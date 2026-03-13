@@ -24,13 +24,13 @@ impl ChangesetErrorBuilder {
     }
 }
 impl ChangesetError {
-    pub fn new(field__469: impl temper_core::ToArcString, message__470: impl temper_core::ToArcString) -> ChangesetError {
-        let field__469 = field__469.to_arc_string();
-        let message__470 = message__470.to_arc_string();
+    pub fn new(field__513: impl temper_core::ToArcString, message__514: impl temper_core::ToArcString) -> ChangesetError {
+        let field__513 = field__513.to_arc_string();
+        let message__514 = message__514.to_arc_string();
         let field;
         let message;
-        field = field__469.clone();
-        message = message__470.clone();
+        field = field__513.clone();
+        message = message__514.clone();
         let selfish = ChangesetError(std::sync::Arc::new(ChangesetErrorStruct {
                     field, message
         }));
@@ -54,15 +54,15 @@ pub trait ChangesetTrait: temper_core::AsAnyValue + temper_core::AnyValueTrait +
     fn changes(& self) -> temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
     fn errors(& self) -> temper_core::List<ChangesetError>;
     fn is_valid(& self) -> bool;
-    fn cast(& self, allowedFields__480: temper_core::List<SafeIdentifier>) -> Changeset;
-    fn validate_required(& self, fields__483: temper_core::List<SafeIdentifier>) -> Changeset;
-    fn validate_length(& self, field__486: SafeIdentifier, min__487: i32, max__488: i32) -> Changeset;
-    fn validate_int(& self, field__491: SafeIdentifier) -> Changeset;
-    fn validate_int64(& self, field__494: SafeIdentifier) -> Changeset;
-    fn validate_float(& self, field__497: SafeIdentifier) -> Changeset;
-    fn validate_bool(& self, field__500: SafeIdentifier) -> Changeset;
+    fn cast(& self, allowedFields__524: temper_core::List<SafeIdentifier>) -> Changeset;
+    fn validate_required(& self, fields__527: temper_core::List<SafeIdentifier>) -> Changeset;
+    fn validate_length(& self, field__530: SafeIdentifier, min__531: i32, max__532: i32) -> Changeset;
+    fn validate_int(& self, field__535: SafeIdentifier) -> Changeset;
+    fn validate_int64(& self, field__538: SafeIdentifier) -> Changeset;
+    fn validate_float(& self, field__541: SafeIdentifier) -> Changeset;
+    fn validate_bool(& self, field__544: SafeIdentifier) -> Changeset;
     fn to_insert_sql(& self) -> temper_core::Result<SqlFragment>;
-    fn to_update_sql(& self, id__505: i32) -> temper_core::Result<SqlFragment>;
+    fn to_update_sql(& self, id__549: i32) -> temper_core::Result<SqlFragment>;
 }
 #[derive(Clone)]
 pub struct Changeset(std::sync::Arc<dyn ChangesetTrait>);
@@ -143,558 +143,558 @@ impl ChangesetImpl {
     pub fn is_valid(& self) -> bool {
         return self.0.is_valid;
     }
-    pub fn cast(& self, allowedFields__521: impl temper_core::ToList<SafeIdentifier>) -> Changeset {
-        let allowedFields__521 = allowedFields__521.to_list();
-        let mb__523: temper_core::MapBuilder<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::MapBuilder::new();
+    pub fn cast(& self, allowedFields__565: impl temper_core::ToList<SafeIdentifier>) -> Changeset {
+        let allowedFields__565 = allowedFields__565.to_list();
+        let mb__567: temper_core::MapBuilder<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::MapBuilder::new();
         #[derive(Clone)]
         struct ClosureGroup___1 {
-            this__166: ChangesetImpl, mb__523: temper_core::MapBuilder<std::sync::Arc<String>, std::sync::Arc<String>>
+            this__179: ChangesetImpl, mb__567: temper_core::MapBuilder<std::sync::Arc<String>, std::sync::Arc<String>>
         }
         impl ClosureGroup___1 {
-            fn fn__9583(& self, f__524: SafeIdentifier) {
-                let mut t___9581: std::sync::Arc<String>;
-                let mut t___9578: std::sync::Arc<String> = f__524.sql_value();
-                let val__525: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.this__166.0.params, t___9578.clone(), std::sync::Arc::new("".to_string()));
-                if ! val__525.is_empty() {
-                    t___9581 = f__524.sql_value();
-                    temper_core::MapBuilder::set( & self.mb__523, t___9581.clone(), val__525.clone());
+            fn fn__10837(& self, f__568: SafeIdentifier) {
+                let mut t___10835: std::sync::Arc<String>;
+                let mut t___10832: std::sync::Arc<String> = f__568.sql_value();
+                let val__569: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.this__179.0.params, t___10832.clone(), std::sync::Arc::new("".to_string()));
+                if ! val__569.is_empty() {
+                    t___10835 = f__568.sql_value();
+                    temper_core::MapBuilder::set( & self.mb__567, t___10835.clone(), val__569.clone());
                 }
             }
         }
         let closure_group = ClosureGroup___1 {
-            this__166: self.clone(), mb__523: mb__523.clone()
+            this__179: self.clone(), mb__567: mb__567.clone()
         };
-        let fn__9583 = {
+        let fn__10837 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | f__524: SafeIdentifier | closure_group.fn__9583(f__524))
+            std::sync::Arc::new(move | f__568: SafeIdentifier | closure_group.fn__10837(f__568))
         };
-        temper_core::listed::list_for_each( & allowedFields__521, & ( * fn__9583.clone()));
-        return Changeset::new(ChangesetImpl::new(self.0.table_def.clone(), self.0.params.clone(), temper_core::MappedTrait::to_map( & mb__523), self.0.errors.clone(), self.0.is_valid));
+        temper_core::listed::list_for_each( & allowedFields__565, & ( * fn__10837.clone()));
+        return Changeset::new(ChangesetImpl::new(self.0.table_def.clone(), self.0.params.clone(), temper_core::MappedTrait::to_map( & mb__567), self.0.errors.clone(), self.0.is_valid));
     }
-    pub fn validate_required(& self, fields__527: impl temper_core::ToList<SafeIdentifier>) -> Changeset {
-        let fields__527 = fields__527.to_list();
-        let return__284: Changeset;
-        let mut t___9576: temper_core::List<ChangesetError>;
-        let mut t___5480: TableDef;
-        let mut t___5481: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        let mut t___5482: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        'fn__528: {
+    pub fn validate_required(& self, fields__571: impl temper_core::ToList<SafeIdentifier>) -> Changeset {
+        let fields__571 = fields__571.to_list();
+        let return__306: Changeset;
+        let mut t___10830: temper_core::List<ChangesetError>;
+        let mut t___6226: TableDef;
+        let mut t___6227: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        let mut t___6228: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        'fn__572: {
             if ! self.0.is_valid {
-                return__284 = Changeset::new(self.clone());
-                break 'fn__528;
+                return__306 = Changeset::new(self.clone());
+                break 'fn__572;
             }
-            let eb__529: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
-            let mut valid__530: std::sync::Arc<std::sync::RwLock<bool>> = std::sync::Arc::new(std::sync::RwLock::new(true));
+            let eb__573: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
+            let mut valid__574: std::sync::Arc<std::sync::RwLock<bool>> = std::sync::Arc::new(std::sync::RwLock::new(true));
             #[derive(Clone)]
             struct ClosureGroup___2 {
-                this__167: ChangesetImpl, eb__529: temper_core::ListBuilder<ChangesetError>, valid__530: std::sync::Arc<std::sync::RwLock<bool>>
+                this__180: ChangesetImpl, eb__573: temper_core::ListBuilder<ChangesetError>, valid__574: std::sync::Arc<std::sync::RwLock<bool>>
             }
             impl ClosureGroup___2 {
-                fn fn__9572(& self, f__531: SafeIdentifier) {
-                    let mut t___9570: ChangesetError;
-                    let mut t___9567: std::sync::Arc<String> = f__531.sql_value();
-                    if ! temper_core::MappedTrait::has( & self.this__167.0.changes, t___9567.clone()) {
-                        t___9570 = ChangesetError::new(f__531.sql_value(), "is required");
-                        temper_core::listed::add( & self.eb__529, t___9570.clone(), None);
+                fn fn__10826(& self, f__575: SafeIdentifier) {
+                    let mut t___10824: ChangesetError;
+                    let mut t___10821: std::sync::Arc<String> = f__575.sql_value();
+                    if ! temper_core::MappedTrait::has( & self.this__180.0.changes, t___10821.clone()) {
+                        t___10824 = ChangesetError::new(f__575.sql_value(), "is required");
+                        temper_core::listed::add( & self.eb__573, t___10824.clone(), None);
                         {
-                            * self.valid__530.write().unwrap() = false;
+                            * self.valid__574.write().unwrap() = false;
                         }
                     }
                 }
             }
             let closure_group = ClosureGroup___2 {
-                this__167: self.clone(), eb__529: eb__529.clone(), valid__530: valid__530.clone()
+                this__180: self.clone(), eb__573: eb__573.clone(), valid__574: valid__574.clone()
             };
-            let fn__9572 = {
+            let fn__10826 = {
                 let closure_group = closure_group.clone();
-                std::sync::Arc::new(move | f__531: SafeIdentifier | closure_group.fn__9572(f__531))
+                std::sync::Arc::new(move | f__575: SafeIdentifier | closure_group.fn__10826(f__575))
             };
-            temper_core::listed::list_for_each( & fields__527, & ( * fn__9572.clone()));
-            t___5480 = self.0.table_def.clone();
-            t___5481 = self.0.params.clone();
-            t___5482 = self.0.changes.clone();
-            t___9576 = temper_core::ListedTrait::to_list( & eb__529);
-            return__284 = Changeset::new(ChangesetImpl::new(t___5480.clone(), t___5481.clone(), t___5482.clone(), t___9576.clone(), temper_core::read_locked( & valid__530)));
+            temper_core::listed::list_for_each( & fields__571, & ( * fn__10826.clone()));
+            t___6226 = self.0.table_def.clone();
+            t___6227 = self.0.params.clone();
+            t___6228 = self.0.changes.clone();
+            t___10830 = temper_core::ListedTrait::to_list( & eb__573);
+            return__306 = Changeset::new(ChangesetImpl::new(t___6226.clone(), t___6227.clone(), t___6228.clone(), t___10830.clone(), temper_core::read_locked( & valid__574)));
         }
-        return return__284.clone();
+        return return__306.clone();
     }
-    pub fn validate_length(& self, field__533: SafeIdentifier, min__534: i32, max__535: i32) -> Changeset {
-        let return__285: Changeset;
-        let mut t___9554: std::sync::Arc<String>;
-        let mut t___9565: temper_core::List<ChangesetError>;
-        let mut t___5463: bool;
-        let mut t___5469: TableDef;
-        let mut t___5470: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        let mut t___5471: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        'fn__536: {
+    pub fn validate_length(& self, field__577: SafeIdentifier, min__578: i32, max__579: i32) -> Changeset {
+        let return__307: Changeset;
+        let mut t___10808: std::sync::Arc<String>;
+        let mut t___10819: temper_core::List<ChangesetError>;
+        let mut t___6209: bool;
+        let mut t___6215: TableDef;
+        let mut t___6216: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        let mut t___6217: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        'fn__580: {
             if ! self.0.is_valid {
-                return__285 = Changeset::new(self.clone());
-                break 'fn__536;
+                return__307 = Changeset::new(self.clone());
+                break 'fn__580;
             }
-            t___9554 = field__533.sql_value();
-            let val__537: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.0.changes, t___9554.clone(), std::sync::Arc::new("".to_string()));
-            let len__538: i32 = temper_core::string::count_between( & val__537, 0usize, val__537.len());
-            if Some(len__538) < Some(min__534) {
-                t___5463 = true;
+            t___10808 = field__577.sql_value();
+            let val__581: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.0.changes, t___10808.clone(), std::sync::Arc::new("".to_string()));
+            let len__582: i32 = temper_core::string::count_between( & val__581, 0usize, val__581.len());
+            if Some(len__582) < Some(min__578) {
+                t___6209 = true;
             } else {
-                t___5463 = Some(len__538) > Some(max__535);
+                t___6209 = Some(len__582) > Some(max__579);
             }
-            if t___5463 {
-                let msg__539: std::sync::Arc<String> = std::sync::Arc::new(format!("must be between {} and {} characters", min__534, max__535));
-                let eb__540: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
-                temper_core::listed::add( & eb__540, ChangesetError::new(field__533.sql_value(), msg__539.clone()), None);
-                t___5469 = self.0.table_def.clone();
-                t___5470 = self.0.params.clone();
-                t___5471 = self.0.changes.clone();
-                t___9565 = temper_core::ListedTrait::to_list( & eb__540);
-                return__285 = Changeset::new(ChangesetImpl::new(t___5469.clone(), t___5470.clone(), t___5471.clone(), t___9565.clone(), false));
-                break 'fn__536;
+            if t___6209 {
+                let msg__583: std::sync::Arc<String> = std::sync::Arc::new(format!("must be between {} and {} characters", min__578, max__579));
+                let eb__584: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
+                temper_core::listed::add( & eb__584, ChangesetError::new(field__577.sql_value(), msg__583.clone()), None);
+                t___6215 = self.0.table_def.clone();
+                t___6216 = self.0.params.clone();
+                t___6217 = self.0.changes.clone();
+                t___10819 = temper_core::ListedTrait::to_list( & eb__584);
+                return__307 = Changeset::new(ChangesetImpl::new(t___6215.clone(), t___6216.clone(), t___6217.clone(), t___10819.clone(), false));
+                break 'fn__580;
             }
-            return__285 = Changeset::new(self.clone());
+            return__307 = Changeset::new(self.clone());
         }
-        return return__285.clone();
+        return return__307.clone();
     }
-    pub fn validate_int(& self, field__542: SafeIdentifier) -> Changeset {
-        let return__286: Changeset;
-        let mut t___9545: std::sync::Arc<String>;
-        let mut t___9552: temper_core::List<ChangesetError>;
-        let mut t___5454: TableDef;
-        let mut t___5455: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        let mut t___5456: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        'fn__543: {
+    pub fn validate_int(& self, field__586: SafeIdentifier) -> Changeset {
+        let return__308: Changeset;
+        let mut t___10799: std::sync::Arc<String>;
+        let mut t___10806: temper_core::List<ChangesetError>;
+        let mut t___6200: TableDef;
+        let mut t___6201: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        let mut t___6202: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        'fn__587: {
             if ! self.0.is_valid {
-                return__286 = Changeset::new(self.clone());
-                break 'fn__543;
+                return__308 = Changeset::new(self.clone());
+                break 'fn__587;
             }
-            t___9545 = field__542.sql_value();
-            let val__544: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.0.changes, t___9545.clone(), std::sync::Arc::new("".to_string()));
-            if val__544.is_empty() {
-                return__286 = Changeset::new(self.clone());
-                break 'fn__543;
+            t___10799 = field__586.sql_value();
+            let val__588: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.0.changes, t___10799.clone(), std::sync::Arc::new("".to_string()));
+            if val__588.is_empty() {
+                return__308 = Changeset::new(self.clone());
+                break 'fn__587;
             }
-            let parseOk__545: bool;
-            'ok___9688: {
-                'orelse___1696: {
-                    match temper_core::string::to_int( & val__544, None) {
+            let parseOk__589: bool;
+            'ok___10942: {
+                'orelse___1893: {
+                    match temper_core::string::to_int( & val__588, None) {
                         Ok(x) => x,
-                        _ => break 'orelse___1696
+                        _ => break 'orelse___1893
                     };
-                    parseOk__545 = true;
-                    break 'ok___9688;
+                    parseOk__589 = true;
+                    break 'ok___10942;
                 }
-                parseOk__545 = false;
+                parseOk__589 = false;
             }
-            if ! parseOk__545 {
-                let eb__546: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
-                temper_core::listed::add( & eb__546, ChangesetError::new(field__542.sql_value(), "must be an integer"), None);
-                t___5454 = self.0.table_def.clone();
-                t___5455 = self.0.params.clone();
-                t___5456 = self.0.changes.clone();
-                t___9552 = temper_core::ListedTrait::to_list( & eb__546);
-                return__286 = Changeset::new(ChangesetImpl::new(t___5454.clone(), t___5455.clone(), t___5456.clone(), t___9552.clone(), false));
-                break 'fn__543;
+            if ! parseOk__589 {
+                let eb__590: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
+                temper_core::listed::add( & eb__590, ChangesetError::new(field__586.sql_value(), "must be an integer"), None);
+                t___6200 = self.0.table_def.clone();
+                t___6201 = self.0.params.clone();
+                t___6202 = self.0.changes.clone();
+                t___10806 = temper_core::ListedTrait::to_list( & eb__590);
+                return__308 = Changeset::new(ChangesetImpl::new(t___6200.clone(), t___6201.clone(), t___6202.clone(), t___10806.clone(), false));
+                break 'fn__587;
             }
-            return__286 = Changeset::new(self.clone());
+            return__308 = Changeset::new(self.clone());
         }
-        return return__286.clone();
+        return return__308.clone();
     }
-    pub fn validate_int64(& self, field__548: SafeIdentifier) -> Changeset {
-        let return__287: Changeset;
-        let mut t___9536: std::sync::Arc<String>;
-        let mut t___9543: temper_core::List<ChangesetError>;
-        let mut t___5441: TableDef;
-        let mut t___5442: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        let mut t___5443: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        'fn__549: {
+    pub fn validate_int64(& self, field__592: SafeIdentifier) -> Changeset {
+        let return__309: Changeset;
+        let mut t___10790: std::sync::Arc<String>;
+        let mut t___10797: temper_core::List<ChangesetError>;
+        let mut t___6187: TableDef;
+        let mut t___6188: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        let mut t___6189: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        'fn__593: {
             if ! self.0.is_valid {
-                return__287 = Changeset::new(self.clone());
-                break 'fn__549;
+                return__309 = Changeset::new(self.clone());
+                break 'fn__593;
             }
-            t___9536 = field__548.sql_value();
-            let val__550: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.0.changes, t___9536.clone(), std::sync::Arc::new("".to_string()));
-            if val__550.is_empty() {
-                return__287 = Changeset::new(self.clone());
-                break 'fn__549;
+            t___10790 = field__592.sql_value();
+            let val__594: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.0.changes, t___10790.clone(), std::sync::Arc::new("".to_string()));
+            if val__594.is_empty() {
+                return__309 = Changeset::new(self.clone());
+                break 'fn__593;
             }
-            let parseOk__551: bool;
-            'ok___9690: {
-                'orelse___1697: {
-                    match temper_core::string::to_int64( & val__550, None) {
+            let parseOk__595: bool;
+            'ok___10944: {
+                'orelse___1894: {
+                    match temper_core::string::to_int64( & val__594, None) {
                         Ok(x) => x,
-                        _ => break 'orelse___1697
+                        _ => break 'orelse___1894
                     };
-                    parseOk__551 = true;
-                    break 'ok___9690;
+                    parseOk__595 = true;
+                    break 'ok___10944;
                 }
-                parseOk__551 = false;
+                parseOk__595 = false;
             }
-            if ! parseOk__551 {
-                let eb__552: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
-                temper_core::listed::add( & eb__552, ChangesetError::new(field__548.sql_value(), "must be a 64-bit integer"), None);
-                t___5441 = self.0.table_def.clone();
-                t___5442 = self.0.params.clone();
-                t___5443 = self.0.changes.clone();
-                t___9543 = temper_core::ListedTrait::to_list( & eb__552);
-                return__287 = Changeset::new(ChangesetImpl::new(t___5441.clone(), t___5442.clone(), t___5443.clone(), t___9543.clone(), false));
-                break 'fn__549;
+            if ! parseOk__595 {
+                let eb__596: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
+                temper_core::listed::add( & eb__596, ChangesetError::new(field__592.sql_value(), "must be a 64-bit integer"), None);
+                t___6187 = self.0.table_def.clone();
+                t___6188 = self.0.params.clone();
+                t___6189 = self.0.changes.clone();
+                t___10797 = temper_core::ListedTrait::to_list( & eb__596);
+                return__309 = Changeset::new(ChangesetImpl::new(t___6187.clone(), t___6188.clone(), t___6189.clone(), t___10797.clone(), false));
+                break 'fn__593;
             }
-            return__287 = Changeset::new(self.clone());
+            return__309 = Changeset::new(self.clone());
         }
-        return return__287.clone();
+        return return__309.clone();
     }
-    pub fn validate_float(& self, field__554: SafeIdentifier) -> Changeset {
-        let return__288: Changeset;
-        let mut t___9527: std::sync::Arc<String>;
-        let mut t___9534: temper_core::List<ChangesetError>;
-        let mut t___5428: TableDef;
-        let mut t___5429: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        let mut t___5430: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        'fn__555: {
+    pub fn validate_float(& self, field__598: SafeIdentifier) -> Changeset {
+        let return__310: Changeset;
+        let mut t___10781: std::sync::Arc<String>;
+        let mut t___10788: temper_core::List<ChangesetError>;
+        let mut t___6174: TableDef;
+        let mut t___6175: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        let mut t___6176: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        'fn__599: {
             if ! self.0.is_valid {
-                return__288 = Changeset::new(self.clone());
-                break 'fn__555;
+                return__310 = Changeset::new(self.clone());
+                break 'fn__599;
             }
-            t___9527 = field__554.sql_value();
-            let val__556: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.0.changes, t___9527.clone(), std::sync::Arc::new("".to_string()));
-            if val__556.is_empty() {
-                return__288 = Changeset::new(self.clone());
-                break 'fn__555;
+            t___10781 = field__598.sql_value();
+            let val__600: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.0.changes, t___10781.clone(), std::sync::Arc::new("".to_string()));
+            if val__600.is_empty() {
+                return__310 = Changeset::new(self.clone());
+                break 'fn__599;
             }
-            let parseOk__557: bool;
-            'ok___9692: {
-                'orelse___1698: {
-                    match temper_core::string::to_float64( & val__556) {
+            let parseOk__601: bool;
+            'ok___10946: {
+                'orelse___1895: {
+                    match temper_core::string::to_float64( & val__600) {
                         Ok(x) => x,
-                        _ => break 'orelse___1698
+                        _ => break 'orelse___1895
                     };
-                    parseOk__557 = true;
-                    break 'ok___9692;
+                    parseOk__601 = true;
+                    break 'ok___10946;
                 }
-                parseOk__557 = false;
+                parseOk__601 = false;
             }
-            if ! parseOk__557 {
-                let eb__558: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
-                temper_core::listed::add( & eb__558, ChangesetError::new(field__554.sql_value(), "must be a number"), None);
-                t___5428 = self.0.table_def.clone();
-                t___5429 = self.0.params.clone();
-                t___5430 = self.0.changes.clone();
-                t___9534 = temper_core::ListedTrait::to_list( & eb__558);
-                return__288 = Changeset::new(ChangesetImpl::new(t___5428.clone(), t___5429.clone(), t___5430.clone(), t___9534.clone(), false));
-                break 'fn__555;
+            if ! parseOk__601 {
+                let eb__602: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
+                temper_core::listed::add( & eb__602, ChangesetError::new(field__598.sql_value(), "must be a number"), None);
+                t___6174 = self.0.table_def.clone();
+                t___6175 = self.0.params.clone();
+                t___6176 = self.0.changes.clone();
+                t___10788 = temper_core::ListedTrait::to_list( & eb__602);
+                return__310 = Changeset::new(ChangesetImpl::new(t___6174.clone(), t___6175.clone(), t___6176.clone(), t___10788.clone(), false));
+                break 'fn__599;
             }
-            return__288 = Changeset::new(self.clone());
+            return__310 = Changeset::new(self.clone());
         }
-        return return__288.clone();
+        return return__310.clone();
     }
-    pub fn validate_bool(& self, field__560: SafeIdentifier) -> Changeset {
-        let return__289: Changeset;
-        let mut t___9518: std::sync::Arc<String>;
-        let mut t___9525: temper_core::List<ChangesetError>;
-        let mut t___5403: bool;
-        let mut t___5404: bool;
-        let mut t___5406: bool;
-        let mut t___5407: bool;
-        let mut t___5409: bool;
-        let mut t___5415: TableDef;
-        let mut t___5416: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        let mut t___5417: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
-        'fn__561: {
+    pub fn validate_bool(& self, field__604: SafeIdentifier) -> Changeset {
+        let return__311: Changeset;
+        let mut t___10772: std::sync::Arc<String>;
+        let mut t___10779: temper_core::List<ChangesetError>;
+        let mut t___6149: bool;
+        let mut t___6150: bool;
+        let mut t___6152: bool;
+        let mut t___6153: bool;
+        let mut t___6155: bool;
+        let mut t___6161: TableDef;
+        let mut t___6162: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        let mut t___6163: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>;
+        'fn__605: {
             if ! self.0.is_valid {
-                return__289 = Changeset::new(self.clone());
-                break 'fn__561;
+                return__311 = Changeset::new(self.clone());
+                break 'fn__605;
             }
-            t___9518 = field__560.sql_value();
-            let val__562: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.0.changes, t___9518.clone(), std::sync::Arc::new("".to_string()));
-            if val__562.is_empty() {
-                return__289 = Changeset::new(self.clone());
-                break 'fn__561;
+            t___10772 = field__604.sql_value();
+            let val__606: std::sync::Arc<String> = temper_core::MappedTrait::get_or( & self.0.changes, t___10772.clone(), std::sync::Arc::new("".to_string()));
+            if val__606.is_empty() {
+                return__311 = Changeset::new(self.clone());
+                break 'fn__605;
             }
-            let isTrue__563: bool;
-            if Some(val__562.as_str()) == Some("true") {
-                isTrue__563 = true;
+            let isTrue__607: bool;
+            if Some(val__606.as_str()) == Some("true") {
+                isTrue__607 = true;
             } else {
-                if Some(val__562.as_str()) == Some("1") {
-                    t___5404 = true;
+                if Some(val__606.as_str()) == Some("1") {
+                    t___6150 = true;
                 } else {
-                    if Some(val__562.as_str()) == Some("yes") {
-                        t___5403 = true;
+                    if Some(val__606.as_str()) == Some("yes") {
+                        t___6149 = true;
                     } else {
-                        t___5403 = Some(val__562.as_str()) == Some("on");
+                        t___6149 = Some(val__606.as_str()) == Some("on");
                     }
-                    t___5404 = t___5403;
+                    t___6150 = t___6149;
                 }
-                isTrue__563 = t___5404;
+                isTrue__607 = t___6150;
             }
-            let isFalse__564: bool;
-            if Some(val__562.as_str()) == Some("false") {
-                isFalse__564 = true;
+            let isFalse__608: bool;
+            if Some(val__606.as_str()) == Some("false") {
+                isFalse__608 = true;
             } else {
-                if Some(val__562.as_str()) == Some("0") {
-                    t___5407 = true;
+                if Some(val__606.as_str()) == Some("0") {
+                    t___6153 = true;
                 } else {
-                    if Some(val__562.as_str()) == Some("no") {
-                        t___5406 = true;
+                    if Some(val__606.as_str()) == Some("no") {
+                        t___6152 = true;
                     } else {
-                        t___5406 = Some(val__562.as_str()) == Some("off");
+                        t___6152 = Some(val__606.as_str()) == Some("off");
                     }
-                    t___5407 = t___5406;
+                    t___6153 = t___6152;
                 }
-                isFalse__564 = t___5407;
+                isFalse__608 = t___6153;
             }
-            if ! isTrue__563 {
-                t___5409 = ! isFalse__564;
+            if ! isTrue__607 {
+                t___6155 = ! isFalse__608;
             } else {
-                t___5409 = false;
+                t___6155 = false;
             }
-            if t___5409 {
-                let eb__565: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
-                temper_core::listed::add( & eb__565, ChangesetError::new(field__560.sql_value(), "must be a boolean (true/false/1/0/yes/no/on/off)"), None);
-                t___5415 = self.0.table_def.clone();
-                t___5416 = self.0.params.clone();
-                t___5417 = self.0.changes.clone();
-                t___9525 = temper_core::ListedTrait::to_list( & eb__565);
-                return__289 = Changeset::new(ChangesetImpl::new(t___5415.clone(), t___5416.clone(), t___5417.clone(), t___9525.clone(), false));
-                break 'fn__561;
+            if t___6155 {
+                let eb__609: temper_core::ListBuilder<ChangesetError> = temper_core::ListedTrait::to_list_builder( & self.0.errors);
+                temper_core::listed::add( & eb__609, ChangesetError::new(field__604.sql_value(), "must be a boolean (true/false/1/0/yes/no/on/off)"), None);
+                t___6161 = self.0.table_def.clone();
+                t___6162 = self.0.params.clone();
+                t___6163 = self.0.changes.clone();
+                t___10779 = temper_core::ListedTrait::to_list( & eb__609);
+                return__311 = Changeset::new(ChangesetImpl::new(t___6161.clone(), t___6162.clone(), t___6163.clone(), t___10779.clone(), false));
+                break 'fn__605;
             }
-            return__289 = Changeset::new(self.clone());
+            return__311 = Changeset::new(self.clone());
         }
-        return return__289.clone();
+        return return__311.clone();
     }
-    fn parse_bool_sql_part(& self, val__567: impl temper_core::ToArcString) -> temper_core::Result<SqlBoolean> {
-        let val__567 = val__567.to_arc_string();
-        let return__290: SqlBoolean;
-        let mut t___5392: bool;
-        let mut t___5393: bool;
-        let mut t___5394: bool;
-        let mut t___5396: bool;
-        let mut t___5397: bool;
-        let mut t___5398: bool;
-        'fn__568: {
-            if Some(val__567.as_str()) == Some("true") {
-                t___5394 = true;
+    fn parse_bool_sql_part(& self, val__611: impl temper_core::ToArcString) -> temper_core::Result<SqlBoolean> {
+        let val__611 = val__611.to_arc_string();
+        let return__312: SqlBoolean;
+        let mut t___6138: bool;
+        let mut t___6139: bool;
+        let mut t___6140: bool;
+        let mut t___6142: bool;
+        let mut t___6143: bool;
+        let mut t___6144: bool;
+        'fn__612: {
+            if Some(val__611.as_str()) == Some("true") {
+                t___6140 = true;
             } else {
-                if Some(val__567.as_str()) == Some("1") {
-                    t___5393 = true;
+                if Some(val__611.as_str()) == Some("1") {
+                    t___6139 = true;
                 } else {
-                    if Some(val__567.as_str()) == Some("yes") {
-                        t___5392 = true;
+                    if Some(val__611.as_str()) == Some("yes") {
+                        t___6138 = true;
                     } else {
-                        t___5392 = Some(val__567.as_str()) == Some("on");
+                        t___6138 = Some(val__611.as_str()) == Some("on");
                     }
-                    t___5393 = t___5392;
+                    t___6139 = t___6138;
                 }
-                t___5394 = t___5393;
+                t___6140 = t___6139;
             }
-            if t___5394 {
-                return__290 = SqlBoolean::new(true);
-                break 'fn__568;
+            if t___6140 {
+                return__312 = SqlBoolean::new(true);
+                break 'fn__612;
             }
-            if Some(val__567.as_str()) == Some("false") {
-                t___5398 = true;
+            if Some(val__611.as_str()) == Some("false") {
+                t___6144 = true;
             } else {
-                if Some(val__567.as_str()) == Some("0") {
-                    t___5397 = true;
+                if Some(val__611.as_str()) == Some("0") {
+                    t___6143 = true;
                 } else {
-                    if Some(val__567.as_str()) == Some("no") {
-                        t___5396 = true;
+                    if Some(val__611.as_str()) == Some("no") {
+                        t___6142 = true;
                     } else {
-                        t___5396 = Some(val__567.as_str()) == Some("off");
+                        t___6142 = Some(val__611.as_str()) == Some("off");
                     }
-                    t___5397 = t___5396;
+                    t___6143 = t___6142;
                 }
-                t___5398 = t___5397;
+                t___6144 = t___6143;
             }
-            if t___5398 {
-                return__290 = SqlBoolean::new(false);
-                break 'fn__568;
+            if t___6144 {
+                return__312 = SqlBoolean::new(false);
+                break 'fn__612;
             }
             return Err(temper_core::Error::new());
         }
-        return Ok(return__290.clone());
+        return Ok(return__312.clone());
     }
-    fn value_to_sql_part(& self, fieldDef__570: FieldDef, val__571: impl temper_core::ToArcString) -> temper_core::Result<SqlPart> {
-        let val__571 = val__571.to_arc_string();
-        let return__291: SqlPart;
-        let mut t___5379: i32;
-        let mut t___5382: i64;
-        let mut t___5385: f64;
-        let mut t___5390: temper_std::temporal::Date;
-        'fn__572: {
-            let ft__573: FieldType = fieldDef__570.field_type();
-            if temper_core::is::<StringField>(ft__573.clone()) {
-                return__291 = SqlPart::new(SqlString::new(val__571.clone()));
-                break 'fn__572;
+    fn value_to_sql_part(& self, fieldDef__614: FieldDef, val__615: impl temper_core::ToArcString) -> temper_core::Result<SqlPart> {
+        let val__615 = val__615.to_arc_string();
+        let return__313: SqlPart;
+        let mut t___6125: i32;
+        let mut t___6128: i64;
+        let mut t___6131: f64;
+        let mut t___6136: temper_std::temporal::Date;
+        'fn__616: {
+            let ft__617: FieldType = fieldDef__614.field_type();
+            if temper_core::is::<StringField>(ft__617.clone()) {
+                return__313 = SqlPart::new(SqlString::new(val__615.clone()));
+                break 'fn__616;
             }
-            if temper_core::is::<IntField>(ft__573.clone()) {
-                t___5379 = temper_core::string::to_int( & val__571, None) ? ;
-                return__291 = SqlPart::new(SqlInt32::new(t___5379));
-                break 'fn__572;
+            if temper_core::is::<IntField>(ft__617.clone()) {
+                t___6125 = temper_core::string::to_int( & val__615, None) ? ;
+                return__313 = SqlPart::new(SqlInt32::new(t___6125));
+                break 'fn__616;
             }
-            if temper_core::is::<Int64Field>(ft__573.clone()) {
-                t___5382 = temper_core::string::to_int64( & val__571, None) ? ;
-                return__291 = SqlPart::new(SqlInt64::new(t___5382));
-                break 'fn__572;
+            if temper_core::is::<Int64Field>(ft__617.clone()) {
+                t___6128 = temper_core::string::to_int64( & val__615, None) ? ;
+                return__313 = SqlPart::new(SqlInt64::new(t___6128));
+                break 'fn__616;
             }
-            if temper_core::is::<FloatField>(ft__573.clone()) {
-                t___5385 = temper_core::string::to_float64( & val__571) ? ;
-                return__291 = SqlPart::new(SqlFloat64::new(t___5385));
-                break 'fn__572;
+            if temper_core::is::<FloatField>(ft__617.clone()) {
+                t___6131 = temper_core::string::to_float64( & val__615) ? ;
+                return__313 = SqlPart::new(SqlFloat64::new(t___6131));
+                break 'fn__616;
             }
-            if temper_core::is::<BoolField>(ft__573.clone()) {
-                return__291 = SqlPart::new(self.parse_bool_sql_part(val__571.clone()) ? );
-                break 'fn__572;
+            if temper_core::is::<BoolField>(ft__617.clone()) {
+                return__313 = SqlPart::new(self.parse_bool_sql_part(val__615.clone()) ? );
+                break 'fn__616;
             }
-            if temper_core::is::<DateField>(ft__573.clone()) {
-                t___5390 = temper_std::temporal::Date::from_iso_string(val__571.clone()) ? ;
-                return__291 = SqlPart::new(SqlDate::new(t___5390.clone()));
-                break 'fn__572;
+            if temper_core::is::<DateField>(ft__617.clone()) {
+                t___6136 = temper_std::temporal::Date::from_iso_string(val__615.clone()) ? ;
+                return__313 = SqlPart::new(SqlDate::new(t___6136.clone()));
+                break 'fn__616;
             }
             return Err(temper_core::Error::new());
         }
-        return Ok(return__291.clone());
+        return Ok(return__313.clone());
     }
     pub fn to_insert_sql(& self) -> temper_core::Result<SqlFragment> {
-        let mut t___9466: i32;
-        let mut t___9471: std::sync::Arc<String>;
-        let mut t___9472: bool;
-        let mut t___9477: i32;
-        let mut t___9479: std::sync::Arc<String>;
-        let mut t___9483: std::sync::Arc<String>;
-        let mut t___9498: i32;
-        let mut t___5343: bool;
-        let mut t___5351: FieldDef;
-        let mut t___5356: SqlPart;
+        let mut t___10720: i32;
+        let mut t___10725: std::sync::Arc<String>;
+        let mut t___10726: bool;
+        let mut t___10731: i32;
+        let mut t___10733: std::sync::Arc<String>;
+        let mut t___10737: std::sync::Arc<String>;
+        let mut t___10752: i32;
+        let mut t___6089: bool;
+        let mut t___6097: FieldDef;
+        let mut t___6102: SqlPart;
         if ! self.0.is_valid {
             return Err(temper_core::Error::new());
         }
-        let mut i__576: i32 = 0;
-        'loop___9754: loop {
-            t___9466 = temper_core::ListedTrait::len( & self.0.table_def.fields());
-            if ! (Some(i__576) < Some(t___9466)) {
+        let mut i__620: i32 = 0;
+        'loop___11021: loop {
+            t___10720 = temper_core::ListedTrait::len( & self.0.table_def.fields());
+            if ! (Some(i__620) < Some(t___10720)) {
                 break;
             }
-            let f__577: FieldDef = temper_core::ListedTrait::get( & self.0.table_def.fields(), i__576);
-            if ! f__577.nullable() {
-                t___9471 = f__577.name().sql_value();
-                t___9472 = temper_core::MappedTrait::has( & self.0.changes, t___9471.clone());
-                t___5343 = ! t___9472;
+            let f__621: FieldDef = temper_core::ListedTrait::get( & self.0.table_def.fields(), i__620);
+            if ! f__621.nullable() {
+                t___10725 = f__621.name().sql_value();
+                t___10726 = temper_core::MappedTrait::has( & self.0.changes, t___10725.clone());
+                t___6089 = ! t___10726;
             } else {
-                t___5343 = false;
+                t___6089 = false;
             }
-            if t___5343 {
+            if t___6089 {
                 return Err(temper_core::Error::new());
             }
-            i__576 = i__576.wrapping_add(1);
+            i__620 = i__620.wrapping_add(1);
         }
-        let pairs__578: temper_core::List<(std::sync::Arc<String>, std::sync::Arc<String>)> = temper_core::MappedTrait::to_list( & self.0.changes);
-        if Some(temper_core::ListedTrait::len( & pairs__578)) == Some(0) {
+        let pairs__622: temper_core::List<(std::sync::Arc<String>, std::sync::Arc<String>)> = temper_core::MappedTrait::to_list( & self.0.changes);
+        if Some(temper_core::ListedTrait::len( & pairs__622)) == Some(0) {
             return Err(temper_core::Error::new());
         }
-        let colNames__579: temper_core::ListBuilder<std::sync::Arc<String>> = temper_core::listed::new_builder();
-        let valParts__580: temper_core::ListBuilder<SqlPart> = temper_core::listed::new_builder();
-        let mut i__581: i32 = 0;
-        'loop___9755: loop {
-            t___9477 = temper_core::ListedTrait::len( & pairs__578);
-            if ! (Some(i__581) < Some(t___9477)) {
+        let colNames__623: temper_core::ListBuilder<std::sync::Arc<String>> = temper_core::listed::new_builder();
+        let valParts__624: temper_core::ListBuilder<SqlPart> = temper_core::listed::new_builder();
+        let mut i__625: i32 = 0;
+        'loop___11022: loop {
+            t___10731 = temper_core::ListedTrait::len( & pairs__622);
+            if ! (Some(i__625) < Some(t___10731)) {
                 break;
             }
-            let pair__582: (std::sync::Arc<String>, std::sync::Arc<String>) = temper_core::ListedTrait::get( & pairs__578, i__581);
-            t___9479 = pair__582.key();
-            t___5351 = self.0.table_def.field(t___9479.clone()) ? ;
-            let fd__583: FieldDef = t___5351.clone();
-            temper_core::listed::add( & colNames__579, fd__583.name().sql_value(), None);
-            t___9483 = pair__582.value();
-            t___5356 = self.value_to_sql_part(fd__583.clone(), t___9483.clone()) ? ;
-            temper_core::listed::add( & valParts__580, t___5356.clone(), None);
-            i__581 = i__581.wrapping_add(1);
+            let pair__626: (std::sync::Arc<String>, std::sync::Arc<String>) = temper_core::ListedTrait::get( & pairs__622, i__625);
+            t___10733 = pair__626.key();
+            t___6097 = self.0.table_def.field(t___10733.clone()) ? ;
+            let fd__627: FieldDef = t___6097.clone();
+            temper_core::listed::add( & colNames__623, fd__627.name().sql_value(), None);
+            t___10737 = pair__626.value();
+            t___6102 = self.value_to_sql_part(fd__627.clone(), t___10737.clone()) ? ;
+            temper_core::listed::add( & valParts__624, t___6102.clone(), None);
+            i__625 = i__625.wrapping_add(1);
         }
-        let b__584: SqlBuilder = SqlBuilder::new();
-        b__584.append_safe("INSERT INTO ");
-        b__584.append_safe(self.0.table_def.table_name().sql_value());
-        b__584.append_safe(" (");
-        let mut t___9491: temper_core::List<std::sync::Arc<String>> = temper_core::ListedTrait::to_list( & colNames__579);
+        let b__628: SqlBuilder = SqlBuilder::new();
+        b__628.append_safe("INSERT INTO ");
+        b__628.append_safe(self.0.table_def.table_name().sql_value());
+        b__628.append_safe(" (");
+        let mut t___10745: temper_core::List<std::sync::Arc<String>> = temper_core::ListedTrait::to_list( & colNames__623);
         #[derive(Clone)]
         struct ClosureGroup___3 {}
         impl ClosureGroup___3 {
-            fn fn__9464(& self, c__585: impl temper_core::ToArcString) -> std::sync::Arc<String> {
-                let c__585 = c__585.to_arc_string();
-                return c__585.clone();
+            fn fn__10718(& self, c__629: impl temper_core::ToArcString) -> std::sync::Arc<String> {
+                let c__629 = c__629.to_arc_string();
+                return c__629.clone();
             }
         }
         let closure_group = ClosureGroup___3 {};
-        let fn__9464 = {
+        let fn__10718 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | c__585: std::sync::Arc<String> | closure_group.fn__9464(c__585))
+            std::sync::Arc::new(move | c__629: std::sync::Arc<String> | closure_group.fn__10718(c__629))
         };
-        b__584.append_safe(temper_core::listed::join( & t___9491, std::sync::Arc::new(", ".to_string()), & ( * fn__9464.clone())));
-        b__584.append_safe(") VALUES (");
-        b__584.append_part(temper_core::ListedTrait::get( & valParts__580, 0));
-        let mut j__586: i32 = 1;
-        'loop___9756: loop {
-            t___9498 = temper_core::ListedTrait::len( & valParts__580);
-            if ! (Some(j__586) < Some(t___9498)) {
+        b__628.append_safe(temper_core::listed::join( & t___10745, std::sync::Arc::new(", ".to_string()), & ( * fn__10718.clone())));
+        b__628.append_safe(") VALUES (");
+        b__628.append_part(temper_core::ListedTrait::get( & valParts__624, 0));
+        let mut j__630: i32 = 1;
+        'loop___11023: loop {
+            t___10752 = temper_core::ListedTrait::len( & valParts__624);
+            if ! (Some(j__630) < Some(t___10752)) {
                 break;
             }
-            b__584.append_safe(", ");
-            b__584.append_part(temper_core::ListedTrait::get( & valParts__580, j__586));
-            j__586 = j__586.wrapping_add(1);
+            b__628.append_safe(", ");
+            b__628.append_part(temper_core::ListedTrait::get( & valParts__624, j__630));
+            j__630 = j__630.wrapping_add(1);
         }
-        b__584.append_safe(")");
-        return Ok(b__584.accumulated());
+        b__628.append_safe(")");
+        return Ok(b__628.accumulated());
     }
-    pub fn to_update_sql(& self, id__588: i32) -> temper_core::Result<SqlFragment> {
-        let mut t___9451: i32;
-        let mut t___9454: std::sync::Arc<String>;
-        let mut t___9459: std::sync::Arc<String>;
-        let mut t___5324: FieldDef;
-        let mut t___5330: SqlPart;
+    pub fn to_update_sql(& self, id__632: i32) -> temper_core::Result<SqlFragment> {
+        let mut t___10705: i32;
+        let mut t___10708: std::sync::Arc<String>;
+        let mut t___10713: std::sync::Arc<String>;
+        let mut t___6070: FieldDef;
+        let mut t___6076: SqlPart;
         if ! self.0.is_valid {
             return Err(temper_core::Error::new());
         }
-        let pairs__590: temper_core::List<(std::sync::Arc<String>, std::sync::Arc<String>)> = temper_core::MappedTrait::to_list( & self.0.changes);
-        if Some(temper_core::ListedTrait::len( & pairs__590)) == Some(0) {
+        let pairs__634: temper_core::List<(std::sync::Arc<String>, std::sync::Arc<String>)> = temper_core::MappedTrait::to_list( & self.0.changes);
+        if Some(temper_core::ListedTrait::len( & pairs__634)) == Some(0) {
             return Err(temper_core::Error::new());
         }
-        let b__591: SqlBuilder = SqlBuilder::new();
-        b__591.append_safe("UPDATE ");
-        b__591.append_safe(self.0.table_def.table_name().sql_value());
-        b__591.append_safe(" SET ");
-        let mut i__592: i32 = 0;
-        'loop___9757: loop {
-            t___9451 = temper_core::ListedTrait::len( & pairs__590);
-            if ! (Some(i__592) < Some(t___9451)) {
+        let b__635: SqlBuilder = SqlBuilder::new();
+        b__635.append_safe("UPDATE ");
+        b__635.append_safe(self.0.table_def.table_name().sql_value());
+        b__635.append_safe(" SET ");
+        let mut i__636: i32 = 0;
+        'loop___11024: loop {
+            t___10705 = temper_core::ListedTrait::len( & pairs__634);
+            if ! (Some(i__636) < Some(t___10705)) {
                 break;
             }
-            if Some(i__592) > Some(0) {
-                b__591.append_safe(", ");
+            if Some(i__636) > Some(0) {
+                b__635.append_safe(", ");
             }
-            let pair__593: (std::sync::Arc<String>, std::sync::Arc<String>) = temper_core::ListedTrait::get( & pairs__590, i__592);
-            t___9454 = pair__593.key();
-            t___5324 = self.0.table_def.field(t___9454.clone()) ? ;
-            let fd__594: FieldDef = t___5324.clone();
-            b__591.append_safe(fd__594.name().sql_value());
-            b__591.append_safe(" = ");
-            t___9459 = pair__593.value();
-            t___5330 = self.value_to_sql_part(fd__594.clone(), t___9459.clone()) ? ;
-            b__591.append_part(t___5330.clone());
-            i__592 = i__592.wrapping_add(1);
+            let pair__637: (std::sync::Arc<String>, std::sync::Arc<String>) = temper_core::ListedTrait::get( & pairs__634, i__636);
+            t___10708 = pair__637.key();
+            t___6070 = self.0.table_def.field(t___10708.clone()) ? ;
+            let fd__638: FieldDef = t___6070.clone();
+            b__635.append_safe(fd__638.name().sql_value());
+            b__635.append_safe(" = ");
+            t___10713 = pair__637.value();
+            t___6076 = self.value_to_sql_part(fd__638.clone(), t___10713.clone()) ? ;
+            b__635.append_part(t___6076.clone());
+            i__636 = i__636.wrapping_add(1);
         }
-        b__591.append_safe(" WHERE id = ");
-        b__591.append_int32(id__588);
-        return Ok(b__591.accumulated());
+        b__635.append_safe(" WHERE id = ");
+        b__635.append_int32(id__632);
+        return Ok(b__635.accumulated());
     }
-    pub fn new(_tableDef__596: TableDef, _params__597: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>, _changes__598: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>, _errors__599: impl temper_core::ToList<ChangesetError>, _isValid__600: bool) -> ChangesetImpl {
-        let _errors__599 = _errors__599.to_list();
+    pub fn new(_tableDef__640: TableDef, _params__641: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>, _changes__642: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>, _errors__643: impl temper_core::ToList<ChangesetError>, _isValid__644: bool) -> ChangesetImpl {
+        let _errors__643 = _errors__643.to_list();
         let table_def;
         let params;
         let changes;
         let errors;
         let is_valid;
-        table_def = _tableDef__596.clone();
-        params = _params__597.clone();
-        changes = _changes__598.clone();
-        errors = _errors__599.clone();
-        is_valid = _isValid__600;
+        table_def = _tableDef__640.clone();
+        params = _params__641.clone();
+        changes = _changes__642.clone();
+        errors = _errors__643.clone();
+        is_valid = _isValid__644;
         let selfish = ChangesetImpl(std::sync::Arc::new(ChangesetImplStruct {
                     table_def, params, changes, errors, is_valid
         }));
@@ -720,32 +720,32 @@ impl ChangesetTrait for ChangesetImpl {
     fn is_valid(& self) -> bool {
         self.is_valid()
     }
-    fn cast(& self, allowedFields__521: temper_core::List<SafeIdentifier>) -> Changeset {
-        self.cast(allowedFields__521)
+    fn cast(& self, allowedFields__565: temper_core::List<SafeIdentifier>) -> Changeset {
+        self.cast(allowedFields__565)
     }
-    fn validate_required(& self, fields__527: temper_core::List<SafeIdentifier>) -> Changeset {
-        self.validate_required(fields__527)
+    fn validate_required(& self, fields__571: temper_core::List<SafeIdentifier>) -> Changeset {
+        self.validate_required(fields__571)
     }
-    fn validate_length(& self, field__533: SafeIdentifier, min__534: i32, max__535: i32) -> Changeset {
-        self.validate_length(field__533, min__534, max__535)
+    fn validate_length(& self, field__577: SafeIdentifier, min__578: i32, max__579: i32) -> Changeset {
+        self.validate_length(field__577, min__578, max__579)
     }
-    fn validate_int(& self, field__542: SafeIdentifier) -> Changeset {
-        self.validate_int(field__542)
+    fn validate_int(& self, field__586: SafeIdentifier) -> Changeset {
+        self.validate_int(field__586)
     }
-    fn validate_int64(& self, field__548: SafeIdentifier) -> Changeset {
-        self.validate_int64(field__548)
+    fn validate_int64(& self, field__592: SafeIdentifier) -> Changeset {
+        self.validate_int64(field__592)
     }
-    fn validate_float(& self, field__554: SafeIdentifier) -> Changeset {
-        self.validate_float(field__554)
+    fn validate_float(& self, field__598: SafeIdentifier) -> Changeset {
+        self.validate_float(field__598)
     }
-    fn validate_bool(& self, field__560: SafeIdentifier) -> Changeset {
-        self.validate_bool(field__560)
+    fn validate_bool(& self, field__604: SafeIdentifier) -> Changeset {
+        self.validate_bool(field__604)
     }
     fn to_insert_sql(& self) -> temper_core::Result<SqlFragment> {
         self.to_insert_sql()
     }
-    fn to_update_sql(& self, id__588: i32) -> temper_core::Result<SqlFragment> {
-        self.to_update_sql(id__588)
+    fn to_update_sql(& self, id__632: i32) -> temper_core::Result<SqlFragment> {
+        self.to_update_sql(id__632)
     }
 }
 temper_core::impl_any_value_trait!(ChangesetImpl, [Changeset]);
@@ -893,13 +893,13 @@ impl JoinClauseBuilder {
     }
 }
 impl JoinClause {
-    pub fn new(joinType__713: JoinType, table__714: SafeIdentifier, onCondition__715: SqlFragment) -> JoinClause {
+    pub fn new(joinType__757: JoinType, table__758: SafeIdentifier, onCondition__759: SqlFragment) -> JoinClause {
         let join_type;
         let table;
         let on_condition;
-        join_type = joinType__713.clone();
-        table = table__714.clone();
-        on_condition = onCondition__715.clone();
+        join_type = joinType__757.clone();
+        table = table__758.clone();
+        on_condition = onCondition__759.clone();
         let selfish = JoinClause(std::sync::Arc::new(JoinClauseStruct {
                     join_type, table, on_condition
         }));
@@ -931,11 +931,11 @@ impl OrderClauseBuilder {
     }
 }
 impl OrderClause {
-    pub fn new(field__719: SafeIdentifier, ascending__720: bool) -> OrderClause {
+    pub fn new(field__763: SafeIdentifier, ascending__764: bool) -> OrderClause {
         let field;
         let ascending;
-        field = field__719.clone();
-        ascending = ascending__720;
+        field = field__763.clone();
+        ascending = ascending__764;
         let selfish = OrderClause(std::sync::Arc::new(OrderClauseStruct {
                     field, ascending
         }));
@@ -998,9 +998,9 @@ impl AndCondition {
     pub fn keyword(& self) -> std::sync::Arc<String> {
         return std::sync::Arc::new("AND".to_string());
     }
-    pub fn new(_condition__731: SqlFragment) -> AndCondition {
+    pub fn new(_condition__775: SqlFragment) -> AndCondition {
         let condition;
-        condition = _condition__731.clone();
+        condition = _condition__775.clone();
         let selfish = AndCondition(std::sync::Arc::new(AndConditionStruct {
                     condition
         }));
@@ -1034,9 +1034,9 @@ impl OrCondition {
     pub fn keyword(& self) -> std::sync::Arc<String> {
         return std::sync::Arc::new("OR".to_string());
     }
-    pub fn new(_condition__738: SqlFragment) -> OrCondition {
+    pub fn new(_condition__782: SqlFragment) -> OrCondition {
         let condition;
-        condition = _condition__738.clone();
+        condition = _condition__782.clone();
         let selfish = OrCondition(std::sync::Arc::new(OrConditionStruct {
                     condition
         }));
@@ -1073,441 +1073,441 @@ impl QueryBuilder {
     }
 }
 impl Query {
-    pub fn r#where(& self, condition__751: SqlFragment) -> Query {
-        let nb__753: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.conditions);
-        temper_core::listed::add( & nb__753, WhereClause::new(AndCondition::new(condition__751.clone())), None);
-        return Query::new(self.0.table_name.clone(), temper_core::ListedTrait::to_list( & nb__753), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
+    pub fn r#where(& self, condition__795: SqlFragment) -> Query {
+        let nb__797: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.conditions);
+        temper_core::listed::add( & nb__797, WhereClause::new(AndCondition::new(condition__795.clone())), None);
+        return Query::new(self.0.table_name.clone(), temper_core::ListedTrait::to_list( & nb__797), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
     }
-    pub fn or_where(& self, condition__755: SqlFragment) -> Query {
-        let nb__757: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.conditions);
-        temper_core::listed::add( & nb__757, WhereClause::new(OrCondition::new(condition__755.clone())), None);
-        return Query::new(self.0.table_name.clone(), temper_core::ListedTrait::to_list( & nb__757), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
+    pub fn or_where(& self, condition__799: SqlFragment) -> Query {
+        let nb__801: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.conditions);
+        temper_core::listed::add( & nb__801, WhereClause::new(OrCondition::new(condition__799.clone())), None);
+        return Query::new(self.0.table_name.clone(), temper_core::ListedTrait::to_list( & nb__801), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
     }
-    pub fn where_null(& self, field__759: SafeIdentifier) -> Query {
-        let b__761: SqlBuilder = SqlBuilder::new();
-        b__761.append_safe(field__759.sql_value());
-        b__761.append_safe(" IS NULL");
-        let mut t___9050: SqlFragment = b__761.accumulated();
-        return self.r#where(t___9050.clone());
+    pub fn where_null(& self, field__803: SafeIdentifier) -> Query {
+        let b__805: SqlBuilder = SqlBuilder::new();
+        b__805.append_safe(field__803.sql_value());
+        b__805.append_safe(" IS NULL");
+        let mut t___10304: SqlFragment = b__805.accumulated();
+        return self.r#where(t___10304.clone());
     }
-    pub fn where_not_null(& self, field__763: SafeIdentifier) -> Query {
-        let b__765: SqlBuilder = SqlBuilder::new();
-        b__765.append_safe(field__763.sql_value());
-        b__765.append_safe(" IS NOT NULL");
-        let mut t___9044: SqlFragment = b__765.accumulated();
-        return self.r#where(t___9044.clone());
+    pub fn where_not_null(& self, field__807: SafeIdentifier) -> Query {
+        let b__809: SqlBuilder = SqlBuilder::new();
+        b__809.append_safe(field__807.sql_value());
+        b__809.append_safe(" IS NOT NULL");
+        let mut t___10298: SqlFragment = b__809.accumulated();
+        return self.r#where(t___10298.clone());
     }
-    pub fn where_in(& self, field__767: SafeIdentifier, values__768: impl temper_core::ToList<SqlPart>) -> Query {
-        let values__768 = values__768.to_list();
-        let return__343: Query;
-        let mut t___9025: SqlFragment;
-        let mut t___9033: i32;
-        let mut t___9038: SqlFragment;
-        'fn__769: {
-            if temper_core::ListedTrait::is_empty( & values__768) {
-                let b__770: SqlBuilder = SqlBuilder::new();
-                b__770.append_safe("1 = 0");
-                t___9025 = b__770.accumulated();
-                return__343 = self.r#where(t___9025.clone());
-                break 'fn__769;
+    pub fn where_in(& self, field__811: SafeIdentifier, values__812: impl temper_core::ToList<SqlPart>) -> Query {
+        let values__812 = values__812.to_list();
+        let return__365: Query;
+        let mut t___10279: SqlFragment;
+        let mut t___10287: i32;
+        let mut t___10292: SqlFragment;
+        'fn__813: {
+            if temper_core::ListedTrait::is_empty( & values__812) {
+                let b__814: SqlBuilder = SqlBuilder::new();
+                b__814.append_safe("1 = 0");
+                t___10279 = b__814.accumulated();
+                return__365 = self.r#where(t___10279.clone());
+                break 'fn__813;
             }
-            let b__771: SqlBuilder = SqlBuilder::new();
-            b__771.append_safe(field__767.sql_value());
-            b__771.append_safe(" IN (");
-            b__771.append_part(temper_core::ListedTrait::get( & values__768, 0));
-            let mut i__772: i32 = 1;
-            'loop___9762: loop {
-                t___9033 = temper_core::ListedTrait::len( & values__768);
-                if ! (Some(i__772) < Some(t___9033)) {
+            let b__815: SqlBuilder = SqlBuilder::new();
+            b__815.append_safe(field__811.sql_value());
+            b__815.append_safe(" IN (");
+            b__815.append_part(temper_core::ListedTrait::get( & values__812, 0));
+            let mut i__816: i32 = 1;
+            'loop___11029: loop {
+                t___10287 = temper_core::ListedTrait::len( & values__812);
+                if ! (Some(i__816) < Some(t___10287)) {
                     break;
                 }
-                b__771.append_safe(", ");
-                b__771.append_part(temper_core::ListedTrait::get( & values__768, i__772));
-                i__772 = i__772.wrapping_add(1);
+                b__815.append_safe(", ");
+                b__815.append_part(temper_core::ListedTrait::get( & values__812, i__816));
+                i__816 = i__816.wrapping_add(1);
             }
-            b__771.append_safe(")");
-            t___9038 = b__771.accumulated();
-            return__343 = self.r#where(t___9038.clone());
+            b__815.append_safe(")");
+            t___10292 = b__815.accumulated();
+            return__365 = self.r#where(t___10292.clone());
         }
-        return return__343.clone();
+        return return__365.clone();
     }
-    pub fn where_in_subquery(& self, field__774: SafeIdentifier, sub__775: Query) -> Query {
-        let b__777: SqlBuilder = SqlBuilder::new();
-        b__777.append_safe(field__774.sql_value());
-        b__777.append_safe(" IN (");
-        b__777.append_fragment(sub__775.to_sql());
-        b__777.append_safe(")");
-        let mut t___9020: SqlFragment = b__777.accumulated();
-        return self.r#where(t___9020.clone());
+    pub fn where_in_subquery(& self, field__818: SafeIdentifier, sub__819: Query) -> Query {
+        let b__821: SqlBuilder = SqlBuilder::new();
+        b__821.append_safe(field__818.sql_value());
+        b__821.append_safe(" IN (");
+        b__821.append_fragment(sub__819.to_sql());
+        b__821.append_safe(")");
+        let mut t___10274: SqlFragment = b__821.accumulated();
+        return self.r#where(t___10274.clone());
     }
-    pub fn where_not(& self, condition__779: SqlFragment) -> Query {
-        let b__781: SqlBuilder = SqlBuilder::new();
-        b__781.append_safe("NOT (");
-        b__781.append_fragment(condition__779.clone());
-        b__781.append_safe(")");
-        let mut t___9011: SqlFragment = b__781.accumulated();
-        return self.r#where(t___9011.clone());
+    pub fn where_not(& self, condition__823: SqlFragment) -> Query {
+        let b__825: SqlBuilder = SqlBuilder::new();
+        b__825.append_safe("NOT (");
+        b__825.append_fragment(condition__823.clone());
+        b__825.append_safe(")");
+        let mut t___10265: SqlFragment = b__825.accumulated();
+        return self.r#where(t___10265.clone());
     }
-    pub fn where_between(& self, field__783: SafeIdentifier, low__784: SqlPart, high__785: SqlPart) -> Query {
-        let b__787: SqlBuilder = SqlBuilder::new();
-        b__787.append_safe(field__783.sql_value());
-        b__787.append_safe(" BETWEEN ");
-        b__787.append_part(low__784.clone());
-        b__787.append_safe(" AND ");
-        b__787.append_part(high__785.clone());
-        let mut t___9005: SqlFragment = b__787.accumulated();
-        return self.r#where(t___9005.clone());
+    pub fn where_between(& self, field__827: SafeIdentifier, low__828: SqlPart, high__829: SqlPart) -> Query {
+        let b__831: SqlBuilder = SqlBuilder::new();
+        b__831.append_safe(field__827.sql_value());
+        b__831.append_safe(" BETWEEN ");
+        b__831.append_part(low__828.clone());
+        b__831.append_safe(" AND ");
+        b__831.append_part(high__829.clone());
+        let mut t___10259: SqlFragment = b__831.accumulated();
+        return self.r#where(t___10259.clone());
     }
-    pub fn where_like(& self, field__789: SafeIdentifier, pattern__790: impl temper_core::ToArcString) -> Query {
-        let pattern__790 = pattern__790.to_arc_string();
-        let b__792: SqlBuilder = SqlBuilder::new();
-        b__792.append_safe(field__789.sql_value());
-        b__792.append_safe(" LIKE ");
-        b__792.append_string(pattern__790.clone());
-        let mut t___8996: SqlFragment = b__792.accumulated();
-        return self.r#where(t___8996.clone());
+    pub fn where_like(& self, field__833: SafeIdentifier, pattern__834: impl temper_core::ToArcString) -> Query {
+        let pattern__834 = pattern__834.to_arc_string();
+        let b__836: SqlBuilder = SqlBuilder::new();
+        b__836.append_safe(field__833.sql_value());
+        b__836.append_safe(" LIKE ");
+        b__836.append_string(pattern__834.clone());
+        let mut t___10250: SqlFragment = b__836.accumulated();
+        return self.r#where(t___10250.clone());
     }
-    pub fn where_i_like(& self, field__794: SafeIdentifier, pattern__795: impl temper_core::ToArcString) -> Query {
-        let pattern__795 = pattern__795.to_arc_string();
-        let b__797: SqlBuilder = SqlBuilder::new();
-        b__797.append_safe(field__794.sql_value());
-        b__797.append_safe(" ILIKE ");
-        b__797.append_string(pattern__795.clone());
-        let mut t___8989: SqlFragment = b__797.accumulated();
-        return self.r#where(t___8989.clone());
+    pub fn where_i_like(& self, field__838: SafeIdentifier, pattern__839: impl temper_core::ToArcString) -> Query {
+        let pattern__839 = pattern__839.to_arc_string();
+        let b__841: SqlBuilder = SqlBuilder::new();
+        b__841.append_safe(field__838.sql_value());
+        b__841.append_safe(" ILIKE ");
+        b__841.append_string(pattern__839.clone());
+        let mut t___10243: SqlFragment = b__841.accumulated();
+        return self.r#where(t___10243.clone());
     }
-    pub fn select(& self, fields__799: impl temper_core::ToList<SafeIdentifier>) -> Query {
-        let fields__799 = fields__799.to_list();
-        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), fields__799.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
+    pub fn select(& self, fields__843: impl temper_core::ToList<SafeIdentifier>) -> Query {
+        let fields__843 = fields__843.to_list();
+        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), fields__843.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
     }
-    pub fn select_expr(& self, exprs__802: impl temper_core::ToList<SqlFragment>) -> Query {
-        let exprs__802 = exprs__802.to_list();
-        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, exprs__802.clone());
+    pub fn select_expr(& self, exprs__846: impl temper_core::ToList<SqlFragment>) -> Query {
+        let exprs__846 = exprs__846.to_list();
+        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, exprs__846.clone());
     }
-    pub fn order_by(& self, field__805: SafeIdentifier, ascending__806: bool) -> Query {
-        let nb__808: temper_core::ListBuilder<OrderClause> = temper_core::ListedTrait::to_list_builder( & self.0.order_clauses);
-        temper_core::listed::add( & nb__808, OrderClause::new(field__805.clone(), ascending__806), None);
-        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), temper_core::ListedTrait::to_list( & nb__808), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
+    pub fn order_by(& self, field__849: SafeIdentifier, ascending__850: bool) -> Query {
+        let nb__852: temper_core::ListBuilder<OrderClause> = temper_core::ListedTrait::to_list_builder( & self.0.order_clauses);
+        temper_core::listed::add( & nb__852, OrderClause::new(field__849.clone(), ascending__850), None);
+        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), temper_core::ListedTrait::to_list( & nb__852), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
     }
-    pub fn limit(& self, n__810: i32) -> temper_core::Result<Query> {
-        if Some(n__810) < Some(0) {
+    pub fn limit(& self, n__854: i32) -> temper_core::Result<Query> {
+        if Some(n__854) < Some(0) {
             return Err(temper_core::Error::new());
         }
-        return Ok(Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), Some(n__810), self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone()));
+        return Ok(Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), Some(n__854), self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone()));
     }
-    pub fn offset(& self, n__813: i32) -> temper_core::Result<Query> {
-        if Some(n__813) < Some(0) {
+    pub fn offset(& self, n__857: i32) -> temper_core::Result<Query> {
+        if Some(n__857) < Some(0) {
             return Err(temper_core::Error::new());
         }
-        return Ok(Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, Some(n__813), self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone()));
+        return Ok(Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, Some(n__857), self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone()));
     }
-    pub fn join(& self, joinType__816: JoinType, table__817: SafeIdentifier, onCondition__818: SqlFragment) -> Query {
-        let nb__820: temper_core::ListBuilder<JoinClause> = temper_core::ListedTrait::to_list_builder( & self.0.join_clauses);
-        temper_core::listed::add( & nb__820, JoinClause::new(joinType__816.clone(), table__817.clone(), onCondition__818.clone()), None);
-        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, temper_core::ListedTrait::to_list( & nb__820), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
+    pub fn join(& self, joinType__860: JoinType, table__861: SafeIdentifier, onCondition__862: SqlFragment) -> Query {
+        let nb__864: temper_core::ListBuilder<JoinClause> = temper_core::ListedTrait::to_list_builder( & self.0.join_clauses);
+        temper_core::listed::add( & nb__864, JoinClause::new(joinType__860.clone(), table__861.clone(), onCondition__862.clone()), None);
+        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, temper_core::ListedTrait::to_list( & nb__864), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
     }
-    pub fn inner_join(& self, table__822: SafeIdentifier, onCondition__823: SqlFragment) -> Query {
-        let mut t___8959: InnerJoin = InnerJoin::new();
-        return self.join(JoinType::new(t___8959.clone()), table__822.clone(), onCondition__823.clone());
+    pub fn inner_join(& self, table__866: SafeIdentifier, onCondition__867: SqlFragment) -> Query {
+        let mut t___10213: InnerJoin = InnerJoin::new();
+        return self.join(JoinType::new(t___10213.clone()), table__866.clone(), onCondition__867.clone());
     }
-    pub fn left_join(& self, table__826: SafeIdentifier, onCondition__827: SqlFragment) -> Query {
-        let mut t___8957: LeftJoin = LeftJoin::new();
-        return self.join(JoinType::new(t___8957.clone()), table__826.clone(), onCondition__827.clone());
+    pub fn left_join(& self, table__870: SafeIdentifier, onCondition__871: SqlFragment) -> Query {
+        let mut t___10211: LeftJoin = LeftJoin::new();
+        return self.join(JoinType::new(t___10211.clone()), table__870.clone(), onCondition__871.clone());
     }
-    pub fn right_join(& self, table__830: SafeIdentifier, onCondition__831: SqlFragment) -> Query {
-        let mut t___8955: RightJoin = RightJoin::new();
-        return self.join(JoinType::new(t___8955.clone()), table__830.clone(), onCondition__831.clone());
+    pub fn right_join(& self, table__874: SafeIdentifier, onCondition__875: SqlFragment) -> Query {
+        let mut t___10209: RightJoin = RightJoin::new();
+        return self.join(JoinType::new(t___10209.clone()), table__874.clone(), onCondition__875.clone());
     }
-    pub fn full_join(& self, table__834: SafeIdentifier, onCondition__835: SqlFragment) -> Query {
-        let mut t___8953: FullJoin = FullJoin::new();
-        return self.join(JoinType::new(t___8953.clone()), table__834.clone(), onCondition__835.clone());
+    pub fn full_join(& self, table__878: SafeIdentifier, onCondition__879: SqlFragment) -> Query {
+        let mut t___10207: FullJoin = FullJoin::new();
+        return self.join(JoinType::new(t___10207.clone()), table__878.clone(), onCondition__879.clone());
     }
-    pub fn group_by(& self, field__838: SafeIdentifier) -> Query {
-        let nb__840: temper_core::ListBuilder<SafeIdentifier> = temper_core::ListedTrait::to_list_builder( & self.0.group_by_fields);
-        temper_core::listed::add( & nb__840, field__838.clone(), None);
-        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), temper_core::ListedTrait::to_list( & nb__840), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
+    pub fn group_by(& self, field__882: SafeIdentifier) -> Query {
+        let nb__884: temper_core::ListBuilder<SafeIdentifier> = temper_core::ListedTrait::to_list_builder( & self.0.group_by_fields);
+        temper_core::listed::add( & nb__884, field__882.clone(), None);
+        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), temper_core::ListedTrait::to_list( & nb__884), self.0.having_conditions.clone(), self.0.is_distinct, self.0.select_exprs.clone());
     }
-    pub fn having(& self, condition__842: SqlFragment) -> Query {
-        let nb__844: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.having_conditions);
-        temper_core::listed::add( & nb__844, WhereClause::new(AndCondition::new(condition__842.clone())), None);
-        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), temper_core::ListedTrait::to_list( & nb__844), self.0.is_distinct, self.0.select_exprs.clone());
+    pub fn having(& self, condition__886: SqlFragment) -> Query {
+        let nb__888: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.having_conditions);
+        temper_core::listed::add( & nb__888, WhereClause::new(AndCondition::new(condition__886.clone())), None);
+        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), temper_core::ListedTrait::to_list( & nb__888), self.0.is_distinct, self.0.select_exprs.clone());
     }
-    pub fn or_having(& self, condition__846: SqlFragment) -> Query {
-        let nb__848: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.having_conditions);
-        temper_core::listed::add( & nb__848, WhereClause::new(OrCondition::new(condition__846.clone())), None);
-        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), temper_core::ListedTrait::to_list( & nb__848), self.0.is_distinct, self.0.select_exprs.clone());
+    pub fn or_having(& self, condition__890: SqlFragment) -> Query {
+        let nb__892: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.having_conditions);
+        temper_core::listed::add( & nb__892, WhereClause::new(OrCondition::new(condition__890.clone())), None);
+        return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), temper_core::ListedTrait::to_list( & nb__892), self.0.is_distinct, self.0.select_exprs.clone());
     }
     pub fn distinct(& self) -> Query {
         return Query::new(self.0.table_name.clone(), self.0.conditions.clone(), self.0.selected_fields.clone(), self.0.order_clauses.clone(), self.0.limit_val, self.0.offset_val, self.0.join_clauses.clone(), self.0.group_by_fields.clone(), self.0.having_conditions.clone(), true, self.0.select_exprs.clone());
     }
     pub fn to_sql(& self) -> SqlFragment {
-        let mut t___8859: i32;
-        let mut t___8878: i32;
-        let mut t___8897: i32;
-        let b__853: SqlBuilder = SqlBuilder::new();
+        let mut t___10113: i32;
+        let mut t___10132: i32;
+        let mut t___10151: i32;
+        let b__897: SqlBuilder = SqlBuilder::new();
         if self.0.is_distinct {
-            b__853.append_safe("SELECT DISTINCT ");
+            b__897.append_safe("SELECT DISTINCT ");
         } else {
-            b__853.append_safe("SELECT ");
+            b__897.append_safe("SELECT ");
         }
         if ! temper_core::ListedTrait::is_empty( & self.0.select_exprs) {
-            b__853.append_fragment(temper_core::ListedTrait::get( & self.0.select_exprs, 0));
-            let mut i__854: i32 = 1;
-            'loop___9781: loop {
-                t___8859 = temper_core::ListedTrait::len( & self.0.select_exprs);
-                if ! (Some(i__854) < Some(t___8859)) {
+            b__897.append_fragment(temper_core::ListedTrait::get( & self.0.select_exprs, 0));
+            let mut i__898: i32 = 1;
+            'loop___11048: loop {
+                t___10113 = temper_core::ListedTrait::len( & self.0.select_exprs);
+                if ! (Some(i__898) < Some(t___10113)) {
                     break;
                 }
-                b__853.append_safe(", ");
-                b__853.append_fragment(temper_core::ListedTrait::get( & self.0.select_exprs, i__854));
-                i__854 = i__854.wrapping_add(1);
+                b__897.append_safe(", ");
+                b__897.append_fragment(temper_core::ListedTrait::get( & self.0.select_exprs, i__898));
+                i__898 = i__898.wrapping_add(1);
             }
         } else {
             if temper_core::ListedTrait::is_empty( & self.0.selected_fields) {
-                b__853.append_safe("*");
+                b__897.append_safe("*");
             } else {
                 #[derive(Clone)]
                 struct ClosureGroup___4 {}
                 impl ClosureGroup___4 {
-                    fn fn__8852(& self, f__855: SafeIdentifier) -> std::sync::Arc<String> {
-                        return f__855.sql_value();
+                    fn fn__10106(& self, f__899: SafeIdentifier) -> std::sync::Arc<String> {
+                        return f__899.sql_value();
                     }
                 }
                 let closure_group = ClosureGroup___4 {};
-                let fn__8852 = {
+                let fn__10106 = {
                     let closure_group = closure_group.clone();
-                    std::sync::Arc::new(move | f__855: SafeIdentifier | closure_group.fn__8852(f__855))
+                    std::sync::Arc::new(move | f__899: SafeIdentifier | closure_group.fn__10106(f__899))
                 };
-                b__853.append_safe(temper_core::listed::join( & self.0.selected_fields, std::sync::Arc::new(", ".to_string()), & ( * fn__8852.clone())));
+                b__897.append_safe(temper_core::listed::join( & self.0.selected_fields, std::sync::Arc::new(", ".to_string()), & ( * fn__10106.clone())));
             }
         }
-        b__853.append_safe(" FROM ");
-        b__853.append_safe(self.0.table_name.sql_value());
+        b__897.append_safe(" FROM ");
+        b__897.append_safe(self.0.table_name.sql_value());
         #[derive(Clone)]
         struct ClosureGroup___5 {
-            b__853: SqlBuilder
+            b__897: SqlBuilder
         }
         impl ClosureGroup___5 {
-            fn fn__8851(& self, jc__856: JoinClause) {
-                self.b__853.append_safe(" ");
-                let mut t___8839: std::sync::Arc<String> = jc__856.join_type().keyword();
-                self.b__853.append_safe(t___8839.clone());
-                self.b__853.append_safe(" ");
-                let mut t___8843: std::sync::Arc<String> = jc__856.table().sql_value();
-                self.b__853.append_safe(t___8843.clone());
-                self.b__853.append_safe(" ON ");
-                let mut t___8846: SqlFragment = jc__856.on_condition();
-                self.b__853.append_fragment(t___8846.clone());
+            fn fn__10105(& self, jc__900: JoinClause) {
+                self.b__897.append_safe(" ");
+                let mut t___10093: std::sync::Arc<String> = jc__900.join_type().keyword();
+                self.b__897.append_safe(t___10093.clone());
+                self.b__897.append_safe(" ");
+                let mut t___10097: std::sync::Arc<String> = jc__900.table().sql_value();
+                self.b__897.append_safe(t___10097.clone());
+                self.b__897.append_safe(" ON ");
+                let mut t___10100: SqlFragment = jc__900.on_condition();
+                self.b__897.append_fragment(t___10100.clone());
             }
         }
         let closure_group = ClosureGroup___5 {
-            b__853: b__853.clone()
+            b__897: b__897.clone()
         };
-        let fn__8851 = {
+        let fn__10105 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | jc__856: JoinClause | closure_group.fn__8851(jc__856))
+            std::sync::Arc::new(move | jc__900: JoinClause | closure_group.fn__10105(jc__900))
         };
-        temper_core::listed::list_for_each( & self.0.join_clauses, & ( * fn__8851.clone()));
+        temper_core::listed::list_for_each( & self.0.join_clauses, & ( * fn__10105.clone()));
         if ! temper_core::ListedTrait::is_empty( & self.0.conditions) {
-            b__853.append_safe(" WHERE ");
-            b__853.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, 0).condition());
-            let mut i__857: i32 = 1;
-            'loop___9782: loop {
-                t___8878 = temper_core::ListedTrait::len( & self.0.conditions);
-                if ! (Some(i__857) < Some(t___8878)) {
+            b__897.append_safe(" WHERE ");
+            b__897.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, 0).condition());
+            let mut i__901: i32 = 1;
+            'loop___11049: loop {
+                t___10132 = temper_core::ListedTrait::len( & self.0.conditions);
+                if ! (Some(i__901) < Some(t___10132)) {
                     break;
                 }
-                b__853.append_safe(" ");
-                b__853.append_safe(temper_core::ListedTrait::get( & self.0.conditions, i__857).keyword());
-                b__853.append_safe(" ");
-                b__853.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, i__857).condition());
-                i__857 = i__857.wrapping_add(1);
+                b__897.append_safe(" ");
+                b__897.append_safe(temper_core::ListedTrait::get( & self.0.conditions, i__901).keyword());
+                b__897.append_safe(" ");
+                b__897.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, i__901).condition());
+                i__901 = i__901.wrapping_add(1);
             }
         }
         if ! temper_core::ListedTrait::is_empty( & self.0.group_by_fields) {
-            b__853.append_safe(" GROUP BY ");
+            b__897.append_safe(" GROUP BY ");
             #[derive(Clone)]
             struct ClosureGroup___6 {}
             impl ClosureGroup___6 {
-                fn fn__8850(& self, f__858: SafeIdentifier) -> std::sync::Arc<String> {
-                    return f__858.sql_value();
+                fn fn__10104(& self, f__902: SafeIdentifier) -> std::sync::Arc<String> {
+                    return f__902.sql_value();
                 }
             }
             let closure_group = ClosureGroup___6 {};
-            let fn__8850 = {
+            let fn__10104 = {
                 let closure_group = closure_group.clone();
-                std::sync::Arc::new(move | f__858: SafeIdentifier | closure_group.fn__8850(f__858))
+                std::sync::Arc::new(move | f__902: SafeIdentifier | closure_group.fn__10104(f__902))
             };
-            b__853.append_safe(temper_core::listed::join( & self.0.group_by_fields, std::sync::Arc::new(", ".to_string()), & ( * fn__8850.clone())));
+            b__897.append_safe(temper_core::listed::join( & self.0.group_by_fields, std::sync::Arc::new(", ".to_string()), & ( * fn__10104.clone())));
         }
         if ! temper_core::ListedTrait::is_empty( & self.0.having_conditions) {
-            b__853.append_safe(" HAVING ");
-            b__853.append_fragment(temper_core::ListedTrait::get( & self.0.having_conditions, 0).condition());
-            let mut i__859: i32 = 1;
-            'loop___9783: loop {
-                t___8897 = temper_core::ListedTrait::len( & self.0.having_conditions);
-                if ! (Some(i__859) < Some(t___8897)) {
+            b__897.append_safe(" HAVING ");
+            b__897.append_fragment(temper_core::ListedTrait::get( & self.0.having_conditions, 0).condition());
+            let mut i__903: i32 = 1;
+            'loop___11050: loop {
+                t___10151 = temper_core::ListedTrait::len( & self.0.having_conditions);
+                if ! (Some(i__903) < Some(t___10151)) {
                     break;
                 }
-                b__853.append_safe(" ");
-                b__853.append_safe(temper_core::ListedTrait::get( & self.0.having_conditions, i__859).keyword());
-                b__853.append_safe(" ");
-                b__853.append_fragment(temper_core::ListedTrait::get( & self.0.having_conditions, i__859).condition());
-                i__859 = i__859.wrapping_add(1);
+                b__897.append_safe(" ");
+                b__897.append_safe(temper_core::ListedTrait::get( & self.0.having_conditions, i__903).keyword());
+                b__897.append_safe(" ");
+                b__897.append_fragment(temper_core::ListedTrait::get( & self.0.having_conditions, i__903).condition());
+                i__903 = i__903.wrapping_add(1);
             }
         }
         if ! temper_core::ListedTrait::is_empty( & self.0.order_clauses) {
-            b__853.append_safe(" ORDER BY ");
-            let mut first__860: std::sync::Arc<std::sync::RwLock<bool>> = std::sync::Arc::new(std::sync::RwLock::new(true));
+            b__897.append_safe(" ORDER BY ");
+            let mut first__904: std::sync::Arc<std::sync::RwLock<bool>> = std::sync::Arc::new(std::sync::RwLock::new(true));
             #[derive(Clone)]
             struct ClosureGroup___7 {
-                first__860: std::sync::Arc<std::sync::RwLock<bool>>, b__853: SqlBuilder
+                first__904: std::sync::Arc<std::sync::RwLock<bool>>, b__897: SqlBuilder
             }
             impl ClosureGroup___7 {
-                fn fn__8849(& self, oc__861: OrderClause) {
-                    let mut t___4769: std::sync::Arc<String>;
-                    if ! temper_core::read_locked( & self.first__860) {
-                        self.b__853.append_safe(", ");
+                fn fn__10103(& self, oc__905: OrderClause) {
+                    let mut t___5515: std::sync::Arc<String>;
+                    if ! temper_core::read_locked( & self.first__904) {
+                        self.b__897.append_safe(", ");
                     }
                     {
-                        * self.first__860.write().unwrap() = false;
+                        * self.first__904.write().unwrap() = false;
                     }
-                    let mut t___8832: std::sync::Arc<String> = oc__861.field().sql_value();
-                    self.b__853.append_safe(t___8832.clone());
-                    if oc__861.ascending() {
-                        t___4769 = std::sync::Arc::new(" ASC".to_string());
+                    let mut t___10086: std::sync::Arc<String> = oc__905.field().sql_value();
+                    self.b__897.append_safe(t___10086.clone());
+                    if oc__905.ascending() {
+                        t___5515 = std::sync::Arc::new(" ASC".to_string());
                     } else {
-                        t___4769 = std::sync::Arc::new(" DESC".to_string());
+                        t___5515 = std::sync::Arc::new(" DESC".to_string());
                     }
-                    self.b__853.append_safe(t___4769.clone());
+                    self.b__897.append_safe(t___5515.clone());
                 }
             }
             let closure_group = ClosureGroup___7 {
-                first__860: first__860.clone(), b__853: b__853.clone()
+                first__904: first__904.clone(), b__897: b__897.clone()
             };
-            let fn__8849 = {
+            let fn__10103 = {
                 let closure_group = closure_group.clone();
-                std::sync::Arc::new(move | oc__861: OrderClause | closure_group.fn__8849(oc__861))
+                std::sync::Arc::new(move | oc__905: OrderClause | closure_group.fn__10103(oc__905))
             };
-            temper_core::listed::list_for_each( & self.0.order_clauses, & ( * fn__8849.clone()));
+            temper_core::listed::list_for_each( & self.0.order_clauses, & ( * fn__10103.clone()));
         }
-        let lv__862: Option<i32> = self.0.limit_val;
-        if ! lv__862.is_none() {
-            let lv___1742: i32 = lv__862.unwrap();
-            b__853.append_safe(" LIMIT ");
-            b__853.append_int32(lv___1742);
+        let lv__906: Option<i32> = self.0.limit_val;
+        if ! lv__906.is_none() {
+            let lv___1952: i32 = lv__906.unwrap();
+            b__897.append_safe(" LIMIT ");
+            b__897.append_int32(lv___1952);
         }
-        let ov__863: Option<i32> = self.0.offset_val;
-        if ! ov__863.is_none() {
-            let ov___1743: i32 = ov__863.unwrap();
-            b__853.append_safe(" OFFSET ");
-            b__853.append_int32(ov___1743);
+        let ov__907: Option<i32> = self.0.offset_val;
+        if ! ov__907.is_none() {
+            let ov___1953: i32 = ov__907.unwrap();
+            b__897.append_safe(" OFFSET ");
+            b__897.append_int32(ov___1953);
         }
-        return b__853.accumulated();
+        return b__897.accumulated();
     }
     pub fn count_sql(& self) -> SqlFragment {
-        let mut t___8801: i32;
-        let mut t___8820: i32;
-        let b__866: SqlBuilder = SqlBuilder::new();
-        b__866.append_safe("SELECT COUNT(*) FROM ");
-        b__866.append_safe(self.0.table_name.sql_value());
+        let mut t___10055: i32;
+        let mut t___10074: i32;
+        let b__910: SqlBuilder = SqlBuilder::new();
+        b__910.append_safe("SELECT COUNT(*) FROM ");
+        b__910.append_safe(self.0.table_name.sql_value());
         #[derive(Clone)]
         struct ClosureGroup___8 {
-            b__866: SqlBuilder
+            b__910: SqlBuilder
         }
         impl ClosureGroup___8 {
-            fn fn__8789(& self, jc__867: JoinClause) {
-                self.b__866.append_safe(" ");
-                let mut t___8779: std::sync::Arc<String> = jc__867.join_type().keyword();
-                self.b__866.append_safe(t___8779.clone());
-                self.b__866.append_safe(" ");
-                let mut t___8783: std::sync::Arc<String> = jc__867.table().sql_value();
-                self.b__866.append_safe(t___8783.clone());
-                self.b__866.append_safe(" ON ");
-                let mut t___8786: SqlFragment = jc__867.on_condition();
-                self.b__866.append_fragment(t___8786.clone());
+            fn fn__10043(& self, jc__911: JoinClause) {
+                self.b__910.append_safe(" ");
+                let mut t___10033: std::sync::Arc<String> = jc__911.join_type().keyword();
+                self.b__910.append_safe(t___10033.clone());
+                self.b__910.append_safe(" ");
+                let mut t___10037: std::sync::Arc<String> = jc__911.table().sql_value();
+                self.b__910.append_safe(t___10037.clone());
+                self.b__910.append_safe(" ON ");
+                let mut t___10040: SqlFragment = jc__911.on_condition();
+                self.b__910.append_fragment(t___10040.clone());
             }
         }
         let closure_group = ClosureGroup___8 {
-            b__866: b__866.clone()
+            b__910: b__910.clone()
         };
-        let fn__8789 = {
+        let fn__10043 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | jc__867: JoinClause | closure_group.fn__8789(jc__867))
+            std::sync::Arc::new(move | jc__911: JoinClause | closure_group.fn__10043(jc__911))
         };
-        temper_core::listed::list_for_each( & self.0.join_clauses, & ( * fn__8789.clone()));
+        temper_core::listed::list_for_each( & self.0.join_clauses, & ( * fn__10043.clone()));
         if ! temper_core::ListedTrait::is_empty( & self.0.conditions) {
-            b__866.append_safe(" WHERE ");
-            b__866.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, 0).condition());
-            let mut i__868: i32 = 1;
-            'loop___9786: loop {
-                t___8801 = temper_core::ListedTrait::len( & self.0.conditions);
-                if ! (Some(i__868) < Some(t___8801)) {
+            b__910.append_safe(" WHERE ");
+            b__910.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, 0).condition());
+            let mut i__912: i32 = 1;
+            'loop___11053: loop {
+                t___10055 = temper_core::ListedTrait::len( & self.0.conditions);
+                if ! (Some(i__912) < Some(t___10055)) {
                     break;
                 }
-                b__866.append_safe(" ");
-                b__866.append_safe(temper_core::ListedTrait::get( & self.0.conditions, i__868).keyword());
-                b__866.append_safe(" ");
-                b__866.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, i__868).condition());
-                i__868 = i__868.wrapping_add(1);
+                b__910.append_safe(" ");
+                b__910.append_safe(temper_core::ListedTrait::get( & self.0.conditions, i__912).keyword());
+                b__910.append_safe(" ");
+                b__910.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, i__912).condition());
+                i__912 = i__912.wrapping_add(1);
             }
         }
         if ! temper_core::ListedTrait::is_empty( & self.0.group_by_fields) {
-            b__866.append_safe(" GROUP BY ");
+            b__910.append_safe(" GROUP BY ");
             #[derive(Clone)]
             struct ClosureGroup___9 {}
             impl ClosureGroup___9 {
-                fn fn__8788(& self, f__869: SafeIdentifier) -> std::sync::Arc<String> {
-                    return f__869.sql_value();
+                fn fn__10042(& self, f__913: SafeIdentifier) -> std::sync::Arc<String> {
+                    return f__913.sql_value();
                 }
             }
             let closure_group = ClosureGroup___9 {};
-            let fn__8788 = {
+            let fn__10042 = {
                 let closure_group = closure_group.clone();
-                std::sync::Arc::new(move | f__869: SafeIdentifier | closure_group.fn__8788(f__869))
+                std::sync::Arc::new(move | f__913: SafeIdentifier | closure_group.fn__10042(f__913))
             };
-            b__866.append_safe(temper_core::listed::join( & self.0.group_by_fields, std::sync::Arc::new(", ".to_string()), & ( * fn__8788.clone())));
+            b__910.append_safe(temper_core::listed::join( & self.0.group_by_fields, std::sync::Arc::new(", ".to_string()), & ( * fn__10042.clone())));
         }
         if ! temper_core::ListedTrait::is_empty( & self.0.having_conditions) {
-            b__866.append_safe(" HAVING ");
-            b__866.append_fragment(temper_core::ListedTrait::get( & self.0.having_conditions, 0).condition());
-            let mut i__870: i32 = 1;
-            'loop___9787: loop {
-                t___8820 = temper_core::ListedTrait::len( & self.0.having_conditions);
-                if ! (Some(i__870) < Some(t___8820)) {
+            b__910.append_safe(" HAVING ");
+            b__910.append_fragment(temper_core::ListedTrait::get( & self.0.having_conditions, 0).condition());
+            let mut i__914: i32 = 1;
+            'loop___11054: loop {
+                t___10074 = temper_core::ListedTrait::len( & self.0.having_conditions);
+                if ! (Some(i__914) < Some(t___10074)) {
                     break;
                 }
-                b__866.append_safe(" ");
-                b__866.append_safe(temper_core::ListedTrait::get( & self.0.having_conditions, i__870).keyword());
-                b__866.append_safe(" ");
-                b__866.append_fragment(temper_core::ListedTrait::get( & self.0.having_conditions, i__870).condition());
-                i__870 = i__870.wrapping_add(1);
+                b__910.append_safe(" ");
+                b__910.append_safe(temper_core::ListedTrait::get( & self.0.having_conditions, i__914).keyword());
+                b__910.append_safe(" ");
+                b__910.append_fragment(temper_core::ListedTrait::get( & self.0.having_conditions, i__914).condition());
+                i__914 = i__914.wrapping_add(1);
             }
         }
-        return b__866.accumulated();
+        return b__910.accumulated();
     }
-    pub fn safe_to_sql(& self, defaultLimit__872: i32) -> temper_core::Result<SqlFragment> {
-        let return__365: SqlFragment;
-        let mut t___4718: Query;
-        if Some(defaultLimit__872) < Some(0) {
+    pub fn safe_to_sql(& self, defaultLimit__916: i32) -> temper_core::Result<SqlFragment> {
+        let return__387: SqlFragment;
+        let mut t___5464: Query;
+        if Some(defaultLimit__916) < Some(0) {
             return Err(temper_core::Error::new());
         }
         if ! self.0.limit_val.is_none() {
-            return__365 = self.to_sql();
+            return__387 = self.to_sql();
         } else {
-            t___4718 = self.limit(defaultLimit__872) ? ;
-            return__365 = t___4718.to_sql();
+            t___5464 = self.limit(defaultLimit__916) ? ;
+            return__387 = t___5464.to_sql();
         }
-        return Ok(return__365.clone());
+        return Ok(return__387.clone());
     }
-    pub fn new(tableName__875: SafeIdentifier, conditions__876: impl temper_core::ToList<WhereClause>, selectedFields__877: impl temper_core::ToList<SafeIdentifier>, orderClauses__878: impl temper_core::ToList<OrderClause>, limitVal__879: Option<i32>, offsetVal__880: Option<i32>, joinClauses__881: impl temper_core::ToList<JoinClause>, groupByFields__882: impl temper_core::ToList<SafeIdentifier>, havingConditions__883: impl temper_core::ToList<WhereClause>, isDistinct__884: bool, selectExprs__885: impl temper_core::ToList<SqlFragment>) -> Query {
-        let conditions__876 = conditions__876.to_list();
-        let selectedFields__877 = selectedFields__877.to_list();
-        let orderClauses__878 = orderClauses__878.to_list();
-        let joinClauses__881 = joinClauses__881.to_list();
-        let groupByFields__882 = groupByFields__882.to_list();
-        let havingConditions__883 = havingConditions__883.to_list();
-        let selectExprs__885 = selectExprs__885.to_list();
+    pub fn new(tableName__919: SafeIdentifier, conditions__920: impl temper_core::ToList<WhereClause>, selectedFields__921: impl temper_core::ToList<SafeIdentifier>, orderClauses__922: impl temper_core::ToList<OrderClause>, limitVal__923: Option<i32>, offsetVal__924: Option<i32>, joinClauses__925: impl temper_core::ToList<JoinClause>, groupByFields__926: impl temper_core::ToList<SafeIdentifier>, havingConditions__927: impl temper_core::ToList<WhereClause>, isDistinct__928: bool, selectExprs__929: impl temper_core::ToList<SqlFragment>) -> Query {
+        let conditions__920 = conditions__920.to_list();
+        let selectedFields__921 = selectedFields__921.to_list();
+        let orderClauses__922 = orderClauses__922.to_list();
+        let joinClauses__925 = joinClauses__925.to_list();
+        let groupByFields__926 = groupByFields__926.to_list();
+        let havingConditions__927 = havingConditions__927.to_list();
+        let selectExprs__929 = selectExprs__929.to_list();
         let table_name;
         let conditions;
         let selected_fields;
@@ -1519,17 +1519,17 @@ impl Query {
         let having_conditions;
         let is_distinct;
         let select_exprs;
-        table_name = tableName__875.clone();
-        conditions = conditions__876.clone();
-        selected_fields = selectedFields__877.clone();
-        order_clauses = orderClauses__878.clone();
-        limit_val = limitVal__879;
-        offset_val = offsetVal__880;
-        join_clauses = joinClauses__881.clone();
-        group_by_fields = groupByFields__882.clone();
-        having_conditions = havingConditions__883.clone();
-        is_distinct = isDistinct__884;
-        select_exprs = selectExprs__885.clone();
+        table_name = tableName__919.clone();
+        conditions = conditions__920.clone();
+        selected_fields = selectedFields__921.clone();
+        order_clauses = orderClauses__922.clone();
+        limit_val = limitVal__923;
+        offset_val = offsetVal__924;
+        join_clauses = joinClauses__925.clone();
+        group_by_fields = groupByFields__926.clone();
+        having_conditions = havingConditions__927.clone();
+        is_distinct = isDistinct__928;
+        select_exprs = selectExprs__929.clone();
         let selfish = Query(std::sync::Arc::new(QueryStruct {
                     table_name, conditions, selected_fields, order_clauses, limit_val, offset_val, join_clauses, group_by_fields, having_conditions, is_distinct, select_exprs
         }));
@@ -1570,6 +1570,240 @@ impl Query {
     }
 }
 temper_core::impl_any_value_trait!(Query, []);
+struct SetClauseStruct {
+    field: SafeIdentifier, value: SqlPart
+}
+#[derive(Clone)]
+pub struct SetClause(std::sync::Arc<SetClauseStruct>);
+#[derive(Clone)]
+pub struct SetClauseBuilder {
+    pub field: SafeIdentifier, pub value: SqlPart
+}
+impl SetClauseBuilder {
+    pub fn build(self) -> SetClause {
+        SetClause::new(self.field, self.value)
+    }
+}
+impl SetClause {
+    pub fn new(field__979: SafeIdentifier, value__980: SqlPart) -> SetClause {
+        let field;
+        let value;
+        field = field__979.clone();
+        value = value__980.clone();
+        let selfish = SetClause(std::sync::Arc::new(SetClauseStruct {
+                    field, value
+        }));
+        return selfish;
+    }
+    pub fn field(& self) -> SafeIdentifier {
+        return self.0.field.clone();
+    }
+    pub fn value(& self) -> SqlPart {
+        return self.0.value.clone();
+    }
+}
+temper_core::impl_any_value_trait!(SetClause, []);
+struct UpdateQueryStruct {
+    table_name: SafeIdentifier, set_clauses: temper_core::List<SetClause>, conditions: temper_core::List<WhereClause>, limit_val: Option<i32>
+}
+#[derive(Clone)]
+pub struct UpdateQuery(std::sync::Arc<UpdateQueryStruct>);
+#[derive(Clone)]
+pub struct UpdateQueryBuilder {
+    pub table_name: SafeIdentifier, pub set_clauses: temper_core::List<SetClause>, pub conditions: temper_core::List<WhereClause>, pub limit_val: Option<i32>
+}
+impl UpdateQueryBuilder {
+    pub fn build(self) -> UpdateQuery {
+        UpdateQuery::new(self.table_name, self.set_clauses, self.conditions, self.limit_val)
+    }
+}
+impl UpdateQuery {
+    pub fn set(& self, field__986: SafeIdentifier, value__987: SqlPart) -> UpdateQuery {
+        let nb__989: temper_core::ListBuilder<SetClause> = temper_core::ListedTrait::to_list_builder( & self.0.set_clauses);
+        temper_core::listed::add( & nb__989, SetClause::new(field__986.clone(), value__987.clone()), None);
+        return UpdateQuery::new(self.0.table_name.clone(), temper_core::ListedTrait::to_list( & nb__989), self.0.conditions.clone(), self.0.limit_val);
+    }
+    pub fn r#where(& self, condition__991: SqlFragment) -> UpdateQuery {
+        let nb__993: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.conditions);
+        temper_core::listed::add( & nb__993, WhereClause::new(AndCondition::new(condition__991.clone())), None);
+        return UpdateQuery::new(self.0.table_name.clone(), self.0.set_clauses.clone(), temper_core::ListedTrait::to_list( & nb__993), self.0.limit_val);
+    }
+    pub fn or_where(& self, condition__995: SqlFragment) -> UpdateQuery {
+        let nb__997: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.conditions);
+        temper_core::listed::add( & nb__997, WhereClause::new(OrCondition::new(condition__995.clone())), None);
+        return UpdateQuery::new(self.0.table_name.clone(), self.0.set_clauses.clone(), temper_core::ListedTrait::to_list( & nb__997), self.0.limit_val);
+    }
+    pub fn limit(& self, n__999: i32) -> temper_core::Result<UpdateQuery> {
+        if Some(n__999) < Some(0) {
+            return Err(temper_core::Error::new());
+        }
+        return Ok(UpdateQuery::new(self.0.table_name.clone(), self.0.set_clauses.clone(), self.0.conditions.clone(), Some(n__999)));
+    }
+    pub fn to_sql(& self) -> temper_core::Result<SqlFragment> {
+        let mut t___9890: i32;
+        let mut t___9904: i32;
+        if temper_core::ListedTrait::is_empty( & self.0.conditions) {
+            return Err(temper_core::Error::new());
+        }
+        if temper_core::ListedTrait::is_empty( & self.0.set_clauses) {
+            return Err(temper_core::Error::new());
+        }
+        let b__1003: SqlBuilder = SqlBuilder::new();
+        b__1003.append_safe("UPDATE ");
+        b__1003.append_safe(self.0.table_name.sql_value());
+        b__1003.append_safe(" SET ");
+        b__1003.append_safe(temper_core::ListedTrait::get( & self.0.set_clauses, 0).field().sql_value());
+        b__1003.append_safe(" = ");
+        b__1003.append_part(temper_core::ListedTrait::get( & self.0.set_clauses, 0).value());
+        let mut i__1004: i32 = 1;
+        'loop___11062: loop {
+            t___9890 = temper_core::ListedTrait::len( & self.0.set_clauses);
+            if ! (Some(i__1004) < Some(t___9890)) {
+                break;
+            }
+            b__1003.append_safe(", ");
+            b__1003.append_safe(temper_core::ListedTrait::get( & self.0.set_clauses, i__1004).field().sql_value());
+            b__1003.append_safe(" = ");
+            b__1003.append_part(temper_core::ListedTrait::get( & self.0.set_clauses, i__1004).value());
+            i__1004 = i__1004.wrapping_add(1);
+        }
+        b__1003.append_safe(" WHERE ");
+        b__1003.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, 0).condition());
+        let mut i__1005: i32 = 1;
+        'loop___11063: loop {
+            t___9904 = temper_core::ListedTrait::len( & self.0.conditions);
+            if ! (Some(i__1005) < Some(t___9904)) {
+                break;
+            }
+            b__1003.append_safe(" ");
+            b__1003.append_safe(temper_core::ListedTrait::get( & self.0.conditions, i__1005).keyword());
+            b__1003.append_safe(" ");
+            b__1003.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, i__1005).condition());
+            i__1005 = i__1005.wrapping_add(1);
+        }
+        let lv__1006: Option<i32> = self.0.limit_val;
+        if ! lv__1006.is_none() {
+            let lv___1954: i32 = lv__1006.unwrap();
+            b__1003.append_safe(" LIMIT ");
+            b__1003.append_int32(lv___1954);
+        }
+        return Ok(b__1003.accumulated());
+    }
+    pub fn new(tableName__1008: SafeIdentifier, setClauses__1009: impl temper_core::ToList<SetClause>, conditions__1010: impl temper_core::ToList<WhereClause>, limitVal__1011: Option<i32>) -> UpdateQuery {
+        let setClauses__1009 = setClauses__1009.to_list();
+        let conditions__1010 = conditions__1010.to_list();
+        let table_name;
+        let set_clauses;
+        let conditions;
+        let limit_val;
+        table_name = tableName__1008.clone();
+        set_clauses = setClauses__1009.clone();
+        conditions = conditions__1010.clone();
+        limit_val = limitVal__1011;
+        let selfish = UpdateQuery(std::sync::Arc::new(UpdateQueryStruct {
+                    table_name, set_clauses, conditions, limit_val
+        }));
+        return selfish;
+    }
+    pub fn table_name(& self) -> SafeIdentifier {
+        return self.0.table_name.clone();
+    }
+    pub fn set_clauses(& self) -> temper_core::List<SetClause> {
+        return self.0.set_clauses.clone();
+    }
+    pub fn conditions(& self) -> temper_core::List<WhereClause> {
+        return self.0.conditions.clone();
+    }
+    pub fn limit_val(& self) -> Option<i32> {
+        return self.0.limit_val;
+    }
+}
+temper_core::impl_any_value_trait!(UpdateQuery, []);
+struct DeleteQueryStruct {
+    table_name: SafeIdentifier, conditions: temper_core::List<WhereClause>, limit_val: Option<i32>
+}
+#[derive(Clone)]
+pub struct DeleteQuery(std::sync::Arc<DeleteQueryStruct>);
+#[derive(Clone)]
+pub struct DeleteQueryBuilder {
+    pub table_name: SafeIdentifier, pub conditions: temper_core::List<WhereClause>, pub limit_val: Option<i32>
+}
+impl DeleteQueryBuilder {
+    pub fn build(self) -> DeleteQuery {
+        DeleteQuery::new(self.table_name, self.conditions, self.limit_val)
+    }
+}
+impl DeleteQuery {
+    pub fn r#where(& self, condition__1016: SqlFragment) -> DeleteQuery {
+        let nb__1018: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.conditions);
+        temper_core::listed::add( & nb__1018, WhereClause::new(AndCondition::new(condition__1016.clone())), None);
+        return DeleteQuery::new(self.0.table_name.clone(), temper_core::ListedTrait::to_list( & nb__1018), self.0.limit_val);
+    }
+    pub fn or_where(& self, condition__1020: SqlFragment) -> DeleteQuery {
+        let nb__1022: temper_core::ListBuilder<WhereClause> = temper_core::ListedTrait::to_list_builder( & self.0.conditions);
+        temper_core::listed::add( & nb__1022, WhereClause::new(OrCondition::new(condition__1020.clone())), None);
+        return DeleteQuery::new(self.0.table_name.clone(), temper_core::ListedTrait::to_list( & nb__1022), self.0.limit_val);
+    }
+    pub fn limit(& self, n__1024: i32) -> temper_core::Result<DeleteQuery> {
+        if Some(n__1024) < Some(0) {
+            return Err(temper_core::Error::new());
+        }
+        return Ok(DeleteQuery::new(self.0.table_name.clone(), self.0.conditions.clone(), Some(n__1024)));
+    }
+    pub fn to_sql(& self) -> temper_core::Result<SqlFragment> {
+        let mut t___9850: i32;
+        if temper_core::ListedTrait::is_empty( & self.0.conditions) {
+            return Err(temper_core::Error::new());
+        }
+        let b__1028: SqlBuilder = SqlBuilder::new();
+        b__1028.append_safe("DELETE FROM ");
+        b__1028.append_safe(self.0.table_name.sql_value());
+        b__1028.append_safe(" WHERE ");
+        b__1028.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, 0).condition());
+        let mut i__1029: i32 = 1;
+        'loop___11069: loop {
+            t___9850 = temper_core::ListedTrait::len( & self.0.conditions);
+            if ! (Some(i__1029) < Some(t___9850)) {
+                break;
+            }
+            b__1028.append_safe(" ");
+            b__1028.append_safe(temper_core::ListedTrait::get( & self.0.conditions, i__1029).keyword());
+            b__1028.append_safe(" ");
+            b__1028.append_fragment(temper_core::ListedTrait::get( & self.0.conditions, i__1029).condition());
+            i__1029 = i__1029.wrapping_add(1);
+        }
+        let lv__1030: Option<i32> = self.0.limit_val;
+        if ! lv__1030.is_none() {
+            let lv___1955: i32 = lv__1030.unwrap();
+            b__1028.append_safe(" LIMIT ");
+            b__1028.append_int32(lv___1955);
+        }
+        return Ok(b__1028.accumulated());
+    }
+    pub fn new(tableName__1032: SafeIdentifier, conditions__1033: impl temper_core::ToList<WhereClause>, limitVal__1034: Option<i32>) -> DeleteQuery {
+        let conditions__1033 = conditions__1033.to_list();
+        let table_name;
+        let conditions;
+        let limit_val;
+        table_name = tableName__1032.clone();
+        conditions = conditions__1033.clone();
+        limit_val = limitVal__1034;
+        let selfish = DeleteQuery(std::sync::Arc::new(DeleteQueryStruct {
+                    table_name, conditions, limit_val
+        }));
+        return selfish;
+    }
+    pub fn table_name(& self) -> SafeIdentifier {
+        return self.0.table_name.clone();
+    }
+    pub fn conditions(& self) -> temper_core::List<WhereClause> {
+        return self.0.conditions.clone();
+    }
+    pub fn limit_val(& self) -> Option<i32> {
+        return self.0.limit_val;
+    }
+}
+temper_core::impl_any_value_trait!(DeleteQuery, []);
 pub enum SafeIdentifierEnum {
     ValidatedIdentifier(ValidatedIdentifier)
 }
@@ -1612,10 +1846,10 @@ impl ValidatedIdentifier {
     pub fn sql_value(& self) -> std::sync::Arc<String> {
         return self.0.value.clone();
     }
-    pub fn new(_value__1120: impl temper_core::ToArcString) -> ValidatedIdentifier {
-        let _value__1120 = _value__1120.to_arc_string();
+    pub fn new(_value__1253: impl temper_core::ToArcString) -> ValidatedIdentifier {
+        let _value__1253 = _value__1253.to_arc_string();
         let value;
-        value = _value__1120.clone();
+        value = _value__1253.clone();
         let selfish = ValidatedIdentifier(std::sync::Arc::new(ValidatedIdentifierStruct {
                     value
         }));
@@ -1786,13 +2020,13 @@ impl FieldDefBuilder {
     }
 }
 impl FieldDef {
-    pub fn new(name__1138: SafeIdentifier, fieldType__1139: FieldType, nullable__1140: bool) -> FieldDef {
+    pub fn new(name__1271: SafeIdentifier, fieldType__1272: FieldType, nullable__1273: bool) -> FieldDef {
         let name;
         let field_type;
         let nullable;
-        name = name__1138.clone();
-        field_type = fieldType__1139.clone();
-        nullable = nullable__1140;
+        name = name__1271.clone();
+        field_type = fieldType__1272.clone();
+        nullable = nullable__1273;
         let selfish = FieldDef(std::sync::Arc::new(FieldDefStruct {
                     name, field_type, nullable
         }));
@@ -1824,32 +2058,32 @@ impl TableDefBuilder {
     }
 }
 impl TableDef {
-    pub fn field(& self, name__1144: impl temper_core::ToArcString) -> temper_core::Result<FieldDef> {
-        let name__1144 = name__1144.to_arc_string();
-        let return__407: FieldDef;
-        'fn__1145: {
-            let this__5723: temper_core::List<FieldDef> = self.0.fields.clone();
-            let n__5724: i32 = temper_core::ListedTrait::len( & this__5723);
-            let mut i__5725: i32 = 0;
-            'loop___9792: while Some(i__5725) < Some(n__5724) {
-                let el__5726: FieldDef = temper_core::ListedTrait::get( & this__5723, i__5725);
-                i__5725 = i__5725.wrapping_add(1);
-                let f__1146: FieldDef = el__5726.clone();
-                if Some(f__1146.name().sql_value().as_str()) == Some(name__1144.as_str()) {
-                    return__407 = f__1146.clone();
-                    break 'fn__1145;
+    pub fn field(& self, name__1277: impl temper_core::ToArcString) -> temper_core::Result<FieldDef> {
+        let name__1277 = name__1277.to_arc_string();
+        let return__451: FieldDef;
+        'fn__1278: {
+            let this__6482: temper_core::List<FieldDef> = self.0.fields.clone();
+            let n__6483: i32 = temper_core::ListedTrait::len( & this__6482);
+            let mut i__6484: i32 = 0;
+            'loop___11073: while Some(i__6484) < Some(n__6483) {
+                let el__6485: FieldDef = temper_core::ListedTrait::get( & this__6482, i__6484);
+                i__6484 = i__6484.wrapping_add(1);
+                let f__1279: FieldDef = el__6485.clone();
+                if Some(f__1279.name().sql_value().as_str()) == Some(name__1277.as_str()) {
+                    return__451 = f__1279.clone();
+                    break 'fn__1278;
                 }
             }
             return Err(temper_core::Error::new());
         }
-        return Ok(return__407.clone());
+        return Ok(return__451.clone());
     }
-    pub fn new(tableName__1148: SafeIdentifier, fields__1149: impl temper_core::ToList<FieldDef>) -> TableDef {
-        let fields__1149 = fields__1149.to_list();
+    pub fn new(tableName__1281: SafeIdentifier, fields__1282: impl temper_core::ToList<FieldDef>) -> TableDef {
+        let fields__1282 = fields__1282.to_list();
         let table_name;
         let fields;
-        table_name = tableName__1148.clone();
-        fields = fields__1149.clone();
+        table_name = tableName__1281.clone();
+        fields = fields__1282.clone();
         let selfish = TableDef(std::sync::Arc::new(TableDefStruct {
                     table_name, fields
         }));
@@ -1869,200 +2103,200 @@ struct SqlBuilderStruct {
 #[derive(Clone)]
 pub struct SqlBuilder(std::sync::Arc<SqlBuilderStruct>);
 impl SqlBuilder {
-    pub fn append_safe(& self, sqlSource__1171: impl temper_core::ToArcString) {
-        let sqlSource__1171 = sqlSource__1171.to_arc_string();
-        let mut t___9641: SqlSource = SqlSource::new(sqlSource__1171.clone());
-        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___9641.clone()), None);
+    pub fn append_safe(& self, sqlSource__1304: impl temper_core::ToArcString) {
+        let sqlSource__1304 = sqlSource__1304.to_arc_string();
+        let mut t___10895: SqlSource = SqlSource::new(sqlSource__1304.clone());
+        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___10895.clone()), None);
     }
-    pub fn append_fragment(& self, fragment__1174: SqlFragment) {
-        let mut t___9639: temper_core::List<SqlPart> = fragment__1174.parts();
-        temper_core::listed::add_all( & self.0.buffer, temper_core::ToListed::to_listed(t___9639.clone()), None);
+    pub fn append_fragment(& self, fragment__1307: SqlFragment) {
+        let mut t___10893: temper_core::List<SqlPart> = fragment__1307.parts();
+        temper_core::listed::add_all( & self.0.buffer, temper_core::ToListed::to_listed(t___10893.clone()), None);
     }
-    pub fn append_part(& self, part__1177: SqlPart) {
-        temper_core::listed::add( & self.0.buffer, part__1177.clone(), None);
+    pub fn append_part(& self, part__1310: SqlPart) {
+        temper_core::listed::add( & self.0.buffer, part__1310.clone(), None);
     }
-    pub fn append_part_list(& self, values__1180: impl temper_core::ToList<SqlPart>) {
-        let values__1180 = values__1180.to_list();
+    pub fn append_part_list(& self, values__1313: impl temper_core::ToList<SqlPart>) {
+        let values__1313 = values__1313.to_list();
         #[derive(Clone)]
         struct ClosureGroup___10 {
-            this__222: SqlBuilder
+            this__244: SqlBuilder
         }
         impl ClosureGroup___10 {
-            fn fn__9635(& self, x__1182: SqlPart) {
-                self.this__222.append_part(x__1182.clone());
+            fn fn__10889(& self, x__1315: SqlPart) {
+                self.this__244.append_part(x__1315.clone());
             }
         }
         let closure_group = ClosureGroup___10 {
-            this__222: self.clone()
+            this__244: self.clone()
         };
-        let fn__9635 = {
+        let fn__10889 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | x__1182: SqlPart | closure_group.fn__9635(x__1182))
+            std::sync::Arc::new(move | x__1315: SqlPart | closure_group.fn__10889(x__1315))
         };
-        self.append_list(temper_core::ToListed::to_listed(values__1180.clone()), fn__9635.clone());
+        self.append_list(temper_core::ToListed::to_listed(values__1313.clone()), fn__10889.clone());
     }
-    pub fn append_boolean(& self, value__1184: bool) {
-        let mut t___9632: SqlBoolean = SqlBoolean::new(value__1184);
-        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___9632.clone()), None);
+    pub fn append_boolean(& self, value__1317: bool) {
+        let mut t___10886: SqlBoolean = SqlBoolean::new(value__1317);
+        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___10886.clone()), None);
     }
-    pub fn append_boolean_list(& self, values__1187: impl temper_core::ToListed<bool>) {
-        let values__1187 = values__1187.to_listed();
+    pub fn append_boolean_list(& self, values__1320: impl temper_core::ToListed<bool>) {
+        let values__1320 = values__1320.to_listed();
         #[derive(Clone)]
         struct ClosureGroup___11 {
-            this__224: SqlBuilder
+            this__246: SqlBuilder
         }
         impl ClosureGroup___11 {
-            fn fn__9629(& self, x__1189: bool) {
-                self.this__224.append_boolean(x__1189);
+            fn fn__10883(& self, x__1322: bool) {
+                self.this__246.append_boolean(x__1322);
             }
         }
         let closure_group = ClosureGroup___11 {
-            this__224: self.clone()
+            this__246: self.clone()
         };
-        let fn__9629 = {
+        let fn__10883 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | x__1189: bool | closure_group.fn__9629(x__1189))
+            std::sync::Arc::new(move | x__1322: bool | closure_group.fn__10883(x__1322))
         };
-        self.append_list(values__1187.clone(), fn__9629.clone());
+        self.append_list(values__1320.clone(), fn__10883.clone());
     }
-    pub fn append_date(& self, value__1191: temper_std::temporal::Date) {
-        let mut t___9626: SqlDate = SqlDate::new(value__1191.clone());
-        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___9626.clone()), None);
+    pub fn append_date(& self, value__1324: temper_std::temporal::Date) {
+        let mut t___10880: SqlDate = SqlDate::new(value__1324.clone());
+        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___10880.clone()), None);
     }
-    pub fn append_date_list(& self, values__1194: impl temper_core::ToListed<temper_std::temporal::Date>) {
-        let values__1194 = values__1194.to_listed();
+    pub fn append_date_list(& self, values__1327: impl temper_core::ToListed<temper_std::temporal::Date>) {
+        let values__1327 = values__1327.to_listed();
         #[derive(Clone)]
         struct ClosureGroup___12 {
-            this__226: SqlBuilder
+            this__248: SqlBuilder
         }
         impl ClosureGroup___12 {
-            fn fn__9623(& self, x__1196: temper_std::temporal::Date) {
-                self.this__226.append_date(x__1196.clone());
+            fn fn__10877(& self, x__1329: temper_std::temporal::Date) {
+                self.this__248.append_date(x__1329.clone());
             }
         }
         let closure_group = ClosureGroup___12 {
-            this__226: self.clone()
+            this__248: self.clone()
         };
-        let fn__9623 = {
+        let fn__10877 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | x__1196: temper_std::temporal::Date | closure_group.fn__9623(x__1196))
+            std::sync::Arc::new(move | x__1329: temper_std::temporal::Date | closure_group.fn__10877(x__1329))
         };
-        self.append_list(values__1194.clone(), fn__9623.clone());
+        self.append_list(values__1327.clone(), fn__10877.clone());
     }
-    pub fn append_float64(& self, value__1198: f64) {
-        let mut t___9620: SqlFloat64 = SqlFloat64::new(value__1198);
-        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___9620.clone()), None);
+    pub fn append_float64(& self, value__1331: f64) {
+        let mut t___10874: SqlFloat64 = SqlFloat64::new(value__1331);
+        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___10874.clone()), None);
     }
-    pub fn append_float64_list(& self, values__1201: impl temper_core::ToListed<f64>) {
-        let values__1201 = values__1201.to_listed();
+    pub fn append_float64_list(& self, values__1334: impl temper_core::ToListed<f64>) {
+        let values__1334 = values__1334.to_listed();
         #[derive(Clone)]
         struct ClosureGroup___13 {
-            this__228: SqlBuilder
+            this__250: SqlBuilder
         }
         impl ClosureGroup___13 {
-            fn fn__9617(& self, x__1203: f64) {
-                self.this__228.append_float64(x__1203);
+            fn fn__10871(& self, x__1336: f64) {
+                self.this__250.append_float64(x__1336);
             }
         }
         let closure_group = ClosureGroup___13 {
-            this__228: self.clone()
+            this__250: self.clone()
         };
-        let fn__9617 = {
+        let fn__10871 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | x__1203: f64 | closure_group.fn__9617(x__1203))
+            std::sync::Arc::new(move | x__1336: f64 | closure_group.fn__10871(x__1336))
         };
-        self.append_list(values__1201.clone(), fn__9617.clone());
+        self.append_list(values__1334.clone(), fn__10871.clone());
     }
-    pub fn append_int32(& self, value__1205: i32) {
-        let mut t___9614: SqlInt32 = SqlInt32::new(value__1205);
-        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___9614.clone()), None);
+    pub fn append_int32(& self, value__1338: i32) {
+        let mut t___10868: SqlInt32 = SqlInt32::new(value__1338);
+        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___10868.clone()), None);
     }
-    pub fn append_int32_list(& self, values__1208: impl temper_core::ToListed<i32>) {
-        let values__1208 = values__1208.to_listed();
+    pub fn append_int32_list(& self, values__1341: impl temper_core::ToListed<i32>) {
+        let values__1341 = values__1341.to_listed();
         #[derive(Clone)]
         struct ClosureGroup___14 {
-            this__230: SqlBuilder
+            this__252: SqlBuilder
         }
         impl ClosureGroup___14 {
-            fn fn__9611(& self, x__1210: i32) {
-                self.this__230.append_int32(x__1210);
+            fn fn__10865(& self, x__1343: i32) {
+                self.this__252.append_int32(x__1343);
             }
         }
         let closure_group = ClosureGroup___14 {
-            this__230: self.clone()
+            this__252: self.clone()
         };
-        let fn__9611 = {
+        let fn__10865 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | x__1210: i32 | closure_group.fn__9611(x__1210))
+            std::sync::Arc::new(move | x__1343: i32 | closure_group.fn__10865(x__1343))
         };
-        self.append_list(values__1208.clone(), fn__9611.clone());
+        self.append_list(values__1341.clone(), fn__10865.clone());
     }
-    pub fn append_int64(& self, value__1212: i64) {
-        let mut t___9608: SqlInt64 = SqlInt64::new(value__1212);
-        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___9608.clone()), None);
+    pub fn append_int64(& self, value__1345: i64) {
+        let mut t___10862: SqlInt64 = SqlInt64::new(value__1345);
+        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___10862.clone()), None);
     }
-    pub fn append_int64_list(& self, values__1215: impl temper_core::ToListed<i64>) {
-        let values__1215 = values__1215.to_listed();
+    pub fn append_int64_list(& self, values__1348: impl temper_core::ToListed<i64>) {
+        let values__1348 = values__1348.to_listed();
         #[derive(Clone)]
         struct ClosureGroup___15 {
-            this__232: SqlBuilder
+            this__254: SqlBuilder
         }
         impl ClosureGroup___15 {
-            fn fn__9605(& self, x__1217: i64) {
-                self.this__232.append_int64(x__1217);
+            fn fn__10859(& self, x__1350: i64) {
+                self.this__254.append_int64(x__1350);
             }
         }
         let closure_group = ClosureGroup___15 {
-            this__232: self.clone()
+            this__254: self.clone()
         };
-        let fn__9605 = {
+        let fn__10859 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | x__1217: i64 | closure_group.fn__9605(x__1217))
+            std::sync::Arc::new(move | x__1350: i64 | closure_group.fn__10859(x__1350))
         };
-        self.append_list(values__1215.clone(), fn__9605.clone());
+        self.append_list(values__1348.clone(), fn__10859.clone());
     }
-    pub fn append_string(& self, value__1219: impl temper_core::ToArcString) {
-        let value__1219 = value__1219.to_arc_string();
-        let mut t___9602: SqlString = SqlString::new(value__1219.clone());
-        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___9602.clone()), None);
+    pub fn append_string(& self, value__1352: impl temper_core::ToArcString) {
+        let value__1352 = value__1352.to_arc_string();
+        let mut t___10856: SqlString = SqlString::new(value__1352.clone());
+        temper_core::listed::add( & self.0.buffer, SqlPart::new(t___10856.clone()), None);
     }
-    pub fn append_string_list(& self, values__1222: impl temper_core::ToListed<std::sync::Arc<String>>) {
-        let values__1222 = values__1222.to_listed();
+    pub fn append_string_list(& self, values__1355: impl temper_core::ToListed<std::sync::Arc<String>>) {
+        let values__1355 = values__1355.to_listed();
         #[derive(Clone)]
         struct ClosureGroup___16 {
-            this__234: SqlBuilder
+            this__256: SqlBuilder
         }
         impl ClosureGroup___16 {
-            fn fn__9599(& self, x__1224: impl temper_core::ToArcString) {
-                let x__1224 = x__1224.to_arc_string();
-                self.this__234.append_string(x__1224.clone());
+            fn fn__10853(& self, x__1357: impl temper_core::ToArcString) {
+                let x__1357 = x__1357.to_arc_string();
+                self.this__256.append_string(x__1357.clone());
             }
         }
         let closure_group = ClosureGroup___16 {
-            this__234: self.clone()
+            this__256: self.clone()
         };
-        let fn__9599 = {
+        let fn__10853 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | x__1224: std::sync::Arc<String> | closure_group.fn__9599(x__1224))
+            std::sync::Arc::new(move | x__1357: std::sync::Arc<String> | closure_group.fn__10853(x__1357))
         };
-        self.append_list(values__1222.clone(), fn__9599.clone());
+        self.append_list(values__1355.clone(), fn__10853.clone());
     }
-    fn append_list<T>(& self, values__1226: impl temper_core::ToListed<T>, appendValue__1227: std::sync::Arc<dyn Fn (T) + std::marker::Send + std::marker::Sync>) where T: Clone + std::marker::Send + std::marker::Sync + 'static {
-        let values__1226 = values__1226.to_listed();
-        let mut t___9594: i32;
-        let mut t___9596: T;
-        let mut i__1229: i32 = 0;
-        'loop___9793: loop {
-            t___9594 = temper_core::ListedTrait::len( & ( * values__1226));
-            if ! (Some(i__1229) < Some(t___9594)) {
+    fn append_list<T>(& self, values__1359: impl temper_core::ToListed<T>, appendValue__1360: std::sync::Arc<dyn Fn (T) + std::marker::Send + std::marker::Sync>) where T: Clone + std::marker::Send + std::marker::Sync + 'static {
+        let values__1359 = values__1359.to_listed();
+        let mut t___10848: i32;
+        let mut t___10850: T;
+        let mut i__1362: i32 = 0;
+        'loop___11074: loop {
+            t___10848 = temper_core::ListedTrait::len( & ( * values__1359));
+            if ! (Some(i__1362) < Some(t___10848)) {
                 break;
             }
-            if Some(i__1229) > Some(0) {
+            if Some(i__1362) > Some(0) {
                 self.append_safe(", ");
             }
-            t___9596 = temper_core::ListedTrait::get( & ( * values__1226), i__1229);
-            appendValue__1227(t___9596.clone());
-            i__1229 = i__1229.wrapping_add(1);
+            t___10850 = temper_core::ListedTrait::get( & ( * values__1359), i__1362);
+            appendValue__1360(t___10850.clone());
+            i__1362 = i__1362.wrapping_add(1);
         }
     }
     pub fn accumulated(& self) -> SqlFragment {
@@ -2070,8 +2304,8 @@ impl SqlBuilder {
     }
     pub fn new() -> SqlBuilder {
         let buffer;
-        let mut t___9591: temper_core::ListBuilder<SqlPart> = temper_core::listed::new_builder();
-        buffer = t___9591.clone();
+        let mut t___10845: temper_core::ListBuilder<SqlPart> = temper_core::listed::new_builder();
+        buffer = t___10845.clone();
         let selfish = SqlBuilder(std::sync::Arc::new(SqlBuilderStruct {
                     buffer
         }));
@@ -2089,23 +2323,23 @@ impl SqlFragment {
         return SqlSource::new(self.to_string());
     }
     pub fn to_string(& self) -> std::sync::Arc<String> {
-        let mut t___9665: i32;
-        let builder__1241: std::sync::Arc<std::sync::RwLock<String>> = std::sync::Arc::new(std::sync::RwLock::new(String::new()));
-        let mut i__1242: i32 = 0;
-        'loop___9794: loop {
-            t___9665 = temper_core::ListedTrait::len( & self.0.parts);
-            if ! (Some(i__1242) < Some(t___9665)) {
+        let mut t___10919: i32;
+        let builder__1374: std::sync::Arc<std::sync::RwLock<String>> = std::sync::Arc::new(std::sync::RwLock::new(String::new()));
+        let mut i__1375: i32 = 0;
+        'loop___11075: loop {
+            t___10919 = temper_core::ListedTrait::len( & self.0.parts);
+            if ! (Some(i__1375) < Some(t___10919)) {
                 break;
             }
-            temper_core::ListedTrait::get( & self.0.parts, i__1242).format_to(builder__1241.clone());
-            i__1242 = i__1242.wrapping_add(1);
+            temper_core::ListedTrait::get( & self.0.parts, i__1375).format_to(builder__1374.clone());
+            i__1375 = i__1375.wrapping_add(1);
         }
-        return temper_core::string::builder::to_string( & builder__1241);
+        return temper_core::string::builder::to_string( & builder__1374);
     }
-    pub fn new(parts__1244: impl temper_core::ToList<SqlPart>) -> SqlFragment {
-        let parts__1244 = parts__1244.to_list();
+    pub fn new(parts__1377: impl temper_core::ToList<SqlPart>) -> SqlFragment {
+        let parts__1377 = parts__1377.to_list();
         let parts;
-        parts = parts__1244.clone();
+        parts = parts__1377.clone();
         let selfish = SqlFragment(std::sync::Arc::new(SqlFragmentStruct {
                     parts
         }));
@@ -2122,7 +2356,7 @@ pub enum SqlPartEnum {
 pub trait SqlPartTrait: temper_core::AsAnyValue + temper_core::AnyValueTrait + std::marker::Send + std::marker::Sync {
     fn as_enum(& self) -> SqlPartEnum;
     fn clone_boxed(& self) -> SqlPart;
-    fn format_to(& self, builder__1246: std::sync::Arc<std::sync::RwLock<String>>);
+    fn format_to(& self, builder__1379: std::sync::Arc<std::sync::RwLock<String>>);
 }
 #[derive(Clone)]
 pub struct SqlPart(std::sync::Arc<dyn SqlPartTrait>);
@@ -2155,13 +2389,13 @@ struct SqlSourceStruct {
 #[derive(Clone)]
 pub struct SqlSource(std::sync::Arc<SqlSourceStruct>);
 impl SqlSource {
-    pub fn format_to(& self, builder__1250: std::sync::Arc<std::sync::RwLock<String>>) {
-        temper_core::string::builder::append( & builder__1250, self.0.source.clone());
+    pub fn format_to(& self, builder__1383: std::sync::Arc<std::sync::RwLock<String>>) {
+        temper_core::string::builder::append( & builder__1383, self.0.source.clone());
     }
-    pub fn new(source__1253: impl temper_core::ToArcString) -> SqlSource {
-        let source__1253 = source__1253.to_arc_string();
+    pub fn new(source__1386: impl temper_core::ToArcString) -> SqlSource {
+        let source__1386 = source__1386.to_arc_string();
         let source;
-        source = source__1253.clone();
+        source = source__1386.clone();
         let selfish = SqlSource(std::sync::Arc::new(SqlSourceStruct {
                     source
         }));
@@ -2178,8 +2412,8 @@ impl SqlPartTrait for SqlSource {
     fn clone_boxed(& self) -> SqlPart {
         SqlPart::new(self.clone())
     }
-    fn format_to(& self, builder__1250: std::sync::Arc<std::sync::RwLock<String>>) {
-        self.format_to(builder__1250)
+    fn format_to(& self, builder__1383: std::sync::Arc<std::sync::RwLock<String>>) {
+        self.format_to(builder__1383)
     }
 }
 temper_core::impl_any_value_trait!(SqlSource, [SqlPart]);
@@ -2189,18 +2423,18 @@ struct SqlBooleanStruct {
 #[derive(Clone)]
 pub struct SqlBoolean(std::sync::Arc<SqlBooleanStruct>);
 impl SqlBoolean {
-    pub fn format_to(& self, builder__1256: std::sync::Arc<std::sync::RwLock<String>>) {
-        let mut t___5535: std::sync::Arc<String>;
+    pub fn format_to(& self, builder__1389: std::sync::Arc<std::sync::RwLock<String>>) {
+        let mut t___6281: std::sync::Arc<String>;
         if self.0.value {
-            t___5535 = std::sync::Arc::new("TRUE".to_string());
+            t___6281 = std::sync::Arc::new("TRUE".to_string());
         } else {
-            t___5535 = std::sync::Arc::new("FALSE".to_string());
+            t___6281 = std::sync::Arc::new("FALSE".to_string());
         }
-        temper_core::string::builder::append( & builder__1256, t___5535.clone());
+        temper_core::string::builder::append( & builder__1389, t___6281.clone());
     }
-    pub fn new(value__1259: bool) -> SqlBoolean {
+    pub fn new(value__1392: bool) -> SqlBoolean {
         let value;
-        value = value__1259;
+        value = value__1392;
         let selfish = SqlBoolean(std::sync::Arc::new(SqlBooleanStruct {
                     value
         }));
@@ -2217,8 +2451,8 @@ impl SqlPartTrait for SqlBoolean {
     fn clone_boxed(& self) -> SqlPart {
         SqlPart::new(self.clone())
     }
-    fn format_to(& self, builder__1256: std::sync::Arc<std::sync::RwLock<String>>) {
-        self.format_to(builder__1256)
+    fn format_to(& self, builder__1389: std::sync::Arc<std::sync::RwLock<String>>) {
+        self.format_to(builder__1389)
     }
 }
 temper_core::impl_any_value_trait!(SqlBoolean, [SqlPart]);
@@ -2228,25 +2462,25 @@ struct SqlDateStruct {
 #[derive(Clone)]
 pub struct SqlDate(std::sync::Arc<SqlDateStruct>);
 impl SqlDate {
-    pub fn format_to(& self, builder__1262: std::sync::Arc<std::sync::RwLock<String>>) {
-        temper_core::string::builder::append( & builder__1262, "'");
-        let mut t___9646: std::sync::Arc<String> = self.0.value.to_string();
+    pub fn format_to(& self, builder__1395: std::sync::Arc<std::sync::RwLock<String>>) {
+        temper_core::string::builder::append( & builder__1395, "'");
+        let mut t___10900: std::sync::Arc<String> = self.0.value.to_string();
         #[derive(Clone)]
         struct ClosureGroup___17 {
-            builder__1262: std::sync::Arc<std::sync::RwLock<String>>
+            builder__1395: std::sync::Arc<std::sync::RwLock<String>>
         }
         impl ClosureGroup___17 {
-            fn fn__9644(& self, c__1264: i32) {
-                if Some(c__1264) == Some(39) {
-                    temper_core::string::builder::append( & self.builder__1262, "''");
+            fn fn__10898(& self, c__1397: i32) {
+                if Some(c__1397) == Some(39) {
+                    temper_core::string::builder::append( & self.builder__1395, "''");
                 } else {
-                    'ok___9704: {
-                        'orelse___1695: {
-                            match temper_core::string::builder::append_code_point( & self.builder__1262, c__1264) {
+                    'ok___10958: {
+                        'orelse___1892: {
+                            match temper_core::string::builder::append_code_point( & self.builder__1395, c__1397) {
                                 Ok(x) => x,
-                                _ => break 'orelse___1695
+                                _ => break 'orelse___1892
                             };
-                            break 'ok___9704;
+                            break 'ok___10958;
                         }
                         return panic!();
                     }
@@ -2254,18 +2488,18 @@ impl SqlDate {
             }
         }
         let closure_group = ClosureGroup___17 {
-            builder__1262: builder__1262.clone()
+            builder__1395: builder__1395.clone()
         };
-        let fn__9644 = {
+        let fn__10898 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | c__1264: i32 | closure_group.fn__9644(c__1264))
+            std::sync::Arc::new(move | c__1397: i32 | closure_group.fn__10898(c__1397))
         };
-        temper_core::string::for_each( & t___9646, & ( * fn__9644.clone()));
-        temper_core::string::builder::append( & builder__1262, "'");
+        temper_core::string::for_each( & t___10900, & ( * fn__10898.clone()));
+        temper_core::string::builder::append( & builder__1395, "'");
     }
-    pub fn new(value__1266: temper_std::temporal::Date) -> SqlDate {
+    pub fn new(value__1399: temper_std::temporal::Date) -> SqlDate {
         let value;
-        value = value__1266.clone();
+        value = value__1399.clone();
         let selfish = SqlDate(std::sync::Arc::new(SqlDateStruct {
                     value
         }));
@@ -2282,8 +2516,8 @@ impl SqlPartTrait for SqlDate {
     fn clone_boxed(& self) -> SqlPart {
         SqlPart::new(self.clone())
     }
-    fn format_to(& self, builder__1262: std::sync::Arc<std::sync::RwLock<String>>) {
-        self.format_to(builder__1262)
+    fn format_to(& self, builder__1395: std::sync::Arc<std::sync::RwLock<String>>) {
+        self.format_to(builder__1395)
     }
 }
 temper_core::impl_any_value_trait!(SqlDate, [SqlPart]);
@@ -2293,29 +2527,29 @@ struct SqlFloat64Struct {
 #[derive(Clone)]
 pub struct SqlFloat64(std::sync::Arc<SqlFloat64Struct>);
 impl SqlFloat64 {
-    pub fn format_to(& self, builder__1269: std::sync::Arc<std::sync::RwLock<String>>) {
-        let mut t___5524: bool;
-        let mut t___5525: bool;
-        let s__1271: std::sync::Arc<String> = temper_core::float64::to_string(self.0.value);
-        if Some(s__1271.as_str()) == Some("NaN") {
-            t___5525 = true;
+    pub fn format_to(& self, builder__1402: std::sync::Arc<std::sync::RwLock<String>>) {
+        let mut t___6270: bool;
+        let mut t___6271: bool;
+        let s__1404: std::sync::Arc<String> = temper_core::float64::to_string(self.0.value);
+        if Some(s__1404.as_str()) == Some("NaN") {
+            t___6271 = true;
         } else {
-            if Some(s__1271.as_str()) == Some("Infinity") {
-                t___5524 = true;
+            if Some(s__1404.as_str()) == Some("Infinity") {
+                t___6270 = true;
             } else {
-                t___5524 = Some(s__1271.as_str()) == Some("-Infinity");
+                t___6270 = Some(s__1404.as_str()) == Some("-Infinity");
             }
-            t___5525 = t___5524;
+            t___6271 = t___6270;
         }
-        if t___5525 {
-            temper_core::string::builder::append( & builder__1269, "NULL");
+        if t___6271 {
+            temper_core::string::builder::append( & builder__1402, "NULL");
         } else {
-            temper_core::string::builder::append( & builder__1269, s__1271.clone());
+            temper_core::string::builder::append( & builder__1402, s__1404.clone());
         }
     }
-    pub fn new(value__1273: f64) -> SqlFloat64 {
+    pub fn new(value__1406: f64) -> SqlFloat64 {
         let value;
-        value = value__1273;
+        value = value__1406;
         let selfish = SqlFloat64(std::sync::Arc::new(SqlFloat64Struct {
                     value
         }));
@@ -2332,8 +2566,8 @@ impl SqlPartTrait for SqlFloat64 {
     fn clone_boxed(& self) -> SqlPart {
         SqlPart::new(self.clone())
     }
-    fn format_to(& self, builder__1269: std::sync::Arc<std::sync::RwLock<String>>) {
-        self.format_to(builder__1269)
+    fn format_to(& self, builder__1402: std::sync::Arc<std::sync::RwLock<String>>) {
+        self.format_to(builder__1402)
     }
 }
 temper_core::impl_any_value_trait!(SqlFloat64, [SqlPart]);
@@ -2343,13 +2577,13 @@ struct SqlInt32Struct {
 #[derive(Clone)]
 pub struct SqlInt32(std::sync::Arc<SqlInt32Struct>);
 impl SqlInt32 {
-    pub fn format_to(& self, builder__1276: std::sync::Arc<std::sync::RwLock<String>>) {
-        let mut t___9655: std::sync::Arc<String> = temper_core::int_to_string(self.0.value, None);
-        temper_core::string::builder::append( & builder__1276, t___9655.clone());
+    pub fn format_to(& self, builder__1409: std::sync::Arc<std::sync::RwLock<String>>) {
+        let mut t___10909: std::sync::Arc<String> = temper_core::int_to_string(self.0.value, None);
+        temper_core::string::builder::append( & builder__1409, t___10909.clone());
     }
-    pub fn new(value__1279: i32) -> SqlInt32 {
+    pub fn new(value__1412: i32) -> SqlInt32 {
         let value;
-        value = value__1279;
+        value = value__1412;
         let selfish = SqlInt32(std::sync::Arc::new(SqlInt32Struct {
                     value
         }));
@@ -2366,8 +2600,8 @@ impl SqlPartTrait for SqlInt32 {
     fn clone_boxed(& self) -> SqlPart {
         SqlPart::new(self.clone())
     }
-    fn format_to(& self, builder__1276: std::sync::Arc<std::sync::RwLock<String>>) {
-        self.format_to(builder__1276)
+    fn format_to(& self, builder__1409: std::sync::Arc<std::sync::RwLock<String>>) {
+        self.format_to(builder__1409)
     }
 }
 temper_core::impl_any_value_trait!(SqlInt32, [SqlPart]);
@@ -2377,13 +2611,13 @@ struct SqlInt64Struct {
 #[derive(Clone)]
 pub struct SqlInt64(std::sync::Arc<SqlInt64Struct>);
 impl SqlInt64 {
-    pub fn format_to(& self, builder__1282: std::sync::Arc<std::sync::RwLock<String>>) {
-        let mut t___9653: std::sync::Arc<String> = temper_core::int64_to_string(self.0.value, None);
-        temper_core::string::builder::append( & builder__1282, t___9653.clone());
+    pub fn format_to(& self, builder__1415: std::sync::Arc<std::sync::RwLock<String>>) {
+        let mut t___10907: std::sync::Arc<String> = temper_core::int64_to_string(self.0.value, None);
+        temper_core::string::builder::append( & builder__1415, t___10907.clone());
     }
-    pub fn new(value__1285: i64) -> SqlInt64 {
+    pub fn new(value__1418: i64) -> SqlInt64 {
         let value;
-        value = value__1285;
+        value = value__1418;
         let selfish = SqlInt64(std::sync::Arc::new(SqlInt64Struct {
                     value
         }));
@@ -2400,8 +2634,8 @@ impl SqlPartTrait for SqlInt64 {
     fn clone_boxed(& self) -> SqlPart {
         SqlPart::new(self.clone())
     }
-    fn format_to(& self, builder__1282: std::sync::Arc<std::sync::RwLock<String>>) {
-        self.format_to(builder__1282)
+    fn format_to(& self, builder__1415: std::sync::Arc<std::sync::RwLock<String>>) {
+        self.format_to(builder__1415)
     }
 }
 temper_core::impl_any_value_trait!(SqlInt64, [SqlPart]);
@@ -2411,24 +2645,24 @@ struct SqlStringStruct {
 #[derive(Clone)]
 pub struct SqlString(std::sync::Arc<SqlStringStruct>);
 impl SqlString {
-    pub fn format_to(& self, builder__1288: std::sync::Arc<std::sync::RwLock<String>>) {
-        temper_core::string::builder::append( & builder__1288, "'");
+    pub fn format_to(& self, builder__1421: std::sync::Arc<std::sync::RwLock<String>>) {
+        temper_core::string::builder::append( & builder__1421, "'");
         #[derive(Clone)]
         struct ClosureGroup___18 {
-            builder__1288: std::sync::Arc<std::sync::RwLock<String>>
+            builder__1421: std::sync::Arc<std::sync::RwLock<String>>
         }
         impl ClosureGroup___18 {
-            fn fn__9658(& self, c__1290: i32) {
-                if Some(c__1290) == Some(39) {
-                    temper_core::string::builder::append( & self.builder__1288, "''");
+            fn fn__10912(& self, c__1423: i32) {
+                if Some(c__1423) == Some(39) {
+                    temper_core::string::builder::append( & self.builder__1421, "''");
                 } else {
-                    'ok___9709: {
-                        'orelse___1694: {
-                            match temper_core::string::builder::append_code_point( & self.builder__1288, c__1290) {
+                    'ok___10963: {
+                        'orelse___1891: {
+                            match temper_core::string::builder::append_code_point( & self.builder__1421, c__1423) {
                                 Ok(x) => x,
-                                _ => break 'orelse___1694
+                                _ => break 'orelse___1891
                             };
-                            break 'ok___9709;
+                            break 'ok___10963;
                         }
                         return panic!();
                     }
@@ -2436,19 +2670,19 @@ impl SqlString {
             }
         }
         let closure_group = ClosureGroup___18 {
-            builder__1288: builder__1288.clone()
+            builder__1421: builder__1421.clone()
         };
-        let fn__9658 = {
+        let fn__10912 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | c__1290: i32 | closure_group.fn__9658(c__1290))
+            std::sync::Arc::new(move | c__1423: i32 | closure_group.fn__10912(c__1423))
         };
-        temper_core::string::for_each( & self.0.value, & ( * fn__9658.clone()));
-        temper_core::string::builder::append( & builder__1288, "'");
+        temper_core::string::for_each( & self.0.value, & ( * fn__10912.clone()));
+        temper_core::string::builder::append( & builder__1421, "'");
     }
-    pub fn new(value__1292: impl temper_core::ToArcString) -> SqlString {
-        let value__1292 = value__1292.to_arc_string();
+    pub fn new(value__1425: impl temper_core::ToArcString) -> SqlString {
+        let value__1425 = value__1425.to_arc_string();
         let value;
-        value = value__1292.clone();
+        value = value__1425.clone();
         let selfish = SqlString(std::sync::Arc::new(SqlStringStruct {
                     value
         }));
@@ -2465,666 +2699,672 @@ impl SqlPartTrait for SqlString {
     fn clone_boxed(& self) -> SqlPart {
         SqlPart::new(self.clone())
     }
-    fn format_to(& self, builder__1288: std::sync::Arc<std::sync::RwLock<String>>) {
-        self.format_to(builder__1288)
+    fn format_to(& self, builder__1421: std::sync::Arc<std::sync::RwLock<String>>) {
+        self.format_to(builder__1421)
     }
 }
 temper_core::impl_any_value_trait!(SqlString, [SqlPart]);
-pub fn changeset(tableDef__601: TableDef, params__602: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>) -> Changeset {
-    let mut t___9441: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & []);
-    return Changeset::new(ChangesetImpl::new(tableDef__601.clone(), params__602.clone(), t___9441.clone(), [], true));
+pub fn changeset(tableDef__645: TableDef, params__646: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>>) -> Changeset {
+    let mut t___10695: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & []);
+    return Changeset::new(ChangesetImpl::new(tableDef__645.clone(), params__646.clone(), t___10695.clone(), [], true));
 }
-fn isIdentStart__462(c__1121: i32) -> bool {
-    let return__387: bool;
-    let mut t___5298: bool;
-    let mut t___5299: bool;
-    if Some(c__1121) >= Some(97) {
-        t___5298 = Some(c__1121) <= Some(122);
+fn isIdentStart__506(c__1254: i32) -> bool {
+    let return__431: bool;
+    let mut t___6044: bool;
+    let mut t___6045: bool;
+    if Some(c__1254) >= Some(97) {
+        t___6044 = Some(c__1254) <= Some(122);
     } else {
-        t___5298 = false;
+        t___6044 = false;
     }
-    if t___5298 {
-        return__387 = true;
+    if t___6044 {
+        return__431 = true;
     } else {
-        if Some(c__1121) >= Some(65) {
-            t___5299 = Some(c__1121) <= Some(90);
+        if Some(c__1254) >= Some(65) {
+            t___6045 = Some(c__1254) <= Some(90);
         } else {
-            t___5299 = false;
+            t___6045 = false;
         }
-        if t___5299 {
-            return__387 = true;
+        if t___6045 {
+            return__431 = true;
         } else {
-            return__387 = Some(c__1121) == Some(95);
-        }
-    }
-    return return__387;
-}
-fn isIdentPart__463(c__1123: i32) -> bool {
-    let return__388: bool;
-    if isIdentStart__462(c__1123) {
-        return__388 = true;
-    } else {
-        if Some(c__1123) >= Some(48) {
-            return__388 = Some(c__1123) <= Some(57);
-        } else {
-            return__388 = false;
+            return__431 = Some(c__1254) == Some(95);
         }
     }
-    return return__388;
+    return return__431;
 }
-pub fn safe_identifier(name__1125: impl temper_core::ToArcString) -> temper_core::Result<SafeIdentifier> {
-    let name__1125 = name__1125.to_arc_string();
-    let mut t___9439: usize;
-    if name__1125.is_empty() {
+fn isIdentPart__507(c__1256: i32) -> bool {
+    let return__432: bool;
+    if isIdentStart__506(c__1256) {
+        return__432 = true;
+    } else {
+        if Some(c__1256) >= Some(48) {
+            return__432 = Some(c__1256) <= Some(57);
+        } else {
+            return__432 = false;
+        }
+    }
+    return return__432;
+}
+pub fn safe_identifier(name__1258: impl temper_core::ToArcString) -> temper_core::Result<SafeIdentifier> {
+    let name__1258 = name__1258.to_arc_string();
+    let mut t___10693: usize;
+    if name__1258.is_empty() {
         return Err(temper_core::Error::new());
     }
-    let mut idx__1127: usize = 0usize;
-    if ! isIdentStart__462(temper_core::string::get( & name__1125, idx__1127)) {
+    let mut idx__1260: usize = 0usize;
+    if ! isIdentStart__506(temper_core::string::get( & name__1258, idx__1260)) {
         return Err(temper_core::Error::new());
     }
-    let mut t___9436: usize = temper_core::string::next( & name__1125, idx__1127);
-    idx__1127 = t___9436;
-    'loop___9795: loop {
-        if ! temper_core::string::has_index( & name__1125, idx__1127) {
+    let mut t___10690: usize = temper_core::string::next( & name__1258, idx__1260);
+    idx__1260 = t___10690;
+    'loop___11076: loop {
+        if ! temper_core::string::has_index( & name__1258, idx__1260) {
             break;
         }
-        if ! isIdentPart__463(temper_core::string::get( & name__1125, idx__1127)) {
+        if ! isIdentPart__507(temper_core::string::get( & name__1258, idx__1260)) {
             return Err(temper_core::Error::new());
         }
-        t___9439 = temper_core::string::next( & name__1125, idx__1127);
-        idx__1127 = t___9439;
+        t___10693 = temper_core::string::next( & name__1258, idx__1260);
+        idx__1260 = t___10693;
     }
-    return Ok(SafeIdentifier::new(ValidatedIdentifier::new(name__1125.clone())));
+    return Ok(SafeIdentifier::new(ValidatedIdentifier::new(name__1258.clone())));
 }
-fn csid__459(name__604: impl temper_core::ToArcString) -> SafeIdentifier {
-    let name__604 = name__604.to_arc_string();
-    let return__295: SafeIdentifier;
-    let mut t___5286: SafeIdentifier;
-    'ok___9714: {
-        'orelse___1699: {
-            t___5286 = match safe_identifier(name__604.clone()) {
+fn csid__503(name__648: impl temper_core::ToArcString) -> SafeIdentifier {
+    let name__648 = name__648.to_arc_string();
+    let return__317: SafeIdentifier;
+    let mut t___6032: SafeIdentifier;
+    'ok___10968: {
+        'orelse___1896: {
+            t___6032 = match safe_identifier(name__648.clone()) {
                 Ok(x) => x,
-                _ => break 'orelse___1699
+                _ => break 'orelse___1896
             };
-            return__295 = t___5286.clone();
-            break 'ok___9714;
+            return__317 = t___6032.clone();
+            break 'ok___10968;
         }
-        return__295 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+        return__317 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
     }
-    return return__295.clone();
+    return return__317.clone();
 }
-fn userTable__460() -> TableDef {
-    return TableDef::new(csid__459("users"), [FieldDef::new(csid__459("name"), FieldType::new(StringField::new()), false), FieldDef::new(csid__459("email"), FieldType::new(StringField::new()), false), FieldDef::new(csid__459("age"), FieldType::new(IntField::new()), true), FieldDef::new(csid__459("score"), FieldType::new(FloatField::new()), true), FieldDef::new(csid__459("active"), FieldType::new(BoolField::new()), true)]);
+fn userTable__504() -> TableDef {
+    return TableDef::new(csid__503("users"), [FieldDef::new(csid__503("name"), FieldType::new(StringField::new()), false), FieldDef::new(csid__503("email"), FieldType::new(StringField::new()), false), FieldDef::new(csid__503("age"), FieldType::new(IntField::new()), true), FieldDef::new(csid__503("score"), FieldType::new(FloatField::new()), true), FieldDef::new(csid__503("active"), FieldType::new(BoolField::new()), true)]);
 }
-pub fn delete_sql(tableDef__691: TableDef, id__692: i32) -> SqlFragment {
-    let b__694: SqlBuilder = SqlBuilder::new();
-    b__694.append_safe("DELETE FROM ");
-    b__694.append_safe(tableDef__691.table_name().sql_value());
-    b__694.append_safe(" WHERE id = ");
-    b__694.append_int32(id__692);
-    return b__694.accumulated();
+pub fn delete_sql(tableDef__735: TableDef, id__736: i32) -> SqlFragment {
+    let b__738: SqlBuilder = SqlBuilder::new();
+    b__738.append_safe("DELETE FROM ");
+    b__738.append_safe(tableDef__735.table_name().sql_value());
+    b__738.append_safe(" WHERE id = ");
+    b__738.append_int32(id__736);
+    return b__738.accumulated();
 }
-pub fn from(tableName__886: SafeIdentifier) -> Query {
-    return Query::new(tableName__886.clone(), [], [], [], None, None, [], [], [], false, []);
+pub fn from(tableName__930: SafeIdentifier) -> Query {
+    return Query::new(tableName__930.clone(), [], [], [], None, None, [], [], [], false, []);
 }
-pub fn col(table__888: SafeIdentifier, column__889: SafeIdentifier) -> SqlFragment {
-    let b__891: SqlBuilder = SqlBuilder::new();
-    b__891.append_safe(table__888.sql_value());
-    b__891.append_safe(".");
-    b__891.append_safe(column__889.sql_value());
-    return b__891.accumulated();
+pub fn col(table__932: SafeIdentifier, column__933: SafeIdentifier) -> SqlFragment {
+    let b__935: SqlBuilder = SqlBuilder::new();
+    b__935.append_safe(table__932.sql_value());
+    b__935.append_safe(".");
+    b__935.append_safe(column__933.sql_value());
+    return b__935.accumulated();
 }
 pub fn count_all() -> SqlFragment {
-    let b__893: SqlBuilder = SqlBuilder::new();
-    b__893.append_safe("COUNT(*)");
-    return b__893.accumulated();
+    let b__937: SqlBuilder = SqlBuilder::new();
+    b__937.append_safe("COUNT(*)");
+    return b__937.accumulated();
 }
-pub fn count_col(field__894: SafeIdentifier) -> SqlFragment {
-    let b__896: SqlBuilder = SqlBuilder::new();
-    b__896.append_safe("COUNT(");
-    b__896.append_safe(field__894.sql_value());
-    b__896.append_safe(")");
-    return b__896.accumulated();
+pub fn count_col(field__938: SafeIdentifier) -> SqlFragment {
+    let b__940: SqlBuilder = SqlBuilder::new();
+    b__940.append_safe("COUNT(");
+    b__940.append_safe(field__938.sql_value());
+    b__940.append_safe(")");
+    return b__940.accumulated();
 }
-pub fn sum_col(field__897: SafeIdentifier) -> SqlFragment {
-    let b__899: SqlBuilder = SqlBuilder::new();
-    b__899.append_safe("SUM(");
-    b__899.append_safe(field__897.sql_value());
-    b__899.append_safe(")");
-    return b__899.accumulated();
+pub fn sum_col(field__941: SafeIdentifier) -> SqlFragment {
+    let b__943: SqlBuilder = SqlBuilder::new();
+    b__943.append_safe("SUM(");
+    b__943.append_safe(field__941.sql_value());
+    b__943.append_safe(")");
+    return b__943.accumulated();
 }
-pub fn avg_col(field__900: SafeIdentifier) -> SqlFragment {
-    let b__902: SqlBuilder = SqlBuilder::new();
-    b__902.append_safe("AVG(");
-    b__902.append_safe(field__900.sql_value());
-    b__902.append_safe(")");
-    return b__902.accumulated();
+pub fn avg_col(field__944: SafeIdentifier) -> SqlFragment {
+    let b__946: SqlBuilder = SqlBuilder::new();
+    b__946.append_safe("AVG(");
+    b__946.append_safe(field__944.sql_value());
+    b__946.append_safe(")");
+    return b__946.accumulated();
 }
-pub fn min_col(field__903: SafeIdentifier) -> SqlFragment {
-    let b__905: SqlBuilder = SqlBuilder::new();
-    b__905.append_safe("MIN(");
-    b__905.append_safe(field__903.sql_value());
-    b__905.append_safe(")");
-    return b__905.accumulated();
+pub fn min_col(field__947: SafeIdentifier) -> SqlFragment {
+    let b__949: SqlBuilder = SqlBuilder::new();
+    b__949.append_safe("MIN(");
+    b__949.append_safe(field__947.sql_value());
+    b__949.append_safe(")");
+    return b__949.accumulated();
 }
-pub fn max_col(field__906: SafeIdentifier) -> SqlFragment {
-    let b__908: SqlBuilder = SqlBuilder::new();
-    b__908.append_safe("MAX(");
-    b__908.append_safe(field__906.sql_value());
-    b__908.append_safe(")");
-    return b__908.accumulated();
+pub fn max_col(field__950: SafeIdentifier) -> SqlFragment {
+    let b__952: SqlBuilder = SqlBuilder::new();
+    b__952.append_safe("MAX(");
+    b__952.append_safe(field__950.sql_value());
+    b__952.append_safe(")");
+    return b__952.accumulated();
 }
-pub fn union_sql(a__909: Query, b__910: Query) -> SqlFragment {
-    let sb__912: SqlBuilder = SqlBuilder::new();
-    sb__912.append_safe("(");
-    sb__912.append_fragment(a__909.to_sql());
-    sb__912.append_safe(") UNION (");
-    sb__912.append_fragment(b__910.to_sql());
-    sb__912.append_safe(")");
-    return sb__912.accumulated();
+pub fn union_sql(a__953: Query, b__954: Query) -> SqlFragment {
+    let sb__956: SqlBuilder = SqlBuilder::new();
+    sb__956.append_safe("(");
+    sb__956.append_fragment(a__953.to_sql());
+    sb__956.append_safe(") UNION (");
+    sb__956.append_fragment(b__954.to_sql());
+    sb__956.append_safe(")");
+    return sb__956.accumulated();
 }
-pub fn union_all_sql(a__913: Query, b__914: Query) -> SqlFragment {
-    let sb__916: SqlBuilder = SqlBuilder::new();
-    sb__916.append_safe("(");
-    sb__916.append_fragment(a__913.to_sql());
-    sb__916.append_safe(") UNION ALL (");
-    sb__916.append_fragment(b__914.to_sql());
-    sb__916.append_safe(")");
-    return sb__916.accumulated();
+pub fn union_all_sql(a__957: Query, b__958: Query) -> SqlFragment {
+    let sb__960: SqlBuilder = SqlBuilder::new();
+    sb__960.append_safe("(");
+    sb__960.append_fragment(a__957.to_sql());
+    sb__960.append_safe(") UNION ALL (");
+    sb__960.append_fragment(b__958.to_sql());
+    sb__960.append_safe(")");
+    return sb__960.accumulated();
 }
-pub fn intersect_sql(a__917: Query, b__918: Query) -> SqlFragment {
-    let sb__920: SqlBuilder = SqlBuilder::new();
-    sb__920.append_safe("(");
-    sb__920.append_fragment(a__917.to_sql());
-    sb__920.append_safe(") INTERSECT (");
-    sb__920.append_fragment(b__918.to_sql());
-    sb__920.append_safe(")");
-    return sb__920.accumulated();
+pub fn intersect_sql(a__961: Query, b__962: Query) -> SqlFragment {
+    let sb__964: SqlBuilder = SqlBuilder::new();
+    sb__964.append_safe("(");
+    sb__964.append_fragment(a__961.to_sql());
+    sb__964.append_safe(") INTERSECT (");
+    sb__964.append_fragment(b__962.to_sql());
+    sb__964.append_safe(")");
+    return sb__964.accumulated();
 }
-pub fn except_sql(a__921: Query, b__922: Query) -> SqlFragment {
-    let sb__924: SqlBuilder = SqlBuilder::new();
-    sb__924.append_safe("(");
-    sb__924.append_fragment(a__921.to_sql());
-    sb__924.append_safe(") EXCEPT (");
-    sb__924.append_fragment(b__922.to_sql());
-    sb__924.append_safe(")");
-    return sb__924.accumulated();
+pub fn except_sql(a__965: Query, b__966: Query) -> SqlFragment {
+    let sb__968: SqlBuilder = SqlBuilder::new();
+    sb__968.append_safe("(");
+    sb__968.append_fragment(a__965.to_sql());
+    sb__968.append_safe(") EXCEPT (");
+    sb__968.append_fragment(b__966.to_sql());
+    sb__968.append_safe(")");
+    return sb__968.accumulated();
 }
-pub fn subquery(q__925: Query, alias__926: SafeIdentifier) -> SqlFragment {
-    let b__928: SqlBuilder = SqlBuilder::new();
-    b__928.append_safe("(");
-    b__928.append_fragment(q__925.to_sql());
-    b__928.append_safe(") AS ");
-    b__928.append_safe(alias__926.sql_value());
-    return b__928.accumulated();
+pub fn subquery(q__969: Query, alias__970: SafeIdentifier) -> SqlFragment {
+    let b__972: SqlBuilder = SqlBuilder::new();
+    b__972.append_safe("(");
+    b__972.append_fragment(q__969.to_sql());
+    b__972.append_safe(") AS ");
+    b__972.append_safe(alias__970.sql_value());
+    return b__972.accumulated();
 }
-pub fn exists_sql(q__929: Query) -> SqlFragment {
-    let b__931: SqlBuilder = SqlBuilder::new();
-    b__931.append_safe("EXISTS (");
-    b__931.append_fragment(q__929.to_sql());
-    b__931.append_safe(")");
-    return b__931.accumulated();
+pub fn exists_sql(q__973: Query) -> SqlFragment {
+    let b__975: SqlBuilder = SqlBuilder::new();
+    b__975.append_safe("EXISTS (");
+    b__975.append_fragment(q__973.to_sql());
+    b__975.append_safe(")");
+    return b__975.accumulated();
 }
-fn sid__461(name__932: impl temper_core::ToArcString) -> SafeIdentifier {
-    let name__932 = name__932.to_arc_string();
-    let return__380: SafeIdentifier;
-    let mut t___4603: SafeIdentifier;
-    'ok___9725: {
-        'orelse___1707: {
-            t___4603 = match safe_identifier(name__932.clone()) {
+pub fn update(tableName__1035: SafeIdentifier) -> UpdateQuery {
+    return UpdateQuery::new(tableName__1035.clone(), [], [], None);
+}
+pub fn delete_from(tableName__1037: SafeIdentifier) -> DeleteQuery {
+    return DeleteQuery::new(tableName__1037.clone(), [], None);
+}
+fn sid__505(name__1039: impl temper_core::ToArcString) -> SafeIdentifier {
+    let name__1039 = name__1039.to_arc_string();
+    let return__424: SafeIdentifier;
+    let mut t___5241: SafeIdentifier;
+    'ok___10979: {
+        'orelse___1904: {
+            t___5241 = match safe_identifier(name__1039.clone()) {
                 Ok(x) => x,
-                _ => break 'orelse___1707
+                _ => break 'orelse___1904
             };
-            return__380 = t___4603.clone();
-            break 'ok___9725;
+            return__424 = t___5241.clone();
+            break 'ok___10979;
         }
-        return__380 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+        return__424 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
     }
-    return return__380.clone();
+    return return__424.clone();
 }
 #[cfg(test)]
 mod tests {
     #[test]
-    fn castWhitelistsAllowedFields__1404() -> temper_core::Result<()> {
+    fn castWhitelistsAllowedFields__1546() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___24 = temper_std::testing::Test::new();
-        let params__608: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Alice".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("alice@example.com".to_string())), (std::sync::Arc::new("admin".to_string()), std::sync::Arc::new("true".to_string()))]);
-        let mut t___9397: TableDef = userTable__460();
-        let mut t___9398: SafeIdentifier = csid__459("name");
-        let mut t___9399: SafeIdentifier = csid__459("email");
-        let cs__609: Changeset = changeset(t___9397.clone(), params__608.clone()).cast(std::sync::Arc::new(vec![t___9398.clone(), t___9399.clone()]));
-        let mut t___9402: bool = temper_core::MappedTrait::has( & cs__609.changes(), std::sync::Arc::new("name".to_string()));
+        let params__652: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Alice".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("alice@example.com".to_string())), (std::sync::Arc::new("admin".to_string()), std::sync::Arc::new("true".to_string()))]);
+        let mut t___10651: TableDef = userTable__504();
+        let mut t___10652: SafeIdentifier = csid__503("name");
+        let mut t___10653: SafeIdentifier = csid__503("email");
+        let cs__653: Changeset = changeset(t___10651.clone(), params__652.clone()).cast(std::sync::Arc::new(vec![t___10652.clone(), t___10653.clone()]));
+        let mut t___10656: bool = temper_core::MappedTrait::has( & cs__653.changes(), std::sync::Arc::new("name".to_string()));
         #[derive(Clone)]
         struct ClosureGroup___19 {}
         impl ClosureGroup___19 {
-            fn fn__9392(& self) -> std::sync::Arc<String> {
+            fn fn__10646(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("name should be in changes".to_string());
             }
         }
         let closure_group = ClosureGroup___19 {};
-        let fn__9392 = {
+        let fn__10646 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9392())
+            std::sync::Arc::new(move | | closure_group.fn__10646())
         };
-        test___24.assert(t___9402, fn__9392.clone());
-        let mut t___9406: bool = temper_core::MappedTrait::has( & cs__609.changes(), std::sync::Arc::new("email".to_string()));
+        test___24.assert(t___10656, fn__10646.clone());
+        let mut t___10660: bool = temper_core::MappedTrait::has( & cs__653.changes(), std::sync::Arc::new("email".to_string()));
         #[derive(Clone)]
         struct ClosureGroup___20 {}
         impl ClosureGroup___20 {
-            fn fn__9391(& self) -> std::sync::Arc<String> {
+            fn fn__10645(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("email should be in changes".to_string());
             }
         }
         let closure_group = ClosureGroup___20 {};
-        let fn__9391 = {
+        let fn__10645 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9391())
+            std::sync::Arc::new(move | | closure_group.fn__10645())
         };
-        test___24.assert(t___9406, fn__9391.clone());
-        let mut t___9412: bool = ! temper_core::MappedTrait::has( & cs__609.changes(), std::sync::Arc::new("admin".to_string()));
+        test___24.assert(t___10660, fn__10645.clone());
+        let mut t___10666: bool = ! temper_core::MappedTrait::has( & cs__653.changes(), std::sync::Arc::new("admin".to_string()));
         #[derive(Clone)]
         struct ClosureGroup___21 {}
         impl ClosureGroup___21 {
-            fn fn__9390(& self) -> std::sync::Arc<String> {
+            fn fn__10644(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("admin must be dropped (not in whitelist)".to_string());
             }
         }
         let closure_group = ClosureGroup___21 {};
-        let fn__9390 = {
+        let fn__10644 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9390())
+            std::sync::Arc::new(move | | closure_group.fn__10644())
         };
-        test___24.assert(t___9412, fn__9390.clone());
-        let mut t___9414: bool = cs__609.is_valid();
+        test___24.assert(t___10666, fn__10644.clone());
+        let mut t___10668: bool = cs__653.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___22 {}
         impl ClosureGroup___22 {
-            fn fn__9389(& self) -> std::sync::Arc<String> {
+            fn fn__10643(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should still be valid".to_string());
             }
         }
         let closure_group = ClosureGroup___22 {};
-        let fn__9389 = {
+        let fn__10643 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9389())
+            std::sync::Arc::new(move | | closure_group.fn__10643())
         };
-        test___24.assert(t___9414, fn__9389.clone());
+        test___24.assert(t___10668, fn__10643.clone());
         test___24.soft_fail_to_hard()
     }
     #[test]
-    fn castIsReplacingNotAdditiveSecondCallResetsWhitelist__1405() -> temper_core::Result<()> {
+    fn castIsReplacingNotAdditiveSecondCallResetsWhitelist__1547() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___25 = temper_std::testing::Test::new();
-        let params__611: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Alice".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("alice@example.com".to_string()))]);
-        let mut t___9375: TableDef = userTable__460();
-        let mut t___9376: SafeIdentifier = csid__459("name");
-        let cs__612: Changeset = changeset(t___9375.clone(), params__611.clone()).cast(std::sync::Arc::new(vec![t___9376.clone()])).cast(std::sync::Arc::new(vec![csid__459("email")]));
-        let mut t___9383: bool = ! temper_core::MappedTrait::has( & cs__612.changes(), std::sync::Arc::new("name".to_string()));
+        let params__655: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Alice".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("alice@example.com".to_string()))]);
+        let mut t___10629: TableDef = userTable__504();
+        let mut t___10630: SafeIdentifier = csid__503("name");
+        let cs__656: Changeset = changeset(t___10629.clone(), params__655.clone()).cast(std::sync::Arc::new(vec![t___10630.clone()])).cast(std::sync::Arc::new(vec![csid__503("email")]));
+        let mut t___10637: bool = ! temper_core::MappedTrait::has( & cs__656.changes(), std::sync::Arc::new("name".to_string()));
         #[derive(Clone)]
         struct ClosureGroup___23 {}
         impl ClosureGroup___23 {
-            fn fn__9371(& self) -> std::sync::Arc<String> {
+            fn fn__10625(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("name must be excluded by second cast".to_string());
             }
         }
         let closure_group = ClosureGroup___23 {};
-        let fn__9371 = {
+        let fn__10625 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9371())
+            std::sync::Arc::new(move | | closure_group.fn__10625())
         };
-        test___25.assert(t___9383, fn__9371.clone());
-        let mut t___9386: bool = temper_core::MappedTrait::has( & cs__612.changes(), std::sync::Arc::new("email".to_string()));
+        test___25.assert(t___10637, fn__10625.clone());
+        let mut t___10640: bool = temper_core::MappedTrait::has( & cs__656.changes(), std::sync::Arc::new("email".to_string()));
         #[derive(Clone)]
         struct ClosureGroup___24 {}
         impl ClosureGroup___24 {
-            fn fn__9370(& self) -> std::sync::Arc<String> {
+            fn fn__10624(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("email should be present".to_string());
             }
         }
         let closure_group = ClosureGroup___24 {};
-        let fn__9370 = {
+        let fn__10624 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9370())
+            std::sync::Arc::new(move | | closure_group.fn__10624())
         };
-        test___25.assert(t___9386, fn__9370.clone());
+        test___25.assert(t___10640, fn__10624.clone());
         test___25.soft_fail_to_hard()
     }
     #[test]
-    fn castIgnoresEmptyStringValues__1406() -> temper_core::Result<()> {
+    fn castIgnoresEmptyStringValues__1548() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___26 = temper_std::testing::Test::new();
-        let params__614: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("bob@example.com".to_string()))]);
-        let mut t___9357: TableDef = userTable__460();
-        let mut t___9358: SafeIdentifier = csid__459("name");
-        let mut t___9359: SafeIdentifier = csid__459("email");
-        let cs__615: Changeset = changeset(t___9357.clone(), params__614.clone()).cast(std::sync::Arc::new(vec![t___9358.clone(), t___9359.clone()]));
-        let mut t___9364: bool = ! temper_core::MappedTrait::has( & cs__615.changes(), std::sync::Arc::new("name".to_string()));
+        let params__658: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("bob@example.com".to_string()))]);
+        let mut t___10611: TableDef = userTable__504();
+        let mut t___10612: SafeIdentifier = csid__503("name");
+        let mut t___10613: SafeIdentifier = csid__503("email");
+        let cs__659: Changeset = changeset(t___10611.clone(), params__658.clone()).cast(std::sync::Arc::new(vec![t___10612.clone(), t___10613.clone()]));
+        let mut t___10618: bool = ! temper_core::MappedTrait::has( & cs__659.changes(), std::sync::Arc::new("name".to_string()));
         #[derive(Clone)]
         struct ClosureGroup___25 {}
         impl ClosureGroup___25 {
-            fn fn__9353(& self) -> std::sync::Arc<String> {
+            fn fn__10607(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("empty name should not be in changes".to_string());
             }
         }
         let closure_group = ClosureGroup___25 {};
-        let fn__9353 = {
+        let fn__10607 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9353())
+            std::sync::Arc::new(move | | closure_group.fn__10607())
         };
-        test___26.assert(t___9364, fn__9353.clone());
-        let mut t___9367: bool = temper_core::MappedTrait::has( & cs__615.changes(), std::sync::Arc::new("email".to_string()));
+        test___26.assert(t___10618, fn__10607.clone());
+        let mut t___10621: bool = temper_core::MappedTrait::has( & cs__659.changes(), std::sync::Arc::new("email".to_string()));
         #[derive(Clone)]
         struct ClosureGroup___26 {}
         impl ClosureGroup___26 {
-            fn fn__9352(& self) -> std::sync::Arc<String> {
+            fn fn__10606(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("email should be in changes".to_string());
             }
         }
         let closure_group = ClosureGroup___26 {};
-        let fn__9352 = {
+        let fn__10606 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9352())
+            std::sync::Arc::new(move | | closure_group.fn__10606())
         };
-        test___26.assert(t___9367, fn__9352.clone());
+        test___26.assert(t___10621, fn__10606.clone());
         test___26.soft_fail_to_hard()
     }
     #[test]
-    fn validateRequiredPassesWhenFieldPresent__1407() -> temper_core::Result<()> {
+    fn validateRequiredPassesWhenFieldPresent__1549() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___27 = temper_std::testing::Test::new();
-        let params__617: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Alice".to_string()))]);
-        let mut t___9339: TableDef = userTable__460();
-        let mut t___9340: SafeIdentifier = csid__459("name");
-        let cs__618: Changeset = changeset(t___9339.clone(), params__617.clone()).cast(std::sync::Arc::new(vec![t___9340.clone()])).validate_required(std::sync::Arc::new(vec![csid__459("name")]));
-        let mut t___9344: bool = cs__618.is_valid();
+        let params__661: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Alice".to_string()))]);
+        let mut t___10593: TableDef = userTable__504();
+        let mut t___10594: SafeIdentifier = csid__503("name");
+        let cs__662: Changeset = changeset(t___10593.clone(), params__661.clone()).cast(std::sync::Arc::new(vec![t___10594.clone()])).validate_required(std::sync::Arc::new(vec![csid__503("name")]));
+        let mut t___10598: bool = cs__662.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___27 {}
         impl ClosureGroup___27 {
-            fn fn__9336(& self) -> std::sync::Arc<String> {
+            fn fn__10590(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should be valid".to_string());
             }
         }
         let closure_group = ClosureGroup___27 {};
-        let fn__9336 = {
+        let fn__10590 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9336())
+            std::sync::Arc::new(move | | closure_group.fn__10590())
         };
-        test___27.assert(t___9344, fn__9336.clone());
-        let mut t___9350: bool = Some(temper_core::ListedTrait::len( & cs__618.errors())) == Some(0);
+        test___27.assert(t___10598, fn__10590.clone());
+        let mut t___10604: bool = Some(temper_core::ListedTrait::len( & cs__662.errors())) == Some(0);
         #[derive(Clone)]
         struct ClosureGroup___28 {}
         impl ClosureGroup___28 {
-            fn fn__9335(& self) -> std::sync::Arc<String> {
+            fn fn__10589(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("no errors expected".to_string());
             }
         }
         let closure_group = ClosureGroup___28 {};
-        let fn__9335 = {
+        let fn__10589 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9335())
+            std::sync::Arc::new(move | | closure_group.fn__10589())
         };
-        test___27.assert(t___9350, fn__9335.clone());
+        test___27.assert(t___10604, fn__10589.clone());
         test___27.soft_fail_to_hard()
     }
     #[test]
-    fn validateRequiredFailsWhenFieldMissing__1408() -> temper_core::Result<()> {
+    fn validateRequiredFailsWhenFieldMissing__1550() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___28 = temper_std::testing::Test::new();
-        let params__620: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & []);
-        let mut t___9315: TableDef = userTable__460();
-        let mut t___9316: SafeIdentifier = csid__459("name");
-        let cs__621: Changeset = changeset(t___9315.clone(), params__620.clone()).cast(std::sync::Arc::new(vec![t___9316.clone()])).validate_required(std::sync::Arc::new(vec![csid__459("name")]));
-        let mut t___9322: bool = ! cs__621.is_valid();
+        let params__664: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & []);
+        let mut t___10569: TableDef = userTable__504();
+        let mut t___10570: SafeIdentifier = csid__503("name");
+        let cs__665: Changeset = changeset(t___10569.clone(), params__664.clone()).cast(std::sync::Arc::new(vec![t___10570.clone()])).validate_required(std::sync::Arc::new(vec![csid__503("name")]));
+        let mut t___10576: bool = ! cs__665.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___29 {}
         impl ClosureGroup___29 {
-            fn fn__9313(& self) -> std::sync::Arc<String> {
+            fn fn__10567(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should be invalid".to_string());
             }
         }
         let closure_group = ClosureGroup___29 {};
-        let fn__9313 = {
+        let fn__10567 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9313())
+            std::sync::Arc::new(move | | closure_group.fn__10567())
         };
-        test___28.assert(t___9322, fn__9313.clone());
-        let mut t___9327: bool = Some(temper_core::ListedTrait::len( & cs__621.errors())) == Some(1);
+        test___28.assert(t___10576, fn__10567.clone());
+        let mut t___10581: bool = Some(temper_core::ListedTrait::len( & cs__665.errors())) == Some(1);
         #[derive(Clone)]
         struct ClosureGroup___30 {}
         impl ClosureGroup___30 {
-            fn fn__9312(& self) -> std::sync::Arc<String> {
+            fn fn__10566(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should have one error".to_string());
             }
         }
         let closure_group = ClosureGroup___30 {};
-        let fn__9312 = {
+        let fn__10566 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9312())
+            std::sync::Arc::new(move | | closure_group.fn__10566())
         };
-        test___28.assert(t___9327, fn__9312.clone());
-        let mut t___9333: bool = Some(temper_core::ListedTrait::get( & cs__621.errors(), 0).field().as_str()) == Some("name");
+        test___28.assert(t___10581, fn__10566.clone());
+        let mut t___10587: bool = Some(temper_core::ListedTrait::get( & cs__665.errors(), 0).field().as_str()) == Some("name");
         #[derive(Clone)]
         struct ClosureGroup___31 {}
         impl ClosureGroup___31 {
-            fn fn__9311(& self) -> std::sync::Arc<String> {
+            fn fn__10565(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("error should name the field".to_string());
             }
         }
         let closure_group = ClosureGroup___31 {};
-        let fn__9311 = {
+        let fn__10565 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9311())
+            std::sync::Arc::new(move | | closure_group.fn__10565())
         };
-        test___28.assert(t___9333, fn__9311.clone());
+        test___28.assert(t___10587, fn__10565.clone());
         test___28.soft_fail_to_hard()
     }
     #[test]
-    fn validateLengthPassesWithinRange__1409() -> temper_core::Result<()> {
+    fn validateLengthPassesWithinRange__1551() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___29 = temper_std::testing::Test::new();
-        let params__623: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Alice".to_string()))]);
-        let mut t___9303: TableDef = userTable__460();
-        let mut t___9304: SafeIdentifier = csid__459("name");
-        let cs__624: Changeset = changeset(t___9303.clone(), params__623.clone()).cast(std::sync::Arc::new(vec![t___9304.clone()])).validate_length(csid__459("name"), 2, 50);
-        let mut t___9308: bool = cs__624.is_valid();
+        let params__667: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Alice".to_string()))]);
+        let mut t___10557: TableDef = userTable__504();
+        let mut t___10558: SafeIdentifier = csid__503("name");
+        let cs__668: Changeset = changeset(t___10557.clone(), params__667.clone()).cast(std::sync::Arc::new(vec![t___10558.clone()])).validate_length(csid__503("name"), 2, 50);
+        let mut t___10562: bool = cs__668.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___32 {}
         impl ClosureGroup___32 {
-            fn fn__9300(& self) -> std::sync::Arc<String> {
+            fn fn__10554(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should be valid".to_string());
             }
         }
         let closure_group = ClosureGroup___32 {};
-        let fn__9300 = {
+        let fn__10554 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9300())
+            std::sync::Arc::new(move | | closure_group.fn__10554())
         };
-        test___29.assert(t___9308, fn__9300.clone());
+        test___29.assert(t___10562, fn__10554.clone());
         test___29.soft_fail_to_hard()
     }
     #[test]
-    fn validateLengthFailsWhenTooShort__1410() -> temper_core::Result<()> {
+    fn validateLengthFailsWhenTooShort__1552() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___30 = temper_std::testing::Test::new();
-        let params__626: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("A".to_string()))]);
-        let mut t___9291: TableDef = userTable__460();
-        let mut t___9292: SafeIdentifier = csid__459("name");
-        let cs__627: Changeset = changeset(t___9291.clone(), params__626.clone()).cast(std::sync::Arc::new(vec![t___9292.clone()])).validate_length(csid__459("name"), 2, 50);
-        let mut t___9298: bool = ! cs__627.is_valid();
+        let params__670: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("A".to_string()))]);
+        let mut t___10545: TableDef = userTable__504();
+        let mut t___10546: SafeIdentifier = csid__503("name");
+        let cs__671: Changeset = changeset(t___10545.clone(), params__670.clone()).cast(std::sync::Arc::new(vec![t___10546.clone()])).validate_length(csid__503("name"), 2, 50);
+        let mut t___10552: bool = ! cs__671.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___33 {}
         impl ClosureGroup___33 {
-            fn fn__9288(& self) -> std::sync::Arc<String> {
+            fn fn__10542(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should be invalid".to_string());
             }
         }
         let closure_group = ClosureGroup___33 {};
-        let fn__9288 = {
+        let fn__10542 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9288())
+            std::sync::Arc::new(move | | closure_group.fn__10542())
         };
-        test___30.assert(t___9298, fn__9288.clone());
+        test___30.assert(t___10552, fn__10542.clone());
         test___30.soft_fail_to_hard()
     }
     #[test]
-    fn validateLengthFailsWhenTooLong__1411() -> temper_core::Result<()> {
+    fn validateLengthFailsWhenTooLong__1553() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___31 = temper_std::testing::Test::new();
-        let params__629: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("ABCDEFGHIJKLMNOPQRSTUVWXYZ".to_string()))]);
-        let mut t___9279: TableDef = userTable__460();
-        let mut t___9280: SafeIdentifier = csid__459("name");
-        let cs__630: Changeset = changeset(t___9279.clone(), params__629.clone()).cast(std::sync::Arc::new(vec![t___9280.clone()])).validate_length(csid__459("name"), 2, 10);
-        let mut t___9286: bool = ! cs__630.is_valid();
+        let params__673: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("ABCDEFGHIJKLMNOPQRSTUVWXYZ".to_string()))]);
+        let mut t___10533: TableDef = userTable__504();
+        let mut t___10534: SafeIdentifier = csid__503("name");
+        let cs__674: Changeset = changeset(t___10533.clone(), params__673.clone()).cast(std::sync::Arc::new(vec![t___10534.clone()])).validate_length(csid__503("name"), 2, 10);
+        let mut t___10540: bool = ! cs__674.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___34 {}
         impl ClosureGroup___34 {
-            fn fn__9276(& self) -> std::sync::Arc<String> {
+            fn fn__10530(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should be invalid".to_string());
             }
         }
         let closure_group = ClosureGroup___34 {};
-        let fn__9276 = {
+        let fn__10530 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9276())
+            std::sync::Arc::new(move | | closure_group.fn__10530())
         };
-        test___31.assert(t___9286, fn__9276.clone());
+        test___31.assert(t___10540, fn__10530.clone());
         test___31.soft_fail_to_hard()
     }
     #[test]
-    fn validateIntPassesForValidInteger__1412() -> temper_core::Result<()> {
+    fn validateIntPassesForValidInteger__1554() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___32 = temper_std::testing::Test::new();
-        let params__632: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("age".to_string()), std::sync::Arc::new("30".to_string()))]);
-        let mut t___9268: TableDef = userTable__460();
-        let mut t___9269: SafeIdentifier = csid__459("age");
-        let cs__633: Changeset = changeset(t___9268.clone(), params__632.clone()).cast(std::sync::Arc::new(vec![t___9269.clone()])).validate_int(csid__459("age"));
-        let mut t___9273: bool = cs__633.is_valid();
+        let params__676: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("age".to_string()), std::sync::Arc::new("30".to_string()))]);
+        let mut t___10522: TableDef = userTable__504();
+        let mut t___10523: SafeIdentifier = csid__503("age");
+        let cs__677: Changeset = changeset(t___10522.clone(), params__676.clone()).cast(std::sync::Arc::new(vec![t___10523.clone()])).validate_int(csid__503("age"));
+        let mut t___10527: bool = cs__677.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___35 {}
         impl ClosureGroup___35 {
-            fn fn__9265(& self) -> std::sync::Arc<String> {
+            fn fn__10519(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should be valid".to_string());
             }
         }
         let closure_group = ClosureGroup___35 {};
-        let fn__9265 = {
+        let fn__10519 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9265())
+            std::sync::Arc::new(move | | closure_group.fn__10519())
         };
-        test___32.assert(t___9273, fn__9265.clone());
+        test___32.assert(t___10527, fn__10519.clone());
         test___32.soft_fail_to_hard()
     }
     #[test]
-    fn validateIntFailsForNonInteger__1413() -> temper_core::Result<()> {
+    fn validateIntFailsForNonInteger__1555() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___33 = temper_std::testing::Test::new();
-        let params__635: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("age".to_string()), std::sync::Arc::new("not-a-number".to_string()))]);
-        let mut t___9256: TableDef = userTable__460();
-        let mut t___9257: SafeIdentifier = csid__459("age");
-        let cs__636: Changeset = changeset(t___9256.clone(), params__635.clone()).cast(std::sync::Arc::new(vec![t___9257.clone()])).validate_int(csid__459("age"));
-        let mut t___9263: bool = ! cs__636.is_valid();
+        let params__679: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("age".to_string()), std::sync::Arc::new("not-a-number".to_string()))]);
+        let mut t___10510: TableDef = userTable__504();
+        let mut t___10511: SafeIdentifier = csid__503("age");
+        let cs__680: Changeset = changeset(t___10510.clone(), params__679.clone()).cast(std::sync::Arc::new(vec![t___10511.clone()])).validate_int(csid__503("age"));
+        let mut t___10517: bool = ! cs__680.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___36 {}
         impl ClosureGroup___36 {
-            fn fn__9253(& self) -> std::sync::Arc<String> {
+            fn fn__10507(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should be invalid".to_string());
             }
         }
         let closure_group = ClosureGroup___36 {};
-        let fn__9253 = {
+        let fn__10507 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9253())
+            std::sync::Arc::new(move | | closure_group.fn__10507())
         };
-        test___33.assert(t___9263, fn__9253.clone());
+        test___33.assert(t___10517, fn__10507.clone());
         test___33.soft_fail_to_hard()
     }
     #[test]
-    fn validateFloatPassesForValidFloat__1414() -> temper_core::Result<()> {
+    fn validateFloatPassesForValidFloat__1556() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___34 = temper_std::testing::Test::new();
-        let params__638: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("score".to_string()), std::sync::Arc::new("9.5".to_string()))]);
-        let mut t___9245: TableDef = userTable__460();
-        let mut t___9246: SafeIdentifier = csid__459("score");
-        let cs__639: Changeset = changeset(t___9245.clone(), params__638.clone()).cast(std::sync::Arc::new(vec![t___9246.clone()])).validate_float(csid__459("score"));
-        let mut t___9250: bool = cs__639.is_valid();
+        let params__682: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("score".to_string()), std::sync::Arc::new("9.5".to_string()))]);
+        let mut t___10499: TableDef = userTable__504();
+        let mut t___10500: SafeIdentifier = csid__503("score");
+        let cs__683: Changeset = changeset(t___10499.clone(), params__682.clone()).cast(std::sync::Arc::new(vec![t___10500.clone()])).validate_float(csid__503("score"));
+        let mut t___10504: bool = cs__683.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___37 {}
         impl ClosureGroup___37 {
-            fn fn__9242(& self) -> std::sync::Arc<String> {
+            fn fn__10496(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should be valid".to_string());
             }
         }
         let closure_group = ClosureGroup___37 {};
-        let fn__9242 = {
+        let fn__10496 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9242())
+            std::sync::Arc::new(move | | closure_group.fn__10496())
         };
-        test___34.assert(t___9250, fn__9242.clone());
+        test___34.assert(t___10504, fn__10496.clone());
         test___34.soft_fail_to_hard()
     }
     #[test]
-    fn validateInt64_passesForValid64_bitInteger__1415() -> temper_core::Result<()> {
+    fn validateInt64_passesForValid64_bitInteger__1557() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___35 = temper_std::testing::Test::new();
-        let params__641: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("age".to_string()), std::sync::Arc::new("9999999999".to_string()))]);
-        let mut t___9234: TableDef = userTable__460();
-        let mut t___9235: SafeIdentifier = csid__459("age");
-        let cs__642: Changeset = changeset(t___9234.clone(), params__641.clone()).cast(std::sync::Arc::new(vec![t___9235.clone()])).validate_int64(csid__459("age"));
-        let mut t___9239: bool = cs__642.is_valid();
+        let params__685: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("age".to_string()), std::sync::Arc::new("9999999999".to_string()))]);
+        let mut t___10488: TableDef = userTable__504();
+        let mut t___10489: SafeIdentifier = csid__503("age");
+        let cs__686: Changeset = changeset(t___10488.clone(), params__685.clone()).cast(std::sync::Arc::new(vec![t___10489.clone()])).validate_int64(csid__503("age"));
+        let mut t___10493: bool = cs__686.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___38 {}
         impl ClosureGroup___38 {
-            fn fn__9231(& self) -> std::sync::Arc<String> {
+            fn fn__10485(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should be valid".to_string());
             }
         }
         let closure_group = ClosureGroup___38 {};
-        let fn__9231 = {
+        let fn__10485 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9231())
+            std::sync::Arc::new(move | | closure_group.fn__10485())
         };
-        test___35.assert(t___9239, fn__9231.clone());
+        test___35.assert(t___10493, fn__10485.clone());
         test___35.soft_fail_to_hard()
     }
     #[test]
-    fn validateInt64_failsForNonInteger__1416() -> temper_core::Result<()> {
+    fn validateInt64_failsForNonInteger__1558() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___36 = temper_std::testing::Test::new();
-        let params__644: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("age".to_string()), std::sync::Arc::new("not-a-number".to_string()))]);
-        let mut t___9222: TableDef = userTable__460();
-        let mut t___9223: SafeIdentifier = csid__459("age");
-        let cs__645: Changeset = changeset(t___9222.clone(), params__644.clone()).cast(std::sync::Arc::new(vec![t___9223.clone()])).validate_int64(csid__459("age"));
-        let mut t___9229: bool = ! cs__645.is_valid();
+        let params__688: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("age".to_string()), std::sync::Arc::new("not-a-number".to_string()))]);
+        let mut t___10476: TableDef = userTable__504();
+        let mut t___10477: SafeIdentifier = csid__503("age");
+        let cs__689: Changeset = changeset(t___10476.clone(), params__688.clone()).cast(std::sync::Arc::new(vec![t___10477.clone()])).validate_int64(csid__503("age"));
+        let mut t___10483: bool = ! cs__689.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___39 {}
         impl ClosureGroup___39 {
-            fn fn__9219(& self) -> std::sync::Arc<String> {
+            fn fn__10473(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("should be invalid".to_string());
             }
         }
         let closure_group = ClosureGroup___39 {};
-        let fn__9219 = {
+        let fn__10473 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9219())
+            std::sync::Arc::new(move | | closure_group.fn__10473())
         };
-        test___36.assert(t___9229, fn__9219.clone());
+        test___36.assert(t___10483, fn__10473.clone());
         test___36.soft_fail_to_hard()
     }
     #[test]
-    fn validateBoolAcceptsTrue1_yesOn__1417() -> temper_core::Result<()> {
+    fn validateBoolAcceptsTrue1_yesOn__1559() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___37 = temper_std::testing::Test::new();
@@ -3133,44 +3373,44 @@ mod tests {
             test___37: temper_std::testing::Test
         }
         impl ClosureGroup___40 {
-            fn fn__9216(& self, v__647: impl temper_core::ToArcString) {
-                let v__647 = v__647.to_arc_string();
-                let params__648: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("active".to_string()), v__647.clone())]);
-                let mut t___9208: TableDef = userTable__460();
-                let mut t___9209: SafeIdentifier = csid__459("active");
-                let cs__649: Changeset = changeset(t___9208.clone(), params__648.clone()).cast(std::sync::Arc::new(vec![t___9209.clone()])).validate_bool(csid__459("active"));
-                let mut t___9213: bool = cs__649.is_valid();
+            fn fn__10470(& self, v__691: impl temper_core::ToArcString) {
+                let v__691 = v__691.to_arc_string();
+                let params__692: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("active".to_string()), v__691.clone())]);
+                let mut t___10462: TableDef = userTable__504();
+                let mut t___10463: SafeIdentifier = csid__503("active");
+                let cs__693: Changeset = changeset(t___10462.clone(), params__692.clone()).cast(std::sync::Arc::new(vec![t___10463.clone()])).validate_bool(csid__503("active"));
+                let mut t___10467: bool = cs__693.is_valid();
                 #[derive(Clone)]
                 struct ClosureGroup___41 {
-                    v__647: std::sync::Arc<String>
+                    v__691: std::sync::Arc<String>
                 }
                 impl ClosureGroup___41 {
-                    fn fn__9205(& self) -> std::sync::Arc<String> {
-                        return std::sync::Arc::new(format!("should accept: {}", self.v__647.clone()));
+                    fn fn__10459(& self) -> std::sync::Arc<String> {
+                        return std::sync::Arc::new(format!("should accept: {}", self.v__691.clone()));
                     }
                 }
                 let closure_group = ClosureGroup___41 {
-                    v__647: v__647.clone()
+                    v__691: v__691.clone()
                 };
-                let fn__9205 = {
+                let fn__10459 = {
                     let closure_group = closure_group.clone();
-                    std::sync::Arc::new(move | | closure_group.fn__9205())
+                    std::sync::Arc::new(move | | closure_group.fn__10459())
                 };
-                self.test___37.assert(t___9213, fn__9205.clone());
+                self.test___37.assert(t___10467, fn__10459.clone());
             }
         }
         let closure_group = ClosureGroup___40 {
             test___37: test___37.clone()
         };
-        let fn__9216 = {
+        let fn__10470 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | v__647: std::sync::Arc<String> | closure_group.fn__9216(v__647))
+            std::sync::Arc::new(move | v__691: std::sync::Arc<String> | closure_group.fn__10470(v__691))
         };
-        temper_core::listed::list_for_each( & std::sync::Arc::new(vec![std::sync::Arc::new("true".to_string()), std::sync::Arc::new("1".to_string()), std::sync::Arc::new("yes".to_string()), std::sync::Arc::new("on".to_string())]), & ( * fn__9216.clone()));
+        temper_core::listed::list_for_each( & std::sync::Arc::new(vec![std::sync::Arc::new("true".to_string()), std::sync::Arc::new("1".to_string()), std::sync::Arc::new("yes".to_string()), std::sync::Arc::new("on".to_string())]), & ( * fn__10470.clone()));
         test___37.soft_fail_to_hard()
     }
     #[test]
-    fn validateBoolAcceptsFalse0_noOff__1418() -> temper_core::Result<()> {
+    fn validateBoolAcceptsFalse0_noOff__1560() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___38 = temper_std::testing::Test::new();
@@ -3179,44 +3419,44 @@ mod tests {
             test___38: temper_std::testing::Test
         }
         impl ClosureGroup___42 {
-            fn fn__9202(& self, v__651: impl temper_core::ToArcString) {
-                let v__651 = v__651.to_arc_string();
-                let params__652: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("active".to_string()), v__651.clone())]);
-                let mut t___9194: TableDef = userTable__460();
-                let mut t___9195: SafeIdentifier = csid__459("active");
-                let cs__653: Changeset = changeset(t___9194.clone(), params__652.clone()).cast(std::sync::Arc::new(vec![t___9195.clone()])).validate_bool(csid__459("active"));
-                let mut t___9199: bool = cs__653.is_valid();
+            fn fn__10456(& self, v__695: impl temper_core::ToArcString) {
+                let v__695 = v__695.to_arc_string();
+                let params__696: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("active".to_string()), v__695.clone())]);
+                let mut t___10448: TableDef = userTable__504();
+                let mut t___10449: SafeIdentifier = csid__503("active");
+                let cs__697: Changeset = changeset(t___10448.clone(), params__696.clone()).cast(std::sync::Arc::new(vec![t___10449.clone()])).validate_bool(csid__503("active"));
+                let mut t___10453: bool = cs__697.is_valid();
                 #[derive(Clone)]
                 struct ClosureGroup___43 {
-                    v__651: std::sync::Arc<String>
+                    v__695: std::sync::Arc<String>
                 }
                 impl ClosureGroup___43 {
-                    fn fn__9191(& self) -> std::sync::Arc<String> {
-                        return std::sync::Arc::new(format!("should accept: {}", self.v__651.clone()));
+                    fn fn__10445(& self) -> std::sync::Arc<String> {
+                        return std::sync::Arc::new(format!("should accept: {}", self.v__695.clone()));
                     }
                 }
                 let closure_group = ClosureGroup___43 {
-                    v__651: v__651.clone()
+                    v__695: v__695.clone()
                 };
-                let fn__9191 = {
+                let fn__10445 = {
                     let closure_group = closure_group.clone();
-                    std::sync::Arc::new(move | | closure_group.fn__9191())
+                    std::sync::Arc::new(move | | closure_group.fn__10445())
                 };
-                self.test___38.assert(t___9199, fn__9191.clone());
+                self.test___38.assert(t___10453, fn__10445.clone());
             }
         }
         let closure_group = ClosureGroup___42 {
             test___38: test___38.clone()
         };
-        let fn__9202 = {
+        let fn__10456 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | v__651: std::sync::Arc<String> | closure_group.fn__9202(v__651))
+            std::sync::Arc::new(move | v__695: std::sync::Arc<String> | closure_group.fn__10456(v__695))
         };
-        temper_core::listed::list_for_each( & std::sync::Arc::new(vec![std::sync::Arc::new("false".to_string()), std::sync::Arc::new("0".to_string()), std::sync::Arc::new("no".to_string()), std::sync::Arc::new("off".to_string())]), & ( * fn__9202.clone()));
+        temper_core::listed::list_for_each( & std::sync::Arc::new(vec![std::sync::Arc::new("false".to_string()), std::sync::Arc::new("0".to_string()), std::sync::Arc::new("no".to_string()), std::sync::Arc::new("off".to_string())]), & ( * fn__10456.clone()));
         test___38.soft_fail_to_hard()
     }
     #[test]
-    fn validateBoolRejectsAmbiguousValues__1419() -> temper_core::Result<()> {
+    fn validateBoolRejectsAmbiguousValues__1561() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___39 = temper_std::testing::Test::new();
@@ -3225,3688 +3465,4276 @@ mod tests {
             test___39: temper_std::testing::Test
         }
         impl ClosureGroup___44 {
-            fn fn__9188(& self, v__655: impl temper_core::ToArcString) {
-                let v__655 = v__655.to_arc_string();
-                let params__656: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("active".to_string()), v__655.clone())]);
-                let mut t___9179: TableDef = userTable__460();
-                let mut t___9180: SafeIdentifier = csid__459("active");
-                let cs__657: Changeset = changeset(t___9179.clone(), params__656.clone()).cast(std::sync::Arc::new(vec![t___9180.clone()])).validate_bool(csid__459("active"));
-                let mut t___9186: bool = ! cs__657.is_valid();
+            fn fn__10442(& self, v__699: impl temper_core::ToArcString) {
+                let v__699 = v__699.to_arc_string();
+                let params__700: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("active".to_string()), v__699.clone())]);
+                let mut t___10433: TableDef = userTable__504();
+                let mut t___10434: SafeIdentifier = csid__503("active");
+                let cs__701: Changeset = changeset(t___10433.clone(), params__700.clone()).cast(std::sync::Arc::new(vec![t___10434.clone()])).validate_bool(csid__503("active"));
+                let mut t___10440: bool = ! cs__701.is_valid();
                 #[derive(Clone)]
                 struct ClosureGroup___45 {
-                    v__655: std::sync::Arc<String>
+                    v__699: std::sync::Arc<String>
                 }
                 impl ClosureGroup___45 {
-                    fn fn__9176(& self) -> std::sync::Arc<String> {
-                        return std::sync::Arc::new(format!("should reject ambiguous: {}", self.v__655.clone()));
+                    fn fn__10430(& self) -> std::sync::Arc<String> {
+                        return std::sync::Arc::new(format!("should reject ambiguous: {}", self.v__699.clone()));
                     }
                 }
                 let closure_group = ClosureGroup___45 {
-                    v__655: v__655.clone()
+                    v__699: v__699.clone()
                 };
-                let fn__9176 = {
+                let fn__10430 = {
                     let closure_group = closure_group.clone();
-                    std::sync::Arc::new(move | | closure_group.fn__9176())
+                    std::sync::Arc::new(move | | closure_group.fn__10430())
                 };
-                self.test___39.assert(t___9186, fn__9176.clone());
+                self.test___39.assert(t___10440, fn__10430.clone());
             }
         }
         let closure_group = ClosureGroup___44 {
             test___39: test___39.clone()
         };
-        let fn__9188 = {
+        let fn__10442 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | v__655: std::sync::Arc<String> | closure_group.fn__9188(v__655))
+            std::sync::Arc::new(move | v__699: std::sync::Arc<String> | closure_group.fn__10442(v__699))
         };
-        temper_core::listed::list_for_each( & std::sync::Arc::new(vec![std::sync::Arc::new("TRUE".to_string()), std::sync::Arc::new("Yes".to_string()), std::sync::Arc::new("maybe".to_string()), std::sync::Arc::new("2".to_string()), std::sync::Arc::new("enabled".to_string())]), & ( * fn__9188.clone()));
+        temper_core::listed::list_for_each( & std::sync::Arc::new(vec![std::sync::Arc::new("TRUE".to_string()), std::sync::Arc::new("Yes".to_string()), std::sync::Arc::new("maybe".to_string()), std::sync::Arc::new("2".to_string()), std::sync::Arc::new("enabled".to_string())]), & ( * fn__10442.clone()));
         test___39.soft_fail_to_hard()
     }
     #[test]
-    fn toInsertSqlEscapesBobbyTables__1420() -> temper_core::Result<()> {
+    fn toInsertSqlEscapesBobbyTables__1562() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___40 = temper_std::testing::Test::new();
-        let mut t___5087: SqlFragment;
-        let params__659: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Robert'); DROP TABLE users;--".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("bobby@evil.com".to_string()))]);
-        let mut t___9164: TableDef = userTable__460();
-        let mut t___9165: SafeIdentifier = csid__459("name");
-        let mut t___9166: SafeIdentifier = csid__459("email");
-        let cs__660: Changeset = changeset(t___9164.clone(), params__659.clone()).cast(std::sync::Arc::new(vec![t___9165.clone(), t___9166.clone()])).validate_required(std::sync::Arc::new(vec![csid__459("name"), csid__459("email")]));
-        let sqlFrag__661: SqlFragment;
-        'ok___9716: {
-            'orelse___1700: {
-                t___5087 = match cs__660.to_insert_sql() {
+        let mut t___5833: SqlFragment;
+        let params__703: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Robert'); DROP TABLE users;--".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("bobby@evil.com".to_string()))]);
+        let mut t___10418: TableDef = userTable__504();
+        let mut t___10419: SafeIdentifier = csid__503("name");
+        let mut t___10420: SafeIdentifier = csid__503("email");
+        let cs__704: Changeset = changeset(t___10418.clone(), params__703.clone()).cast(std::sync::Arc::new(vec![t___10419.clone(), t___10420.clone()])).validate_required(std::sync::Arc::new(vec![csid__503("name"), csid__503("email")]));
+        let sqlFrag__705: SqlFragment;
+        'ok___10970: {
+            'orelse___1897: {
+                t___5833 = match cs__704.to_insert_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1700
+                    _ => break 'orelse___1897
                 };
-                sqlFrag__661 = t___5087.clone();
-                break 'ok___9716;
+                sqlFrag__705 = t___5833.clone();
+                break 'ok___10970;
             }
-            sqlFrag__661 = panic!();
+            sqlFrag__705 = panic!();
         }
-        let s__662: std::sync::Arc<String> = sqlFrag__661.to_string();
-        let mut t___9173: bool = temper_core::string::index_of( & s__662, "''", None).is_some();
+        let s__706: std::sync::Arc<String> = sqlFrag__705.to_string();
+        let mut t___10427: bool = temper_core::string::index_of( & s__706, "''", None).is_some();
         #[derive(Clone)]
         struct ClosureGroup___46 {
-            s__662: std::sync::Arc<String>
+            s__706: std::sync::Arc<String>
         }
         impl ClosureGroup___46 {
-            fn fn__9160(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("single quote must be doubled: {}", self.s__662.clone()));
+            fn fn__10414(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("single quote must be doubled: {}", self.s__706.clone()));
             }
         }
         let closure_group = ClosureGroup___46 {
-            s__662: s__662.clone()
+            s__706: s__706.clone()
         };
-        let fn__9160 = {
+        let fn__10414 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9160())
+            std::sync::Arc::new(move | | closure_group.fn__10414())
         };
-        test___40.assert(t___9173, fn__9160.clone());
+        test___40.assert(t___10427, fn__10414.clone());
         test___40.soft_fail_to_hard()
     }
     #[test]
-    fn toInsertSqlProducesCorrectSqlForStringField__1421() -> temper_core::Result<()> {
+    fn toInsertSqlProducesCorrectSqlForStringField__1563() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___41 = temper_std::testing::Test::new();
-        let mut t___5066: SqlFragment;
-        let params__664: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Alice".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("a@example.com".to_string()))]);
-        let mut t___9144: TableDef = userTable__460();
-        let mut t___9145: SafeIdentifier = csid__459("name");
-        let mut t___9146: SafeIdentifier = csid__459("email");
-        let cs__665: Changeset = changeset(t___9144.clone(), params__664.clone()).cast(std::sync::Arc::new(vec![t___9145.clone(), t___9146.clone()])).validate_required(std::sync::Arc::new(vec![csid__459("name"), csid__459("email")]));
-        let sqlFrag__666: SqlFragment;
-        'ok___9719: {
-            'orelse___1701: {
-                t___5066 = match cs__665.to_insert_sql() {
+        let mut t___5812: SqlFragment;
+        let params__708: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Alice".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("a@example.com".to_string()))]);
+        let mut t___10398: TableDef = userTable__504();
+        let mut t___10399: SafeIdentifier = csid__503("name");
+        let mut t___10400: SafeIdentifier = csid__503("email");
+        let cs__709: Changeset = changeset(t___10398.clone(), params__708.clone()).cast(std::sync::Arc::new(vec![t___10399.clone(), t___10400.clone()])).validate_required(std::sync::Arc::new(vec![csid__503("name"), csid__503("email")]));
+        let sqlFrag__710: SqlFragment;
+        'ok___10973: {
+            'orelse___1898: {
+                t___5812 = match cs__709.to_insert_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1701
+                    _ => break 'orelse___1898
                 };
-                sqlFrag__666 = t___5066.clone();
-                break 'ok___9719;
+                sqlFrag__710 = t___5812.clone();
+                break 'ok___10973;
             }
-            sqlFrag__666 = panic!();
+            sqlFrag__710 = panic!();
         }
-        let s__667: std::sync::Arc<String> = sqlFrag__666.to_string();
-        let mut t___9153: bool = temper_core::string::index_of( & s__667, "INSERT INTO users", None).is_some();
+        let s__711: std::sync::Arc<String> = sqlFrag__710.to_string();
+        let mut t___10407: bool = temper_core::string::index_of( & s__711, "INSERT INTO users", None).is_some();
         #[derive(Clone)]
         struct ClosureGroup___47 {
-            s__667: std::sync::Arc<String>
+            s__711: std::sync::Arc<String>
         }
         impl ClosureGroup___47 {
-            fn fn__9140(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("has INSERT INTO: {}", self.s__667.clone()));
+            fn fn__10394(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("has INSERT INTO: {}", self.s__711.clone()));
             }
         }
         let closure_group = ClosureGroup___47 {
-            s__667: s__667.clone()
+            s__711: s__711.clone()
         };
-        let fn__9140 = {
+        let fn__10394 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9140())
+            std::sync::Arc::new(move | | closure_group.fn__10394())
         };
-        test___41.assert(t___9153, fn__9140.clone());
-        let mut t___9157: bool = temper_core::string::index_of( & s__667, "'Alice'", None).is_some();
+        test___41.assert(t___10407, fn__10394.clone());
+        let mut t___10411: bool = temper_core::string::index_of( & s__711, "'Alice'", None).is_some();
         #[derive(Clone)]
         struct ClosureGroup___48 {
-            s__667: std::sync::Arc<String>
+            s__711: std::sync::Arc<String>
         }
         impl ClosureGroup___48 {
-            fn fn__9139(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("has quoted name: {}", self.s__667.clone()));
+            fn fn__10393(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("has quoted name: {}", self.s__711.clone()));
             }
         }
         let closure_group = ClosureGroup___48 {
-            s__667: s__667.clone()
+            s__711: s__711.clone()
         };
-        let fn__9139 = {
+        let fn__10393 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9139())
+            std::sync::Arc::new(move | | closure_group.fn__10393())
         };
-        test___41.assert(t___9157, fn__9139.clone());
+        test___41.assert(t___10411, fn__10393.clone());
         test___41.soft_fail_to_hard()
     }
     #[test]
-    fn toInsertSqlProducesCorrectSqlForIntField__1422() -> temper_core::Result<()> {
+    fn toInsertSqlProducesCorrectSqlForIntField__1564() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___42 = temper_std::testing::Test::new();
-        let mut t___5049: SqlFragment;
-        let params__669: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Bob".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("b@example.com".to_string())), (std::sync::Arc::new("age".to_string()), std::sync::Arc::new("25".to_string()))]);
-        let mut t___9126: TableDef = userTable__460();
-        let mut t___9127: SafeIdentifier = csid__459("name");
-        let mut t___9128: SafeIdentifier = csid__459("email");
-        let mut t___9129: SafeIdentifier = csid__459("age");
-        let cs__670: Changeset = changeset(t___9126.clone(), params__669.clone()).cast(std::sync::Arc::new(vec![t___9127.clone(), t___9128.clone(), t___9129.clone()])).validate_required(std::sync::Arc::new(vec![csid__459("name"), csid__459("email")]));
-        let sqlFrag__671: SqlFragment;
-        'ok___9720: {
-            'orelse___1702: {
-                t___5049 = match cs__670.to_insert_sql() {
+        let mut t___5795: SqlFragment;
+        let params__713: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Bob".to_string())), (std::sync::Arc::new("email".to_string()), std::sync::Arc::new("b@example.com".to_string())), (std::sync::Arc::new("age".to_string()), std::sync::Arc::new("25".to_string()))]);
+        let mut t___10380: TableDef = userTable__504();
+        let mut t___10381: SafeIdentifier = csid__503("name");
+        let mut t___10382: SafeIdentifier = csid__503("email");
+        let mut t___10383: SafeIdentifier = csid__503("age");
+        let cs__714: Changeset = changeset(t___10380.clone(), params__713.clone()).cast(std::sync::Arc::new(vec![t___10381.clone(), t___10382.clone(), t___10383.clone()])).validate_required(std::sync::Arc::new(vec![csid__503("name"), csid__503("email")]));
+        let sqlFrag__715: SqlFragment;
+        'ok___10974: {
+            'orelse___1899: {
+                t___5795 = match cs__714.to_insert_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1702
+                    _ => break 'orelse___1899
                 };
-                sqlFrag__671 = t___5049.clone();
-                break 'ok___9720;
+                sqlFrag__715 = t___5795.clone();
+                break 'ok___10974;
             }
-            sqlFrag__671 = panic!();
+            sqlFrag__715 = panic!();
         }
-        let s__672: std::sync::Arc<String> = sqlFrag__671.to_string();
-        let mut t___9136: bool = temper_core::string::index_of( & s__672, "25", None).is_some();
+        let s__716: std::sync::Arc<String> = sqlFrag__715.to_string();
+        let mut t___10390: bool = temper_core::string::index_of( & s__716, "25", None).is_some();
         #[derive(Clone)]
         struct ClosureGroup___49 {
-            s__672: std::sync::Arc<String>
+            s__716: std::sync::Arc<String>
         }
         impl ClosureGroup___49 {
-            fn fn__9121(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("age rendered unquoted: {}", self.s__672.clone()));
+            fn fn__10375(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("age rendered unquoted: {}", self.s__716.clone()));
             }
         }
         let closure_group = ClosureGroup___49 {
-            s__672: s__672.clone()
+            s__716: s__716.clone()
         };
-        let fn__9121 = {
+        let fn__10375 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9121())
+            std::sync::Arc::new(move | | closure_group.fn__10375())
         };
-        test___42.assert(t___9136, fn__9121.clone());
+        test___42.assert(t___10390, fn__10375.clone());
         test___42.soft_fail_to_hard()
     }
     #[test]
-    fn toInsertSqlBubblesOnInvalidChangeset__1423() -> temper_core::Result<()> {
+    fn toInsertSqlBubblesOnInvalidChangeset__1565() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___43 = temper_std::testing::Test::new();
-        let params__674: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & []);
-        let mut t___9114: TableDef = userTable__460();
-        let mut t___9115: SafeIdentifier = csid__459("name");
-        let cs__675: Changeset = changeset(t___9114.clone(), params__674.clone()).cast(std::sync::Arc::new(vec![t___9115.clone()])).validate_required(std::sync::Arc::new(vec![csid__459("name")]));
-        let didBubble__676: bool;
-        'ok___9721: {
-            'orelse___1703: {
-                match cs__675.to_insert_sql() {
+        let params__718: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & []);
+        let mut t___10368: TableDef = userTable__504();
+        let mut t___10369: SafeIdentifier = csid__503("name");
+        let cs__719: Changeset = changeset(t___10368.clone(), params__718.clone()).cast(std::sync::Arc::new(vec![t___10369.clone()])).validate_required(std::sync::Arc::new(vec![csid__503("name")]));
+        let didBubble__720: bool;
+        'ok___10975: {
+            'orelse___1900: {
+                match cs__719.to_insert_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1703
+                    _ => break 'orelse___1900
                 };
-                didBubble__676 = false;
-                break 'ok___9721;
+                didBubble__720 = false;
+                break 'ok___10975;
             }
-            didBubble__676 = true;
+            didBubble__720 = true;
         }
         #[derive(Clone)]
         struct ClosureGroup___50 {}
         impl ClosureGroup___50 {
-            fn fn__9112(& self) -> std::sync::Arc<String> {
+            fn fn__10366(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("invalid changeset should bubble".to_string());
             }
         }
         let closure_group = ClosureGroup___50 {};
-        let fn__9112 = {
+        let fn__10366 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9112())
+            std::sync::Arc::new(move | | closure_group.fn__10366())
         };
-        test___43.assert(didBubble__676, fn__9112.clone());
+        test___43.assert(didBubble__720, fn__10366.clone());
         test___43.soft_fail_to_hard()
     }
     #[test]
-    fn toInsertSqlEnforcesNonNullableFieldsIndependentlyOfIsValid__1424() -> temper_core::Result<()> {
+    fn toInsertSqlEnforcesNonNullableFieldsIndependentlyOfIsValid__1566() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___44 = temper_std::testing::Test::new();
-        let strictTable__678: TableDef = TableDef::new(csid__459("posts"), [FieldDef::new(csid__459("title"), FieldType::new(StringField::new()), false), FieldDef::new(csid__459("body"), FieldType::new(StringField::new()), true)]);
-        let params__679: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("body".to_string()), std::sync::Arc::new("hello".to_string()))]);
-        let mut t___9105: SafeIdentifier = csid__459("body");
-        let cs__680: Changeset = changeset(strictTable__678.clone(), params__679.clone()).cast(std::sync::Arc::new(vec![t___9105.clone()]));
-        let mut t___9107: bool = cs__680.is_valid();
+        let strictTable__722: TableDef = TableDef::new(csid__503("posts"), [FieldDef::new(csid__503("title"), FieldType::new(StringField::new()), false), FieldDef::new(csid__503("body"), FieldType::new(StringField::new()), true)]);
+        let params__723: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("body".to_string()), std::sync::Arc::new("hello".to_string()))]);
+        let mut t___10359: SafeIdentifier = csid__503("body");
+        let cs__724: Changeset = changeset(strictTable__722.clone(), params__723.clone()).cast(std::sync::Arc::new(vec![t___10359.clone()]));
+        let mut t___10361: bool = cs__724.is_valid();
         #[derive(Clone)]
         struct ClosureGroup___51 {}
         impl ClosureGroup___51 {
-            fn fn__9094(& self) -> std::sync::Arc<String> {
+            fn fn__10348(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("changeset should appear valid (no explicit validation run)".to_string());
             }
         }
         let closure_group = ClosureGroup___51 {};
-        let fn__9094 = {
+        let fn__10348 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9094())
+            std::sync::Arc::new(move | | closure_group.fn__10348())
         };
-        test___44.assert(t___9107, fn__9094.clone());
-        let didBubble__681: bool;
-        'ok___9722: {
-            'orelse___1704: {
-                match cs__680.to_insert_sql() {
+        test___44.assert(t___10361, fn__10348.clone());
+        let didBubble__725: bool;
+        'ok___10976: {
+            'orelse___1901: {
+                match cs__724.to_insert_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1704
+                    _ => break 'orelse___1901
                 };
-                didBubble__681 = false;
-                break 'ok___9722;
+                didBubble__725 = false;
+                break 'ok___10976;
             }
-            didBubble__681 = true;
+            didBubble__725 = true;
         }
         #[derive(Clone)]
         struct ClosureGroup___52 {}
         impl ClosureGroup___52 {
-            fn fn__9093(& self) -> std::sync::Arc<String> {
+            fn fn__10347(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("toInsertSql should enforce nullable regardless of isValid".to_string());
             }
         }
         let closure_group = ClosureGroup___52 {};
-        let fn__9093 = {
+        let fn__10347 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9093())
+            std::sync::Arc::new(move | | closure_group.fn__10347())
         };
-        test___44.assert(didBubble__681, fn__9093.clone());
+        test___44.assert(didBubble__725, fn__10347.clone());
         test___44.soft_fail_to_hard()
     }
     #[test]
-    fn toUpdateSqlProducesCorrectSql__1425() -> temper_core::Result<()> {
+    fn toUpdateSqlProducesCorrectSql__1567() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___45 = temper_std::testing::Test::new();
-        let mut t___5009: SqlFragment;
-        let params__683: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Bob".to_string()))]);
-        let mut t___9084: TableDef = userTable__460();
-        let mut t___9085: SafeIdentifier = csid__459("name");
-        let cs__684: Changeset = changeset(t___9084.clone(), params__683.clone()).cast(std::sync::Arc::new(vec![t___9085.clone()])).validate_required(std::sync::Arc::new(vec![csid__459("name")]));
-        let sqlFrag__685: SqlFragment;
-        'ok___9723: {
-            'orelse___1705: {
-                t___5009 = match cs__684.to_update_sql(42) {
+        let mut t___5755: SqlFragment;
+        let params__727: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & [(std::sync::Arc::new("name".to_string()), std::sync::Arc::new("Bob".to_string()))]);
+        let mut t___10338: TableDef = userTable__504();
+        let mut t___10339: SafeIdentifier = csid__503("name");
+        let cs__728: Changeset = changeset(t___10338.clone(), params__727.clone()).cast(std::sync::Arc::new(vec![t___10339.clone()])).validate_required(std::sync::Arc::new(vec![csid__503("name")]));
+        let sqlFrag__729: SqlFragment;
+        'ok___10977: {
+            'orelse___1902: {
+                t___5755 = match cs__728.to_update_sql(42) {
                     Ok(x) => x,
-                    _ => break 'orelse___1705
+                    _ => break 'orelse___1902
                 };
-                sqlFrag__685 = t___5009.clone();
-                break 'ok___9723;
+                sqlFrag__729 = t___5755.clone();
+                break 'ok___10977;
             }
-            sqlFrag__685 = panic!();
+            sqlFrag__729 = panic!();
         }
-        let s__686: std::sync::Arc<String> = sqlFrag__685.to_string();
-        let mut t___9091: bool = Some(s__686.as_str()) == Some("UPDATE users SET name = 'Bob' WHERE id = 42");
+        let s__730: std::sync::Arc<String> = sqlFrag__729.to_string();
+        let mut t___10345: bool = Some(s__730.as_str()) == Some("UPDATE users SET name = 'Bob' WHERE id = 42");
         #[derive(Clone)]
         struct ClosureGroup___53 {
-            s__686: std::sync::Arc<String>
+            s__730: std::sync::Arc<String>
         }
         impl ClosureGroup___53 {
-            fn fn__9081(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("got: {}", self.s__686.clone()));
+            fn fn__10335(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("got: {}", self.s__730.clone()));
             }
         }
         let closure_group = ClosureGroup___53 {
-            s__686: s__686.clone()
+            s__730: s__730.clone()
         };
-        let fn__9081 = {
+        let fn__10335 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9081())
+            std::sync::Arc::new(move | | closure_group.fn__10335())
         };
-        test___45.assert(t___9091, fn__9081.clone());
+        test___45.assert(t___10345, fn__10335.clone());
         test___45.soft_fail_to_hard()
     }
     #[test]
-    fn toUpdateSqlBubblesOnInvalidChangeset__1426() -> temper_core::Result<()> {
+    fn toUpdateSqlBubblesOnInvalidChangeset__1568() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___46 = temper_std::testing::Test::new();
-        let params__688: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & []);
-        let mut t___9074: TableDef = userTable__460();
-        let mut t___9075: SafeIdentifier = csid__459("name");
-        let cs__689: Changeset = changeset(t___9074.clone(), params__688.clone()).cast(std::sync::Arc::new(vec![t___9075.clone()])).validate_required(std::sync::Arc::new(vec![csid__459("name")]));
-        let didBubble__690: bool;
-        'ok___9724: {
-            'orelse___1706: {
-                match cs__689.to_update_sql(1) {
+        let params__732: temper_core::Map<std::sync::Arc<String>, std::sync::Arc<String>> = temper_core::Map::new( & []);
+        let mut t___10328: TableDef = userTable__504();
+        let mut t___10329: SafeIdentifier = csid__503("name");
+        let cs__733: Changeset = changeset(t___10328.clone(), params__732.clone()).cast(std::sync::Arc::new(vec![t___10329.clone()])).validate_required(std::sync::Arc::new(vec![csid__503("name")]));
+        let didBubble__734: bool;
+        'ok___10978: {
+            'orelse___1903: {
+                match cs__733.to_update_sql(1) {
                     Ok(x) => x,
-                    _ => break 'orelse___1706
+                    _ => break 'orelse___1903
                 };
-                didBubble__690 = false;
-                break 'ok___9724;
+                didBubble__734 = false;
+                break 'ok___10978;
             }
-            didBubble__690 = true;
+            didBubble__734 = true;
         }
         #[derive(Clone)]
         struct ClosureGroup___54 {}
         impl ClosureGroup___54 {
-            fn fn__9072(& self) -> std::sync::Arc<String> {
+            fn fn__10326(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("invalid changeset should bubble".to_string());
             }
         }
         let closure_group = ClosureGroup___54 {};
-        let fn__9072 = {
+        let fn__10326 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__9072())
+            std::sync::Arc::new(move | | closure_group.fn__10326())
         };
-        test___46.assert(didBubble__690, fn__9072.clone());
+        test___46.assert(didBubble__734, fn__10326.clone());
         test___46.soft_fail_to_hard()
     }
     #[test]
-    fn bareFromProducesSelect__1475() -> temper_core::Result<()> {
+    fn bareFromProducesSelect__1644() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___47 = temper_std::testing::Test::new();
-        let q__935: Query = from(sid__461("users"));
-        let mut t___8681: bool = Some(q__935.to_sql().to_string().as_str()) == Some("SELECT * FROM users");
+        let q__1042: Query = from(sid__505("users"));
+        let mut t___9837: bool = Some(q__1042.to_sql().to_string().as_str()) == Some("SELECT * FROM users");
         #[derive(Clone)]
         struct ClosureGroup___55 {}
         impl ClosureGroup___55 {
-            fn fn__8676(& self) -> std::sync::Arc<String> {
+            fn fn__9832(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("bare query".to_string());
             }
         }
         let closure_group = ClosureGroup___55 {};
-        let fn__8676 = {
+        let fn__9832 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8676())
+            std::sync::Arc::new(move | | closure_group.fn__9832())
         };
-        test___47.assert(t___8681, fn__8676.clone());
+        test___47.assert(t___9837, fn__9832.clone());
         test___47.soft_fail_to_hard()
     }
     #[test]
-    fn selectRestrictsColumns__1476() -> temper_core::Result<()> {
+    fn selectRestrictsColumns__1645() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___48 = temper_std::testing::Test::new();
-        let mut t___8667: SafeIdentifier = sid__461("users");
-        let mut t___8668: SafeIdentifier = sid__461("id");
-        let mut t___8669: SafeIdentifier = sid__461("name");
-        let q__937: Query = from(t___8667.clone()).select([t___8668.clone(), t___8669.clone()]);
-        let mut t___8674: bool = Some(q__937.to_sql().to_string().as_str()) == Some("SELECT id, name FROM users");
+        let mut t___9823: SafeIdentifier = sid__505("users");
+        let mut t___9824: SafeIdentifier = sid__505("id");
+        let mut t___9825: SafeIdentifier = sid__505("name");
+        let q__1044: Query = from(t___9823.clone()).select([t___9824.clone(), t___9825.clone()]);
+        let mut t___9830: bool = Some(q__1044.to_sql().to_string().as_str()) == Some("SELECT id, name FROM users");
         #[derive(Clone)]
         struct ClosureGroup___56 {}
         impl ClosureGroup___56 {
-            fn fn__8666(& self) -> std::sync::Arc<String> {
+            fn fn__9822(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("select columns".to_string());
             }
         }
         let closure_group = ClosureGroup___56 {};
-        let fn__8666 = {
+        let fn__9822 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8666())
+            std::sync::Arc::new(move | | closure_group.fn__9822())
         };
-        test___48.assert(t___8674, fn__8666.clone());
+        test___48.assert(t___9830, fn__9822.clone());
         test___48.soft_fail_to_hard()
     }
     #[test]
-    fn whereAddsConditionWithIntValue__1477() -> temper_core::Result<()> {
+    fn whereAddsConditionWithIntValue__1646() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___49 = temper_std::testing::Test::new();
-        let mut t___8655: SafeIdentifier = sid__461("users");
-        let mut t___8656: SqlBuilder = SqlBuilder::new();
-        t___8656.append_safe("age > ");
-        t___8656.append_int32(18);
-        let mut t___8659: SqlFragment = t___8656.accumulated();
-        let q__939: Query = from(t___8655.clone()).r#where(t___8659.clone());
-        let mut t___8664: bool = Some(q__939.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age > 18");
+        let mut t___9811: SafeIdentifier = sid__505("users");
+        let mut t___9812: SqlBuilder = SqlBuilder::new();
+        t___9812.append_safe("age > ");
+        t___9812.append_int32(18);
+        let mut t___9815: SqlFragment = t___9812.accumulated();
+        let q__1046: Query = from(t___9811.clone()).r#where(t___9815.clone());
+        let mut t___9820: bool = Some(q__1046.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age > 18");
         #[derive(Clone)]
         struct ClosureGroup___57 {}
         impl ClosureGroup___57 {
-            fn fn__8654(& self) -> std::sync::Arc<String> {
+            fn fn__9810(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("where int".to_string());
             }
         }
         let closure_group = ClosureGroup___57 {};
-        let fn__8654 = {
+        let fn__9810 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8654())
+            std::sync::Arc::new(move | | closure_group.fn__9810())
         };
-        test___49.assert(t___8664, fn__8654.clone());
+        test___49.assert(t___9820, fn__9810.clone());
         test___49.soft_fail_to_hard()
     }
     #[test]
-    fn whereAddsConditionWithBoolValue__1479() -> temper_core::Result<()> {
+    fn whereAddsConditionWithBoolValue__1648() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___50 = temper_std::testing::Test::new();
-        let mut t___8643: SafeIdentifier = sid__461("users");
-        let mut t___8644: SqlBuilder = SqlBuilder::new();
-        t___8644.append_safe("active = ");
-        t___8644.append_boolean(true);
-        let mut t___8647: SqlFragment = t___8644.accumulated();
-        let q__941: Query = from(t___8643.clone()).r#where(t___8647.clone());
-        let mut t___8652: bool = Some(q__941.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE active = TRUE");
+        let mut t___9799: SafeIdentifier = sid__505("users");
+        let mut t___9800: SqlBuilder = SqlBuilder::new();
+        t___9800.append_safe("active = ");
+        t___9800.append_boolean(true);
+        let mut t___9803: SqlFragment = t___9800.accumulated();
+        let q__1048: Query = from(t___9799.clone()).r#where(t___9803.clone());
+        let mut t___9808: bool = Some(q__1048.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE active = TRUE");
         #[derive(Clone)]
         struct ClosureGroup___58 {}
         impl ClosureGroup___58 {
-            fn fn__8642(& self) -> std::sync::Arc<String> {
+            fn fn__9798(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("where bool".to_string());
             }
         }
         let closure_group = ClosureGroup___58 {};
-        let fn__8642 = {
+        let fn__9798 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8642())
+            std::sync::Arc::new(move | | closure_group.fn__9798())
         };
-        test___50.assert(t___8652, fn__8642.clone());
+        test___50.assert(t___9808, fn__9798.clone());
         test___50.soft_fail_to_hard()
     }
     #[test]
-    fn chainedWhereUsesAnd__1481() -> temper_core::Result<()> {
+    fn chainedWhereUsesAnd__1650() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___51 = temper_std::testing::Test::new();
-        let mut t___8626: SafeIdentifier = sid__461("users");
-        let mut t___8627: SqlBuilder = SqlBuilder::new();
-        t___8627.append_safe("age > ");
-        t___8627.append_int32(18);
-        let mut t___8630: SqlFragment = t___8627.accumulated();
-        let mut t___8631: Query = from(t___8626.clone()).r#where(t___8630.clone());
-        let mut t___8632: SqlBuilder = SqlBuilder::new();
-        t___8632.append_safe("active = ");
-        t___8632.append_boolean(true);
-        let q__943: Query = t___8631.r#where(t___8632.accumulated());
-        let mut t___8640: bool = Some(q__943.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age > 18 AND active = TRUE");
+        let mut t___9782: SafeIdentifier = sid__505("users");
+        let mut t___9783: SqlBuilder = SqlBuilder::new();
+        t___9783.append_safe("age > ");
+        t___9783.append_int32(18);
+        let mut t___9786: SqlFragment = t___9783.accumulated();
+        let mut t___9787: Query = from(t___9782.clone()).r#where(t___9786.clone());
+        let mut t___9788: SqlBuilder = SqlBuilder::new();
+        t___9788.append_safe("active = ");
+        t___9788.append_boolean(true);
+        let q__1050: Query = t___9787.r#where(t___9788.accumulated());
+        let mut t___9796: bool = Some(q__1050.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age > 18 AND active = TRUE");
         #[derive(Clone)]
         struct ClosureGroup___59 {}
         impl ClosureGroup___59 {
-            fn fn__8625(& self) -> std::sync::Arc<String> {
+            fn fn__9781(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("chained where".to_string());
             }
         }
         let closure_group = ClosureGroup___59 {};
-        let fn__8625 = {
+        let fn__9781 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8625())
+            std::sync::Arc::new(move | | closure_group.fn__9781())
         };
-        test___51.assert(t___8640, fn__8625.clone());
+        test___51.assert(t___9796, fn__9781.clone());
         test___51.soft_fail_to_hard()
     }
     #[test]
-    fn orderByAsc__1484() -> temper_core::Result<()> {
+    fn orderByAsc__1653() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___52 = temper_std::testing::Test::new();
-        let mut t___8617: SafeIdentifier = sid__461("users");
-        let mut t___8618: SafeIdentifier = sid__461("name");
-        let q__945: Query = from(t___8617.clone()).order_by(t___8618.clone(), true);
-        let mut t___8623: bool = Some(q__945.to_sql().to_string().as_str()) == Some("SELECT * FROM users ORDER BY name ASC");
+        let mut t___9773: SafeIdentifier = sid__505("users");
+        let mut t___9774: SafeIdentifier = sid__505("name");
+        let q__1052: Query = from(t___9773.clone()).order_by(t___9774.clone(), true);
+        let mut t___9779: bool = Some(q__1052.to_sql().to_string().as_str()) == Some("SELECT * FROM users ORDER BY name ASC");
         #[derive(Clone)]
         struct ClosureGroup___60 {}
         impl ClosureGroup___60 {
-            fn fn__8616(& self) -> std::sync::Arc<String> {
+            fn fn__9772(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("order asc".to_string());
             }
         }
         let closure_group = ClosureGroup___60 {};
-        let fn__8616 = {
+        let fn__9772 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8616())
+            std::sync::Arc::new(move | | closure_group.fn__9772())
         };
-        test___52.assert(t___8623, fn__8616.clone());
+        test___52.assert(t___9779, fn__9772.clone());
         test___52.soft_fail_to_hard()
     }
     #[test]
-    fn orderByDesc__1485() -> temper_core::Result<()> {
+    fn orderByDesc__1654() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___53 = temper_std::testing::Test::new();
-        let mut t___8608: SafeIdentifier = sid__461("users");
-        let mut t___8609: SafeIdentifier = sid__461("created_at");
-        let q__947: Query = from(t___8608.clone()).order_by(t___8609.clone(), false);
-        let mut t___8614: bool = Some(q__947.to_sql().to_string().as_str()) == Some("SELECT * FROM users ORDER BY created_at DESC");
+        let mut t___9764: SafeIdentifier = sid__505("users");
+        let mut t___9765: SafeIdentifier = sid__505("created_at");
+        let q__1054: Query = from(t___9764.clone()).order_by(t___9765.clone(), false);
+        let mut t___9770: bool = Some(q__1054.to_sql().to_string().as_str()) == Some("SELECT * FROM users ORDER BY created_at DESC");
         #[derive(Clone)]
         struct ClosureGroup___61 {}
         impl ClosureGroup___61 {
-            fn fn__8607(& self) -> std::sync::Arc<String> {
+            fn fn__9763(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("order desc".to_string());
             }
         }
         let closure_group = ClosureGroup___61 {};
-        let fn__8607 = {
+        let fn__9763 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8607())
+            std::sync::Arc::new(move | | closure_group.fn__9763())
         };
-        test___53.assert(t___8614, fn__8607.clone());
+        test___53.assert(t___9770, fn__9763.clone());
         test___53.soft_fail_to_hard()
     }
     #[test]
-    fn limitAndOffset__1486() -> temper_core::Result<()> {
+    fn limitAndOffset__1655() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___54 = temper_std::testing::Test::new();
-        let mut t___4537: Query;
-        let mut t___4538: Query;
-        let q__949: Query;
-        'ok___9726: {
-            'orelse___1708: {
-                t___4537 = match from(sid__461("users")).limit(10) {
+        let mut t___5175: Query;
+        let mut t___5176: Query;
+        let q__1056: Query;
+        'ok___10980: {
+            'orelse___1905: {
+                t___5175 = match from(sid__505("users")).limit(10) {
                     Ok(x) => x,
-                    _ => break 'orelse___1708
+                    _ => break 'orelse___1905
                 };
-                t___4538 = match t___4537.offset(20) {
+                t___5176 = match t___5175.offset(20) {
                     Ok(x) => x,
-                    _ => break 'orelse___1708
+                    _ => break 'orelse___1905
                 };
-                q__949 = t___4538.clone();
-                break 'ok___9726;
+                q__1056 = t___5176.clone();
+                break 'ok___10980;
             }
-            q__949 = panic!();
+            q__1056 = panic!();
         }
-        let mut t___8605: bool = Some(q__949.to_sql().to_string().as_str()) == Some("SELECT * FROM users LIMIT 10 OFFSET 20");
+        let mut t___9761: bool = Some(q__1056.to_sql().to_string().as_str()) == Some("SELECT * FROM users LIMIT 10 OFFSET 20");
         #[derive(Clone)]
         struct ClosureGroup___62 {}
         impl ClosureGroup___62 {
-            fn fn__8600(& self) -> std::sync::Arc<String> {
+            fn fn__9756(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("limit/offset".to_string());
             }
         }
         let closure_group = ClosureGroup___62 {};
-        let fn__8600 = {
+        let fn__9756 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8600())
+            std::sync::Arc::new(move | | closure_group.fn__9756())
         };
-        test___54.assert(t___8605, fn__8600.clone());
+        test___54.assert(t___9761, fn__9756.clone());
         test___54.soft_fail_to_hard()
     }
     #[test]
-    fn limitBubblesOnNegative__1487() -> temper_core::Result<()> {
+    fn limitBubblesOnNegative__1656() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___55 = temper_std::testing::Test::new();
-        let didBubble__951: bool;
-        'ok___9727: {
-            'orelse___1709: {
-                match from(sid__461("users")).limit(-1) {
+        let didBubble__1058: bool;
+        'ok___10981: {
+            'orelse___1906: {
+                match from(sid__505("users")).limit(-1) {
                     Ok(x) => x,
-                    _ => break 'orelse___1709
+                    _ => break 'orelse___1906
                 };
-                didBubble__951 = false;
-                break 'ok___9727;
+                didBubble__1058 = false;
+                break 'ok___10981;
             }
-            didBubble__951 = true;
+            didBubble__1058 = true;
         }
         #[derive(Clone)]
         struct ClosureGroup___63 {}
         impl ClosureGroup___63 {
-            fn fn__8596(& self) -> std::sync::Arc<String> {
+            fn fn__9752(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("negative limit should bubble".to_string());
             }
         }
         let closure_group = ClosureGroup___63 {};
-        let fn__8596 = {
+        let fn__9752 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8596())
+            std::sync::Arc::new(move | | closure_group.fn__9752())
         };
-        test___55.assert(didBubble__951, fn__8596.clone());
+        test___55.assert(didBubble__1058, fn__9752.clone());
         test___55.soft_fail_to_hard()
     }
     #[test]
-    fn offsetBubblesOnNegative__1488() -> temper_core::Result<()> {
+    fn offsetBubblesOnNegative__1657() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___56 = temper_std::testing::Test::new();
-        let didBubble__953: bool;
-        'ok___9728: {
-            'orelse___1710: {
-                match from(sid__461("users")).offset(-1) {
+        let didBubble__1060: bool;
+        'ok___10982: {
+            'orelse___1907: {
+                match from(sid__505("users")).offset(-1) {
                     Ok(x) => x,
-                    _ => break 'orelse___1710
+                    _ => break 'orelse___1907
                 };
-                didBubble__953 = false;
-                break 'ok___9728;
+                didBubble__1060 = false;
+                break 'ok___10982;
             }
-            didBubble__953 = true;
+            didBubble__1060 = true;
         }
         #[derive(Clone)]
         struct ClosureGroup___64 {}
         impl ClosureGroup___64 {
-            fn fn__8592(& self) -> std::sync::Arc<String> {
+            fn fn__9748(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("negative offset should bubble".to_string());
             }
         }
         let closure_group = ClosureGroup___64 {};
-        let fn__8592 = {
+        let fn__9748 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8592())
+            std::sync::Arc::new(move | | closure_group.fn__9748())
         };
-        test___56.assert(didBubble__953, fn__8592.clone());
+        test___56.assert(didBubble__1060, fn__9748.clone());
         test___56.soft_fail_to_hard()
     }
     #[test]
-    fn complexComposedQuery__1489() -> temper_core::Result<()> {
+    fn complexComposedQuery__1658() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___57 = temper_std::testing::Test::new();
-        let mut t___8570: SafeIdentifier;
-        let mut t___8571: SafeIdentifier;
-        let mut t___8572: SafeIdentifier;
-        let mut t___8573: SafeIdentifier;
-        let mut t___8574: Query;
-        let mut t___8575: SqlBuilder;
-        let mut t___8579: Query;
-        let mut t___8580: SqlBuilder;
-        let mut t___4523: Query;
-        let mut t___4524: Query;
-        let minAge__955: i32 = 21;
-        let q__956: Query;
-        'ok___9729: {
-            'orelse___1711: {
-                t___8570 = sid__461("users");
-                t___8571 = sid__461("id");
-                t___8572 = sid__461("name");
-                t___8573 = sid__461("email");
-                t___8574 = from(t___8570.clone()).select([t___8571.clone(), t___8572.clone(), t___8573.clone()]);
-                t___8575 = SqlBuilder::new();
-                t___8575.append_safe("age >= ");
-                t___8575.append_int32(21);
-                t___8579 = t___8574.r#where(t___8575.accumulated());
-                t___8580 = SqlBuilder::new();
-                t___8580.append_safe("active = ");
-                t___8580.append_boolean(true);
-                t___4523 = match t___8579.r#where(t___8580.accumulated()).order_by(sid__461("name"), true).limit(25) {
+        let mut t___9726: SafeIdentifier;
+        let mut t___9727: SafeIdentifier;
+        let mut t___9728: SafeIdentifier;
+        let mut t___9729: SafeIdentifier;
+        let mut t___9730: Query;
+        let mut t___9731: SqlBuilder;
+        let mut t___9735: Query;
+        let mut t___9736: SqlBuilder;
+        let mut t___5161: Query;
+        let mut t___5162: Query;
+        let minAge__1062: i32 = 21;
+        let q__1063: Query;
+        'ok___10983: {
+            'orelse___1908: {
+                t___9726 = sid__505("users");
+                t___9727 = sid__505("id");
+                t___9728 = sid__505("name");
+                t___9729 = sid__505("email");
+                t___9730 = from(t___9726.clone()).select([t___9727.clone(), t___9728.clone(), t___9729.clone()]);
+                t___9731 = SqlBuilder::new();
+                t___9731.append_safe("age >= ");
+                t___9731.append_int32(21);
+                t___9735 = t___9730.r#where(t___9731.accumulated());
+                t___9736 = SqlBuilder::new();
+                t___9736.append_safe("active = ");
+                t___9736.append_boolean(true);
+                t___5161 = match t___9735.r#where(t___9736.accumulated()).order_by(sid__505("name"), true).limit(25) {
                     Ok(x) => x,
-                    _ => break 'orelse___1711
+                    _ => break 'orelse___1908
                 };
-                t___4524 = match t___4523.offset(0) {
+                t___5162 = match t___5161.offset(0) {
                     Ok(x) => x,
-                    _ => break 'orelse___1711
+                    _ => break 'orelse___1908
                 };
-                q__956 = t___4524.clone();
-                break 'ok___9729;
+                q__1063 = t___5162.clone();
+                break 'ok___10983;
             }
-            q__956 = panic!();
+            q__1063 = panic!();
         }
-        let mut t___8590: bool = Some(q__956.to_sql().to_string().as_str()) == Some("SELECT id, name, email FROM users WHERE age >= 21 AND active = TRUE ORDER BY name ASC LIMIT 25 OFFSET 0");
+        let mut t___9746: bool = Some(q__1063.to_sql().to_string().as_str()) == Some("SELECT id, name, email FROM users WHERE age >= 21 AND active = TRUE ORDER BY name ASC LIMIT 25 OFFSET 0");
         #[derive(Clone)]
         struct ClosureGroup___65 {}
         impl ClosureGroup___65 {
-            fn fn__8569(& self) -> std::sync::Arc<String> {
+            fn fn__9725(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("complex query".to_string());
             }
         }
         let closure_group = ClosureGroup___65 {};
-        let fn__8569 = {
+        let fn__9725 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8569())
+            std::sync::Arc::new(move | | closure_group.fn__9725())
         };
-        test___57.assert(t___8590, fn__8569.clone());
+        test___57.assert(t___9746, fn__9725.clone());
         test___57.soft_fail_to_hard()
     }
     #[test]
-    fn safeToSqlAppliesDefaultLimitWhenNoneSet__1492() -> temper_core::Result<()> {
+    fn safeToSqlAppliesDefaultLimitWhenNoneSet__1661() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___58 = temper_std::testing::Test::new();
-        let mut t___4500: SqlFragment;
-        let mut t___4501: SqlFragment;
-        let q__958: Query = from(sid__461("users"));
-        'ok___9730: {
-            'orelse___1712: {
-                t___4500 = match q__958.safe_to_sql(100) {
+        let mut t___5138: SqlFragment;
+        let mut t___5139: SqlFragment;
+        let q__1065: Query = from(sid__505("users"));
+        'ok___10984: {
+            'orelse___1909: {
+                t___5138 = match q__1065.safe_to_sql(100) {
                     Ok(x) => x,
-                    _ => break 'orelse___1712
+                    _ => break 'orelse___1909
                 };
-                t___4501 = t___4500.clone();
-                break 'ok___9730;
+                t___5139 = t___5138.clone();
+                break 'ok___10984;
             }
-            t___4501 = panic!();
+            t___5139 = panic!();
         }
-        let s__959: std::sync::Arc<String> = t___4501.to_string();
-        let mut t___8567: bool = Some(s__959.as_str()) == Some("SELECT * FROM users LIMIT 100");
+        let s__1066: std::sync::Arc<String> = t___5139.to_string();
+        let mut t___9723: bool = Some(s__1066.as_str()) == Some("SELECT * FROM users LIMIT 100");
         #[derive(Clone)]
         struct ClosureGroup___66 {
-            s__959: std::sync::Arc<String>
+            s__1066: std::sync::Arc<String>
         }
         impl ClosureGroup___66 {
-            fn fn__8563(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("should have limit: {}", self.s__959.clone()));
+            fn fn__9719(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("should have limit: {}", self.s__1066.clone()));
             }
         }
         let closure_group = ClosureGroup___66 {
-            s__959: s__959.clone()
+            s__1066: s__1066.clone()
         };
-        let fn__8563 = {
+        let fn__9719 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8563())
+            std::sync::Arc::new(move | | closure_group.fn__9719())
         };
-        test___58.assert(t___8567, fn__8563.clone());
+        test___58.assert(t___9723, fn__9719.clone());
         test___58.soft_fail_to_hard()
     }
     #[test]
-    fn safeToSqlRespectsExplicitLimit__1493() -> temper_core::Result<()> {
+    fn safeToSqlRespectsExplicitLimit__1662() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___59 = temper_std::testing::Test::new();
-        let mut t___4492: Query;
-        let mut t___4495: SqlFragment;
-        let mut t___4496: SqlFragment;
-        let q__961: Query;
-        'ok___9731: {
-            'orelse___1713: {
-                t___4492 = match from(sid__461("users")).limit(5) {
+        let mut t___5130: Query;
+        let mut t___5133: SqlFragment;
+        let mut t___5134: SqlFragment;
+        let q__1068: Query;
+        'ok___10985: {
+            'orelse___1910: {
+                t___5130 = match from(sid__505("users")).limit(5) {
                     Ok(x) => x,
-                    _ => break 'orelse___1713
+                    _ => break 'orelse___1910
                 };
-                q__961 = t___4492.clone();
-                break 'ok___9731;
+                q__1068 = t___5130.clone();
+                break 'ok___10985;
             }
-            q__961 = panic!();
+            q__1068 = panic!();
         }
-        'ok___9732: {
-            'orelse___1714: {
-                t___4495 = match q__961.safe_to_sql(100) {
+        'ok___10986: {
+            'orelse___1911: {
+                t___5133 = match q__1068.safe_to_sql(100) {
                     Ok(x) => x,
-                    _ => break 'orelse___1714
+                    _ => break 'orelse___1911
                 };
-                t___4496 = t___4495.clone();
-                break 'ok___9732;
+                t___5134 = t___5133.clone();
+                break 'ok___10986;
             }
-            t___4496 = panic!();
+            t___5134 = panic!();
         }
-        let s__962: std::sync::Arc<String> = t___4496.to_string();
-        let mut t___8561: bool = Some(s__962.as_str()) == Some("SELECT * FROM users LIMIT 5");
+        let s__1069: std::sync::Arc<String> = t___5134.to_string();
+        let mut t___9717: bool = Some(s__1069.as_str()) == Some("SELECT * FROM users LIMIT 5");
         #[derive(Clone)]
         struct ClosureGroup___67 {
-            s__962: std::sync::Arc<String>
+            s__1069: std::sync::Arc<String>
         }
         impl ClosureGroup___67 {
-            fn fn__8557(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("explicit limit preserved: {}", self.s__962.clone()));
+            fn fn__9713(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("explicit limit preserved: {}", self.s__1069.clone()));
             }
         }
         let closure_group = ClosureGroup___67 {
-            s__962: s__962.clone()
+            s__1069: s__1069.clone()
         };
-        let fn__8557 = {
+        let fn__9713 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8557())
+            std::sync::Arc::new(move | | closure_group.fn__9713())
         };
-        test___59.assert(t___8561, fn__8557.clone());
+        test___59.assert(t___9717, fn__9713.clone());
         test___59.soft_fail_to_hard()
     }
     #[test]
-    fn safeToSqlBubblesOnNegativeDefaultLimit__1494() -> temper_core::Result<()> {
+    fn safeToSqlBubblesOnNegativeDefaultLimit__1663() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___60 = temper_std::testing::Test::new();
-        let didBubble__964: bool;
-        'ok___9733: {
-            'orelse___1715: {
-                match from(sid__461("users")).safe_to_sql(-1) {
+        let didBubble__1071: bool;
+        'ok___10987: {
+            'orelse___1912: {
+                match from(sid__505("users")).safe_to_sql(-1) {
                     Ok(x) => x,
-                    _ => break 'orelse___1715
+                    _ => break 'orelse___1912
                 };
-                didBubble__964 = false;
-                break 'ok___9733;
+                didBubble__1071 = false;
+                break 'ok___10987;
             }
-            didBubble__964 = true;
+            didBubble__1071 = true;
         }
         #[derive(Clone)]
         struct ClosureGroup___68 {}
         impl ClosureGroup___68 {
-            fn fn__8553(& self) -> std::sync::Arc<String> {
+            fn fn__9709(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("negative defaultLimit should bubble".to_string());
             }
         }
         let closure_group = ClosureGroup___68 {};
-        let fn__8553 = {
+        let fn__9709 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8553())
+            std::sync::Arc::new(move | | closure_group.fn__9709())
         };
-        test___60.assert(didBubble__964, fn__8553.clone());
+        test___60.assert(didBubble__1071, fn__9709.clone());
         test___60.soft_fail_to_hard()
     }
     #[test]
-    fn whereWithInjectionAttemptInStringValueIsEscaped__1495() -> temper_core::Result<()> {
+    fn whereWithInjectionAttemptInStringValueIsEscaped__1664() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___61 = temper_std::testing::Test::new();
-        let evil__966: std::sync::Arc<String> = std::sync::Arc::new("'; DROP TABLE users; --".to_string());
-        let mut t___8537: SafeIdentifier = sid__461("users");
-        let mut t___8538: SqlBuilder = SqlBuilder::new();
-        t___8538.append_safe("name = ");
-        t___8538.append_string("'; DROP TABLE users; --");
-        let mut t___8541: SqlFragment = t___8538.accumulated();
-        let q__967: Query = from(t___8537.clone()).r#where(t___8541.clone());
-        let s__968: std::sync::Arc<String> = q__967.to_sql().to_string();
-        let mut t___8546: bool = temper_core::string::index_of( & s__968, "''", None).is_some();
+        let evil__1073: std::sync::Arc<String> = std::sync::Arc::new("'; DROP TABLE users; --".to_string());
+        let mut t___9693: SafeIdentifier = sid__505("users");
+        let mut t___9694: SqlBuilder = SqlBuilder::new();
+        t___9694.append_safe("name = ");
+        t___9694.append_string("'; DROP TABLE users; --");
+        let mut t___9697: SqlFragment = t___9694.accumulated();
+        let q__1074: Query = from(t___9693.clone()).r#where(t___9697.clone());
+        let s__1075: std::sync::Arc<String> = q__1074.to_sql().to_string();
+        let mut t___9702: bool = temper_core::string::index_of( & s__1075, "''", None).is_some();
         #[derive(Clone)]
         struct ClosureGroup___69 {
-            s__968: std::sync::Arc<String>
+            s__1075: std::sync::Arc<String>
         }
         impl ClosureGroup___69 {
-            fn fn__8536(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("quotes must be doubled: {}", self.s__968.clone()));
+            fn fn__9692(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("quotes must be doubled: {}", self.s__1075.clone()));
             }
         }
         let closure_group = ClosureGroup___69 {
-            s__968: s__968.clone()
+            s__1075: s__1075.clone()
         };
-        let fn__8536 = {
+        let fn__9692 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8536())
+            std::sync::Arc::new(move | | closure_group.fn__9692())
         };
-        test___61.assert(t___8546, fn__8536.clone());
-        let mut t___8550: bool = temper_core::string::index_of( & s__968, "SELECT * FROM users WHERE name =", None).is_some();
+        test___61.assert(t___9702, fn__9692.clone());
+        let mut t___9706: bool = temper_core::string::index_of( & s__1075, "SELECT * FROM users WHERE name =", None).is_some();
         #[derive(Clone)]
         struct ClosureGroup___70 {
-            s__968: std::sync::Arc<String>
+            s__1075: std::sync::Arc<String>
         }
         impl ClosureGroup___70 {
-            fn fn__8535(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("structure intact: {}", self.s__968.clone()));
+            fn fn__9691(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("structure intact: {}", self.s__1075.clone()));
             }
         }
         let closure_group = ClosureGroup___70 {
-            s__968: s__968.clone()
+            s__1075: s__1075.clone()
         };
-        let fn__8535 = {
+        let fn__9691 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8535())
+            std::sync::Arc::new(move | | closure_group.fn__9691())
         };
-        test___61.assert(t___8550, fn__8535.clone());
+        test___61.assert(t___9706, fn__9691.clone());
         test___61.soft_fail_to_hard()
     }
     #[test]
-    fn safeIdentifierRejectsUserSuppliedTableNameWithMetacharacters__1497() -> temper_core::Result<()> {
+    fn safeIdentifierRejectsUserSuppliedTableNameWithMetacharacters__1666() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___62 = temper_std::testing::Test::new();
-        let attack__970: std::sync::Arc<String> = std::sync::Arc::new("users; DROP TABLE users; --".to_string());
-        let didBubble__971: bool;
-        'ok___9734: {
-            'orelse___1716: {
+        let attack__1077: std::sync::Arc<String> = std::sync::Arc::new("users; DROP TABLE users; --".to_string());
+        let didBubble__1078: bool;
+        'ok___10988: {
+            'orelse___1913: {
                 match safe_identifier("users; DROP TABLE users; --") {
                     Ok(x) => x,
-                    _ => break 'orelse___1716
+                    _ => break 'orelse___1913
                 };
-                didBubble__971 = false;
-                break 'ok___9734;
+                didBubble__1078 = false;
+                break 'ok___10988;
             }
-            didBubble__971 = true;
+            didBubble__1078 = true;
         }
         #[derive(Clone)]
         struct ClosureGroup___71 {}
         impl ClosureGroup___71 {
-            fn fn__8532(& self) -> std::sync::Arc<String> {
+            fn fn__9688(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("metacharacter-containing name must be rejected at construction".to_string());
             }
         }
         let closure_group = ClosureGroup___71 {};
-        let fn__8532 = {
+        let fn__9688 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8532())
+            std::sync::Arc::new(move | | closure_group.fn__9688())
         };
-        test___62.assert(didBubble__971, fn__8532.clone());
+        test___62.assert(didBubble__1078, fn__9688.clone());
         test___62.soft_fail_to_hard()
     }
     #[test]
-    fn innerJoinProducesInnerJoin__1498() -> temper_core::Result<()> {
+    fn innerJoinProducesInnerJoin__1667() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___63 = temper_std::testing::Test::new();
-        let mut t___8521: SafeIdentifier = sid__461("users");
-        let mut t___8522: SafeIdentifier = sid__461("orders");
-        let mut t___8523: SqlBuilder = SqlBuilder::new();
-        t___8523.append_safe("users.id = orders.user_id");
-        let mut t___8525: SqlFragment = t___8523.accumulated();
-        let q__973: Query = from(t___8521.clone()).inner_join(t___8522.clone(), t___8525.clone());
-        let mut t___8530: bool = Some(q__973.to_sql().to_string().as_str()) == Some("SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id");
+        let mut t___9677: SafeIdentifier = sid__505("users");
+        let mut t___9678: SafeIdentifier = sid__505("orders");
+        let mut t___9679: SqlBuilder = SqlBuilder::new();
+        t___9679.append_safe("users.id = orders.user_id");
+        let mut t___9681: SqlFragment = t___9679.accumulated();
+        let q__1080: Query = from(t___9677.clone()).inner_join(t___9678.clone(), t___9681.clone());
+        let mut t___9686: bool = Some(q__1080.to_sql().to_string().as_str()) == Some("SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id");
         #[derive(Clone)]
         struct ClosureGroup___72 {}
         impl ClosureGroup___72 {
-            fn fn__8520(& self) -> std::sync::Arc<String> {
+            fn fn__9676(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("inner join".to_string());
             }
         }
         let closure_group = ClosureGroup___72 {};
-        let fn__8520 = {
+        let fn__9676 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8520())
+            std::sync::Arc::new(move | | closure_group.fn__9676())
         };
-        test___63.assert(t___8530, fn__8520.clone());
+        test___63.assert(t___9686, fn__9676.clone());
         test___63.soft_fail_to_hard()
     }
     #[test]
-    fn leftJoinProducesLeftJoin__1500() -> temper_core::Result<()> {
+    fn leftJoinProducesLeftJoin__1669() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___64 = temper_std::testing::Test::new();
-        let mut t___8509: SafeIdentifier = sid__461("users");
-        let mut t___8510: SafeIdentifier = sid__461("profiles");
-        let mut t___8511: SqlBuilder = SqlBuilder::new();
-        t___8511.append_safe("users.id = profiles.user_id");
-        let mut t___8513: SqlFragment = t___8511.accumulated();
-        let q__975: Query = from(t___8509.clone()).left_join(t___8510.clone(), t___8513.clone());
-        let mut t___8518: bool = Some(q__975.to_sql().to_string().as_str()) == Some("SELECT * FROM users LEFT JOIN profiles ON users.id = profiles.user_id");
+        let mut t___9665: SafeIdentifier = sid__505("users");
+        let mut t___9666: SafeIdentifier = sid__505("profiles");
+        let mut t___9667: SqlBuilder = SqlBuilder::new();
+        t___9667.append_safe("users.id = profiles.user_id");
+        let mut t___9669: SqlFragment = t___9667.accumulated();
+        let q__1082: Query = from(t___9665.clone()).left_join(t___9666.clone(), t___9669.clone());
+        let mut t___9674: bool = Some(q__1082.to_sql().to_string().as_str()) == Some("SELECT * FROM users LEFT JOIN profiles ON users.id = profiles.user_id");
         #[derive(Clone)]
         struct ClosureGroup___73 {}
         impl ClosureGroup___73 {
-            fn fn__8508(& self) -> std::sync::Arc<String> {
+            fn fn__9664(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("left join".to_string());
             }
         }
         let closure_group = ClosureGroup___73 {};
-        let fn__8508 = {
+        let fn__9664 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8508())
+            std::sync::Arc::new(move | | closure_group.fn__9664())
         };
-        test___64.assert(t___8518, fn__8508.clone());
+        test___64.assert(t___9674, fn__9664.clone());
         test___64.soft_fail_to_hard()
     }
     #[test]
-    fn rightJoinProducesRightJoin__1502() -> temper_core::Result<()> {
+    fn rightJoinProducesRightJoin__1671() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___65 = temper_std::testing::Test::new();
-        let mut t___8497: SafeIdentifier = sid__461("orders");
-        let mut t___8498: SafeIdentifier = sid__461("users");
-        let mut t___8499: SqlBuilder = SqlBuilder::new();
-        t___8499.append_safe("orders.user_id = users.id");
-        let mut t___8501: SqlFragment = t___8499.accumulated();
-        let q__977: Query = from(t___8497.clone()).right_join(t___8498.clone(), t___8501.clone());
-        let mut t___8506: bool = Some(q__977.to_sql().to_string().as_str()) == Some("SELECT * FROM orders RIGHT JOIN users ON orders.user_id = users.id");
+        let mut t___9653: SafeIdentifier = sid__505("orders");
+        let mut t___9654: SafeIdentifier = sid__505("users");
+        let mut t___9655: SqlBuilder = SqlBuilder::new();
+        t___9655.append_safe("orders.user_id = users.id");
+        let mut t___9657: SqlFragment = t___9655.accumulated();
+        let q__1084: Query = from(t___9653.clone()).right_join(t___9654.clone(), t___9657.clone());
+        let mut t___9662: bool = Some(q__1084.to_sql().to_string().as_str()) == Some("SELECT * FROM orders RIGHT JOIN users ON orders.user_id = users.id");
         #[derive(Clone)]
         struct ClosureGroup___74 {}
         impl ClosureGroup___74 {
-            fn fn__8496(& self) -> std::sync::Arc<String> {
+            fn fn__9652(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("right join".to_string());
             }
         }
         let closure_group = ClosureGroup___74 {};
-        let fn__8496 = {
+        let fn__9652 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8496())
+            std::sync::Arc::new(move | | closure_group.fn__9652())
         };
-        test___65.assert(t___8506, fn__8496.clone());
+        test___65.assert(t___9662, fn__9652.clone());
         test___65.soft_fail_to_hard()
     }
     #[test]
-    fn fullJoinProducesFullOuterJoin__1504() -> temper_core::Result<()> {
+    fn fullJoinProducesFullOuterJoin__1673() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___66 = temper_std::testing::Test::new();
-        let mut t___8485: SafeIdentifier = sid__461("users");
-        let mut t___8486: SafeIdentifier = sid__461("orders");
-        let mut t___8487: SqlBuilder = SqlBuilder::new();
-        t___8487.append_safe("users.id = orders.user_id");
-        let mut t___8489: SqlFragment = t___8487.accumulated();
-        let q__979: Query = from(t___8485.clone()).full_join(t___8486.clone(), t___8489.clone());
-        let mut t___8494: bool = Some(q__979.to_sql().to_string().as_str()) == Some("SELECT * FROM users FULL OUTER JOIN orders ON users.id = orders.user_id");
+        let mut t___9641: SafeIdentifier = sid__505("users");
+        let mut t___9642: SafeIdentifier = sid__505("orders");
+        let mut t___9643: SqlBuilder = SqlBuilder::new();
+        t___9643.append_safe("users.id = orders.user_id");
+        let mut t___9645: SqlFragment = t___9643.accumulated();
+        let q__1086: Query = from(t___9641.clone()).full_join(t___9642.clone(), t___9645.clone());
+        let mut t___9650: bool = Some(q__1086.to_sql().to_string().as_str()) == Some("SELECT * FROM users FULL OUTER JOIN orders ON users.id = orders.user_id");
         #[derive(Clone)]
         struct ClosureGroup___75 {}
         impl ClosureGroup___75 {
-            fn fn__8484(& self) -> std::sync::Arc<String> {
+            fn fn__9640(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("full join".to_string());
             }
         }
         let closure_group = ClosureGroup___75 {};
-        let fn__8484 = {
+        let fn__9640 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8484())
+            std::sync::Arc::new(move | | closure_group.fn__9640())
         };
-        test___66.assert(t___8494, fn__8484.clone());
+        test___66.assert(t___9650, fn__9640.clone());
         test___66.soft_fail_to_hard()
     }
     #[test]
-    fn chainedJoins__1506() -> temper_core::Result<()> {
+    fn chainedJoins__1675() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___67 = temper_std::testing::Test::new();
-        let mut t___8468: SafeIdentifier = sid__461("users");
-        let mut t___8469: SafeIdentifier = sid__461("orders");
-        let mut t___8470: SqlBuilder = SqlBuilder::new();
-        t___8470.append_safe("users.id = orders.user_id");
-        let mut t___8472: SqlFragment = t___8470.accumulated();
-        let mut t___8473: Query = from(t___8468.clone()).inner_join(t___8469.clone(), t___8472.clone());
-        let mut t___8474: SafeIdentifier = sid__461("profiles");
-        let mut t___8475: SqlBuilder = SqlBuilder::new();
-        t___8475.append_safe("users.id = profiles.user_id");
-        let q__981: Query = t___8473.left_join(t___8474.clone(), t___8475.accumulated());
-        let mut t___8482: bool = Some(q__981.to_sql().to_string().as_str()) == Some("SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id LEFT JOIN profiles ON users.id = profiles.user_id");
+        let mut t___9624: SafeIdentifier = sid__505("users");
+        let mut t___9625: SafeIdentifier = sid__505("orders");
+        let mut t___9626: SqlBuilder = SqlBuilder::new();
+        t___9626.append_safe("users.id = orders.user_id");
+        let mut t___9628: SqlFragment = t___9626.accumulated();
+        let mut t___9629: Query = from(t___9624.clone()).inner_join(t___9625.clone(), t___9628.clone());
+        let mut t___9630: SafeIdentifier = sid__505("profiles");
+        let mut t___9631: SqlBuilder = SqlBuilder::new();
+        t___9631.append_safe("users.id = profiles.user_id");
+        let q__1088: Query = t___9629.left_join(t___9630.clone(), t___9631.accumulated());
+        let mut t___9638: bool = Some(q__1088.to_sql().to_string().as_str()) == Some("SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id LEFT JOIN profiles ON users.id = profiles.user_id");
         #[derive(Clone)]
         struct ClosureGroup___76 {}
         impl ClosureGroup___76 {
-            fn fn__8467(& self) -> std::sync::Arc<String> {
+            fn fn__9623(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("chained joins".to_string());
             }
         }
         let closure_group = ClosureGroup___76 {};
-        let fn__8467 = {
+        let fn__9623 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8467())
+            std::sync::Arc::new(move | | closure_group.fn__9623())
         };
-        test___67.assert(t___8482, fn__8467.clone());
+        test___67.assert(t___9638, fn__9623.clone());
         test___67.soft_fail_to_hard()
     }
     #[test]
-    fn joinWithWhereAndOrderBy__1509() -> temper_core::Result<()> {
+    fn joinWithWhereAndOrderBy__1678() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___68 = temper_std::testing::Test::new();
-        let mut t___8449: SafeIdentifier;
-        let mut t___8450: SafeIdentifier;
-        let mut t___8451: SqlBuilder;
-        let mut t___8453: SqlFragment;
-        let mut t___8454: Query;
-        let mut t___8455: SqlBuilder;
-        let mut t___4407: Query;
-        let q__983: Query;
-        'ok___9735: {
-            'orelse___1717: {
-                t___8449 = sid__461("users");
-                t___8450 = sid__461("orders");
-                t___8451 = SqlBuilder::new();
-                t___8451.append_safe("users.id = orders.user_id");
-                t___8453 = t___8451.accumulated();
-                t___8454 = from(t___8449.clone()).inner_join(t___8450.clone(), t___8453.clone());
-                t___8455 = SqlBuilder::new();
-                t___8455.append_safe("orders.total > ");
-                t___8455.append_int32(100);
-                t___4407 = match t___8454.r#where(t___8455.accumulated()).order_by(sid__461("name"), true).limit(10) {
+        let mut t___9605: SafeIdentifier;
+        let mut t___9606: SafeIdentifier;
+        let mut t___9607: SqlBuilder;
+        let mut t___9609: SqlFragment;
+        let mut t___9610: Query;
+        let mut t___9611: SqlBuilder;
+        let mut t___5045: Query;
+        let q__1090: Query;
+        'ok___10989: {
+            'orelse___1914: {
+                t___9605 = sid__505("users");
+                t___9606 = sid__505("orders");
+                t___9607 = SqlBuilder::new();
+                t___9607.append_safe("users.id = orders.user_id");
+                t___9609 = t___9607.accumulated();
+                t___9610 = from(t___9605.clone()).inner_join(t___9606.clone(), t___9609.clone());
+                t___9611 = SqlBuilder::new();
+                t___9611.append_safe("orders.total > ");
+                t___9611.append_int32(100);
+                t___5045 = match t___9610.r#where(t___9611.accumulated()).order_by(sid__505("name"), true).limit(10) {
                     Ok(x) => x,
-                    _ => break 'orelse___1717
+                    _ => break 'orelse___1914
                 };
-                q__983 = t___4407.clone();
-                break 'ok___9735;
+                q__1090 = t___5045.clone();
+                break 'ok___10989;
             }
-            q__983 = panic!();
+            q__1090 = panic!();
         }
-        let mut t___8465: bool = Some(q__983.to_sql().to_string().as_str()) == Some("SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id WHERE orders.total > 100 ORDER BY name ASC LIMIT 10");
+        let mut t___9621: bool = Some(q__1090.to_sql().to_string().as_str()) == Some("SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id WHERE orders.total > 100 ORDER BY name ASC LIMIT 10");
         #[derive(Clone)]
         struct ClosureGroup___77 {}
         impl ClosureGroup___77 {
-            fn fn__8448(& self) -> std::sync::Arc<String> {
+            fn fn__9604(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("join with where/order/limit".to_string());
             }
         }
         let closure_group = ClosureGroup___77 {};
-        let fn__8448 = {
+        let fn__9604 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8448())
+            std::sync::Arc::new(move | | closure_group.fn__9604())
         };
-        test___68.assert(t___8465, fn__8448.clone());
+        test___68.assert(t___9621, fn__9604.clone());
         test___68.soft_fail_to_hard()
     }
     #[test]
-    fn colHelperProducesQualifiedReference__1512() -> temper_core::Result<()> {
+    fn colHelperProducesQualifiedReference__1681() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___69 = temper_std::testing::Test::new();
-        let c__985: SqlFragment = col(sid__461("users"), sid__461("id"));
-        let mut t___8446: bool = Some(c__985.to_string().as_str()) == Some("users.id");
+        let c__1092: SqlFragment = col(sid__505("users"), sid__505("id"));
+        let mut t___9602: bool = Some(c__1092.to_string().as_str()) == Some("users.id");
         #[derive(Clone)]
         struct ClosureGroup___78 {}
         impl ClosureGroup___78 {
-            fn fn__8440(& self) -> std::sync::Arc<String> {
+            fn fn__9596(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("col helper".to_string());
             }
         }
         let closure_group = ClosureGroup___78 {};
-        let fn__8440 = {
+        let fn__9596 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8440())
+            std::sync::Arc::new(move | | closure_group.fn__9596())
         };
-        test___69.assert(t___8446, fn__8440.clone());
+        test___69.assert(t___9602, fn__9596.clone());
         test___69.soft_fail_to_hard()
     }
     #[test]
-    fn joinWithColHelper__1513() -> temper_core::Result<()> {
+    fn joinWithColHelper__1682() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___70 = temper_std::testing::Test::new();
-        let onCond__987: SqlFragment = col(sid__461("users"), sid__461("id"));
-        let b__988: SqlBuilder = SqlBuilder::new();
-        b__988.append_fragment(onCond__987.clone());
-        b__988.append_safe(" = ");
-        b__988.append_fragment(col(sid__461("orders"), sid__461("user_id")));
-        let mut t___8431: SafeIdentifier = sid__461("users");
-        let mut t___8432: SafeIdentifier = sid__461("orders");
-        let mut t___8433: SqlFragment = b__988.accumulated();
-        let q__989: Query = from(t___8431.clone()).inner_join(t___8432.clone(), t___8433.clone());
-        let mut t___8438: bool = Some(q__989.to_sql().to_string().as_str()) == Some("SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id");
+        let onCond__1094: SqlFragment = col(sid__505("users"), sid__505("id"));
+        let b__1095: SqlBuilder = SqlBuilder::new();
+        b__1095.append_fragment(onCond__1094.clone());
+        b__1095.append_safe(" = ");
+        b__1095.append_fragment(col(sid__505("orders"), sid__505("user_id")));
+        let mut t___9587: SafeIdentifier = sid__505("users");
+        let mut t___9588: SafeIdentifier = sid__505("orders");
+        let mut t___9589: SqlFragment = b__1095.accumulated();
+        let q__1096: Query = from(t___9587.clone()).inner_join(t___9588.clone(), t___9589.clone());
+        let mut t___9594: bool = Some(q__1096.to_sql().to_string().as_str()) == Some("SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id");
         #[derive(Clone)]
         struct ClosureGroup___79 {}
         impl ClosureGroup___79 {
-            fn fn__8420(& self) -> std::sync::Arc<String> {
+            fn fn__9576(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("join with col".to_string());
             }
         }
         let closure_group = ClosureGroup___79 {};
-        let fn__8420 = {
+        let fn__9576 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8420())
+            std::sync::Arc::new(move | | closure_group.fn__9576())
         };
-        test___70.assert(t___8438, fn__8420.clone());
+        test___70.assert(t___9594, fn__9576.clone());
         test___70.soft_fail_to_hard()
     }
     #[test]
-    fn orWhereBasic__1514() -> temper_core::Result<()> {
+    fn orWhereBasic__1683() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___71 = temper_std::testing::Test::new();
-        let mut t___8409: SafeIdentifier = sid__461("users");
-        let mut t___8410: SqlBuilder = SqlBuilder::new();
-        t___8410.append_safe("status = ");
-        t___8410.append_string("active");
-        let mut t___8413: SqlFragment = t___8410.accumulated();
-        let q__991: Query = from(t___8409.clone()).or_where(t___8413.clone());
-        let mut t___8418: bool = Some(q__991.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE status = 'active'");
+        let mut t___9565: SafeIdentifier = sid__505("users");
+        let mut t___9566: SqlBuilder = SqlBuilder::new();
+        t___9566.append_safe("status = ");
+        t___9566.append_string("active");
+        let mut t___9569: SqlFragment = t___9566.accumulated();
+        let q__1098: Query = from(t___9565.clone()).or_where(t___9569.clone());
+        let mut t___9574: bool = Some(q__1098.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE status = 'active'");
         #[derive(Clone)]
         struct ClosureGroup___80 {}
         impl ClosureGroup___80 {
-            fn fn__8408(& self) -> std::sync::Arc<String> {
+            fn fn__9564(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("orWhere basic".to_string());
             }
         }
         let closure_group = ClosureGroup___80 {};
-        let fn__8408 = {
+        let fn__9564 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8408())
+            std::sync::Arc::new(move | | closure_group.fn__9564())
         };
-        test___71.assert(t___8418, fn__8408.clone());
+        test___71.assert(t___9574, fn__9564.clone());
         test___71.soft_fail_to_hard()
     }
     #[test]
-    fn whereThenOrWhere__1516() -> temper_core::Result<()> {
+    fn whereThenOrWhere__1685() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___72 = temper_std::testing::Test::new();
-        let mut t___8392: SafeIdentifier = sid__461("users");
-        let mut t___8393: SqlBuilder = SqlBuilder::new();
-        t___8393.append_safe("age > ");
-        t___8393.append_int32(18);
-        let mut t___8396: SqlFragment = t___8393.accumulated();
-        let mut t___8397: Query = from(t___8392.clone()).r#where(t___8396.clone());
-        let mut t___8398: SqlBuilder = SqlBuilder::new();
-        t___8398.append_safe("vip = ");
-        t___8398.append_boolean(true);
-        let q__993: Query = t___8397.or_where(t___8398.accumulated());
-        let mut t___8406: bool = Some(q__993.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age > 18 OR vip = TRUE");
+        let mut t___9548: SafeIdentifier = sid__505("users");
+        let mut t___9549: SqlBuilder = SqlBuilder::new();
+        t___9549.append_safe("age > ");
+        t___9549.append_int32(18);
+        let mut t___9552: SqlFragment = t___9549.accumulated();
+        let mut t___9553: Query = from(t___9548.clone()).r#where(t___9552.clone());
+        let mut t___9554: SqlBuilder = SqlBuilder::new();
+        t___9554.append_safe("vip = ");
+        t___9554.append_boolean(true);
+        let q__1100: Query = t___9553.or_where(t___9554.accumulated());
+        let mut t___9562: bool = Some(q__1100.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age > 18 OR vip = TRUE");
         #[derive(Clone)]
         struct ClosureGroup___81 {}
         impl ClosureGroup___81 {
-            fn fn__8391(& self) -> std::sync::Arc<String> {
+            fn fn__9547(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("where then orWhere".to_string());
             }
         }
         let closure_group = ClosureGroup___81 {};
-        let fn__8391 = {
+        let fn__9547 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8391())
+            std::sync::Arc::new(move | | closure_group.fn__9547())
         };
-        test___72.assert(t___8406, fn__8391.clone());
+        test___72.assert(t___9562, fn__9547.clone());
         test___72.soft_fail_to_hard()
     }
     #[test]
-    fn multipleOrWhere__1519() -> temper_core::Result<()> {
+    fn multipleOrWhere__1688() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___73 = temper_std::testing::Test::new();
-        let mut t___8370: SafeIdentifier = sid__461("users");
-        let mut t___8371: SqlBuilder = SqlBuilder::new();
-        t___8371.append_safe("active = ");
-        t___8371.append_boolean(true);
-        let mut t___8374: SqlFragment = t___8371.accumulated();
-        let mut t___8375: Query = from(t___8370.clone()).r#where(t___8374.clone());
-        let mut t___8376: SqlBuilder = SqlBuilder::new();
-        t___8376.append_safe("role = ");
-        t___8376.append_string("admin");
-        let mut t___8380: Query = t___8375.or_where(t___8376.accumulated());
-        let mut t___8381: SqlBuilder = SqlBuilder::new();
-        t___8381.append_safe("role = ");
-        t___8381.append_string("moderator");
-        let q__995: Query = t___8380.or_where(t___8381.accumulated());
-        let mut t___8389: bool = Some(q__995.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE active = TRUE OR role = 'admin' OR role = 'moderator'");
+        let mut t___9526: SafeIdentifier = sid__505("users");
+        let mut t___9527: SqlBuilder = SqlBuilder::new();
+        t___9527.append_safe("active = ");
+        t___9527.append_boolean(true);
+        let mut t___9530: SqlFragment = t___9527.accumulated();
+        let mut t___9531: Query = from(t___9526.clone()).r#where(t___9530.clone());
+        let mut t___9532: SqlBuilder = SqlBuilder::new();
+        t___9532.append_safe("role = ");
+        t___9532.append_string("admin");
+        let mut t___9536: Query = t___9531.or_where(t___9532.accumulated());
+        let mut t___9537: SqlBuilder = SqlBuilder::new();
+        t___9537.append_safe("role = ");
+        t___9537.append_string("moderator");
+        let q__1102: Query = t___9536.or_where(t___9537.accumulated());
+        let mut t___9545: bool = Some(q__1102.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE active = TRUE OR role = 'admin' OR role = 'moderator'");
         #[derive(Clone)]
         struct ClosureGroup___82 {}
         impl ClosureGroup___82 {
-            fn fn__8369(& self) -> std::sync::Arc<String> {
+            fn fn__9525(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("multiple orWhere".to_string());
             }
         }
         let closure_group = ClosureGroup___82 {};
-        let fn__8369 = {
+        let fn__9525 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8369())
+            std::sync::Arc::new(move | | closure_group.fn__9525())
         };
-        test___73.assert(t___8389, fn__8369.clone());
+        test___73.assert(t___9545, fn__9525.clone());
         test___73.soft_fail_to_hard()
     }
     #[test]
-    fn mixedWhereAndOrWhere__1523() -> temper_core::Result<()> {
+    fn mixedWhereAndOrWhere__1692() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___74 = temper_std::testing::Test::new();
-        let mut t___8348: SafeIdentifier = sid__461("users");
-        let mut t___8349: SqlBuilder = SqlBuilder::new();
-        t___8349.append_safe("age > ");
-        t___8349.append_int32(18);
-        let mut t___8352: SqlFragment = t___8349.accumulated();
-        let mut t___8353: Query = from(t___8348.clone()).r#where(t___8352.clone());
-        let mut t___8354: SqlBuilder = SqlBuilder::new();
-        t___8354.append_safe("active = ");
-        t___8354.append_boolean(true);
-        let mut t___8358: Query = t___8353.r#where(t___8354.accumulated());
-        let mut t___8359: SqlBuilder = SqlBuilder::new();
-        t___8359.append_safe("vip = ");
-        t___8359.append_boolean(true);
-        let q__997: Query = t___8358.or_where(t___8359.accumulated());
-        let mut t___8367: bool = Some(q__997.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age > 18 AND active = TRUE OR vip = TRUE");
+        let mut t___9504: SafeIdentifier = sid__505("users");
+        let mut t___9505: SqlBuilder = SqlBuilder::new();
+        t___9505.append_safe("age > ");
+        t___9505.append_int32(18);
+        let mut t___9508: SqlFragment = t___9505.accumulated();
+        let mut t___9509: Query = from(t___9504.clone()).r#where(t___9508.clone());
+        let mut t___9510: SqlBuilder = SqlBuilder::new();
+        t___9510.append_safe("active = ");
+        t___9510.append_boolean(true);
+        let mut t___9514: Query = t___9509.r#where(t___9510.accumulated());
+        let mut t___9515: SqlBuilder = SqlBuilder::new();
+        t___9515.append_safe("vip = ");
+        t___9515.append_boolean(true);
+        let q__1104: Query = t___9514.or_where(t___9515.accumulated());
+        let mut t___9523: bool = Some(q__1104.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age > 18 AND active = TRUE OR vip = TRUE");
         #[derive(Clone)]
         struct ClosureGroup___83 {}
         impl ClosureGroup___83 {
-            fn fn__8347(& self) -> std::sync::Arc<String> {
+            fn fn__9503(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("mixed where and orWhere".to_string());
             }
         }
         let closure_group = ClosureGroup___83 {};
-        let fn__8347 = {
+        let fn__9503 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8347())
+            std::sync::Arc::new(move | | closure_group.fn__9503())
         };
-        test___74.assert(t___8367, fn__8347.clone());
+        test___74.assert(t___9523, fn__9503.clone());
         test___74.soft_fail_to_hard()
     }
     #[test]
-    fn whereNull__1527() -> temper_core::Result<()> {
+    fn whereNull__1696() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___75 = temper_std::testing::Test::new();
-        let mut t___8339: SafeIdentifier = sid__461("users");
-        let mut t___8340: SafeIdentifier = sid__461("deleted_at");
-        let q__999: Query = from(t___8339.clone()).where_null(t___8340.clone());
-        let mut t___8345: bool = Some(q__999.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE deleted_at IS NULL");
+        let mut t___9495: SafeIdentifier = sid__505("users");
+        let mut t___9496: SafeIdentifier = sid__505("deleted_at");
+        let q__1106: Query = from(t___9495.clone()).where_null(t___9496.clone());
+        let mut t___9501: bool = Some(q__1106.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE deleted_at IS NULL");
         #[derive(Clone)]
         struct ClosureGroup___84 {}
         impl ClosureGroup___84 {
-            fn fn__8338(& self) -> std::sync::Arc<String> {
+            fn fn__9494(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereNull".to_string());
             }
         }
         let closure_group = ClosureGroup___84 {};
-        let fn__8338 = {
+        let fn__9494 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8338())
+            std::sync::Arc::new(move | | closure_group.fn__9494())
         };
-        test___75.assert(t___8345, fn__8338.clone());
+        test___75.assert(t___9501, fn__9494.clone());
         test___75.soft_fail_to_hard()
     }
     #[test]
-    fn whereNotNull__1528() -> temper_core::Result<()> {
+    fn whereNotNull__1697() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___76 = temper_std::testing::Test::new();
-        let mut t___8330: SafeIdentifier = sid__461("users");
-        let mut t___8331: SafeIdentifier = sid__461("email");
-        let q__1001: Query = from(t___8330.clone()).where_not_null(t___8331.clone());
-        let mut t___8336: bool = Some(q__1001.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE email IS NOT NULL");
+        let mut t___9486: SafeIdentifier = sid__505("users");
+        let mut t___9487: SafeIdentifier = sid__505("email");
+        let q__1108: Query = from(t___9486.clone()).where_not_null(t___9487.clone());
+        let mut t___9492: bool = Some(q__1108.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE email IS NOT NULL");
         #[derive(Clone)]
         struct ClosureGroup___85 {}
         impl ClosureGroup___85 {
-            fn fn__8329(& self) -> std::sync::Arc<String> {
+            fn fn__9485(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereNotNull".to_string());
             }
         }
         let closure_group = ClosureGroup___85 {};
-        let fn__8329 = {
+        let fn__9485 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8329())
+            std::sync::Arc::new(move | | closure_group.fn__9485())
         };
-        test___76.assert(t___8336, fn__8329.clone());
+        test___76.assert(t___9492, fn__9485.clone());
         test___76.soft_fail_to_hard()
     }
     #[test]
-    fn whereNullChainedWithWhere__1529() -> temper_core::Result<()> {
+    fn whereNullChainedWithWhere__1698() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___77 = temper_std::testing::Test::new();
-        let mut t___8316: SafeIdentifier = sid__461("users");
-        let mut t___8317: SqlBuilder = SqlBuilder::new();
-        t___8317.append_safe("active = ");
-        t___8317.append_boolean(true);
-        let mut t___8320: SqlFragment = t___8317.accumulated();
-        let q__1003: Query = from(t___8316.clone()).r#where(t___8320.clone()).where_null(sid__461("deleted_at"));
-        let mut t___8327: bool = Some(q__1003.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE active = TRUE AND deleted_at IS NULL");
+        let mut t___9472: SafeIdentifier = sid__505("users");
+        let mut t___9473: SqlBuilder = SqlBuilder::new();
+        t___9473.append_safe("active = ");
+        t___9473.append_boolean(true);
+        let mut t___9476: SqlFragment = t___9473.accumulated();
+        let q__1110: Query = from(t___9472.clone()).r#where(t___9476.clone()).where_null(sid__505("deleted_at"));
+        let mut t___9483: bool = Some(q__1110.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE active = TRUE AND deleted_at IS NULL");
         #[derive(Clone)]
         struct ClosureGroup___86 {}
         impl ClosureGroup___86 {
-            fn fn__8315(& self) -> std::sync::Arc<String> {
+            fn fn__9471(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereNull chained".to_string());
             }
         }
         let closure_group = ClosureGroup___86 {};
-        let fn__8315 = {
+        let fn__9471 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8315())
+            std::sync::Arc::new(move | | closure_group.fn__9471())
         };
-        test___77.assert(t___8327, fn__8315.clone());
+        test___77.assert(t___9483, fn__9471.clone());
         test___77.soft_fail_to_hard()
     }
     #[test]
-    fn whereNotNullChainedWithOrWhere__1531() -> temper_core::Result<()> {
+    fn whereNotNullChainedWithOrWhere__1700() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___78 = temper_std::testing::Test::new();
-        let mut t___8302: SafeIdentifier = sid__461("users");
-        let mut t___8303: SafeIdentifier = sid__461("deleted_at");
-        let mut t___8304: Query = from(t___8302.clone()).where_null(t___8303.clone());
-        let mut t___8305: SqlBuilder = SqlBuilder::new();
-        t___8305.append_safe("role = ");
-        t___8305.append_string("admin");
-        let q__1005: Query = t___8304.or_where(t___8305.accumulated());
-        let mut t___8313: bool = Some(q__1005.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE deleted_at IS NULL OR role = 'admin'");
+        let mut t___9458: SafeIdentifier = sid__505("users");
+        let mut t___9459: SafeIdentifier = sid__505("deleted_at");
+        let mut t___9460: Query = from(t___9458.clone()).where_null(t___9459.clone());
+        let mut t___9461: SqlBuilder = SqlBuilder::new();
+        t___9461.append_safe("role = ");
+        t___9461.append_string("admin");
+        let q__1112: Query = t___9460.or_where(t___9461.accumulated());
+        let mut t___9469: bool = Some(q__1112.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE deleted_at IS NULL OR role = 'admin'");
         #[derive(Clone)]
         struct ClosureGroup___87 {}
         impl ClosureGroup___87 {
-            fn fn__8301(& self) -> std::sync::Arc<String> {
+            fn fn__9457(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereNotNull with orWhere".to_string());
             }
         }
         let closure_group = ClosureGroup___87 {};
-        let fn__8301 = {
+        let fn__9457 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8301())
+            std::sync::Arc::new(move | | closure_group.fn__9457())
         };
-        test___78.assert(t___8313, fn__8301.clone());
+        test___78.assert(t___9469, fn__9457.clone());
         test___78.soft_fail_to_hard()
     }
     #[test]
-    fn whereInWithIntValues__1533() -> temper_core::Result<()> {
+    fn whereInWithIntValues__1702() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___79 = temper_std::testing::Test::new();
-        let mut t___8290: SafeIdentifier = sid__461("users");
-        let mut t___8291: SafeIdentifier = sid__461("id");
-        let mut t___8292: SqlInt32 = SqlInt32::new(1);
-        let mut t___8293: SqlInt32 = SqlInt32::new(2);
-        let mut t___8294: SqlInt32 = SqlInt32::new(3);
-        let q__1007: Query = from(t___8290.clone()).where_in(t___8291.clone(), [SqlPart::new(t___8292.clone()), SqlPart::new(t___8293.clone()), SqlPart::new(t___8294.clone())]);
-        let mut t___8299: bool = Some(q__1007.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE id IN (1, 2, 3)");
+        let mut t___9446: SafeIdentifier = sid__505("users");
+        let mut t___9447: SafeIdentifier = sid__505("id");
+        let mut t___9448: SqlInt32 = SqlInt32::new(1);
+        let mut t___9449: SqlInt32 = SqlInt32::new(2);
+        let mut t___9450: SqlInt32 = SqlInt32::new(3);
+        let q__1114: Query = from(t___9446.clone()).where_in(t___9447.clone(), [SqlPart::new(t___9448.clone()), SqlPart::new(t___9449.clone()), SqlPart::new(t___9450.clone())]);
+        let mut t___9455: bool = Some(q__1114.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE id IN (1, 2, 3)");
         #[derive(Clone)]
         struct ClosureGroup___88 {}
         impl ClosureGroup___88 {
-            fn fn__8289(& self) -> std::sync::Arc<String> {
+            fn fn__9445(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereIn ints".to_string());
             }
         }
         let closure_group = ClosureGroup___88 {};
-        let fn__8289 = {
+        let fn__9445 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8289())
+            std::sync::Arc::new(move | | closure_group.fn__9445())
         };
-        test___79.assert(t___8299, fn__8289.clone());
+        test___79.assert(t___9455, fn__9445.clone());
         test___79.soft_fail_to_hard()
     }
     #[test]
-    fn whereInWithStringValuesEscaping__1534() -> temper_core::Result<()> {
+    fn whereInWithStringValuesEscaping__1703() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___80 = temper_std::testing::Test::new();
-        let mut t___8279: SafeIdentifier = sid__461("users");
-        let mut t___8280: SafeIdentifier = sid__461("name");
-        let mut t___8281: SqlString = SqlString::new("Alice");
-        let mut t___8282: SqlString = SqlString::new("Bob's");
-        let q__1009: Query = from(t___8279.clone()).where_in(t___8280.clone(), [SqlPart::new(t___8281.clone()), SqlPart::new(t___8282.clone())]);
-        let mut t___8287: bool = Some(q__1009.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE name IN ('Alice', 'Bob''s')");
+        let mut t___9435: SafeIdentifier = sid__505("users");
+        let mut t___9436: SafeIdentifier = sid__505("name");
+        let mut t___9437: SqlString = SqlString::new("Alice");
+        let mut t___9438: SqlString = SqlString::new("Bob's");
+        let q__1116: Query = from(t___9435.clone()).where_in(t___9436.clone(), [SqlPart::new(t___9437.clone()), SqlPart::new(t___9438.clone())]);
+        let mut t___9443: bool = Some(q__1116.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE name IN ('Alice', 'Bob''s')");
         #[derive(Clone)]
         struct ClosureGroup___89 {}
         impl ClosureGroup___89 {
-            fn fn__8278(& self) -> std::sync::Arc<String> {
+            fn fn__9434(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereIn strings".to_string());
             }
         }
         let closure_group = ClosureGroup___89 {};
-        let fn__8278 = {
+        let fn__9434 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8278())
+            std::sync::Arc::new(move | | closure_group.fn__9434())
         };
-        test___80.assert(t___8287, fn__8278.clone());
+        test___80.assert(t___9443, fn__9434.clone());
         test___80.soft_fail_to_hard()
     }
     #[test]
-    fn whereInWithEmptyListProduces1_0__1535() -> temper_core::Result<()> {
+    fn whereInWithEmptyListProduces1_0__1704() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___81 = temper_std::testing::Test::new();
-        let mut t___8270: SafeIdentifier = sid__461("users");
-        let mut t___8271: SafeIdentifier = sid__461("id");
-        let q__1011: Query = from(t___8270.clone()).where_in(t___8271.clone(), []);
-        let mut t___8276: bool = Some(q__1011.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE 1 = 0");
+        let mut t___9426: SafeIdentifier = sid__505("users");
+        let mut t___9427: SafeIdentifier = sid__505("id");
+        let q__1118: Query = from(t___9426.clone()).where_in(t___9427.clone(), []);
+        let mut t___9432: bool = Some(q__1118.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE 1 = 0");
         #[derive(Clone)]
         struct ClosureGroup___90 {}
         impl ClosureGroup___90 {
-            fn fn__8269(& self) -> std::sync::Arc<String> {
+            fn fn__9425(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereIn empty".to_string());
             }
         }
         let closure_group = ClosureGroup___90 {};
-        let fn__8269 = {
+        let fn__9425 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8269())
+            std::sync::Arc::new(move | | closure_group.fn__9425())
         };
-        test___81.assert(t___8276, fn__8269.clone());
+        test___81.assert(t___9432, fn__9425.clone());
         test___81.soft_fail_to_hard()
     }
     #[test]
-    fn whereInChained__1536() -> temper_core::Result<()> {
+    fn whereInChained__1705() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___82 = temper_std::testing::Test::new();
-        let mut t___8254: SafeIdentifier = sid__461("users");
-        let mut t___8255: SqlBuilder = SqlBuilder::new();
-        t___8255.append_safe("active = ");
-        t___8255.append_boolean(true);
-        let mut t___8258: SqlFragment = t___8255.accumulated();
-        let q__1013: Query = from(t___8254.clone()).r#where(t___8258.clone()).where_in(sid__461("role"), [SqlPart::new(SqlString::new("admin")), SqlPart::new(SqlString::new("user"))]);
-        let mut t___8267: bool = Some(q__1013.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE active = TRUE AND role IN ('admin', 'user')");
+        let mut t___9410: SafeIdentifier = sid__505("users");
+        let mut t___9411: SqlBuilder = SqlBuilder::new();
+        t___9411.append_safe("active = ");
+        t___9411.append_boolean(true);
+        let mut t___9414: SqlFragment = t___9411.accumulated();
+        let q__1120: Query = from(t___9410.clone()).r#where(t___9414.clone()).where_in(sid__505("role"), [SqlPart::new(SqlString::new("admin")), SqlPart::new(SqlString::new("user"))]);
+        let mut t___9423: bool = Some(q__1120.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE active = TRUE AND role IN ('admin', 'user')");
         #[derive(Clone)]
         struct ClosureGroup___91 {}
         impl ClosureGroup___91 {
-            fn fn__8253(& self) -> std::sync::Arc<String> {
+            fn fn__9409(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereIn chained".to_string());
             }
         }
         let closure_group = ClosureGroup___91 {};
-        let fn__8253 = {
+        let fn__9409 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8253())
+            std::sync::Arc::new(move | | closure_group.fn__9409())
         };
-        test___82.assert(t___8267, fn__8253.clone());
+        test___82.assert(t___9423, fn__9409.clone());
         test___82.soft_fail_to_hard()
     }
     #[test]
-    fn whereInSingleElement__1538() -> temper_core::Result<()> {
+    fn whereInSingleElement__1707() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___83 = temper_std::testing::Test::new();
-        let mut t___8244: SafeIdentifier = sid__461("users");
-        let mut t___8245: SafeIdentifier = sid__461("id");
-        let mut t___8246: SqlInt32 = SqlInt32::new(42);
-        let q__1015: Query = from(t___8244.clone()).where_in(t___8245.clone(), [SqlPart::new(t___8246.clone())]);
-        let mut t___8251: bool = Some(q__1015.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE id IN (42)");
+        let mut t___9400: SafeIdentifier = sid__505("users");
+        let mut t___9401: SafeIdentifier = sid__505("id");
+        let mut t___9402: SqlInt32 = SqlInt32::new(42);
+        let q__1122: Query = from(t___9400.clone()).where_in(t___9401.clone(), [SqlPart::new(t___9402.clone())]);
+        let mut t___9407: bool = Some(q__1122.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE id IN (42)");
         #[derive(Clone)]
         struct ClosureGroup___92 {}
         impl ClosureGroup___92 {
-            fn fn__8243(& self) -> std::sync::Arc<String> {
+            fn fn__9399(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereIn single".to_string());
             }
         }
         let closure_group = ClosureGroup___92 {};
-        let fn__8243 = {
+        let fn__9399 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8243())
+            std::sync::Arc::new(move | | closure_group.fn__9399())
         };
-        test___83.assert(t___8251, fn__8243.clone());
+        test___83.assert(t___9407, fn__9399.clone());
         test___83.soft_fail_to_hard()
     }
     #[test]
-    fn whereNotBasic__1539() -> temper_core::Result<()> {
+    fn whereNotBasic__1708() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___84 = temper_std::testing::Test::new();
-        let mut t___8232: SafeIdentifier = sid__461("users");
-        let mut t___8233: SqlBuilder = SqlBuilder::new();
-        t___8233.append_safe("active = ");
-        t___8233.append_boolean(true);
-        let mut t___8236: SqlFragment = t___8233.accumulated();
-        let q__1017: Query = from(t___8232.clone()).where_not(t___8236.clone());
-        let mut t___8241: bool = Some(q__1017.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE NOT (active = TRUE)");
+        let mut t___9388: SafeIdentifier = sid__505("users");
+        let mut t___9389: SqlBuilder = SqlBuilder::new();
+        t___9389.append_safe("active = ");
+        t___9389.append_boolean(true);
+        let mut t___9392: SqlFragment = t___9389.accumulated();
+        let q__1124: Query = from(t___9388.clone()).where_not(t___9392.clone());
+        let mut t___9397: bool = Some(q__1124.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE NOT (active = TRUE)");
         #[derive(Clone)]
         struct ClosureGroup___93 {}
         impl ClosureGroup___93 {
-            fn fn__8231(& self) -> std::sync::Arc<String> {
+            fn fn__9387(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereNot".to_string());
             }
         }
         let closure_group = ClosureGroup___93 {};
-        let fn__8231 = {
+        let fn__9387 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8231())
+            std::sync::Arc::new(move | | closure_group.fn__9387())
         };
-        test___84.assert(t___8241, fn__8231.clone());
+        test___84.assert(t___9397, fn__9387.clone());
         test___84.soft_fail_to_hard()
     }
     #[test]
-    fn whereNotChained__1541() -> temper_core::Result<()> {
+    fn whereNotChained__1710() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___85 = temper_std::testing::Test::new();
-        let mut t___8215: SafeIdentifier = sid__461("users");
-        let mut t___8216: SqlBuilder = SqlBuilder::new();
-        t___8216.append_safe("age > ");
-        t___8216.append_int32(18);
-        let mut t___8219: SqlFragment = t___8216.accumulated();
-        let mut t___8220: Query = from(t___8215.clone()).r#where(t___8219.clone());
-        let mut t___8221: SqlBuilder = SqlBuilder::new();
-        t___8221.append_safe("banned = ");
-        t___8221.append_boolean(true);
-        let q__1019: Query = t___8220.where_not(t___8221.accumulated());
-        let mut t___8229: bool = Some(q__1019.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age > 18 AND NOT (banned = TRUE)");
+        let mut t___9371: SafeIdentifier = sid__505("users");
+        let mut t___9372: SqlBuilder = SqlBuilder::new();
+        t___9372.append_safe("age > ");
+        t___9372.append_int32(18);
+        let mut t___9375: SqlFragment = t___9372.accumulated();
+        let mut t___9376: Query = from(t___9371.clone()).r#where(t___9375.clone());
+        let mut t___9377: SqlBuilder = SqlBuilder::new();
+        t___9377.append_safe("banned = ");
+        t___9377.append_boolean(true);
+        let q__1126: Query = t___9376.where_not(t___9377.accumulated());
+        let mut t___9385: bool = Some(q__1126.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age > 18 AND NOT (banned = TRUE)");
         #[derive(Clone)]
         struct ClosureGroup___94 {}
         impl ClosureGroup___94 {
-            fn fn__8214(& self) -> std::sync::Arc<String> {
+            fn fn__9370(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereNot chained".to_string());
             }
         }
         let closure_group = ClosureGroup___94 {};
-        let fn__8214 = {
+        let fn__9370 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8214())
+            std::sync::Arc::new(move | | closure_group.fn__9370())
         };
-        test___85.assert(t___8229, fn__8214.clone());
+        test___85.assert(t___9385, fn__9370.clone());
         test___85.soft_fail_to_hard()
     }
     #[test]
-    fn whereBetweenIntegers__1544() -> temper_core::Result<()> {
+    fn whereBetweenIntegers__1713() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___86 = temper_std::testing::Test::new();
-        let mut t___8204: SafeIdentifier = sid__461("users");
-        let mut t___8205: SafeIdentifier = sid__461("age");
-        let mut t___8206: SqlInt32 = SqlInt32::new(18);
-        let mut t___8207: SqlInt32 = SqlInt32::new(65);
-        let q__1021: Query = from(t___8204.clone()).where_between(t___8205.clone(), SqlPart::new(t___8206.clone()), SqlPart::new(t___8207.clone()));
-        let mut t___8212: bool = Some(q__1021.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age BETWEEN 18 AND 65");
+        let mut t___9360: SafeIdentifier = sid__505("users");
+        let mut t___9361: SafeIdentifier = sid__505("age");
+        let mut t___9362: SqlInt32 = SqlInt32::new(18);
+        let mut t___9363: SqlInt32 = SqlInt32::new(65);
+        let q__1128: Query = from(t___9360.clone()).where_between(t___9361.clone(), SqlPart::new(t___9362.clone()), SqlPart::new(t___9363.clone()));
+        let mut t___9368: bool = Some(q__1128.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE age BETWEEN 18 AND 65");
         #[derive(Clone)]
         struct ClosureGroup___95 {}
         impl ClosureGroup___95 {
-            fn fn__8203(& self) -> std::sync::Arc<String> {
+            fn fn__9359(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereBetween ints".to_string());
             }
         }
         let closure_group = ClosureGroup___95 {};
-        let fn__8203 = {
+        let fn__9359 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8203())
+            std::sync::Arc::new(move | | closure_group.fn__9359())
         };
-        test___86.assert(t___8212, fn__8203.clone());
+        test___86.assert(t___9368, fn__9359.clone());
         test___86.soft_fail_to_hard()
     }
     #[test]
-    fn whereBetweenChained__1545() -> temper_core::Result<()> {
+    fn whereBetweenChained__1714() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___87 = temper_std::testing::Test::new();
-        let mut t___8188: SafeIdentifier = sid__461("users");
-        let mut t___8189: SqlBuilder = SqlBuilder::new();
-        t___8189.append_safe("active = ");
-        t___8189.append_boolean(true);
-        let mut t___8192: SqlFragment = t___8189.accumulated();
-        let q__1023: Query = from(t___8188.clone()).r#where(t___8192.clone()).where_between(sid__461("age"), SqlPart::new(SqlInt32::new(21)), SqlPart::new(SqlInt32::new(30)));
-        let mut t___8201: bool = Some(q__1023.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE active = TRUE AND age BETWEEN 21 AND 30");
+        let mut t___9344: SafeIdentifier = sid__505("users");
+        let mut t___9345: SqlBuilder = SqlBuilder::new();
+        t___9345.append_safe("active = ");
+        t___9345.append_boolean(true);
+        let mut t___9348: SqlFragment = t___9345.accumulated();
+        let q__1130: Query = from(t___9344.clone()).r#where(t___9348.clone()).where_between(sid__505("age"), SqlPart::new(SqlInt32::new(21)), SqlPart::new(SqlInt32::new(30)));
+        let mut t___9357: bool = Some(q__1130.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE active = TRUE AND age BETWEEN 21 AND 30");
         #[derive(Clone)]
         struct ClosureGroup___96 {}
         impl ClosureGroup___96 {
-            fn fn__8187(& self) -> std::sync::Arc<String> {
+            fn fn__9343(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereBetween chained".to_string());
             }
         }
         let closure_group = ClosureGroup___96 {};
-        let fn__8187 = {
+        let fn__9343 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8187())
+            std::sync::Arc::new(move | | closure_group.fn__9343())
         };
-        test___87.assert(t___8201, fn__8187.clone());
+        test___87.assert(t___9357, fn__9343.clone());
         test___87.soft_fail_to_hard()
     }
     #[test]
-    fn whereLikeBasic__1547() -> temper_core::Result<()> {
+    fn whereLikeBasic__1716() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___88 = temper_std::testing::Test::new();
-        let mut t___8179: SafeIdentifier = sid__461("users");
-        let mut t___8180: SafeIdentifier = sid__461("name");
-        let q__1025: Query = from(t___8179.clone()).where_like(t___8180.clone(), "John%");
-        let mut t___8185: bool = Some(q__1025.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE name LIKE 'John%'");
+        let mut t___9335: SafeIdentifier = sid__505("users");
+        let mut t___9336: SafeIdentifier = sid__505("name");
+        let q__1132: Query = from(t___9335.clone()).where_like(t___9336.clone(), "John%");
+        let mut t___9341: bool = Some(q__1132.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE name LIKE 'John%'");
         #[derive(Clone)]
         struct ClosureGroup___97 {}
         impl ClosureGroup___97 {
-            fn fn__8178(& self) -> std::sync::Arc<String> {
+            fn fn__9334(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereLike".to_string());
             }
         }
         let closure_group = ClosureGroup___97 {};
-        let fn__8178 = {
+        let fn__9334 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8178())
+            std::sync::Arc::new(move | | closure_group.fn__9334())
         };
-        test___88.assert(t___8185, fn__8178.clone());
+        test___88.assert(t___9341, fn__9334.clone());
         test___88.soft_fail_to_hard()
     }
     #[test]
-    fn whereIlikeBasic__1548() -> temper_core::Result<()> {
+    fn whereIlikeBasic__1717() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___89 = temper_std::testing::Test::new();
-        let mut t___8170: SafeIdentifier = sid__461("users");
-        let mut t___8171: SafeIdentifier = sid__461("email");
-        let q__1027: Query = from(t___8170.clone()).where_i_like(t___8171.clone(), "%@gmail.com");
-        let mut t___8176: bool = Some(q__1027.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE email ILIKE '%@gmail.com'");
+        let mut t___9326: SafeIdentifier = sid__505("users");
+        let mut t___9327: SafeIdentifier = sid__505("email");
+        let q__1134: Query = from(t___9326.clone()).where_i_like(t___9327.clone(), "%@gmail.com");
+        let mut t___9332: bool = Some(q__1134.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE email ILIKE '%@gmail.com'");
         #[derive(Clone)]
         struct ClosureGroup___98 {}
         impl ClosureGroup___98 {
-            fn fn__8169(& self) -> std::sync::Arc<String> {
+            fn fn__9325(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereILike".to_string());
             }
         }
         let closure_group = ClosureGroup___98 {};
-        let fn__8169 = {
+        let fn__9325 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8169())
+            std::sync::Arc::new(move | | closure_group.fn__9325())
         };
-        test___89.assert(t___8176, fn__8169.clone());
+        test___89.assert(t___9332, fn__9325.clone());
         test___89.soft_fail_to_hard()
     }
     #[test]
-    fn whereLikeWithInjectionAttempt__1549() -> temper_core::Result<()> {
+    fn whereLikeWithInjectionAttempt__1718() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___90 = temper_std::testing::Test::new();
-        let mut t___8156: SafeIdentifier = sid__461("users");
-        let mut t___8157: SafeIdentifier = sid__461("name");
-        let q__1029: Query = from(t___8156.clone()).where_like(t___8157.clone(), "'; DROP TABLE users; --");
-        let s__1030: std::sync::Arc<String> = q__1029.to_sql().to_string();
-        let mut t___8162: bool = temper_core::string::index_of( & s__1030, "''", None).is_some();
+        let mut t___9312: SafeIdentifier = sid__505("users");
+        let mut t___9313: SafeIdentifier = sid__505("name");
+        let q__1136: Query = from(t___9312.clone()).where_like(t___9313.clone(), "'; DROP TABLE users; --");
+        let s__1137: std::sync::Arc<String> = q__1136.to_sql().to_string();
+        let mut t___9318: bool = temper_core::string::index_of( & s__1137, "''", None).is_some();
         #[derive(Clone)]
         struct ClosureGroup___99 {
-            s__1030: std::sync::Arc<String>
+            s__1137: std::sync::Arc<String>
         }
         impl ClosureGroup___99 {
-            fn fn__8155(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("like injection escaped: {}", self.s__1030.clone()));
+            fn fn__9311(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("like injection escaped: {}", self.s__1137.clone()));
             }
         }
         let closure_group = ClosureGroup___99 {
-            s__1030: s__1030.clone()
+            s__1137: s__1137.clone()
         };
-        let fn__8155 = {
+        let fn__9311 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8155())
+            std::sync::Arc::new(move | | closure_group.fn__9311())
         };
-        test___90.assert(t___8162, fn__8155.clone());
-        let mut t___8166: bool = temper_core::string::index_of( & s__1030, "LIKE", None).is_some();
+        test___90.assert(t___9318, fn__9311.clone());
+        let mut t___9322: bool = temper_core::string::index_of( & s__1137, "LIKE", None).is_some();
         #[derive(Clone)]
         struct ClosureGroup___100 {
-            s__1030: std::sync::Arc<String>
+            s__1137: std::sync::Arc<String>
         }
         impl ClosureGroup___100 {
-            fn fn__8154(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("like structure intact: {}", self.s__1030.clone()));
+            fn fn__9310(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("like structure intact: {}", self.s__1137.clone()));
             }
         }
         let closure_group = ClosureGroup___100 {
-            s__1030: s__1030.clone()
+            s__1137: s__1137.clone()
         };
-        let fn__8154 = {
+        let fn__9310 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8154())
+            std::sync::Arc::new(move | | closure_group.fn__9310())
         };
-        test___90.assert(t___8166, fn__8154.clone());
+        test___90.assert(t___9322, fn__9310.clone());
         test___90.soft_fail_to_hard()
     }
     #[test]
-    fn whereLikeWildcardPatterns__1550() -> temper_core::Result<()> {
+    fn whereLikeWildcardPatterns__1719() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___91 = temper_std::testing::Test::new();
-        let mut t___8146: SafeIdentifier = sid__461("users");
-        let mut t___8147: SafeIdentifier = sid__461("name");
-        let q__1032: Query = from(t___8146.clone()).where_like(t___8147.clone(), "%son%");
-        let mut t___8152: bool = Some(q__1032.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE name LIKE '%son%'");
+        let mut t___9302: SafeIdentifier = sid__505("users");
+        let mut t___9303: SafeIdentifier = sid__505("name");
+        let q__1139: Query = from(t___9302.clone()).where_like(t___9303.clone(), "%son%");
+        let mut t___9308: bool = Some(q__1139.to_sql().to_string().as_str()) == Some("SELECT * FROM users WHERE name LIKE '%son%'");
         #[derive(Clone)]
         struct ClosureGroup___101 {}
         impl ClosureGroup___101 {
-            fn fn__8145(& self) -> std::sync::Arc<String> {
+            fn fn__9301(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("whereLike wildcard".to_string());
             }
         }
         let closure_group = ClosureGroup___101 {};
-        let fn__8145 = {
+        let fn__9301 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8145())
+            std::sync::Arc::new(move | | closure_group.fn__9301())
         };
-        test___91.assert(t___8152, fn__8145.clone());
+        test___91.assert(t___9308, fn__9301.clone());
         test___91.soft_fail_to_hard()
     }
     #[test]
-    fn countAllProducesCount__1551() -> temper_core::Result<()> {
+    fn countAllProducesCount__1720() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___92 = temper_std::testing::Test::new();
-        let f__1034: SqlFragment = count_all();
-        let mut t___8143: bool = Some(f__1034.to_string().as_str()) == Some("COUNT(*)");
+        let f__1141: SqlFragment = count_all();
+        let mut t___9299: bool = Some(f__1141.to_string().as_str()) == Some("COUNT(*)");
         #[derive(Clone)]
         struct ClosureGroup___102 {}
         impl ClosureGroup___102 {
-            fn fn__8139(& self) -> std::sync::Arc<String> {
+            fn fn__9295(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("countAll".to_string());
             }
         }
         let closure_group = ClosureGroup___102 {};
-        let fn__8139 = {
+        let fn__9295 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8139())
+            std::sync::Arc::new(move | | closure_group.fn__9295())
         };
-        test___92.assert(t___8143, fn__8139.clone());
+        test___92.assert(t___9299, fn__9295.clone());
         test___92.soft_fail_to_hard()
     }
     #[test]
-    fn countColProducesCountField__1552() -> temper_core::Result<()> {
+    fn countColProducesCountField__1721() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___93 = temper_std::testing::Test::new();
-        let f__1036: SqlFragment = count_col(sid__461("id"));
-        let mut t___8137: bool = Some(f__1036.to_string().as_str()) == Some("COUNT(id)");
+        let f__1143: SqlFragment = count_col(sid__505("id"));
+        let mut t___9293: bool = Some(f__1143.to_string().as_str()) == Some("COUNT(id)");
         #[derive(Clone)]
         struct ClosureGroup___103 {}
         impl ClosureGroup___103 {
-            fn fn__8132(& self) -> std::sync::Arc<String> {
+            fn fn__9288(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("countCol".to_string());
             }
         }
         let closure_group = ClosureGroup___103 {};
-        let fn__8132 = {
+        let fn__9288 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8132())
+            std::sync::Arc::new(move | | closure_group.fn__9288())
         };
-        test___93.assert(t___8137, fn__8132.clone());
+        test___93.assert(t___9293, fn__9288.clone());
         test___93.soft_fail_to_hard()
     }
     #[test]
-    fn sumColProducesSumField__1553() -> temper_core::Result<()> {
+    fn sumColProducesSumField__1722() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___94 = temper_std::testing::Test::new();
-        let f__1038: SqlFragment = sum_col(sid__461("amount"));
-        let mut t___8130: bool = Some(f__1038.to_string().as_str()) == Some("SUM(amount)");
+        let f__1145: SqlFragment = sum_col(sid__505("amount"));
+        let mut t___9286: bool = Some(f__1145.to_string().as_str()) == Some("SUM(amount)");
         #[derive(Clone)]
         struct ClosureGroup___104 {}
         impl ClosureGroup___104 {
-            fn fn__8125(& self) -> std::sync::Arc<String> {
+            fn fn__9281(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("sumCol".to_string());
             }
         }
         let closure_group = ClosureGroup___104 {};
-        let fn__8125 = {
+        let fn__9281 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8125())
+            std::sync::Arc::new(move | | closure_group.fn__9281())
         };
-        test___94.assert(t___8130, fn__8125.clone());
+        test___94.assert(t___9286, fn__9281.clone());
         test___94.soft_fail_to_hard()
     }
     #[test]
-    fn avgColProducesAvgField__1554() -> temper_core::Result<()> {
+    fn avgColProducesAvgField__1723() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___95 = temper_std::testing::Test::new();
-        let f__1040: SqlFragment = avg_col(sid__461("price"));
-        let mut t___8123: bool = Some(f__1040.to_string().as_str()) == Some("AVG(price)");
+        let f__1147: SqlFragment = avg_col(sid__505("price"));
+        let mut t___9279: bool = Some(f__1147.to_string().as_str()) == Some("AVG(price)");
         #[derive(Clone)]
         struct ClosureGroup___105 {}
         impl ClosureGroup___105 {
-            fn fn__8118(& self) -> std::sync::Arc<String> {
+            fn fn__9274(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("avgCol".to_string());
             }
         }
         let closure_group = ClosureGroup___105 {};
-        let fn__8118 = {
+        let fn__9274 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8118())
+            std::sync::Arc::new(move | | closure_group.fn__9274())
         };
-        test___95.assert(t___8123, fn__8118.clone());
+        test___95.assert(t___9279, fn__9274.clone());
         test___95.soft_fail_to_hard()
     }
     #[test]
-    fn minColProducesMinField__1555() -> temper_core::Result<()> {
+    fn minColProducesMinField__1724() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___96 = temper_std::testing::Test::new();
-        let f__1042: SqlFragment = min_col(sid__461("created_at"));
-        let mut t___8116: bool = Some(f__1042.to_string().as_str()) == Some("MIN(created_at)");
+        let f__1149: SqlFragment = min_col(sid__505("created_at"));
+        let mut t___9272: bool = Some(f__1149.to_string().as_str()) == Some("MIN(created_at)");
         #[derive(Clone)]
         struct ClosureGroup___106 {}
         impl ClosureGroup___106 {
-            fn fn__8111(& self) -> std::sync::Arc<String> {
+            fn fn__9267(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("minCol".to_string());
             }
         }
         let closure_group = ClosureGroup___106 {};
-        let fn__8111 = {
+        let fn__9267 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8111())
+            std::sync::Arc::new(move | | closure_group.fn__9267())
         };
-        test___96.assert(t___8116, fn__8111.clone());
+        test___96.assert(t___9272, fn__9267.clone());
         test___96.soft_fail_to_hard()
     }
     #[test]
-    fn maxColProducesMaxField__1556() -> temper_core::Result<()> {
+    fn maxColProducesMaxField__1725() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___97 = temper_std::testing::Test::new();
-        let f__1044: SqlFragment = max_col(sid__461("score"));
-        let mut t___8109: bool = Some(f__1044.to_string().as_str()) == Some("MAX(score)");
+        let f__1151: SqlFragment = max_col(sid__505("score"));
+        let mut t___9265: bool = Some(f__1151.to_string().as_str()) == Some("MAX(score)");
         #[derive(Clone)]
         struct ClosureGroup___107 {}
         impl ClosureGroup___107 {
-            fn fn__8104(& self) -> std::sync::Arc<String> {
+            fn fn__9260(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("maxCol".to_string());
             }
         }
         let closure_group = ClosureGroup___107 {};
-        let fn__8104 = {
+        let fn__9260 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8104())
+            std::sync::Arc::new(move | | closure_group.fn__9260())
         };
-        test___97.assert(t___8109, fn__8104.clone());
+        test___97.assert(t___9265, fn__9260.clone());
         test___97.soft_fail_to_hard()
     }
     #[test]
-    fn selectExprWithAggregate__1557() -> temper_core::Result<()> {
+    fn selectExprWithAggregate__1726() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___98 = temper_std::testing::Test::new();
-        let mut t___8096: SafeIdentifier = sid__461("orders");
-        let mut t___8097: SqlFragment = count_all();
-        let q__1046: Query = from(t___8096.clone()).select_expr([t___8097.clone()]);
-        let mut t___8102: bool = Some(q__1046.to_sql().to_string().as_str()) == Some("SELECT COUNT(*) FROM orders");
+        let mut t___9252: SafeIdentifier = sid__505("orders");
+        let mut t___9253: SqlFragment = count_all();
+        let q__1153: Query = from(t___9252.clone()).select_expr([t___9253.clone()]);
+        let mut t___9258: bool = Some(q__1153.to_sql().to_string().as_str()) == Some("SELECT COUNT(*) FROM orders");
         #[derive(Clone)]
         struct ClosureGroup___108 {}
         impl ClosureGroup___108 {
-            fn fn__8095(& self) -> std::sync::Arc<String> {
+            fn fn__9251(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("selectExpr count".to_string());
             }
         }
         let closure_group = ClosureGroup___108 {};
-        let fn__8095 = {
+        let fn__9251 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8095())
+            std::sync::Arc::new(move | | closure_group.fn__9251())
         };
-        test___98.assert(t___8102, fn__8095.clone());
+        test___98.assert(t___9258, fn__9251.clone());
         test___98.soft_fail_to_hard()
     }
     #[test]
-    fn selectExprWithMultipleExpressions__1558() -> temper_core::Result<()> {
+    fn selectExprWithMultipleExpressions__1727() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___99 = temper_std::testing::Test::new();
-        let nameFrag__1048: SqlFragment = col(sid__461("users"), sid__461("name"));
-        let mut t___8087: SafeIdentifier = sid__461("users");
-        let mut t___8088: SqlFragment = count_all();
-        let q__1049: Query = from(t___8087.clone()).select_expr([nameFrag__1048.clone(), t___8088.clone()]);
-        let mut t___8093: bool = Some(q__1049.to_sql().to_string().as_str()) == Some("SELECT users.name, COUNT(*) FROM users");
+        let nameFrag__1155: SqlFragment = col(sid__505("users"), sid__505("name"));
+        let mut t___9243: SafeIdentifier = sid__505("users");
+        let mut t___9244: SqlFragment = count_all();
+        let q__1156: Query = from(t___9243.clone()).select_expr([nameFrag__1155.clone(), t___9244.clone()]);
+        let mut t___9249: bool = Some(q__1156.to_sql().to_string().as_str()) == Some("SELECT users.name, COUNT(*) FROM users");
         #[derive(Clone)]
         struct ClosureGroup___109 {}
         impl ClosureGroup___109 {
-            fn fn__8083(& self) -> std::sync::Arc<String> {
+            fn fn__9239(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("selectExpr multi".to_string());
             }
         }
         let closure_group = ClosureGroup___109 {};
-        let fn__8083 = {
+        let fn__9239 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8083())
+            std::sync::Arc::new(move | | closure_group.fn__9239())
         };
-        test___99.assert(t___8093, fn__8083.clone());
+        test___99.assert(t___9249, fn__9239.clone());
         test___99.soft_fail_to_hard()
     }
     #[test]
-    fn selectExprOverridesSelectedFields__1559() -> temper_core::Result<()> {
+    fn selectExprOverridesSelectedFields__1728() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___100 = temper_std::testing::Test::new();
-        let mut t___8072: SafeIdentifier = sid__461("users");
-        let mut t___8073: SafeIdentifier = sid__461("id");
-        let mut t___8074: SafeIdentifier = sid__461("name");
-        let q__1051: Query = from(t___8072.clone()).select([t___8073.clone(), t___8074.clone()]).select_expr([count_all()]);
-        let mut t___8081: bool = Some(q__1051.to_sql().to_string().as_str()) == Some("SELECT COUNT(*) FROM users");
+        let mut t___9228: SafeIdentifier = sid__505("users");
+        let mut t___9229: SafeIdentifier = sid__505("id");
+        let mut t___9230: SafeIdentifier = sid__505("name");
+        let q__1158: Query = from(t___9228.clone()).select([t___9229.clone(), t___9230.clone()]).select_expr([count_all()]);
+        let mut t___9237: bool = Some(q__1158.to_sql().to_string().as_str()) == Some("SELECT COUNT(*) FROM users");
         #[derive(Clone)]
         struct ClosureGroup___110 {}
         impl ClosureGroup___110 {
-            fn fn__8071(& self) -> std::sync::Arc<String> {
+            fn fn__9227(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("selectExpr overrides select".to_string());
             }
         }
         let closure_group = ClosureGroup___110 {};
-        let fn__8071 = {
+        let fn__9227 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8071())
+            std::sync::Arc::new(move | | closure_group.fn__9227())
         };
-        test___100.assert(t___8081, fn__8071.clone());
+        test___100.assert(t___9237, fn__9227.clone());
         test___100.soft_fail_to_hard()
     }
     #[test]
-    fn groupBySingleField__1560() -> temper_core::Result<()> {
+    fn groupBySingleField__1729() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___101 = temper_std::testing::Test::new();
-        let mut t___8058: SafeIdentifier = sid__461("orders");
-        let mut t___8061: SqlFragment = col(sid__461("orders"), sid__461("status"));
-        let mut t___8062: SqlFragment = count_all();
-        let q__1053: Query = from(t___8058.clone()).select_expr([t___8061.clone(), t___8062.clone()]).group_by(sid__461("status"));
-        let mut t___8069: bool = Some(q__1053.to_sql().to_string().as_str()) == Some("SELECT orders.status, COUNT(*) FROM orders GROUP BY status");
+        let mut t___9214: SafeIdentifier = sid__505("orders");
+        let mut t___9217: SqlFragment = col(sid__505("orders"), sid__505("status"));
+        let mut t___9218: SqlFragment = count_all();
+        let q__1160: Query = from(t___9214.clone()).select_expr([t___9217.clone(), t___9218.clone()]).group_by(sid__505("status"));
+        let mut t___9225: bool = Some(q__1160.to_sql().to_string().as_str()) == Some("SELECT orders.status, COUNT(*) FROM orders GROUP BY status");
         #[derive(Clone)]
         struct ClosureGroup___111 {}
         impl ClosureGroup___111 {
-            fn fn__8057(& self) -> std::sync::Arc<String> {
+            fn fn__9213(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("groupBy single".to_string());
             }
         }
         let closure_group = ClosureGroup___111 {};
-        let fn__8057 = {
+        let fn__9213 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8057())
+            std::sync::Arc::new(move | | closure_group.fn__9213())
         };
-        test___101.assert(t___8069, fn__8057.clone());
+        test___101.assert(t___9225, fn__9213.clone());
         test___101.soft_fail_to_hard()
     }
     #[test]
-    fn groupByMultipleFields__1561() -> temper_core::Result<()> {
+    fn groupByMultipleFields__1730() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___102 = temper_std::testing::Test::new();
-        let mut t___8047: SafeIdentifier = sid__461("orders");
-        let mut t___8048: SafeIdentifier = sid__461("status");
-        let q__1055: Query = from(t___8047.clone()).group_by(t___8048.clone()).group_by(sid__461("category"));
-        let mut t___8055: bool = Some(q__1055.to_sql().to_string().as_str()) == Some("SELECT * FROM orders GROUP BY status, category");
+        let mut t___9203: SafeIdentifier = sid__505("orders");
+        let mut t___9204: SafeIdentifier = sid__505("status");
+        let q__1162: Query = from(t___9203.clone()).group_by(t___9204.clone()).group_by(sid__505("category"));
+        let mut t___9211: bool = Some(q__1162.to_sql().to_string().as_str()) == Some("SELECT * FROM orders GROUP BY status, category");
         #[derive(Clone)]
         struct ClosureGroup___112 {}
         impl ClosureGroup___112 {
-            fn fn__8046(& self) -> std::sync::Arc<String> {
+            fn fn__9202(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("groupBy multiple".to_string());
             }
         }
         let closure_group = ClosureGroup___112 {};
-        let fn__8046 = {
+        let fn__9202 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8046())
+            std::sync::Arc::new(move | | closure_group.fn__9202())
         };
-        test___102.assert(t___8055, fn__8046.clone());
+        test___102.assert(t___9211, fn__9202.clone());
         test___102.soft_fail_to_hard()
     }
     #[test]
-    fn havingBasic__1562() -> temper_core::Result<()> {
+    fn havingBasic__1731() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___103 = temper_std::testing::Test::new();
-        let mut t___8028: SafeIdentifier = sid__461("orders");
-        let mut t___8031: SqlFragment = col(sid__461("orders"), sid__461("status"));
-        let mut t___8032: SqlFragment = count_all();
-        let mut t___8035: Query = from(t___8028.clone()).select_expr([t___8031.clone(), t___8032.clone()]).group_by(sid__461("status"));
-        let mut t___8036: SqlBuilder = SqlBuilder::new();
-        t___8036.append_safe("COUNT(*) > ");
-        t___8036.append_int32(5);
-        let q__1057: Query = t___8035.having(t___8036.accumulated());
-        let mut t___8044: bool = Some(q__1057.to_sql().to_string().as_str()) == Some("SELECT orders.status, COUNT(*) FROM orders GROUP BY status HAVING COUNT(*) > 5");
+        let mut t___9184: SafeIdentifier = sid__505("orders");
+        let mut t___9187: SqlFragment = col(sid__505("orders"), sid__505("status"));
+        let mut t___9188: SqlFragment = count_all();
+        let mut t___9191: Query = from(t___9184.clone()).select_expr([t___9187.clone(), t___9188.clone()]).group_by(sid__505("status"));
+        let mut t___9192: SqlBuilder = SqlBuilder::new();
+        t___9192.append_safe("COUNT(*) > ");
+        t___9192.append_int32(5);
+        let q__1164: Query = t___9191.having(t___9192.accumulated());
+        let mut t___9200: bool = Some(q__1164.to_sql().to_string().as_str()) == Some("SELECT orders.status, COUNT(*) FROM orders GROUP BY status HAVING COUNT(*) > 5");
         #[derive(Clone)]
         struct ClosureGroup___113 {}
         impl ClosureGroup___113 {
-            fn fn__8027(& self) -> std::sync::Arc<String> {
+            fn fn__9183(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("having basic".to_string());
             }
         }
         let closure_group = ClosureGroup___113 {};
-        let fn__8027 = {
+        let fn__9183 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8027())
+            std::sync::Arc::new(move | | closure_group.fn__9183())
         };
-        test___103.assert(t___8044, fn__8027.clone());
+        test___103.assert(t___9200, fn__9183.clone());
         test___103.soft_fail_to_hard()
     }
     #[test]
-    fn orHaving__1564() -> temper_core::Result<()> {
+    fn orHaving__1733() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___104 = temper_std::testing::Test::new();
-        let mut t___8009: SafeIdentifier = sid__461("orders");
-        let mut t___8010: SafeIdentifier = sid__461("status");
-        let mut t___8011: Query = from(t___8009.clone()).group_by(t___8010.clone());
-        let mut t___8012: SqlBuilder = SqlBuilder::new();
-        t___8012.append_safe("COUNT(*) > ");
-        t___8012.append_int32(5);
-        let mut t___8016: Query = t___8011.having(t___8012.accumulated());
-        let mut t___8017: SqlBuilder = SqlBuilder::new();
-        t___8017.append_safe("SUM(total) > ");
-        t___8017.append_int32(1000);
-        let q__1059: Query = t___8016.or_having(t___8017.accumulated());
-        let mut t___8025: bool = Some(q__1059.to_sql().to_string().as_str()) == Some("SELECT * FROM orders GROUP BY status HAVING COUNT(*) > 5 OR SUM(total) > 1000");
+        let mut t___9165: SafeIdentifier = sid__505("orders");
+        let mut t___9166: SafeIdentifier = sid__505("status");
+        let mut t___9167: Query = from(t___9165.clone()).group_by(t___9166.clone());
+        let mut t___9168: SqlBuilder = SqlBuilder::new();
+        t___9168.append_safe("COUNT(*) > ");
+        t___9168.append_int32(5);
+        let mut t___9172: Query = t___9167.having(t___9168.accumulated());
+        let mut t___9173: SqlBuilder = SqlBuilder::new();
+        t___9173.append_safe("SUM(total) > ");
+        t___9173.append_int32(1000);
+        let q__1166: Query = t___9172.or_having(t___9173.accumulated());
+        let mut t___9181: bool = Some(q__1166.to_sql().to_string().as_str()) == Some("SELECT * FROM orders GROUP BY status HAVING COUNT(*) > 5 OR SUM(total) > 1000");
         #[derive(Clone)]
         struct ClosureGroup___114 {}
         impl ClosureGroup___114 {
-            fn fn__8008(& self) -> std::sync::Arc<String> {
+            fn fn__9164(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("orHaving".to_string());
             }
         }
         let closure_group = ClosureGroup___114 {};
-        let fn__8008 = {
+        let fn__9164 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__8008())
+            std::sync::Arc::new(move | | closure_group.fn__9164())
         };
-        test___104.assert(t___8025, fn__8008.clone());
+        test___104.assert(t___9181, fn__9164.clone());
         test___104.soft_fail_to_hard()
     }
     #[test]
-    fn distinctBasic__1567() -> temper_core::Result<()> {
+    fn distinctBasic__1736() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___105 = temper_std::testing::Test::new();
-        let mut t___7999: SafeIdentifier = sid__461("users");
-        let mut t___8000: SafeIdentifier = sid__461("name");
-        let q__1061: Query = from(t___7999.clone()).select([t___8000.clone()]).distinct();
-        let mut t___8006: bool = Some(q__1061.to_sql().to_string().as_str()) == Some("SELECT DISTINCT name FROM users");
+        let mut t___9155: SafeIdentifier = sid__505("users");
+        let mut t___9156: SafeIdentifier = sid__505("name");
+        let q__1168: Query = from(t___9155.clone()).select([t___9156.clone()]).distinct();
+        let mut t___9162: bool = Some(q__1168.to_sql().to_string().as_str()) == Some("SELECT DISTINCT name FROM users");
         #[derive(Clone)]
         struct ClosureGroup___115 {}
         impl ClosureGroup___115 {
-            fn fn__7998(& self) -> std::sync::Arc<String> {
+            fn fn__9154(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("distinct".to_string());
             }
         }
         let closure_group = ClosureGroup___115 {};
-        let fn__7998 = {
+        let fn__9154 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7998())
+            std::sync::Arc::new(move | | closure_group.fn__9154())
         };
-        test___105.assert(t___8006, fn__7998.clone());
+        test___105.assert(t___9162, fn__9154.clone());
         test___105.soft_fail_to_hard()
     }
     #[test]
-    fn distinctWithWhere__1568() -> temper_core::Result<()> {
+    fn distinctWithWhere__1737() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___106 = temper_std::testing::Test::new();
-        let mut t___7984: SafeIdentifier = sid__461("users");
-        let mut t___7985: SafeIdentifier = sid__461("email");
-        let mut t___7986: Query = from(t___7984.clone()).select([t___7985.clone()]);
-        let mut t___7987: SqlBuilder = SqlBuilder::new();
-        t___7987.append_safe("active = ");
-        t___7987.append_boolean(true);
-        let q__1063: Query = t___7986.r#where(t___7987.accumulated()).distinct();
-        let mut t___7996: bool = Some(q__1063.to_sql().to_string().as_str()) == Some("SELECT DISTINCT email FROM users WHERE active = TRUE");
+        let mut t___9140: SafeIdentifier = sid__505("users");
+        let mut t___9141: SafeIdentifier = sid__505("email");
+        let mut t___9142: Query = from(t___9140.clone()).select([t___9141.clone()]);
+        let mut t___9143: SqlBuilder = SqlBuilder::new();
+        t___9143.append_safe("active = ");
+        t___9143.append_boolean(true);
+        let q__1170: Query = t___9142.r#where(t___9143.accumulated()).distinct();
+        let mut t___9152: bool = Some(q__1170.to_sql().to_string().as_str()) == Some("SELECT DISTINCT email FROM users WHERE active = TRUE");
         #[derive(Clone)]
         struct ClosureGroup___116 {}
         impl ClosureGroup___116 {
-            fn fn__7983(& self) -> std::sync::Arc<String> {
+            fn fn__9139(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("distinct with where".to_string());
             }
         }
         let closure_group = ClosureGroup___116 {};
-        let fn__7983 = {
+        let fn__9139 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7983())
+            std::sync::Arc::new(move | | closure_group.fn__9139())
         };
-        test___106.assert(t___7996, fn__7983.clone());
+        test___106.assert(t___9152, fn__9139.clone());
         test___106.soft_fail_to_hard()
     }
     #[test]
-    fn countSqlBare__1570() -> temper_core::Result<()> {
+    fn countSqlBare__1739() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___107 = temper_std::testing::Test::new();
-        let q__1065: Query = from(sid__461("users"));
-        let mut t___7981: bool = Some(q__1065.count_sql().to_string().as_str()) == Some("SELECT COUNT(*) FROM users");
+        let q__1172: Query = from(sid__505("users"));
+        let mut t___9137: bool = Some(q__1172.count_sql().to_string().as_str()) == Some("SELECT COUNT(*) FROM users");
         #[derive(Clone)]
         struct ClosureGroup___117 {}
         impl ClosureGroup___117 {
-            fn fn__7976(& self) -> std::sync::Arc<String> {
+            fn fn__9132(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("countSql bare".to_string());
             }
         }
         let closure_group = ClosureGroup___117 {};
-        let fn__7976 = {
+        let fn__9132 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7976())
+            std::sync::Arc::new(move | | closure_group.fn__9132())
         };
-        test___107.assert(t___7981, fn__7976.clone());
+        test___107.assert(t___9137, fn__9132.clone());
         test___107.soft_fail_to_hard()
     }
     #[test]
-    fn countSqlWithWhere__1571() -> temper_core::Result<()> {
+    fn countSqlWithWhere__1740() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___108 = temper_std::testing::Test::new();
-        let mut t___7965: SafeIdentifier = sid__461("users");
-        let mut t___7966: SqlBuilder = SqlBuilder::new();
-        t___7966.append_safe("active = ");
-        t___7966.append_boolean(true);
-        let mut t___7969: SqlFragment = t___7966.accumulated();
-        let q__1067: Query = from(t___7965.clone()).r#where(t___7969.clone());
-        let mut t___7974: bool = Some(q__1067.count_sql().to_string().as_str()) == Some("SELECT COUNT(*) FROM users WHERE active = TRUE");
+        let mut t___9121: SafeIdentifier = sid__505("users");
+        let mut t___9122: SqlBuilder = SqlBuilder::new();
+        t___9122.append_safe("active = ");
+        t___9122.append_boolean(true);
+        let mut t___9125: SqlFragment = t___9122.accumulated();
+        let q__1174: Query = from(t___9121.clone()).r#where(t___9125.clone());
+        let mut t___9130: bool = Some(q__1174.count_sql().to_string().as_str()) == Some("SELECT COUNT(*) FROM users WHERE active = TRUE");
         #[derive(Clone)]
         struct ClosureGroup___118 {}
         impl ClosureGroup___118 {
-            fn fn__7964(& self) -> std::sync::Arc<String> {
+            fn fn__9120(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("countSql with where".to_string());
             }
         }
         let closure_group = ClosureGroup___118 {};
-        let fn__7964 = {
+        let fn__9120 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7964())
+            std::sync::Arc::new(move | | closure_group.fn__9120())
         };
-        test___108.assert(t___7974, fn__7964.clone());
+        test___108.assert(t___9130, fn__9120.clone());
         test___108.soft_fail_to_hard()
     }
     #[test]
-    fn countSqlWithJoin__1573() -> temper_core::Result<()> {
+    fn countSqlWithJoin__1742() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___109 = temper_std::testing::Test::new();
-        let mut t___7948: SafeIdentifier = sid__461("users");
-        let mut t___7949: SafeIdentifier = sid__461("orders");
-        let mut t___7950: SqlBuilder = SqlBuilder::new();
-        t___7950.append_safe("users.id = orders.user_id");
-        let mut t___7952: SqlFragment = t___7950.accumulated();
-        let mut t___7953: Query = from(t___7948.clone()).inner_join(t___7949.clone(), t___7952.clone());
-        let mut t___7954: SqlBuilder = SqlBuilder::new();
-        t___7954.append_safe("orders.total > ");
-        t___7954.append_int32(100);
-        let q__1069: Query = t___7953.r#where(t___7954.accumulated());
-        let mut t___7962: bool = Some(q__1069.count_sql().to_string().as_str()) == Some("SELECT COUNT(*) FROM users INNER JOIN orders ON users.id = orders.user_id WHERE orders.total > 100");
+        let mut t___9104: SafeIdentifier = sid__505("users");
+        let mut t___9105: SafeIdentifier = sid__505("orders");
+        let mut t___9106: SqlBuilder = SqlBuilder::new();
+        t___9106.append_safe("users.id = orders.user_id");
+        let mut t___9108: SqlFragment = t___9106.accumulated();
+        let mut t___9109: Query = from(t___9104.clone()).inner_join(t___9105.clone(), t___9108.clone());
+        let mut t___9110: SqlBuilder = SqlBuilder::new();
+        t___9110.append_safe("orders.total > ");
+        t___9110.append_int32(100);
+        let q__1176: Query = t___9109.r#where(t___9110.accumulated());
+        let mut t___9118: bool = Some(q__1176.count_sql().to_string().as_str()) == Some("SELECT COUNT(*) FROM users INNER JOIN orders ON users.id = orders.user_id WHERE orders.total > 100");
         #[derive(Clone)]
         struct ClosureGroup___119 {}
         impl ClosureGroup___119 {
-            fn fn__7947(& self) -> std::sync::Arc<String> {
+            fn fn__9103(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("countSql with join".to_string());
             }
         }
         let closure_group = ClosureGroup___119 {};
-        let fn__7947 = {
+        let fn__9103 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7947())
+            std::sync::Arc::new(move | | closure_group.fn__9103())
         };
-        test___109.assert(t___7962, fn__7947.clone());
+        test___109.assert(t___9118, fn__9103.clone());
         test___109.soft_fail_to_hard()
     }
     #[test]
-    fn countSqlDropsOrderByLimitOffset__1576() -> temper_core::Result<()> {
+    fn countSqlDropsOrderByLimitOffset__1745() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___110 = temper_std::testing::Test::new();
-        let mut t___7934: SafeIdentifier;
-        let mut t___7935: SqlBuilder;
-        let mut t___7938: SqlFragment;
-        let mut t___3983: Query;
-        let mut t___3984: Query;
-        let q__1071: Query;
-        'ok___9736: {
-            'orelse___1718: {
-                t___7934 = sid__461("users");
-                t___7935 = SqlBuilder::new();
-                t___7935.append_safe("active = ");
-                t___7935.append_boolean(true);
-                t___7938 = t___7935.accumulated();
-                t___3983 = match from(t___7934.clone()).r#where(t___7938.clone()).order_by(sid__461("name"), true).limit(10) {
+        let mut t___9090: SafeIdentifier;
+        let mut t___9091: SqlBuilder;
+        let mut t___9094: SqlFragment;
+        let mut t___4621: Query;
+        let mut t___4622: Query;
+        let q__1178: Query;
+        'ok___10990: {
+            'orelse___1915: {
+                t___9090 = sid__505("users");
+                t___9091 = SqlBuilder::new();
+                t___9091.append_safe("active = ");
+                t___9091.append_boolean(true);
+                t___9094 = t___9091.accumulated();
+                t___4621 = match from(t___9090.clone()).r#where(t___9094.clone()).order_by(sid__505("name"), true).limit(10) {
                     Ok(x) => x,
-                    _ => break 'orelse___1718
+                    _ => break 'orelse___1915
                 };
-                t___3984 = match t___3983.offset(20) {
+                t___4622 = match t___4621.offset(20) {
                     Ok(x) => x,
-                    _ => break 'orelse___1718
+                    _ => break 'orelse___1915
                 };
-                q__1071 = t___3984.clone();
-                break 'ok___9736;
+                q__1178 = t___4622.clone();
+                break 'ok___10990;
             }
-            q__1071 = panic!();
+            q__1178 = panic!();
         }
-        let s__1072: std::sync::Arc<String> = q__1071.count_sql().to_string();
-        let mut t___7945: bool = Some(s__1072.as_str()) == Some("SELECT COUNT(*) FROM users WHERE active = TRUE");
+        let s__1179: std::sync::Arc<String> = q__1178.count_sql().to_string();
+        let mut t___9101: bool = Some(s__1179.as_str()) == Some("SELECT COUNT(*) FROM users WHERE active = TRUE");
         #[derive(Clone)]
         struct ClosureGroup___120 {
-            s__1072: std::sync::Arc<String>
+            s__1179: std::sync::Arc<String>
         }
         impl ClosureGroup___120 {
-            fn fn__7933(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("countSql drops extras: {}", self.s__1072.clone()));
+            fn fn__9089(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("countSql drops extras: {}", self.s__1179.clone()));
             }
         }
         let closure_group = ClosureGroup___120 {
-            s__1072: s__1072.clone()
+            s__1179: s__1179.clone()
         };
-        let fn__7933 = {
+        let fn__9089 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7933())
+            std::sync::Arc::new(move | | closure_group.fn__9089())
         };
-        test___110.assert(t___7945, fn__7933.clone());
+        test___110.assert(t___9101, fn__9089.clone());
         test___110.soft_fail_to_hard()
     }
     #[test]
-    fn fullAggregationQuery__1578() -> temper_core::Result<()> {
+    fn fullAggregationQuery__1747() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___111 = temper_std::testing::Test::new();
-        let mut t___7901: SafeIdentifier = sid__461("orders");
-        let mut t___7904: SqlFragment = col(sid__461("orders"), sid__461("status"));
-        let mut t___7905: SqlFragment = count_all();
-        let mut t___7907: SqlFragment = sum_col(sid__461("total"));
-        let mut t___7908: Query = from(t___7901.clone()).select_expr([t___7904.clone(), t___7905.clone(), t___7907.clone()]);
-        let mut t___7909: SafeIdentifier = sid__461("users");
-        let mut t___7910: SqlBuilder = SqlBuilder::new();
-        t___7910.append_safe("orders.user_id = users.id");
-        let mut t___7913: Query = t___7908.inner_join(t___7909.clone(), t___7910.accumulated());
-        let mut t___7914: SqlBuilder = SqlBuilder::new();
-        t___7914.append_safe("users.active = ");
-        t___7914.append_boolean(true);
-        let mut t___7920: Query = t___7913.r#where(t___7914.accumulated()).group_by(sid__461("status"));
-        let mut t___7921: SqlBuilder = SqlBuilder::new();
-        t___7921.append_safe("COUNT(*) > ");
-        t___7921.append_int32(3);
-        let q__1074: Query = t___7920.having(t___7921.accumulated()).order_by(sid__461("status"), true);
-        let expected__1075: std::sync::Arc<String> = std::sync::Arc::new("SELECT orders.status, COUNT(*), SUM(total) FROM orders INNER JOIN users ON orders.user_id = users.id WHERE users.active = TRUE GROUP BY status HAVING COUNT(*) > 3 ORDER BY status ASC".to_string());
-        let mut t___7931: bool = Some(q__1074.to_sql().to_string().as_str()) == Some("SELECT orders.status, COUNT(*), SUM(total) FROM orders INNER JOIN users ON orders.user_id = users.id WHERE users.active = TRUE GROUP BY status HAVING COUNT(*) > 3 ORDER BY status ASC");
+        let mut t___9057: SafeIdentifier = sid__505("orders");
+        let mut t___9060: SqlFragment = col(sid__505("orders"), sid__505("status"));
+        let mut t___9061: SqlFragment = count_all();
+        let mut t___9063: SqlFragment = sum_col(sid__505("total"));
+        let mut t___9064: Query = from(t___9057.clone()).select_expr([t___9060.clone(), t___9061.clone(), t___9063.clone()]);
+        let mut t___9065: SafeIdentifier = sid__505("users");
+        let mut t___9066: SqlBuilder = SqlBuilder::new();
+        t___9066.append_safe("orders.user_id = users.id");
+        let mut t___9069: Query = t___9064.inner_join(t___9065.clone(), t___9066.accumulated());
+        let mut t___9070: SqlBuilder = SqlBuilder::new();
+        t___9070.append_safe("users.active = ");
+        t___9070.append_boolean(true);
+        let mut t___9076: Query = t___9069.r#where(t___9070.accumulated()).group_by(sid__505("status"));
+        let mut t___9077: SqlBuilder = SqlBuilder::new();
+        t___9077.append_safe("COUNT(*) > ");
+        t___9077.append_int32(3);
+        let q__1181: Query = t___9076.having(t___9077.accumulated()).order_by(sid__505("status"), true);
+        let expected__1182: std::sync::Arc<String> = std::sync::Arc::new("SELECT orders.status, COUNT(*), SUM(total) FROM orders INNER JOIN users ON orders.user_id = users.id WHERE users.active = TRUE GROUP BY status HAVING COUNT(*) > 3 ORDER BY status ASC".to_string());
+        let mut t___9087: bool = Some(q__1181.to_sql().to_string().as_str()) == Some("SELECT orders.status, COUNT(*), SUM(total) FROM orders INNER JOIN users ON orders.user_id = users.id WHERE users.active = TRUE GROUP BY status HAVING COUNT(*) > 3 ORDER BY status ASC");
         #[derive(Clone)]
         struct ClosureGroup___121 {}
         impl ClosureGroup___121 {
-            fn fn__7900(& self) -> std::sync::Arc<String> {
+            fn fn__9056(& self) -> std::sync::Arc<String> {
                 return std::sync::Arc::new("full aggregation".to_string());
             }
         }
         let closure_group = ClosureGroup___121 {};
-        let fn__7900 = {
+        let fn__9056 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7900())
+            std::sync::Arc::new(move | | closure_group.fn__9056())
         };
-        test___111.assert(t___7931, fn__7900.clone());
+        test___111.assert(t___9087, fn__9056.clone());
         test___111.soft_fail_to_hard()
     }
     #[test]
-    fn unionSql__1582() -> temper_core::Result<()> {
+    fn unionSql__1751() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___112 = temper_std::testing::Test::new();
-        let mut t___7883: SafeIdentifier = sid__461("users");
-        let mut t___7884: SqlBuilder = SqlBuilder::new();
-        t___7884.append_safe("role = ");
-        t___7884.append_string("admin");
-        let mut t___7887: SqlFragment = t___7884.accumulated();
-        let a__1077: Query = from(t___7883.clone()).r#where(t___7887.clone());
-        let mut t___7889: SafeIdentifier = sid__461("users");
-        let mut t___7890: SqlBuilder = SqlBuilder::new();
-        t___7890.append_safe("role = ");
-        t___7890.append_string("moderator");
-        let mut t___7893: SqlFragment = t___7890.accumulated();
-        let b__1078: Query = from(t___7889.clone()).r#where(t___7893.clone());
-        let s__1079: std::sync::Arc<String> = union_sql(a__1077.clone(), b__1078.clone()).to_string();
-        let mut t___7898: bool = Some(s__1079.as_str()) == Some("(SELECT * FROM users WHERE role = 'admin') UNION (SELECT * FROM users WHERE role = 'moderator')");
+        let mut t___9039: SafeIdentifier = sid__505("users");
+        let mut t___9040: SqlBuilder = SqlBuilder::new();
+        t___9040.append_safe("role = ");
+        t___9040.append_string("admin");
+        let mut t___9043: SqlFragment = t___9040.accumulated();
+        let a__1184: Query = from(t___9039.clone()).r#where(t___9043.clone());
+        let mut t___9045: SafeIdentifier = sid__505("users");
+        let mut t___9046: SqlBuilder = SqlBuilder::new();
+        t___9046.append_safe("role = ");
+        t___9046.append_string("moderator");
+        let mut t___9049: SqlFragment = t___9046.accumulated();
+        let b__1185: Query = from(t___9045.clone()).r#where(t___9049.clone());
+        let s__1186: std::sync::Arc<String> = union_sql(a__1184.clone(), b__1185.clone()).to_string();
+        let mut t___9054: bool = Some(s__1186.as_str()) == Some("(SELECT * FROM users WHERE role = 'admin') UNION (SELECT * FROM users WHERE role = 'moderator')");
         #[derive(Clone)]
         struct ClosureGroup___122 {
-            s__1079: std::sync::Arc<String>
+            s__1186: std::sync::Arc<String>
         }
         impl ClosureGroup___122 {
-            fn fn__7882(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("unionSql: {}", self.s__1079.clone()));
+            fn fn__9038(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("unionSql: {}", self.s__1186.clone()));
             }
         }
         let closure_group = ClosureGroup___122 {
-            s__1079: s__1079.clone()
+            s__1186: s__1186.clone()
         };
-        let fn__7882 = {
+        let fn__9038 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7882())
+            std::sync::Arc::new(move | | closure_group.fn__9038())
         };
-        test___112.assert(t___7898, fn__7882.clone());
+        test___112.assert(t___9054, fn__9038.clone());
         test___112.soft_fail_to_hard()
     }
     #[test]
-    fn unionAllSql__1585() -> temper_core::Result<()> {
+    fn unionAllSql__1754() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___113 = temper_std::testing::Test::new();
-        let mut t___7871: SafeIdentifier = sid__461("users");
-        let mut t___7872: SafeIdentifier = sid__461("name");
-        let a__1081: Query = from(t___7871.clone()).select([t___7872.clone()]);
-        let mut t___7874: SafeIdentifier = sid__461("contacts");
-        let mut t___7875: SafeIdentifier = sid__461("name");
-        let b__1082: Query = from(t___7874.clone()).select([t___7875.clone()]);
-        let s__1083: std::sync::Arc<String> = union_all_sql(a__1081.clone(), b__1082.clone()).to_string();
-        let mut t___7880: bool = Some(s__1083.as_str()) == Some("(SELECT name FROM users) UNION ALL (SELECT name FROM contacts)");
+        let mut t___9027: SafeIdentifier = sid__505("users");
+        let mut t___9028: SafeIdentifier = sid__505("name");
+        let a__1188: Query = from(t___9027.clone()).select([t___9028.clone()]);
+        let mut t___9030: SafeIdentifier = sid__505("contacts");
+        let mut t___9031: SafeIdentifier = sid__505("name");
+        let b__1189: Query = from(t___9030.clone()).select([t___9031.clone()]);
+        let s__1190: std::sync::Arc<String> = union_all_sql(a__1188.clone(), b__1189.clone()).to_string();
+        let mut t___9036: bool = Some(s__1190.as_str()) == Some("(SELECT name FROM users) UNION ALL (SELECT name FROM contacts)");
         #[derive(Clone)]
         struct ClosureGroup___123 {
-            s__1083: std::sync::Arc<String>
+            s__1190: std::sync::Arc<String>
         }
         impl ClosureGroup___123 {
-            fn fn__7870(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("unionAllSql: {}", self.s__1083.clone()));
+            fn fn__9026(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("unionAllSql: {}", self.s__1190.clone()));
             }
         }
         let closure_group = ClosureGroup___123 {
-            s__1083: s__1083.clone()
+            s__1190: s__1190.clone()
         };
-        let fn__7870 = {
+        let fn__9026 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7870())
+            std::sync::Arc::new(move | | closure_group.fn__9026())
         };
-        test___113.assert(t___7880, fn__7870.clone());
+        test___113.assert(t___9036, fn__9026.clone());
         test___113.soft_fail_to_hard()
     }
     #[test]
-    fn intersectSql__1586() -> temper_core::Result<()> {
+    fn intersectSql__1755() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___114 = temper_std::testing::Test::new();
-        let mut t___7859: SafeIdentifier = sid__461("users");
-        let mut t___7860: SafeIdentifier = sid__461("email");
-        let a__1085: Query = from(t___7859.clone()).select([t___7860.clone()]);
-        let mut t___7862: SafeIdentifier = sid__461("subscribers");
-        let mut t___7863: SafeIdentifier = sid__461("email");
-        let b__1086: Query = from(t___7862.clone()).select([t___7863.clone()]);
-        let s__1087: std::sync::Arc<String> = intersect_sql(a__1085.clone(), b__1086.clone()).to_string();
-        let mut t___7868: bool = Some(s__1087.as_str()) == Some("(SELECT email FROM users) INTERSECT (SELECT email FROM subscribers)");
+        let mut t___9015: SafeIdentifier = sid__505("users");
+        let mut t___9016: SafeIdentifier = sid__505("email");
+        let a__1192: Query = from(t___9015.clone()).select([t___9016.clone()]);
+        let mut t___9018: SafeIdentifier = sid__505("subscribers");
+        let mut t___9019: SafeIdentifier = sid__505("email");
+        let b__1193: Query = from(t___9018.clone()).select([t___9019.clone()]);
+        let s__1194: std::sync::Arc<String> = intersect_sql(a__1192.clone(), b__1193.clone()).to_string();
+        let mut t___9024: bool = Some(s__1194.as_str()) == Some("(SELECT email FROM users) INTERSECT (SELECT email FROM subscribers)");
         #[derive(Clone)]
         struct ClosureGroup___124 {
-            s__1087: std::sync::Arc<String>
+            s__1194: std::sync::Arc<String>
         }
         impl ClosureGroup___124 {
-            fn fn__7858(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("intersectSql: {}", self.s__1087.clone()));
+            fn fn__9014(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("intersectSql: {}", self.s__1194.clone()));
             }
         }
         let closure_group = ClosureGroup___124 {
-            s__1087: s__1087.clone()
+            s__1194: s__1194.clone()
         };
-        let fn__7858 = {
+        let fn__9014 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7858())
+            std::sync::Arc::new(move | | closure_group.fn__9014())
         };
-        test___114.assert(t___7868, fn__7858.clone());
+        test___114.assert(t___9024, fn__9014.clone());
         test___114.soft_fail_to_hard()
     }
     #[test]
-    fn exceptSql__1587() -> temper_core::Result<()> {
+    fn exceptSql__1756() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___115 = temper_std::testing::Test::new();
-        let mut t___7847: SafeIdentifier = sid__461("users");
-        let mut t___7848: SafeIdentifier = sid__461("id");
-        let a__1089: Query = from(t___7847.clone()).select([t___7848.clone()]);
-        let mut t___7850: SafeIdentifier = sid__461("banned");
-        let mut t___7851: SafeIdentifier = sid__461("id");
-        let b__1090: Query = from(t___7850.clone()).select([t___7851.clone()]);
-        let s__1091: std::sync::Arc<String> = except_sql(a__1089.clone(), b__1090.clone()).to_string();
-        let mut t___7856: bool = Some(s__1091.as_str()) == Some("(SELECT id FROM users) EXCEPT (SELECT id FROM banned)");
+        let mut t___9003: SafeIdentifier = sid__505("users");
+        let mut t___9004: SafeIdentifier = sid__505("id");
+        let a__1196: Query = from(t___9003.clone()).select([t___9004.clone()]);
+        let mut t___9006: SafeIdentifier = sid__505("banned");
+        let mut t___9007: SafeIdentifier = sid__505("id");
+        let b__1197: Query = from(t___9006.clone()).select([t___9007.clone()]);
+        let s__1198: std::sync::Arc<String> = except_sql(a__1196.clone(), b__1197.clone()).to_string();
+        let mut t___9012: bool = Some(s__1198.as_str()) == Some("(SELECT id FROM users) EXCEPT (SELECT id FROM banned)");
         #[derive(Clone)]
         struct ClosureGroup___125 {
-            s__1091: std::sync::Arc<String>
+            s__1198: std::sync::Arc<String>
         }
         impl ClosureGroup___125 {
-            fn fn__7846(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("exceptSql: {}", self.s__1091.clone()));
+            fn fn__9002(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("exceptSql: {}", self.s__1198.clone()));
             }
         }
         let closure_group = ClosureGroup___125 {
-            s__1091: s__1091.clone()
+            s__1198: s__1198.clone()
         };
-        let fn__7846 = {
+        let fn__9002 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7846())
+            std::sync::Arc::new(move | | closure_group.fn__9002())
         };
-        test___115.assert(t___7856, fn__7846.clone());
+        test___115.assert(t___9012, fn__9002.clone());
         test___115.soft_fail_to_hard()
     }
     #[test]
-    fn subqueryWithAlias__1588() -> temper_core::Result<()> {
+    fn subqueryWithAlias__1757() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___116 = temper_std::testing::Test::new();
-        let mut t___7832: SafeIdentifier = sid__461("orders");
-        let mut t___7833: SafeIdentifier = sid__461("user_id");
-        let mut t___7834: Query = from(t___7832.clone()).select([t___7833.clone()]);
-        let mut t___7835: SqlBuilder = SqlBuilder::new();
-        t___7835.append_safe("total > ");
-        t___7835.append_int32(100);
-        let inner__1093: Query = t___7834.r#where(t___7835.accumulated());
-        let s__1094: std::sync::Arc<String> = subquery(inner__1093.clone(), sid__461("big_orders")).to_string();
-        let mut t___7844: bool = Some(s__1094.as_str()) == Some("(SELECT user_id FROM orders WHERE total > 100) AS big_orders");
+        let mut t___8988: SafeIdentifier = sid__505("orders");
+        let mut t___8989: SafeIdentifier = sid__505("user_id");
+        let mut t___8990: Query = from(t___8988.clone()).select([t___8989.clone()]);
+        let mut t___8991: SqlBuilder = SqlBuilder::new();
+        t___8991.append_safe("total > ");
+        t___8991.append_int32(100);
+        let inner__1200: Query = t___8990.r#where(t___8991.accumulated());
+        let s__1201: std::sync::Arc<String> = subquery(inner__1200.clone(), sid__505("big_orders")).to_string();
+        let mut t___9000: bool = Some(s__1201.as_str()) == Some("(SELECT user_id FROM orders WHERE total > 100) AS big_orders");
         #[derive(Clone)]
         struct ClosureGroup___126 {
-            s__1094: std::sync::Arc<String>
+            s__1201: std::sync::Arc<String>
         }
         impl ClosureGroup___126 {
-            fn fn__7831(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("subquery: {}", self.s__1094.clone()));
+            fn fn__8987(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("subquery: {}", self.s__1201.clone()));
             }
         }
         let closure_group = ClosureGroup___126 {
-            s__1094: s__1094.clone()
+            s__1201: s__1201.clone()
         };
-        let fn__7831 = {
+        let fn__8987 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7831())
+            std::sync::Arc::new(move | | closure_group.fn__8987())
         };
-        test___116.assert(t___7844, fn__7831.clone());
+        test___116.assert(t___9000, fn__8987.clone());
         test___116.soft_fail_to_hard()
     }
     #[test]
-    fn existsSql__1590() -> temper_core::Result<()> {
+    fn existsSql__1759() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___117 = temper_std::testing::Test::new();
-        let mut t___7821: SafeIdentifier = sid__461("orders");
-        let mut t___7822: SqlBuilder = SqlBuilder::new();
-        t___7822.append_safe("orders.user_id = users.id");
-        let mut t___7824: SqlFragment = t___7822.accumulated();
-        let inner__1096: Query = from(t___7821.clone()).r#where(t___7824.clone());
-        let s__1097: std::sync::Arc<String> = exists_sql(inner__1096.clone()).to_string();
-        let mut t___7829: bool = Some(s__1097.as_str()) == Some("EXISTS (SELECT * FROM orders WHERE orders.user_id = users.id)");
+        let mut t___8977: SafeIdentifier = sid__505("orders");
+        let mut t___8978: SqlBuilder = SqlBuilder::new();
+        t___8978.append_safe("orders.user_id = users.id");
+        let mut t___8980: SqlFragment = t___8978.accumulated();
+        let inner__1203: Query = from(t___8977.clone()).r#where(t___8980.clone());
+        let s__1204: std::sync::Arc<String> = exists_sql(inner__1203.clone()).to_string();
+        let mut t___8985: bool = Some(s__1204.as_str()) == Some("EXISTS (SELECT * FROM orders WHERE orders.user_id = users.id)");
         #[derive(Clone)]
         struct ClosureGroup___127 {
-            s__1097: std::sync::Arc<String>
+            s__1204: std::sync::Arc<String>
         }
         impl ClosureGroup___127 {
-            fn fn__7820(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("existsSql: {}", self.s__1097.clone()));
+            fn fn__8976(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("existsSql: {}", self.s__1204.clone()));
             }
         }
         let closure_group = ClosureGroup___127 {
-            s__1097: s__1097.clone()
+            s__1204: s__1204.clone()
         };
-        let fn__7820 = {
+        let fn__8976 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7820())
+            std::sync::Arc::new(move | | closure_group.fn__8976())
         };
-        test___117.assert(t___7829, fn__7820.clone());
+        test___117.assert(t___8985, fn__8976.clone());
         test___117.soft_fail_to_hard()
     }
     #[test]
-    fn whereInSubquery__1592() -> temper_core::Result<()> {
+    fn whereInSubquery__1761() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___118 = temper_std::testing::Test::new();
-        let mut t___7804: SafeIdentifier = sid__461("orders");
-        let mut t___7805: SafeIdentifier = sid__461("user_id");
-        let mut t___7806: Query = from(t___7804.clone()).select([t___7805.clone()]);
-        let mut t___7807: SqlBuilder = SqlBuilder::new();
-        t___7807.append_safe("total > ");
-        t___7807.append_int32(1000);
-        let sub__1099: Query = t___7806.r#where(t___7807.accumulated());
-        let mut t___7812: SafeIdentifier = sid__461("users");
-        let mut t___7813: SafeIdentifier = sid__461("id");
-        let q__1100: Query = from(t___7812.clone()).where_in_subquery(t___7813.clone(), sub__1099.clone());
-        let s__1101: std::sync::Arc<String> = q__1100.to_sql().to_string();
-        let mut t___7818: bool = Some(s__1101.as_str()) == Some("SELECT * FROM users WHERE id IN (SELECT user_id FROM orders WHERE total > 1000)");
+        let mut t___8960: SafeIdentifier = sid__505("orders");
+        let mut t___8961: SafeIdentifier = sid__505("user_id");
+        let mut t___8962: Query = from(t___8960.clone()).select([t___8961.clone()]);
+        let mut t___8963: SqlBuilder = SqlBuilder::new();
+        t___8963.append_safe("total > ");
+        t___8963.append_int32(1000);
+        let sub__1206: Query = t___8962.r#where(t___8963.accumulated());
+        let mut t___8968: SafeIdentifier = sid__505("users");
+        let mut t___8969: SafeIdentifier = sid__505("id");
+        let q__1207: Query = from(t___8968.clone()).where_in_subquery(t___8969.clone(), sub__1206.clone());
+        let s__1208: std::sync::Arc<String> = q__1207.to_sql().to_string();
+        let mut t___8974: bool = Some(s__1208.as_str()) == Some("SELECT * FROM users WHERE id IN (SELECT user_id FROM orders WHERE total > 1000)");
         #[derive(Clone)]
         struct ClosureGroup___128 {
-            s__1101: std::sync::Arc<String>
+            s__1208: std::sync::Arc<String>
         }
         impl ClosureGroup___128 {
-            fn fn__7803(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("whereInSubquery: {}", self.s__1101.clone()));
+            fn fn__8959(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("whereInSubquery: {}", self.s__1208.clone()));
             }
         }
         let closure_group = ClosureGroup___128 {
-            s__1101: s__1101.clone()
+            s__1208: s__1208.clone()
         };
-        let fn__7803 = {
+        let fn__8959 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7803())
+            std::sync::Arc::new(move | | closure_group.fn__8959())
         };
-        test___118.assert(t___7818, fn__7803.clone());
+        test___118.assert(t___8974, fn__8959.clone());
         test___118.soft_fail_to_hard()
     }
     #[test]
-    fn setOperationWithWhereOnEachSide__1594() -> temper_core::Result<()> {
+    fn setOperationWithWhereOnEachSide__1763() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___119 = temper_std::testing::Test::new();
-        let mut t___7781: SafeIdentifier = sid__461("users");
-        let mut t___7782: SqlBuilder = SqlBuilder::new();
-        t___7782.append_safe("age > ");
-        t___7782.append_int32(18);
-        let mut t___7785: SqlFragment = t___7782.accumulated();
-        let mut t___7786: Query = from(t___7781.clone()).r#where(t___7785.clone());
-        let mut t___7787: SqlBuilder = SqlBuilder::new();
-        t___7787.append_safe("active = ");
-        t___7787.append_boolean(true);
-        let a__1103: Query = t___7786.r#where(t___7787.accumulated());
-        let mut t___7792: SafeIdentifier = sid__461("users");
-        let mut t___7793: SqlBuilder = SqlBuilder::new();
-        t___7793.append_safe("role = ");
-        t___7793.append_string("vip");
-        let mut t___7796: SqlFragment = t___7793.accumulated();
-        let b__1104: Query = from(t___7792.clone()).r#where(t___7796.clone());
-        let s__1105: std::sync::Arc<String> = union_sql(a__1103.clone(), b__1104.clone()).to_string();
-        let mut t___7801: bool = Some(s__1105.as_str()) == Some("(SELECT * FROM users WHERE age > 18 AND active = TRUE) UNION (SELECT * FROM users WHERE role = 'vip')");
+        let mut t___8937: SafeIdentifier = sid__505("users");
+        let mut t___8938: SqlBuilder = SqlBuilder::new();
+        t___8938.append_safe("age > ");
+        t___8938.append_int32(18);
+        let mut t___8941: SqlFragment = t___8938.accumulated();
+        let mut t___8942: Query = from(t___8937.clone()).r#where(t___8941.clone());
+        let mut t___8943: SqlBuilder = SqlBuilder::new();
+        t___8943.append_safe("active = ");
+        t___8943.append_boolean(true);
+        let a__1210: Query = t___8942.r#where(t___8943.accumulated());
+        let mut t___8948: SafeIdentifier = sid__505("users");
+        let mut t___8949: SqlBuilder = SqlBuilder::new();
+        t___8949.append_safe("role = ");
+        t___8949.append_string("vip");
+        let mut t___8952: SqlFragment = t___8949.accumulated();
+        let b__1211: Query = from(t___8948.clone()).r#where(t___8952.clone());
+        let s__1212: std::sync::Arc<String> = union_sql(a__1210.clone(), b__1211.clone()).to_string();
+        let mut t___8957: bool = Some(s__1212.as_str()) == Some("(SELECT * FROM users WHERE age > 18 AND active = TRUE) UNION (SELECT * FROM users WHERE role = 'vip')");
         #[derive(Clone)]
         struct ClosureGroup___129 {
-            s__1105: std::sync::Arc<String>
+            s__1212: std::sync::Arc<String>
         }
         impl ClosureGroup___129 {
-            fn fn__7780(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("union with where: {}", self.s__1105.clone()));
+            fn fn__8936(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("union with where: {}", self.s__1212.clone()));
             }
         }
         let closure_group = ClosureGroup___129 {
-            s__1105: s__1105.clone()
+            s__1212: s__1212.clone()
         };
-        let fn__7780 = {
+        let fn__8936 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7780())
+            std::sync::Arc::new(move | | closure_group.fn__8936())
         };
-        test___119.assert(t___7801, fn__7780.clone());
+        test___119.assert(t___8957, fn__8936.clone());
         test___119.soft_fail_to_hard()
     }
     #[test]
-    fn whereInSubqueryChainedWithWhere__1598() -> temper_core::Result<()> {
+    fn whereInSubqueryChainedWithWhere__1767() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___120 = temper_std::testing::Test::new();
-        let mut t___7764: SafeIdentifier = sid__461("orders");
-        let mut t___7765: SafeIdentifier = sid__461("user_id");
-        let sub__1107: Query = from(t___7764.clone()).select([t___7765.clone()]);
-        let mut t___7767: SafeIdentifier = sid__461("users");
-        let mut t___7768: SqlBuilder = SqlBuilder::new();
-        t___7768.append_safe("active = ");
-        t___7768.append_boolean(true);
-        let mut t___7771: SqlFragment = t___7768.accumulated();
-        let q__1108: Query = from(t___7767.clone()).r#where(t___7771.clone()).where_in_subquery(sid__461("id"), sub__1107.clone());
-        let s__1109: std::sync::Arc<String> = q__1108.to_sql().to_string();
-        let mut t___7778: bool = Some(s__1109.as_str()) == Some("SELECT * FROM users WHERE active = TRUE AND id IN (SELECT user_id FROM orders)");
+        let mut t___8920: SafeIdentifier = sid__505("orders");
+        let mut t___8921: SafeIdentifier = sid__505("user_id");
+        let sub__1214: Query = from(t___8920.clone()).select([t___8921.clone()]);
+        let mut t___8923: SafeIdentifier = sid__505("users");
+        let mut t___8924: SqlBuilder = SqlBuilder::new();
+        t___8924.append_safe("active = ");
+        t___8924.append_boolean(true);
+        let mut t___8927: SqlFragment = t___8924.accumulated();
+        let q__1215: Query = from(t___8923.clone()).r#where(t___8927.clone()).where_in_subquery(sid__505("id"), sub__1214.clone());
+        let s__1216: std::sync::Arc<String> = q__1215.to_sql().to_string();
+        let mut t___8934: bool = Some(s__1216.as_str()) == Some("SELECT * FROM users WHERE active = TRUE AND id IN (SELECT user_id FROM orders)");
         #[derive(Clone)]
         struct ClosureGroup___130 {
-            s__1109: std::sync::Arc<String>
+            s__1216: std::sync::Arc<String>
         }
         impl ClosureGroup___130 {
-            fn fn__7763(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("whereInSubquery chained: {}", self.s__1109.clone()));
+            fn fn__8919(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("whereInSubquery chained: {}", self.s__1216.clone()));
             }
         }
         let closure_group = ClosureGroup___130 {
-            s__1109: s__1109.clone()
+            s__1216: s__1216.clone()
         };
-        let fn__7763 = {
+        let fn__8919 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7763())
+            std::sync::Arc::new(move | | closure_group.fn__8919())
         };
-        test___120.assert(t___7778, fn__7763.clone());
+        test___120.assert(t___8934, fn__8919.clone());
         test___120.soft_fail_to_hard()
     }
     #[test]
-    fn existsSqlUsedInWhere__1600() -> temper_core::Result<()> {
+    fn existsSqlUsedInWhere__1769() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___121 = temper_std::testing::Test::new();
-        let mut t___7750: SafeIdentifier = sid__461("orders");
-        let mut t___7751: SqlBuilder = SqlBuilder::new();
-        t___7751.append_safe("orders.user_id = users.id");
-        let mut t___7753: SqlFragment = t___7751.accumulated();
-        let sub__1111: Query = from(t___7750.clone()).r#where(t___7753.clone());
-        let mut t___7755: SafeIdentifier = sid__461("users");
-        let mut t___7756: SqlFragment = exists_sql(sub__1111.clone());
-        let q__1112: Query = from(t___7755.clone()).r#where(t___7756.clone());
-        let s__1113: std::sync::Arc<String> = q__1112.to_sql().to_string();
-        let mut t___7761: bool = Some(s__1113.as_str()) == Some("SELECT * FROM users WHERE EXISTS (SELECT * FROM orders WHERE orders.user_id = users.id)");
+        let mut t___8906: SafeIdentifier = sid__505("orders");
+        let mut t___8907: SqlBuilder = SqlBuilder::new();
+        t___8907.append_safe("orders.user_id = users.id");
+        let mut t___8909: SqlFragment = t___8907.accumulated();
+        let sub__1218: Query = from(t___8906.clone()).r#where(t___8909.clone());
+        let mut t___8911: SafeIdentifier = sid__505("users");
+        let mut t___8912: SqlFragment = exists_sql(sub__1218.clone());
+        let q__1219: Query = from(t___8911.clone()).r#where(t___8912.clone());
+        let s__1220: std::sync::Arc<String> = q__1219.to_sql().to_string();
+        let mut t___8917: bool = Some(s__1220.as_str()) == Some("SELECT * FROM users WHERE EXISTS (SELECT * FROM orders WHERE orders.user_id = users.id)");
         #[derive(Clone)]
         struct ClosureGroup___131 {
-            s__1113: std::sync::Arc<String>
+            s__1220: std::sync::Arc<String>
         }
         impl ClosureGroup___131 {
-            fn fn__7749(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("exists in where: {}", self.s__1113.clone()));
+            fn fn__8905(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("exists in where: {}", self.s__1220.clone()));
             }
         }
         let closure_group = ClosureGroup___131 {
-            s__1113: s__1113.clone()
+            s__1220: s__1220.clone()
         };
-        let fn__7749 = {
+        let fn__8905 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7749())
+            std::sync::Arc::new(move | | closure_group.fn__8905())
         };
-        test___121.assert(t___7761, fn__7749.clone());
+        test___121.assert(t___8917, fn__8905.clone());
         test___121.soft_fail_to_hard()
     }
     #[test]
-    fn safeIdentifierAcceptsValidNames__1602() -> temper_core::Result<()> {
+    fn updateQueryBasic__1771() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
-        let test___128 = temper_std::testing::Test::new();
-        let mut t___3806: SafeIdentifier;
-        let id__1151: SafeIdentifier;
-        'ok___9737: {
-            'orelse___1719: {
-                t___3806 = match safe_identifier("user_name") {
+        let test___122 = temper_std::testing::Test::new();
+        let mut t___8892: SafeIdentifier;
+        let mut t___8893: SafeIdentifier;
+        let mut t___8894: SqlString;
+        let mut t___8895: UpdateQuery;
+        let mut t___8896: SqlBuilder;
+        let mut t___4443: SqlFragment;
+        let q__1222: SqlFragment;
+        'ok___10991: {
+            'orelse___1916: {
+                t___8892 = sid__505("users");
+                t___8893 = sid__505("name");
+                t___8894 = SqlString::new("Alice");
+                t___8895 = update(t___8892.clone()).set(t___8893.clone(), SqlPart::new(t___8894.clone()));
+                t___8896 = SqlBuilder::new();
+                t___8896.append_safe("id = ");
+                t___8896.append_int32(1);
+                t___4443 = match t___8895.r#where(t___8896.accumulated()).to_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1719
+                    _ => break 'orelse___1916
                 };
-                id__1151 = t___3806.clone();
-                break 'ok___9737;
+                q__1222 = t___4443.clone();
+                break 'ok___10991;
             }
-            id__1151 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+            q__1222 = panic!();
         }
-        let mut t___7747: bool = Some(id__1151.sql_value().as_str()) == Some("user_name");
+        let mut t___8903: bool = Some(q__1222.to_string().as_str()) == Some("UPDATE users SET name = 'Alice' WHERE id = 1");
         #[derive(Clone)]
         struct ClosureGroup___132 {}
         impl ClosureGroup___132 {
-            fn fn__7744(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new("value should round-trip".to_string());
+            fn fn__8891(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("update basic".to_string());
             }
         }
         let closure_group = ClosureGroup___132 {};
-        let fn__7744 = {
+        let fn__8891 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7744())
+            std::sync::Arc::new(move | | closure_group.fn__8891())
         };
-        test___128.assert(t___7747, fn__7744.clone());
-        test___128.soft_fail_to_hard()
+        test___122.assert(t___8903, fn__8891.clone());
+        test___122.soft_fail_to_hard()
     }
     #[test]
-    fn safeIdentifierRejectsEmptyString__1603() -> temper_core::Result<()> {
+    fn updateQueryMultipleSet__1773() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
-        let test___129 = temper_std::testing::Test::new();
-        let didBubble__1153: bool;
-        'ok___9738: {
-            'orelse___1720: {
-                match safe_identifier("") {
+        let test___123 = temper_std::testing::Test::new();
+        let mut t___8875: SafeIdentifier;
+        let mut t___8876: SafeIdentifier;
+        let mut t___8877: SqlString;
+        let mut t___8881: UpdateQuery;
+        let mut t___8882: SqlBuilder;
+        let mut t___4428: SqlFragment;
+        let q__1224: SqlFragment;
+        'ok___10992: {
+            'orelse___1917: {
+                t___8875 = sid__505("users");
+                t___8876 = sid__505("name");
+                t___8877 = SqlString::new("Bob");
+                t___8881 = update(t___8875.clone()).set(t___8876.clone(), SqlPart::new(t___8877.clone())).set(sid__505("age"), SqlPart::new(SqlInt32::new(30)));
+                t___8882 = SqlBuilder::new();
+                t___8882.append_safe("id = ");
+                t___8882.append_int32(2);
+                t___4428 = match t___8881.r#where(t___8882.accumulated()).to_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1720
+                    _ => break 'orelse___1917
                 };
-                didBubble__1153 = false;
-                break 'ok___9738;
+                q__1224 = t___4428.clone();
+                break 'ok___10992;
             }
-            didBubble__1153 = true;
+            q__1224 = panic!();
         }
+        let mut t___8889: bool = Some(q__1224.to_string().as_str()) == Some("UPDATE users SET name = 'Bob', age = 30 WHERE id = 2");
         #[derive(Clone)]
         struct ClosureGroup___133 {}
         impl ClosureGroup___133 {
-            fn fn__7741(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new("empty string should bubble".to_string());
+            fn fn__8874(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("update multi set".to_string());
             }
         }
         let closure_group = ClosureGroup___133 {};
-        let fn__7741 = {
+        let fn__8874 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7741())
+            std::sync::Arc::new(move | | closure_group.fn__8874())
         };
-        test___129.assert(didBubble__1153, fn__7741.clone());
-        test___129.soft_fail_to_hard()
+        test___123.assert(t___8889, fn__8874.clone());
+        test___123.soft_fail_to_hard()
     }
     #[test]
-    fn safeIdentifierRejectsLeadingDigit__1604() -> temper_core::Result<()> {
+    fn updateQueryMultipleWhere__1775() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
-        let test___130 = temper_std::testing::Test::new();
-        let didBubble__1155: bool;
-        'ok___9739: {
-            'orelse___1721: {
-                match safe_identifier("1col") {
+        let test___124 = temper_std::testing::Test::new();
+        let mut t___8856: SafeIdentifier;
+        let mut t___8857: SafeIdentifier;
+        let mut t___8858: SqlBoolean;
+        let mut t___8859: UpdateQuery;
+        let mut t___8860: SqlBuilder;
+        let mut t___8864: UpdateQuery;
+        let mut t___8865: SqlBuilder;
+        let mut t___4410: SqlFragment;
+        let q__1226: SqlFragment;
+        'ok___10993: {
+            'orelse___1918: {
+                t___8856 = sid__505("users");
+                t___8857 = sid__505("active");
+                t___8858 = SqlBoolean::new(false);
+                t___8859 = update(t___8856.clone()).set(t___8857.clone(), SqlPart::new(t___8858.clone()));
+                t___8860 = SqlBuilder::new();
+                t___8860.append_safe("age < ");
+                t___8860.append_int32(18);
+                t___8864 = t___8859.r#where(t___8860.accumulated());
+                t___8865 = SqlBuilder::new();
+                t___8865.append_safe("role = ");
+                t___8865.append_string("guest");
+                t___4410 = match t___8864.r#where(t___8865.accumulated()).to_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1721
+                    _ => break 'orelse___1918
                 };
-                didBubble__1155 = false;
-                break 'ok___9739;
+                q__1226 = t___4410.clone();
+                break 'ok___10993;
             }
-            didBubble__1155 = true;
+            q__1226 = panic!();
         }
+        let mut t___8872: bool = Some(q__1226.to_string().as_str()) == Some("UPDATE users SET active = FALSE WHERE age < 18 AND role = 'guest'");
         #[derive(Clone)]
         struct ClosureGroup___134 {}
         impl ClosureGroup___134 {
-            fn fn__7738(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new("leading digit should bubble".to_string());
+            fn fn__8855(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("update multi where".to_string());
             }
         }
         let closure_group = ClosureGroup___134 {};
-        let fn__7738 = {
+        let fn__8855 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7738())
+            std::sync::Arc::new(move | | closure_group.fn__8855())
         };
-        test___130.assert(didBubble__1155, fn__7738.clone());
-        test___130.soft_fail_to_hard()
+        test___124.assert(t___8872, fn__8855.clone());
+        test___124.soft_fail_to_hard()
     }
     #[test]
-    fn safeIdentifierRejectsSqlMetacharacters__1605() -> temper_core::Result<()> {
+    fn updateQueryOrWhere__1778() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
-        let test___131 = temper_std::testing::Test::new();
-        let cases__1157: temper_core::List<std::sync::Arc<String>> = std::sync::Arc::new(vec![std::sync::Arc::new("name); DROP TABLE".to_string()), std::sync::Arc::new("col'".to_string()), std::sync::Arc::new("a b".to_string()), std::sync::Arc::new("a-b".to_string()), std::sync::Arc::new("a.b".to_string()), std::sync::Arc::new("a;b".to_string())]);
+        let test___125 = temper_std::testing::Test::new();
+        let mut t___8837: SafeIdentifier;
+        let mut t___8838: SafeIdentifier;
+        let mut t___8839: SqlString;
+        let mut t___8840: UpdateQuery;
+        let mut t___8841: SqlBuilder;
+        let mut t___8845: UpdateQuery;
+        let mut t___8846: SqlBuilder;
+        let mut t___4389: SqlFragment;
+        let q__1228: SqlFragment;
+        'ok___10994: {
+            'orelse___1919: {
+                t___8837 = sid__505("users");
+                t___8838 = sid__505("status");
+                t___8839 = SqlString::new("banned");
+                t___8840 = update(t___8837.clone()).set(t___8838.clone(), SqlPart::new(t___8839.clone()));
+                t___8841 = SqlBuilder::new();
+                t___8841.append_safe("spam_count > ");
+                t___8841.append_int32(10);
+                t___8845 = t___8840.r#where(t___8841.accumulated());
+                t___8846 = SqlBuilder::new();
+                t___8846.append_safe("reported = ");
+                t___8846.append_boolean(true);
+                t___4389 = match t___8845.or_where(t___8846.accumulated()).to_sql() {
+                    Ok(x) => x,
+                    _ => break 'orelse___1919
+                };
+                q__1228 = t___4389.clone();
+                break 'ok___10994;
+            }
+            q__1228 = panic!();
+        }
+        let mut t___8853: bool = Some(q__1228.to_string().as_str()) == Some("UPDATE users SET status = 'banned' WHERE spam_count > 10 OR reported = TRUE");
         #[derive(Clone)]
-        struct ClosureGroup___135 {
-            test___131: temper_std::testing::Test
-        }
+        struct ClosureGroup___135 {}
         impl ClosureGroup___135 {
-            fn fn__7735(& self, c__1158: impl temper_core::ToArcString) {
-                let c__1158 = c__1158.to_arc_string();
-                let didBubble__1159: bool;
-                'ok___9740: {
-                    'orelse___1722: {
-                        match safe_identifier(c__1158.clone()) {
-                            Ok(x) => x,
-                            _ => break 'orelse___1722
-                        };
-                        didBubble__1159 = false;
-                        break 'ok___9740;
-                    }
-                    didBubble__1159 = true;
-                }
-                #[derive(Clone)]
-                struct ClosureGroup___136 {
-                    c__1158: std::sync::Arc<String>
-                }
-                impl ClosureGroup___136 {
-                    fn fn__7732(& self) -> std::sync::Arc<String> {
-                        return std::sync::Arc::new(format!("should reject: {}", self.c__1158.clone()));
-                    }
-                }
-                let closure_group = ClosureGroup___136 {
-                    c__1158: c__1158.clone()
-                };
-                let fn__7732 = {
-                    let closure_group = closure_group.clone();
-                    std::sync::Arc::new(move | | closure_group.fn__7732())
-                };
-                self.test___131.assert(didBubble__1159, fn__7732.clone());
+            fn fn__8836(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("update orWhere".to_string());
             }
         }
-        let closure_group = ClosureGroup___135 {
-            test___131: test___131.clone()
-        };
-        let fn__7735 = {
+        let closure_group = ClosureGroup___135 {};
+        let fn__8836 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | c__1158: std::sync::Arc<String> | closure_group.fn__7735(c__1158))
+            std::sync::Arc::new(move | | closure_group.fn__8836())
         };
-        temper_core::listed::list_for_each( & cases__1157, & ( * fn__7735.clone()));
-        test___131.soft_fail_to_hard()
+        test___125.assert(t___8853, fn__8836.clone());
+        test___125.soft_fail_to_hard()
     }
     #[test]
-    fn tableDefFieldLookupFound__1606() -> temper_core::Result<()> {
+    fn updateQueryBubblesWithoutWhere__1781() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
-        let test___132 = temper_std::testing::Test::new();
-        let mut t___3783: SafeIdentifier;
-        let mut t___3784: SafeIdentifier;
-        let mut t___3785: SafeIdentifier;
-        let mut t___3786: SafeIdentifier;
-        let mut t___3789: SafeIdentifier;
-        let mut t___3790: SafeIdentifier;
-        let mut t___3794: FieldDef;
-        'ok___9741: {
-            'orelse___1723: {
-                t___3783 = match safe_identifier("users") {
+        let test___126 = temper_std::testing::Test::new();
+        let mut t___8830: SafeIdentifier;
+        let mut t___8831: SafeIdentifier;
+        let mut t___8832: SqlInt32;
+        let didBubble__1230: bool;
+        'ok___10995: {
+            'orelse___1920: {
+                t___8830 = sid__505("users");
+                t___8831 = sid__505("x");
+                t___8832 = SqlInt32::new(1);
+                match update(t___8830.clone()).set(t___8831.clone(), SqlPart::new(t___8832.clone())).to_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1723
+                    _ => break 'orelse___1920
                 };
-                t___3784 = t___3783.clone();
-                break 'ok___9741;
+                didBubble__1230 = false;
+                break 'ok___10995;
             }
-            t___3784 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+            didBubble__1230 = true;
         }
-        'ok___9742: {
-            'orelse___1724: {
-                t___3785 = match safe_identifier("name") {
+        #[derive(Clone)]
+        struct ClosureGroup___136 {}
+        impl ClosureGroup___136 {
+            fn fn__8829(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("update without WHERE should bubble".to_string());
+            }
+        }
+        let closure_group = ClosureGroup___136 {};
+        let fn__8829 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8829())
+        };
+        test___126.assert(didBubble__1230, fn__8829.clone());
+        test___126.soft_fail_to_hard()
+    }
+    #[test]
+    fn updateQueryBubblesWithoutSet__1782() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___127 = temper_std::testing::Test::new();
+        let mut t___8821: SafeIdentifier;
+        let mut t___8822: SqlBuilder;
+        let mut t___8825: SqlFragment;
+        let didBubble__1232: bool;
+        'ok___10996: {
+            'orelse___1921: {
+                t___8821 = sid__505("users");
+                t___8822 = SqlBuilder::new();
+                t___8822.append_safe("id = ");
+                t___8822.append_int32(1);
+                t___8825 = t___8822.accumulated();
+                match update(t___8821.clone()).r#where(t___8825.clone()).to_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1724
+                    _ => break 'orelse___1921
                 };
-                t___3786 = t___3785.clone();
-                break 'ok___9742;
+                didBubble__1232 = false;
+                break 'ok___10996;
             }
-            t___3786 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+            didBubble__1232 = true;
         }
-        let mut t___7722: StringField = StringField::new();
-        let mut t___7723: FieldDef = FieldDef::new(t___3786.clone(), FieldType::new(t___7722.clone()), false);
-        'ok___9743: {
-            'orelse___1725: {
-                t___3789 = match safe_identifier("age") {
-                    Ok(x) => x,
-                    _ => break 'orelse___1725
-                };
-                t___3790 = t___3789.clone();
-                break 'ok___9743;
-            }
-            t___3790 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
-        }
-        let mut t___7724: IntField = IntField::new();
-        let mut t___7725: FieldDef = FieldDef::new(t___3790.clone(), FieldType::new(t___7724.clone()), false);
-        let td__1161: TableDef = TableDef::new(t___3784.clone(), [t___7723.clone(), t___7725.clone()]);
-        let f__1162: FieldDef;
-        'ok___9744: {
-            'orelse___1726: {
-                t___3794 = match td__1161.field("age") {
-                    Ok(x) => x,
-                    _ => break 'orelse___1726
-                };
-                f__1162 = t___3794.clone();
-                break 'ok___9744;
-            }
-            f__1162 = panic!();
-        }
-        let mut t___7730: bool = Some(f__1162.name().sql_value().as_str()) == Some("age");
         #[derive(Clone)]
         struct ClosureGroup___137 {}
         impl ClosureGroup___137 {
-            fn fn__7721(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new("should find age field".to_string());
+            fn fn__8820(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("update without SET should bubble".to_string());
             }
         }
         let closure_group = ClosureGroup___137 {};
-        let fn__7721 = {
+        let fn__8820 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7721())
+            std::sync::Arc::new(move | | closure_group.fn__8820())
         };
-        test___132.assert(t___7730, fn__7721.clone());
-        test___132.soft_fail_to_hard()
+        test___127.assert(didBubble__1232, fn__8820.clone());
+        test___127.soft_fail_to_hard()
     }
     #[test]
-    fn tableDefFieldLookupNotFoundBubbles__1607() -> temper_core::Result<()> {
+    fn updateQueryWithLimit__1784() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
-        let test___133 = temper_std::testing::Test::new();
-        let mut t___3774: SafeIdentifier;
-        let mut t___3775: SafeIdentifier;
-        let mut t___3776: SafeIdentifier;
-        let mut t___3777: SafeIdentifier;
-        'ok___9745: {
-            'orelse___1727: {
-                t___3774 = match safe_identifier("users") {
+        let test___128 = temper_std::testing::Test::new();
+        let mut t___8807: SafeIdentifier;
+        let mut t___8808: SafeIdentifier;
+        let mut t___8809: SqlBoolean;
+        let mut t___8810: UpdateQuery;
+        let mut t___8811: SqlBuilder;
+        let mut t___4352: UpdateQuery;
+        let mut t___4353: SqlFragment;
+        let q__1234: SqlFragment;
+        'ok___10997: {
+            'orelse___1922: {
+                t___8807 = sid__505("users");
+                t___8808 = sid__505("active");
+                t___8809 = SqlBoolean::new(false);
+                t___8810 = update(t___8807.clone()).set(t___8808.clone(), SqlPart::new(t___8809.clone()));
+                t___8811 = SqlBuilder::new();
+                t___8811.append_safe("last_login < ");
+                t___8811.append_string("2024-01-01");
+                t___4352 = match t___8810.r#where(t___8811.accumulated()).limit(100) {
                     Ok(x) => x,
-                    _ => break 'orelse___1727
+                    _ => break 'orelse___1922
                 };
-                t___3775 = t___3774.clone();
-                break 'ok___9745;
-            }
-            t___3775 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
-        }
-        'ok___9746: {
-            'orelse___1728: {
-                t___3776 = match safe_identifier("name") {
+                t___4353 = match t___4352.to_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1728
+                    _ => break 'orelse___1922
                 };
-                t___3777 = t___3776.clone();
-                break 'ok___9746;
+                q__1234 = t___4353.clone();
+                break 'ok___10997;
             }
-            t___3777 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+            q__1234 = panic!();
         }
-        let mut t___7716: StringField = StringField::new();
-        let mut t___7717: FieldDef = FieldDef::new(t___3777.clone(), FieldType::new(t___7716.clone()), false);
-        let td__1164: TableDef = TableDef::new(t___3775.clone(), [t___7717.clone()]);
-        let didBubble__1165: bool;
-        'ok___9747: {
-            'orelse___1729: {
-                match td__1164.field("nonexistent") {
-                    Ok(x) => x,
-                    _ => break 'orelse___1729
-                };
-                didBubble__1165 = false;
-                break 'ok___9747;
-            }
-            didBubble__1165 = true;
-        }
+        let mut t___8818: bool = Some(q__1234.to_string().as_str()) == Some("UPDATE users SET active = FALSE WHERE last_login < '2024-01-01' LIMIT 100");
         #[derive(Clone)]
         struct ClosureGroup___138 {}
         impl ClosureGroup___138 {
-            fn fn__7715(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new("unknown field should bubble".to_string());
+            fn fn__8806(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("update limit".to_string());
             }
         }
         let closure_group = ClosureGroup___138 {};
-        let fn__7715 = {
+        let fn__8806 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7715())
+            std::sync::Arc::new(move | | closure_group.fn__8806())
         };
-        test___133.assert(didBubble__1165, fn__7715.clone());
-        test___133.soft_fail_to_hard()
+        test___128.assert(t___8818, fn__8806.clone());
+        test___128.soft_fail_to_hard()
     }
     #[test]
-    fn fieldDefNullableFlag__1608() -> temper_core::Result<()> {
+    fn updateQueryEscaping__1786() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
-        let test___134 = temper_std::testing::Test::new();
-        let mut t___3762: SafeIdentifier;
-        let mut t___3763: SafeIdentifier;
-        let mut t___3766: SafeIdentifier;
-        let mut t___3767: SafeIdentifier;
-        'ok___9748: {
-            'orelse___1730: {
-                t___3762 = match safe_identifier("email") {
+        let test___129 = temper_std::testing::Test::new();
+        let mut t___8793: SafeIdentifier;
+        let mut t___8794: SafeIdentifier;
+        let mut t___8795: SqlString;
+        let mut t___8796: UpdateQuery;
+        let mut t___8797: SqlBuilder;
+        let mut t___4337: SqlFragment;
+        let q__1236: SqlFragment;
+        'ok___10998: {
+            'orelse___1923: {
+                t___8793 = sid__505("users");
+                t___8794 = sid__505("bio");
+                t___8795 = SqlString::new("It's a test");
+                t___8796 = update(t___8793.clone()).set(t___8794.clone(), SqlPart::new(t___8795.clone()));
+                t___8797 = SqlBuilder::new();
+                t___8797.append_safe("id = ");
+                t___8797.append_int32(1);
+                t___4337 = match t___8796.r#where(t___8797.accumulated()).to_sql() {
                     Ok(x) => x,
-                    _ => break 'orelse___1730
+                    _ => break 'orelse___1923
                 };
-                t___3763 = t___3762.clone();
-                break 'ok___9748;
+                q__1236 = t___4337.clone();
+                break 'ok___10998;
             }
-            t___3763 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+            q__1236 = panic!();
         }
-        let mut t___7704: StringField = StringField::new();
-        let required__1167: FieldDef = FieldDef::new(t___3763.clone(), FieldType::new(t___7704.clone()), false);
-        'ok___9749: {
-            'orelse___1731: {
-                t___3766 = match safe_identifier("bio") {
-                    Ok(x) => x,
-                    _ => break 'orelse___1731
-                };
-                t___3767 = t___3766.clone();
-                break 'ok___9749;
-            }
-            t___3767 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
-        }
-        let mut t___7706: StringField = StringField::new();
-        let optional__1168: FieldDef = FieldDef::new(t___3767.clone(), FieldType::new(t___7706.clone()), true);
-        let mut t___7710: bool = ! required__1167.nullable();
+        let mut t___8804: bool = Some(q__1236.to_string().as_str()) == Some("UPDATE users SET bio = 'It''s a test' WHERE id = 1");
         #[derive(Clone)]
         struct ClosureGroup___139 {}
         impl ClosureGroup___139 {
-            fn fn__7703(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new("required field should not be nullable".to_string());
+            fn fn__8792(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("update escaping".to_string());
             }
         }
         let closure_group = ClosureGroup___139 {};
-        let fn__7703 = {
+        let fn__8792 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7703())
+            std::sync::Arc::new(move | | closure_group.fn__8792())
         };
-        test___134.assert(t___7710, fn__7703.clone());
-        let mut t___7712: bool = optional__1168.nullable();
+        test___129.assert(t___8804, fn__8792.clone());
+        test___129.soft_fail_to_hard()
+    }
+    #[test]
+    fn deleteQueryBasic__1788() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___130 = temper_std::testing::Test::new();
+        let mut t___8782: SafeIdentifier;
+        let mut t___8783: SqlBuilder;
+        let mut t___8786: SqlFragment;
+        let mut t___4322: SqlFragment;
+        let q__1238: SqlFragment;
+        'ok___10999: {
+            'orelse___1924: {
+                t___8782 = sid__505("users");
+                t___8783 = SqlBuilder::new();
+                t___8783.append_safe("id = ");
+                t___8783.append_int32(1);
+                t___8786 = t___8783.accumulated();
+                t___4322 = match delete_from(t___8782.clone()).r#where(t___8786.clone()).to_sql() {
+                    Ok(x) => x,
+                    _ => break 'orelse___1924
+                };
+                q__1238 = t___4322.clone();
+                break 'ok___10999;
+            }
+            q__1238 = panic!();
+        }
+        let mut t___8790: bool = Some(q__1238.to_string().as_str()) == Some("DELETE FROM users WHERE id = 1");
         #[derive(Clone)]
         struct ClosureGroup___140 {}
         impl ClosureGroup___140 {
-            fn fn__7702(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new("optional field should be nullable".to_string());
+            fn fn__8781(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("delete basic".to_string());
             }
         }
         let closure_group = ClosureGroup___140 {};
-        let fn__7702 = {
+        let fn__8781 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7702())
+            std::sync::Arc::new(move | | closure_group.fn__8781())
         };
-        test___134.assert(t___7712, fn__7702.clone());
-        test___134.soft_fail_to_hard()
+        test___130.assert(t___8790, fn__8781.clone());
+        test___130.soft_fail_to_hard()
     }
     #[test]
-    fn stringEscaping__1609() -> temper_core::Result<()> {
+    fn deleteQueryMultipleWhere__1790() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
-        let test___138 = temper_std::testing::Test::new();
+        let test___131 = temper_std::testing::Test::new();
+        let mut t___8766: SafeIdentifier;
+        let mut t___8767: SqlBuilder;
+        let mut t___8770: SqlFragment;
+        let mut t___8771: DeleteQuery;
+        let mut t___8772: SqlBuilder;
+        let mut t___4310: SqlFragment;
+        let q__1240: SqlFragment;
+        'ok___11000: {
+            'orelse___1925: {
+                t___8766 = sid__505("logs");
+                t___8767 = SqlBuilder::new();
+                t___8767.append_safe("created_at < ");
+                t___8767.append_string("2024-01-01");
+                t___8770 = t___8767.accumulated();
+                t___8771 = delete_from(t___8766.clone()).r#where(t___8770.clone());
+                t___8772 = SqlBuilder::new();
+                t___8772.append_safe("level = ");
+                t___8772.append_string("debug");
+                t___4310 = match t___8771.r#where(t___8772.accumulated()).to_sql() {
+                    Ok(x) => x,
+                    _ => break 'orelse___1925
+                };
+                q__1240 = t___4310.clone();
+                break 'ok___11000;
+            }
+            q__1240 = panic!();
+        }
+        let mut t___8779: bool = Some(q__1240.to_string().as_str()) == Some("DELETE FROM logs WHERE created_at < '2024-01-01' AND level = 'debug'");
         #[derive(Clone)]
         struct ClosureGroup___141 {}
         impl ClosureGroup___141 {
-            fn build__1294(& self, name__1296: impl temper_core::ToArcString) -> std::sync::Arc<String> {
-                let name__1296 = name__1296.to_arc_string();
-                let mut t___7684: SqlBuilder = SqlBuilder::new();
-                t___7684.append_safe("select * from hi where name = ");
-                t___7684.append_string(name__1296.clone());
-                return t___7684.accumulated().to_string();
-            }
-            fn buildWrong__1295(& self, name__1298: impl temper_core::ToArcString) -> std::sync::Arc<String> {
-                let name__1298 = name__1298.to_arc_string();
-                return std::sync::Arc::new(format!("select * from hi where name = '{}'", name__1298.clone()));
+            fn fn__8765(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("delete multi where".to_string());
             }
         }
         let closure_group = ClosureGroup___141 {};
-        let build__1294 = {
+        let fn__8765 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | name__1296: std::sync::Arc<String> | closure_group.build__1294(name__1296))
+            std::sync::Arc::new(move | | closure_group.fn__8765())
         };
-        let buildWrong__1295 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | name__1298: std::sync::Arc<String> | closure_group.buildWrong__1295(name__1298))
-        };
-        let actual___1611: std::sync::Arc<String> = build__1294(std::sync::Arc::new("world".to_string()));
-        let mut t___7694: bool = Some(actual___1611.as_str()) == Some("select * from hi where name = 'world'");
-        #[derive(Clone)]
-        struct ClosureGroup___142 {
-            actual___1611: std::sync::Arc<String>
+        test___131.assert(t___8779, fn__8765.clone());
+        test___131.soft_fail_to_hard()
+    }
+    #[test]
+    fn deleteQueryBubblesWithoutWhere__1793() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___132 = temper_std::testing::Test::new();
+        let didBubble__1242: bool;
+        'ok___11001: {
+            'orelse___1926: {
+                match delete_from(sid__505("users")).to_sql() {
+                    Ok(x) => x,
+                    _ => break 'orelse___1926
+                };
+                didBubble__1242 = false;
+                break 'ok___11001;
+            }
+            didBubble__1242 = true;
         }
+        #[derive(Clone)]
+        struct ClosureGroup___142 {}
         impl ClosureGroup___142 {
-            fn fn__7691(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected build(\"world\") == (select * from hi where name = 'world') not ({})", self.actual___1611.clone()));
+            fn fn__8761(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("delete without WHERE should bubble".to_string());
             }
         }
-        let closure_group = ClosureGroup___142 {
-            actual___1611: actual___1611.clone()
-        };
-        let fn__7691 = {
+        let closure_group = ClosureGroup___142 {};
+        let fn__8761 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7691())
+            std::sync::Arc::new(move | | closure_group.fn__8761())
         };
-        test___138.assert(t___7694, fn__7691.clone());
-        let bobbyTables__1300: std::sync::Arc<String> = std::sync::Arc::new("Robert'); drop table hi;--".to_string());
-        let actual___1613: std::sync::Arc<String> = build__1294(std::sync::Arc::new("Robert'); drop table hi;--".to_string()));
-        let mut t___7698: bool = Some(actual___1613.as_str()) == Some("select * from hi where name = 'Robert''); drop table hi;--'");
+        test___132.assert(didBubble__1242, fn__8761.clone());
+        test___132.soft_fail_to_hard()
+    }
+    #[test]
+    fn deleteQueryOrWhere__1794() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___133 = temper_std::testing::Test::new();
+        let mut t___8746: SafeIdentifier;
+        let mut t___8747: SqlBuilder;
+        let mut t___8750: SqlFragment;
+        let mut t___8751: DeleteQuery;
+        let mut t___8752: SqlBuilder;
+        let mut t___4289: SqlFragment;
+        let q__1244: SqlFragment;
+        'ok___11002: {
+            'orelse___1927: {
+                t___8746 = sid__505("sessions");
+                t___8747 = SqlBuilder::new();
+                t___8747.append_safe("expired = ");
+                t___8747.append_boolean(true);
+                t___8750 = t___8747.accumulated();
+                t___8751 = delete_from(t___8746.clone()).r#where(t___8750.clone());
+                t___8752 = SqlBuilder::new();
+                t___8752.append_safe("created_at < ");
+                t___8752.append_string("2023-01-01");
+                t___4289 = match t___8751.or_where(t___8752.accumulated()).to_sql() {
+                    Ok(x) => x,
+                    _ => break 'orelse___1927
+                };
+                q__1244 = t___4289.clone();
+                break 'ok___11002;
+            }
+            q__1244 = panic!();
+        }
+        let mut t___8759: bool = Some(q__1244.to_string().as_str()) == Some("DELETE FROM sessions WHERE expired = TRUE OR created_at < '2023-01-01'");
         #[derive(Clone)]
-        struct ClosureGroup___143 {
-            actual___1613: std::sync::Arc<String>
-        }
+        struct ClosureGroup___143 {}
         impl ClosureGroup___143 {
-            fn fn__7690(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected build(bobbyTables) == (select * from hi where name = 'Robert''); drop table hi;--') not ({})", self.actual___1613.clone()));
+            fn fn__8745(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("delete orWhere".to_string());
             }
         }
-        let closure_group = ClosureGroup___143 {
-            actual___1613: actual___1613.clone()
-        };
-        let fn__7690 = {
+        let closure_group = ClosureGroup___143 {};
+        let fn__8745 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7690())
+            std::sync::Arc::new(move | | closure_group.fn__8745())
         };
-        test___138.assert(t___7698, fn__7690.clone());
+        test___133.assert(t___8759, fn__8745.clone());
+        test___133.soft_fail_to_hard()
+    }
+    #[test]
+    fn deleteQueryWithLimit__1797() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___134 = temper_std::testing::Test::new();
+        let mut t___8735: SafeIdentifier;
+        let mut t___8736: SqlBuilder;
+        let mut t___8739: SqlFragment;
+        let mut t___4270: DeleteQuery;
+        let mut t___4271: SqlFragment;
+        let q__1246: SqlFragment;
+        'ok___11003: {
+            'orelse___1928: {
+                t___8735 = sid__505("logs");
+                t___8736 = SqlBuilder::new();
+                t___8736.append_safe("level = ");
+                t___8736.append_string("debug");
+                t___8739 = t___8736.accumulated();
+                t___4270 = match delete_from(t___8735.clone()).r#where(t___8739.clone()).limit(1000) {
+                    Ok(x) => x,
+                    _ => break 'orelse___1928
+                };
+                t___4271 = match t___4270.to_sql() {
+                    Ok(x) => x,
+                    _ => break 'orelse___1928
+                };
+                q__1246 = t___4271.clone();
+                break 'ok___11003;
+            }
+            q__1246 = panic!();
+        }
+        let mut t___8743: bool = Some(q__1246.to_string().as_str()) == Some("DELETE FROM logs WHERE level = 'debug' LIMIT 1000");
         #[derive(Clone)]
         struct ClosureGroup___144 {}
         impl ClosureGroup___144 {
-            fn fn__7689(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new("expected buildWrong(bobbyTables) == (select * from hi where name = 'Robert'); drop table hi;--') not (select * from hi where name = 'Robert'); drop table hi;--')".to_string());
+            fn fn__8734(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("delete limit".to_string());
             }
         }
         let closure_group = ClosureGroup___144 {};
-        let fn__7689 = {
+        let fn__8734 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7689())
+            std::sync::Arc::new(move | | closure_group.fn__8734())
         };
-        test___138.assert(true, fn__7689.clone());
-        test___138.soft_fail_to_hard()
+        test___134.assert(t___8743, fn__8734.clone());
+        test___134.soft_fail_to_hard()
     }
     #[test]
-    fn stringEdgeCases__1617() -> temper_core::Result<()> {
-        crate::init(None);
-        temper_std::init(None);
-        let test___139 = temper_std::testing::Test::new();
-        let mut t___7652: SqlBuilder = SqlBuilder::new();
-        t___7652.append_safe("v = ");
-        t___7652.append_string("");
-        let actual___1618: std::sync::Arc<String> = t___7652.accumulated().to_string();
-        let mut t___7658: bool = Some(actual___1618.as_str()) == Some("v = ''");
-        #[derive(Clone)]
-        struct ClosureGroup___145 {
-            actual___1618: std::sync::Arc<String>
-        }
-        impl ClosureGroup___145 {
-            fn fn__7651(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, \"\").toString() == (v = '') not ({})", self.actual___1618.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___145 {
-            actual___1618: actual___1618.clone()
-        };
-        let fn__7651 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7651())
-        };
-        test___139.assert(t___7658, fn__7651.clone());
-        let mut t___7660: SqlBuilder = SqlBuilder::new();
-        t___7660.append_safe("v = ");
-        t___7660.append_string("a''b");
-        let actual___1621: std::sync::Arc<String> = t___7660.accumulated().to_string();
-        let mut t___7666: bool = Some(actual___1621.as_str()) == Some("v = 'a''''b'");
-        #[derive(Clone)]
-        struct ClosureGroup___146 {
-            actual___1621: std::sync::Arc<String>
-        }
-        impl ClosureGroup___146 {
-            fn fn__7650(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, \"a''b\").toString() == (v = 'a''''b') not ({})", self.actual___1621.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___146 {
-            actual___1621: actual___1621.clone()
-        };
-        let fn__7650 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7650())
-        };
-        test___139.assert(t___7666, fn__7650.clone());
-        let mut t___7668: SqlBuilder = SqlBuilder::new();
-        t___7668.append_safe("v = ");
-        t___7668.append_string("Hello 世界");
-        let actual___1624: std::sync::Arc<String> = t___7668.accumulated().to_string();
-        let mut t___7674: bool = Some(actual___1624.as_str()) == Some("v = 'Hello 世界'");
-        #[derive(Clone)]
-        struct ClosureGroup___147 {
-            actual___1624: std::sync::Arc<String>
-        }
-        impl ClosureGroup___147 {
-            fn fn__7649(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, \"Hello 世界\").toString() == (v = 'Hello 世界') not ({})", self.actual___1624.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___147 {
-            actual___1624: actual___1624.clone()
-        };
-        let fn__7649 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7649())
-        };
-        test___139.assert(t___7674, fn__7649.clone());
-        let mut t___7676: SqlBuilder = SqlBuilder::new();
-        t___7676.append_safe("v = ");
-        t___7676.append_string("Line1\x0aLine2");
-        let actual___1627: std::sync::Arc<String> = t___7676.accumulated().to_string();
-        let mut t___7682: bool = Some(actual___1627.as_str()) == Some("v = 'Line1\x0aLine2'");
-        #[derive(Clone)]
-        struct ClosureGroup___148 {
-            actual___1627: std::sync::Arc<String>
-        }
-        impl ClosureGroup___148 {
-            fn fn__7648(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, \"Line1\\nLine2\").toString() == (v = 'Line1\x0aLine2') not ({})", self.actual___1627.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___148 {
-            actual___1627: actual___1627.clone()
-        };
-        let fn__7648 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7648())
-        };
-        test___139.assert(t___7682, fn__7648.clone());
-        test___139.soft_fail_to_hard()
-    }
-    #[test]
-    fn numbersAndBooleans__1630() -> temper_core::Result<()> {
-        crate::init(None);
-        temper_std::init(None);
-        let test___140 = temper_std::testing::Test::new();
-        let mut t___3707: temper_std::temporal::Date;
-        let mut t___7623: SqlBuilder = SqlBuilder::new();
-        t___7623.append_safe("select ");
-        t___7623.append_int32(42);
-        t___7623.append_safe(", ");
-        t___7623.append_int64(43);
-        t___7623.append_safe(", ");
-        t___7623.append_float64(19.99f64);
-        t___7623.append_safe(", ");
-        t___7623.append_boolean(true);
-        t___7623.append_safe(", ");
-        t___7623.append_boolean(false);
-        let actual___1631: std::sync::Arc<String> = t___7623.accumulated().to_string();
-        let mut t___7637: bool = Some(actual___1631.as_str()) == Some("select 42, 43, 19.99, TRUE, FALSE");
-        #[derive(Clone)]
-        struct ClosureGroup___149 {
-            actual___1631: std::sync::Arc<String>
-        }
-        impl ClosureGroup___149 {
-            fn fn__7622(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"select \", \\interpolate, 42, \", \", \\interpolate, 43, \", \", \\interpolate, 19.99, \", \", \\interpolate, true, \", \", \\interpolate, false).toString() == (select 42, 43, 19.99, TRUE, FALSE) not ({})", self.actual___1631.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___149 {
-            actual___1631: actual___1631.clone()
-        };
-        let fn__7622 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7622())
-        };
-        test___140.assert(t___7637, fn__7622.clone());
-        let date__1303: temper_std::temporal::Date;
-        'ok___9750: {
-            'orelse___1732: {
-                t___3707 = match temper_std::temporal::Date::new(2024, 12, 25) {
-                    Ok(x) => x,
-                    _ => break 'orelse___1732
-                };
-                date__1303 = t___3707.clone();
-                break 'ok___9750;
-            }
-            date__1303 = panic!();
-        }
-        let mut t___7639: SqlBuilder = SqlBuilder::new();
-        t___7639.append_safe("insert into t values (");
-        t___7639.append_date(date__1303.clone());
-        t___7639.append_safe(")");
-        let actual___1634: std::sync::Arc<String> = t___7639.accumulated().to_string();
-        let mut t___7646: bool = Some(actual___1634.as_str()) == Some("insert into t values ('2024-12-25')");
-        #[derive(Clone)]
-        struct ClosureGroup___150 {
-            actual___1634: std::sync::Arc<String>
-        }
-        impl ClosureGroup___150 {
-            fn fn__7621(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"insert into t values (\", \\interpolate, date, \")\").toString() == (insert into t values ('2024-12-25')) not ({})", self.actual___1634.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___150 {
-            actual___1634: actual___1634.clone()
-        };
-        let fn__7621 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7621())
-        };
-        test___140.assert(t___7646, fn__7621.clone());
-        test___140.soft_fail_to_hard()
-    }
-    #[test]
-    fn lists__1637() -> temper_core::Result<()> {
+    fn safeIdentifierAcceptsValidNames__1799() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___141 = temper_std::testing::Test::new();
-        let mut t___3679: temper_std::temporal::Date;
-        let mut t___3680: temper_std::temporal::Date;
-        let mut t___3681: temper_std::temporal::Date;
-        let mut t___3682: temper_std::temporal::Date;
-        let mut t___7567: SqlBuilder = SqlBuilder::new();
-        t___7567.append_safe("v IN (");
-        t___7567.append_string_list(temper_core::ToListed::to_listed([std::sync::Arc::new("a".to_string()), std::sync::Arc::new("b".to_string()), std::sync::Arc::new("c'd".to_string())]));
-        t___7567.append_safe(")");
-        let actual___1638: std::sync::Arc<String> = t___7567.accumulated().to_string();
-        let mut t___7574: bool = Some(actual___1638.as_str()) == Some("v IN ('a', 'b', 'c''d')");
-        #[derive(Clone)]
-        struct ClosureGroup___151 {
-            actual___1638: std::sync::Arc<String>
-        }
-        impl ClosureGroup___151 {
-            fn fn__7566(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, list(\"a\", \"b\", \"c'd\"), \")\").toString() == (v IN ('a', 'b', 'c''d')) not ({})", self.actual___1638.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___151 {
-            actual___1638: actual___1638.clone()
-        };
-        let fn__7566 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7566())
-        };
-        test___141.assert(t___7574, fn__7566.clone());
-        let mut t___7576: SqlBuilder = SqlBuilder::new();
-        t___7576.append_safe("v IN (");
-        t___7576.append_int32_list(temper_core::ToListed::to_listed([1, 2, 3]));
-        t___7576.append_safe(")");
-        let actual___1641: std::sync::Arc<String> = t___7576.accumulated().to_string();
-        let mut t___7583: bool = Some(actual___1641.as_str()) == Some("v IN (1, 2, 3)");
-        #[derive(Clone)]
-        struct ClosureGroup___152 {
-            actual___1641: std::sync::Arc<String>
-        }
-        impl ClosureGroup___152 {
-            fn fn__7565(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, list(1, 2, 3), \")\").toString() == (v IN (1, 2, 3)) not ({})", self.actual___1641.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___152 {
-            actual___1641: actual___1641.clone()
-        };
-        let fn__7565 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7565())
-        };
-        test___141.assert(t___7583, fn__7565.clone());
-        let mut t___7585: SqlBuilder = SqlBuilder::new();
-        t___7585.append_safe("v IN (");
-        t___7585.append_int64_list(temper_core::ToListed::to_listed([1, 2]));
-        t___7585.append_safe(")");
-        let actual___1644: std::sync::Arc<String> = t___7585.accumulated().to_string();
-        let mut t___7592: bool = Some(actual___1644.as_str()) == Some("v IN (1, 2)");
-        #[derive(Clone)]
-        struct ClosureGroup___153 {
-            actual___1644: std::sync::Arc<String>
-        }
-        impl ClosureGroup___153 {
-            fn fn__7564(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, list(1, 2), \")\").toString() == (v IN (1, 2)) not ({})", self.actual___1644.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___153 {
-            actual___1644: actual___1644.clone()
-        };
-        let fn__7564 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7564())
-        };
-        test___141.assert(t___7592, fn__7564.clone());
-        let mut t___7594: SqlBuilder = SqlBuilder::new();
-        t___7594.append_safe("v IN (");
-        t___7594.append_float64_list(temper_core::ToListed::to_listed([1.0f64, 2.0f64]));
-        t___7594.append_safe(")");
-        let actual___1647: std::sync::Arc<String> = t___7594.accumulated().to_string();
-        let mut t___7601: bool = Some(actual___1647.as_str()) == Some("v IN (1.0, 2.0)");
-        #[derive(Clone)]
-        struct ClosureGroup___154 {
-            actual___1647: std::sync::Arc<String>
-        }
-        impl ClosureGroup___154 {
-            fn fn__7563(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, list(1.0, 2.0), \")\").toString() == (v IN (1.0, 2.0)) not ({})", self.actual___1647.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___154 {
-            actual___1647: actual___1647.clone()
-        };
-        let fn__7563 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7563())
-        };
-        test___141.assert(t___7601, fn__7563.clone());
-        let mut t___7603: SqlBuilder = SqlBuilder::new();
-        t___7603.append_safe("v IN (");
-        t___7603.append_boolean_list(temper_core::ToListed::to_listed([true, false]));
-        t___7603.append_safe(")");
-        let actual___1650: std::sync::Arc<String> = t___7603.accumulated().to_string();
-        let mut t___7610: bool = Some(actual___1650.as_str()) == Some("v IN (TRUE, FALSE)");
-        #[derive(Clone)]
-        struct ClosureGroup___155 {
-            actual___1650: std::sync::Arc<String>
-        }
-        impl ClosureGroup___155 {
-            fn fn__7562(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, list(true, false), \")\").toString() == (v IN (TRUE, FALSE)) not ({})", self.actual___1650.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___155 {
-            actual___1650: actual___1650.clone()
-        };
-        let fn__7562 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7562())
-        };
-        test___141.assert(t___7610, fn__7562.clone());
-        'ok___9751: {
-            'orelse___1733: {
-                t___3679 = match temper_std::temporal::Date::new(2024, 1, 1) {
+        let mut t___4259: SafeIdentifier;
+        let id__1284: SafeIdentifier;
+        'ok___11004: {
+            'orelse___1929: {
+                t___4259 = match safe_identifier("user_name") {
                     Ok(x) => x,
-                    _ => break 'orelse___1733
+                    _ => break 'orelse___1929
                 };
-                t___3680 = t___3679.clone();
-                break 'ok___9751;
+                id__1284 = t___4259.clone();
+                break 'ok___11004;
             }
-            t___3680 = panic!();
+            id__1284 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
         }
-        'ok___9752: {
-            'orelse___1734: {
-                t___3681 = match temper_std::temporal::Date::new(2024, 12, 25) {
-                    Ok(x) => x,
-                    _ => break 'orelse___1734
-                };
-                t___3682 = t___3681.clone();
-                break 'ok___9752;
-            }
-            t___3682 = panic!();
-        }
-        let dates__1305: temper_core::List<temper_std::temporal::Date> = std::sync::Arc::new(vec![t___3680.clone(), t___3682.clone()]);
-        let mut t___7612: SqlBuilder = SqlBuilder::new();
-        t___7612.append_safe("v IN (");
-        t___7612.append_date_list(temper_core::ToListed::to_listed(dates__1305.clone()));
-        t___7612.append_safe(")");
-        let actual___1653: std::sync::Arc<String> = t___7612.accumulated().to_string();
-        let mut t___7619: bool = Some(actual___1653.as_str()) == Some("v IN ('2024-01-01', '2024-12-25')");
+        let mut t___8732: bool = Some(id__1284.sql_value().as_str()) == Some("user_name");
         #[derive(Clone)]
-        struct ClosureGroup___156 {
-            actual___1653: std::sync::Arc<String>
-        }
-        impl ClosureGroup___156 {
-            fn fn__7561(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, dates, \")\").toString() == (v IN ('2024-01-01', '2024-12-25')) not ({})", self.actual___1653.clone()));
+        struct ClosureGroup___145 {}
+        impl ClosureGroup___145 {
+            fn fn__8729(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("value should round-trip".to_string());
             }
         }
-        let closure_group = ClosureGroup___156 {
-            actual___1653: actual___1653.clone()
-        };
-        let fn__7561 = {
+        let closure_group = ClosureGroup___145 {};
+        let fn__8729 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7561())
+            std::sync::Arc::new(move | | closure_group.fn__8729())
         };
-        test___141.assert(t___7619, fn__7561.clone());
+        test___141.assert(t___8732, fn__8729.clone());
         test___141.soft_fail_to_hard()
     }
     #[test]
-    fn sqlFloat64_naNRendersAsNull__1656() -> temper_core::Result<()> {
+    fn safeIdentifierRejectsEmptyString__1800() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___142 = temper_std::testing::Test::new();
-        let nan__1307: f64;
-        nan__1307 = temper_core::float64::div(0.0f64, 0.0f64) ? ;
-        let mut t___7553: SqlBuilder = SqlBuilder::new();
-        t___7553.append_safe("v = ");
-        t___7553.append_float64(nan__1307);
-        let actual___1657: std::sync::Arc<String> = t___7553.accumulated().to_string();
-        let mut t___7559: bool = Some(actual___1657.as_str()) == Some("v = NULL");
-        #[derive(Clone)]
-        struct ClosureGroup___157 {
-            actual___1657: std::sync::Arc<String>
+        let didBubble__1286: bool;
+        'ok___11005: {
+            'orelse___1930: {
+                match safe_identifier("") {
+                    Ok(x) => x,
+                    _ => break 'orelse___1930
+                };
+                didBubble__1286 = false;
+                break 'ok___11005;
+            }
+            didBubble__1286 = true;
         }
-        impl ClosureGroup___157 {
-            fn fn__7552(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, nan).toString() == (v = NULL) not ({})", self.actual___1657.clone()));
+        #[derive(Clone)]
+        struct ClosureGroup___146 {}
+        impl ClosureGroup___146 {
+            fn fn__8726(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("empty string should bubble".to_string());
             }
         }
-        let closure_group = ClosureGroup___157 {
-            actual___1657: actual___1657.clone()
-        };
-        let fn__7552 = {
+        let closure_group = ClosureGroup___146 {};
+        let fn__8726 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7552())
+            std::sync::Arc::new(move | | closure_group.fn__8726())
         };
-        test___142.assert(t___7559, fn__7552.clone());
+        test___142.assert(didBubble__1286, fn__8726.clone());
         test___142.soft_fail_to_hard()
     }
     #[test]
-    fn sqlFloat64_infinityRendersAsNull__1660() -> temper_core::Result<()> {
+    fn safeIdentifierRejectsLeadingDigit__1801() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___143 = temper_std::testing::Test::new();
-        let inf__1309: f64;
-        inf__1309 = temper_core::float64::div(1.0f64, 0.0f64) ? ;
-        let mut t___7544: SqlBuilder = SqlBuilder::new();
-        t___7544.append_safe("v = ");
-        t___7544.append_float64(inf__1309);
-        let actual___1661: std::sync::Arc<String> = t___7544.accumulated().to_string();
-        let mut t___7550: bool = Some(actual___1661.as_str()) == Some("v = NULL");
-        #[derive(Clone)]
-        struct ClosureGroup___158 {
-            actual___1661: std::sync::Arc<String>
+        let didBubble__1288: bool;
+        'ok___11006: {
+            'orelse___1931: {
+                match safe_identifier("1col") {
+                    Ok(x) => x,
+                    _ => break 'orelse___1931
+                };
+                didBubble__1288 = false;
+                break 'ok___11006;
+            }
+            didBubble__1288 = true;
         }
-        impl ClosureGroup___158 {
-            fn fn__7543(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, inf).toString() == (v = NULL) not ({})", self.actual___1661.clone()));
+        #[derive(Clone)]
+        struct ClosureGroup___147 {}
+        impl ClosureGroup___147 {
+            fn fn__8723(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("leading digit should bubble".to_string());
             }
         }
-        let closure_group = ClosureGroup___158 {
-            actual___1661: actual___1661.clone()
-        };
-        let fn__7543 = {
+        let closure_group = ClosureGroup___147 {};
+        let fn__8723 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7543())
+            std::sync::Arc::new(move | | closure_group.fn__8723())
         };
-        test___143.assert(t___7550, fn__7543.clone());
+        test___143.assert(didBubble__1288, fn__8723.clone());
         test___143.soft_fail_to_hard()
     }
     #[test]
-    fn sqlFloat64_negativeInfinityRendersAsNull__1664() -> temper_core::Result<()> {
+    fn safeIdentifierRejectsSqlMetacharacters__1802() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___144 = temper_std::testing::Test::new();
-        let ninf__1311: f64;
-        ninf__1311 = temper_core::float64::div(-1.0f64, 0.0f64) ? ;
-        let mut t___7535: SqlBuilder = SqlBuilder::new();
-        t___7535.append_safe("v = ");
-        t___7535.append_float64(ninf__1311);
-        let actual___1665: std::sync::Arc<String> = t___7535.accumulated().to_string();
-        let mut t___7541: bool = Some(actual___1665.as_str()) == Some("v = NULL");
+        let cases__1290: temper_core::List<std::sync::Arc<String>> = std::sync::Arc::new(vec![std::sync::Arc::new("name); DROP TABLE".to_string()), std::sync::Arc::new("col'".to_string()), std::sync::Arc::new("a b".to_string()), std::sync::Arc::new("a-b".to_string()), std::sync::Arc::new("a.b".to_string()), std::sync::Arc::new("a;b".to_string())]);
         #[derive(Clone)]
-        struct ClosureGroup___159 {
-            actual___1665: std::sync::Arc<String>
+        struct ClosureGroup___148 {
+            test___144: temper_std::testing::Test
         }
-        impl ClosureGroup___159 {
-            fn fn__7534(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, ninf).toString() == (v = NULL) not ({})", self.actual___1665.clone()));
+        impl ClosureGroup___148 {
+            fn fn__8720(& self, c__1291: impl temper_core::ToArcString) {
+                let c__1291 = c__1291.to_arc_string();
+                let didBubble__1292: bool;
+                'ok___11007: {
+                    'orelse___1932: {
+                        match safe_identifier(c__1291.clone()) {
+                            Ok(x) => x,
+                            _ => break 'orelse___1932
+                        };
+                        didBubble__1292 = false;
+                        break 'ok___11007;
+                    }
+                    didBubble__1292 = true;
+                }
+                #[derive(Clone)]
+                struct ClosureGroup___149 {
+                    c__1291: std::sync::Arc<String>
+                }
+                impl ClosureGroup___149 {
+                    fn fn__8717(& self) -> std::sync::Arc<String> {
+                        return std::sync::Arc::new(format!("should reject: {}", self.c__1291.clone()));
+                    }
+                }
+                let closure_group = ClosureGroup___149 {
+                    c__1291: c__1291.clone()
+                };
+                let fn__8717 = {
+                    let closure_group = closure_group.clone();
+                    std::sync::Arc::new(move | | closure_group.fn__8717())
+                };
+                self.test___144.assert(didBubble__1292, fn__8717.clone());
             }
         }
-        let closure_group = ClosureGroup___159 {
-            actual___1665: actual___1665.clone()
+        let closure_group = ClosureGroup___148 {
+            test___144: test___144.clone()
         };
-        let fn__7534 = {
+        let fn__8720 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7534())
+            std::sync::Arc::new(move | c__1291: std::sync::Arc<String> | closure_group.fn__8720(c__1291))
         };
-        test___144.assert(t___7541, fn__7534.clone());
+        temper_core::listed::list_for_each( & cases__1290, & ( * fn__8720.clone()));
         test___144.soft_fail_to_hard()
     }
     #[test]
-    fn sqlFloat64_normalValuesStillWork__1668() -> temper_core::Result<()> {
+    fn tableDefFieldLookupFound__1803() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___145 = temper_std::testing::Test::new();
-        let mut t___7510: SqlBuilder = SqlBuilder::new();
-        t___7510.append_safe("v = ");
-        t___7510.append_float64(3.14f64);
-        let actual___1669: std::sync::Arc<String> = t___7510.accumulated().to_string();
-        let mut t___7516: bool = Some(actual___1669.as_str()) == Some("v = 3.14");
-        #[derive(Clone)]
-        struct ClosureGroup___160 {
-            actual___1669: std::sync::Arc<String>
+        let mut t___4236: SafeIdentifier;
+        let mut t___4237: SafeIdentifier;
+        let mut t___4238: SafeIdentifier;
+        let mut t___4239: SafeIdentifier;
+        let mut t___4242: SafeIdentifier;
+        let mut t___4243: SafeIdentifier;
+        let mut t___4247: FieldDef;
+        'ok___11008: {
+            'orelse___1933: {
+                t___4236 = match safe_identifier("users") {
+                    Ok(x) => x,
+                    _ => break 'orelse___1933
+                };
+                t___4237 = t___4236.clone();
+                break 'ok___11008;
+            }
+            t___4237 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
         }
-        impl ClosureGroup___160 {
-            fn fn__7509(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, 3.14).toString() == (v = 3.14) not ({})", self.actual___1669.clone()));
+        'ok___11009: {
+            'orelse___1934: {
+                t___4238 = match safe_identifier("name") {
+                    Ok(x) => x,
+                    _ => break 'orelse___1934
+                };
+                t___4239 = t___4238.clone();
+                break 'ok___11009;
+            }
+            t___4239 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+        }
+        let mut t___8707: StringField = StringField::new();
+        let mut t___8708: FieldDef = FieldDef::new(t___4239.clone(), FieldType::new(t___8707.clone()), false);
+        'ok___11010: {
+            'orelse___1935: {
+                t___4242 = match safe_identifier("age") {
+                    Ok(x) => x,
+                    _ => break 'orelse___1935
+                };
+                t___4243 = t___4242.clone();
+                break 'ok___11010;
+            }
+            t___4243 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+        }
+        let mut t___8709: IntField = IntField::new();
+        let mut t___8710: FieldDef = FieldDef::new(t___4243.clone(), FieldType::new(t___8709.clone()), false);
+        let td__1294: TableDef = TableDef::new(t___4237.clone(), [t___8708.clone(), t___8710.clone()]);
+        let f__1295: FieldDef;
+        'ok___11011: {
+            'orelse___1936: {
+                t___4247 = match td__1294.field("age") {
+                    Ok(x) => x,
+                    _ => break 'orelse___1936
+                };
+                f__1295 = t___4247.clone();
+                break 'ok___11011;
+            }
+            f__1295 = panic!();
+        }
+        let mut t___8715: bool = Some(f__1295.name().sql_value().as_str()) == Some("age");
+        #[derive(Clone)]
+        struct ClosureGroup___150 {}
+        impl ClosureGroup___150 {
+            fn fn__8706(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("should find age field".to_string());
             }
         }
-        let closure_group = ClosureGroup___160 {
-            actual___1669: actual___1669.clone()
-        };
-        let fn__7509 = {
+        let closure_group = ClosureGroup___150 {};
+        let fn__8706 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7509())
+            std::sync::Arc::new(move | | closure_group.fn__8706())
         };
-        test___145.assert(t___7516, fn__7509.clone());
-        let mut t___7518: SqlBuilder = SqlBuilder::new();
-        t___7518.append_safe("v = ");
-        t___7518.append_float64(0.0f64);
-        let actual___1672: std::sync::Arc<String> = t___7518.accumulated().to_string();
-        let mut t___7524: bool = Some(actual___1672.as_str()) == Some("v = 0.0");
-        #[derive(Clone)]
-        struct ClosureGroup___161 {
-            actual___1672: std::sync::Arc<String>
-        }
-        impl ClosureGroup___161 {
-            fn fn__7508(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, 0.0).toString() == (v = 0.0) not ({})", self.actual___1672.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___161 {
-            actual___1672: actual___1672.clone()
-        };
-        let fn__7508 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7508())
-        };
-        test___145.assert(t___7524, fn__7508.clone());
-        let mut t___7526: SqlBuilder = SqlBuilder::new();
-        t___7526.append_safe("v = ");
-        t___7526.append_float64(-42.5f64);
-        let actual___1675: std::sync::Arc<String> = t___7526.accumulated().to_string();
-        let mut t___7532: bool = Some(actual___1675.as_str()) == Some("v = -42.5");
-        #[derive(Clone)]
-        struct ClosureGroup___162 {
-            actual___1675: std::sync::Arc<String>
-        }
-        impl ClosureGroup___162 {
-            fn fn__7507(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, -42.5).toString() == (v = -42.5) not ({})", self.actual___1675.clone()));
-            }
-        }
-        let closure_group = ClosureGroup___162 {
-            actual___1675: actual___1675.clone()
-        };
-        let fn__7507 = {
-            let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7507())
-        };
-        test___145.assert(t___7532, fn__7507.clone());
+        test___145.assert(t___8715, fn__8706.clone());
         test___145.soft_fail_to_hard()
     }
     #[test]
-    fn sqlDateRendersWithQuotes__1678() -> temper_core::Result<()> {
+    fn tableDefFieldLookupNotFoundBubbles__1804() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___146 = temper_std::testing::Test::new();
-        let mut t___3575: temper_std::temporal::Date;
-        let d__1314: temper_std::temporal::Date;
-        'ok___9753: {
-            'orelse___1735: {
-                t___3575 = match temper_std::temporal::Date::new(2024, 6, 15) {
+        let mut t___4227: SafeIdentifier;
+        let mut t___4228: SafeIdentifier;
+        let mut t___4229: SafeIdentifier;
+        let mut t___4230: SafeIdentifier;
+        'ok___11012: {
+            'orelse___1937: {
+                t___4227 = match safe_identifier("users") {
                     Ok(x) => x,
-                    _ => break 'orelse___1735
+                    _ => break 'orelse___1937
                 };
-                d__1314 = t___3575.clone();
-                break 'ok___9753;
+                t___4228 = t___4227.clone();
+                break 'ok___11012;
             }
-            d__1314 = panic!();
+            t___4228 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
         }
-        let mut t___7499: SqlBuilder = SqlBuilder::new();
-        t___7499.append_safe("v = ");
-        t___7499.append_date(d__1314.clone());
-        let actual___1679: std::sync::Arc<String> = t___7499.accumulated().to_string();
-        let mut t___7505: bool = Some(actual___1679.as_str()) == Some("v = '2024-06-15'");
+        'ok___11013: {
+            'orelse___1938: {
+                t___4229 = match safe_identifier("name") {
+                    Ok(x) => x,
+                    _ => break 'orelse___1938
+                };
+                t___4230 = t___4229.clone();
+                break 'ok___11013;
+            }
+            t___4230 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+        }
+        let mut t___8701: StringField = StringField::new();
+        let mut t___8702: FieldDef = FieldDef::new(t___4230.clone(), FieldType::new(t___8701.clone()), false);
+        let td__1297: TableDef = TableDef::new(t___4228.clone(), [t___8702.clone()]);
+        let didBubble__1298: bool;
+        'ok___11014: {
+            'orelse___1939: {
+                match td__1297.field("nonexistent") {
+                    Ok(x) => x,
+                    _ => break 'orelse___1939
+                };
+                didBubble__1298 = false;
+                break 'ok___11014;
+            }
+            didBubble__1298 = true;
+        }
         #[derive(Clone)]
-        struct ClosureGroup___163 {
-            actual___1679: std::sync::Arc<String>
-        }
-        impl ClosureGroup___163 {
-            fn fn__7498(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, d).toString() == (v = '2024-06-15') not ({})", self.actual___1679.clone()));
+        struct ClosureGroup___151 {}
+        impl ClosureGroup___151 {
+            fn fn__8700(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("unknown field should bubble".to_string());
             }
         }
-        let closure_group = ClosureGroup___163 {
-            actual___1679: actual___1679.clone()
-        };
-        let fn__7498 = {
+        let closure_group = ClosureGroup___151 {};
+        let fn__8700 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7498())
+            std::sync::Arc::new(move | | closure_group.fn__8700())
         };
-        test___146.assert(t___7505, fn__7498.clone());
+        test___146.assert(didBubble__1298, fn__8700.clone());
         test___146.soft_fail_to_hard()
     }
     #[test]
-    fn nesting__1682() -> temper_core::Result<()> {
+    fn fieldDefNullableFlag__1805() -> temper_core::Result<()> {
         crate::init(None);
         temper_std::init(None);
         let test___147 = temper_std::testing::Test::new();
-        let name__1316: std::sync::Arc<String> = std::sync::Arc::new("Someone".to_string());
-        let mut t___7467: SqlBuilder = SqlBuilder::new();
-        t___7467.append_safe("where p.last_name = ");
-        t___7467.append_string("Someone");
-        let condition__1317: SqlFragment = t___7467.accumulated();
-        let mut t___7471: SqlBuilder = SqlBuilder::new();
-        t___7471.append_safe("select p.id from person p ");
-        t___7471.append_fragment(condition__1317.clone());
-        let actual___1684: std::sync::Arc<String> = t___7471.accumulated().to_string();
-        let mut t___7477: bool = Some(actual___1684.as_str()) == Some("select p.id from person p where p.last_name = 'Someone'");
+        let mut t___4215: SafeIdentifier;
+        let mut t___4216: SafeIdentifier;
+        let mut t___4219: SafeIdentifier;
+        let mut t___4220: SafeIdentifier;
+        'ok___11015: {
+            'orelse___1940: {
+                t___4215 = match safe_identifier("email") {
+                    Ok(x) => x,
+                    _ => break 'orelse___1940
+                };
+                t___4216 = t___4215.clone();
+                break 'ok___11015;
+            }
+            t___4216 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+        }
+        let mut t___8689: StringField = StringField::new();
+        let required__1300: FieldDef = FieldDef::new(t___4216.clone(), FieldType::new(t___8689.clone()), false);
+        'ok___11016: {
+            'orelse___1941: {
+                t___4219 = match safe_identifier("bio") {
+                    Ok(x) => x,
+                    _ => break 'orelse___1941
+                };
+                t___4220 = t___4219.clone();
+                break 'ok___11016;
+            }
+            t___4220 = temper_core::cast::<SafeIdentifier>(panic!()).unwrap();
+        }
+        let mut t___8691: StringField = StringField::new();
+        let optional__1301: FieldDef = FieldDef::new(t___4220.clone(), FieldType::new(t___8691.clone()), true);
+        let mut t___8695: bool = ! required__1300.nullable();
+        #[derive(Clone)]
+        struct ClosureGroup___152 {}
+        impl ClosureGroup___152 {
+            fn fn__8688(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("required field should not be nullable".to_string());
+            }
+        }
+        let closure_group = ClosureGroup___152 {};
+        let fn__8688 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8688())
+        };
+        test___147.assert(t___8695, fn__8688.clone());
+        let mut t___8697: bool = optional__1301.nullable();
+        #[derive(Clone)]
+        struct ClosureGroup___153 {}
+        impl ClosureGroup___153 {
+            fn fn__8687(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("optional field should be nullable".to_string());
+            }
+        }
+        let closure_group = ClosureGroup___153 {};
+        let fn__8687 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8687())
+        };
+        test___147.assert(t___8697, fn__8687.clone());
+        test___147.soft_fail_to_hard()
+    }
+    #[test]
+    fn stringEscaping__1806() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___151 = temper_std::testing::Test::new();
+        #[derive(Clone)]
+        struct ClosureGroup___154 {}
+        impl ClosureGroup___154 {
+            fn build__1427(& self, name__1429: impl temper_core::ToArcString) -> std::sync::Arc<String> {
+                let name__1429 = name__1429.to_arc_string();
+                let mut t___8669: SqlBuilder = SqlBuilder::new();
+                t___8669.append_safe("select * from hi where name = ");
+                t___8669.append_string(name__1429.clone());
+                return t___8669.accumulated().to_string();
+            }
+            fn buildWrong__1428(& self, name__1431: impl temper_core::ToArcString) -> std::sync::Arc<String> {
+                let name__1431 = name__1431.to_arc_string();
+                return std::sync::Arc::new(format!("select * from hi where name = '{}'", name__1431.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___154 {};
+        let build__1427 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | name__1429: std::sync::Arc<String> | closure_group.build__1427(name__1429))
+        };
+        let buildWrong__1428 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | name__1431: std::sync::Arc<String> | closure_group.buildWrong__1428(name__1431))
+        };
+        let actual___1808: std::sync::Arc<String> = build__1427(std::sync::Arc::new("world".to_string()));
+        let mut t___8679: bool = Some(actual___1808.as_str()) == Some("select * from hi where name = 'world'");
+        #[derive(Clone)]
+        struct ClosureGroup___155 {
+            actual___1808: std::sync::Arc<String>
+        }
+        impl ClosureGroup___155 {
+            fn fn__8676(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected build(\"world\") == (select * from hi where name = 'world') not ({})", self.actual___1808.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___155 {
+            actual___1808: actual___1808.clone()
+        };
+        let fn__8676 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8676())
+        };
+        test___151.assert(t___8679, fn__8676.clone());
+        let bobbyTables__1433: std::sync::Arc<String> = std::sync::Arc::new("Robert'); drop table hi;--".to_string());
+        let actual___1810: std::sync::Arc<String> = build__1427(std::sync::Arc::new("Robert'); drop table hi;--".to_string()));
+        let mut t___8683: bool = Some(actual___1810.as_str()) == Some("select * from hi where name = 'Robert''); drop table hi;--'");
+        #[derive(Clone)]
+        struct ClosureGroup___156 {
+            actual___1810: std::sync::Arc<String>
+        }
+        impl ClosureGroup___156 {
+            fn fn__8675(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected build(bobbyTables) == (select * from hi where name = 'Robert''); drop table hi;--') not ({})", self.actual___1810.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___156 {
+            actual___1810: actual___1810.clone()
+        };
+        let fn__8675 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8675())
+        };
+        test___151.assert(t___8683, fn__8675.clone());
+        #[derive(Clone)]
+        struct ClosureGroup___157 {}
+        impl ClosureGroup___157 {
+            fn fn__8674(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new("expected buildWrong(bobbyTables) == (select * from hi where name = 'Robert'); drop table hi;--') not (select * from hi where name = 'Robert'); drop table hi;--')".to_string());
+            }
+        }
+        let closure_group = ClosureGroup___157 {};
+        let fn__8674 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8674())
+        };
+        test___151.assert(true, fn__8674.clone());
+        test___151.soft_fail_to_hard()
+    }
+    #[test]
+    fn stringEdgeCases__1814() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___152 = temper_std::testing::Test::new();
+        let mut t___8637: SqlBuilder = SqlBuilder::new();
+        t___8637.append_safe("v = ");
+        t___8637.append_string("");
+        let actual___1815: std::sync::Arc<String> = t___8637.accumulated().to_string();
+        let mut t___8643: bool = Some(actual___1815.as_str()) == Some("v = ''");
+        #[derive(Clone)]
+        struct ClosureGroup___158 {
+            actual___1815: std::sync::Arc<String>
+        }
+        impl ClosureGroup___158 {
+            fn fn__8636(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, \"\").toString() == (v = '') not ({})", self.actual___1815.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___158 {
+            actual___1815: actual___1815.clone()
+        };
+        let fn__8636 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8636())
+        };
+        test___152.assert(t___8643, fn__8636.clone());
+        let mut t___8645: SqlBuilder = SqlBuilder::new();
+        t___8645.append_safe("v = ");
+        t___8645.append_string("a''b");
+        let actual___1818: std::sync::Arc<String> = t___8645.accumulated().to_string();
+        let mut t___8651: bool = Some(actual___1818.as_str()) == Some("v = 'a''''b'");
+        #[derive(Clone)]
+        struct ClosureGroup___159 {
+            actual___1818: std::sync::Arc<String>
+        }
+        impl ClosureGroup___159 {
+            fn fn__8635(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, \"a''b\").toString() == (v = 'a''''b') not ({})", self.actual___1818.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___159 {
+            actual___1818: actual___1818.clone()
+        };
+        let fn__8635 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8635())
+        };
+        test___152.assert(t___8651, fn__8635.clone());
+        let mut t___8653: SqlBuilder = SqlBuilder::new();
+        t___8653.append_safe("v = ");
+        t___8653.append_string("Hello 世界");
+        let actual___1821: std::sync::Arc<String> = t___8653.accumulated().to_string();
+        let mut t___8659: bool = Some(actual___1821.as_str()) == Some("v = 'Hello 世界'");
+        #[derive(Clone)]
+        struct ClosureGroup___160 {
+            actual___1821: std::sync::Arc<String>
+        }
+        impl ClosureGroup___160 {
+            fn fn__8634(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, \"Hello 世界\").toString() == (v = 'Hello 世界') not ({})", self.actual___1821.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___160 {
+            actual___1821: actual___1821.clone()
+        };
+        let fn__8634 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8634())
+        };
+        test___152.assert(t___8659, fn__8634.clone());
+        let mut t___8661: SqlBuilder = SqlBuilder::new();
+        t___8661.append_safe("v = ");
+        t___8661.append_string("Line1\x0aLine2");
+        let actual___1824: std::sync::Arc<String> = t___8661.accumulated().to_string();
+        let mut t___8667: bool = Some(actual___1824.as_str()) == Some("v = 'Line1\x0aLine2'");
+        #[derive(Clone)]
+        struct ClosureGroup___161 {
+            actual___1824: std::sync::Arc<String>
+        }
+        impl ClosureGroup___161 {
+            fn fn__8633(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, \"Line1\\nLine2\").toString() == (v = 'Line1\x0aLine2') not ({})", self.actual___1824.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___161 {
+            actual___1824: actual___1824.clone()
+        };
+        let fn__8633 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8633())
+        };
+        test___152.assert(t___8667, fn__8633.clone());
+        test___152.soft_fail_to_hard()
+    }
+    #[test]
+    fn numbersAndBooleans__1827() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___153 = temper_std::testing::Test::new();
+        let mut t___4160: temper_std::temporal::Date;
+        let mut t___8608: SqlBuilder = SqlBuilder::new();
+        t___8608.append_safe("select ");
+        t___8608.append_int32(42);
+        t___8608.append_safe(", ");
+        t___8608.append_int64(43);
+        t___8608.append_safe(", ");
+        t___8608.append_float64(19.99f64);
+        t___8608.append_safe(", ");
+        t___8608.append_boolean(true);
+        t___8608.append_safe(", ");
+        t___8608.append_boolean(false);
+        let actual___1828: std::sync::Arc<String> = t___8608.accumulated().to_string();
+        let mut t___8622: bool = Some(actual___1828.as_str()) == Some("select 42, 43, 19.99, TRUE, FALSE");
+        #[derive(Clone)]
+        struct ClosureGroup___162 {
+            actual___1828: std::sync::Arc<String>
+        }
+        impl ClosureGroup___162 {
+            fn fn__8607(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"select \", \\interpolate, 42, \", \", \\interpolate, 43, \", \", \\interpolate, 19.99, \", \", \\interpolate, true, \", \", \\interpolate, false).toString() == (select 42, 43, 19.99, TRUE, FALSE) not ({})", self.actual___1828.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___162 {
+            actual___1828: actual___1828.clone()
+        };
+        let fn__8607 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8607())
+        };
+        test___153.assert(t___8622, fn__8607.clone());
+        let date__1436: temper_std::temporal::Date;
+        'ok___11017: {
+            'orelse___1942: {
+                t___4160 = match temper_std::temporal::Date::new(2024, 12, 25) {
+                    Ok(x) => x,
+                    _ => break 'orelse___1942
+                };
+                date__1436 = t___4160.clone();
+                break 'ok___11017;
+            }
+            date__1436 = panic!();
+        }
+        let mut t___8624: SqlBuilder = SqlBuilder::new();
+        t___8624.append_safe("insert into t values (");
+        t___8624.append_date(date__1436.clone());
+        t___8624.append_safe(")");
+        let actual___1831: std::sync::Arc<String> = t___8624.accumulated().to_string();
+        let mut t___8631: bool = Some(actual___1831.as_str()) == Some("insert into t values ('2024-12-25')");
+        #[derive(Clone)]
+        struct ClosureGroup___163 {
+            actual___1831: std::sync::Arc<String>
+        }
+        impl ClosureGroup___163 {
+            fn fn__8606(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"insert into t values (\", \\interpolate, date, \")\").toString() == (insert into t values ('2024-12-25')) not ({})", self.actual___1831.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___163 {
+            actual___1831: actual___1831.clone()
+        };
+        let fn__8606 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8606())
+        };
+        test___153.assert(t___8631, fn__8606.clone());
+        test___153.soft_fail_to_hard()
+    }
+    #[test]
+    fn lists__1834() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___154 = temper_std::testing::Test::new();
+        let mut t___4132: temper_std::temporal::Date;
+        let mut t___4133: temper_std::temporal::Date;
+        let mut t___4134: temper_std::temporal::Date;
+        let mut t___4135: temper_std::temporal::Date;
+        let mut t___8552: SqlBuilder = SqlBuilder::new();
+        t___8552.append_safe("v IN (");
+        t___8552.append_string_list(temper_core::ToListed::to_listed([std::sync::Arc::new("a".to_string()), std::sync::Arc::new("b".to_string()), std::sync::Arc::new("c'd".to_string())]));
+        t___8552.append_safe(")");
+        let actual___1835: std::sync::Arc<String> = t___8552.accumulated().to_string();
+        let mut t___8559: bool = Some(actual___1835.as_str()) == Some("v IN ('a', 'b', 'c''d')");
         #[derive(Clone)]
         struct ClosureGroup___164 {
-            actual___1684: std::sync::Arc<String>
+            actual___1835: std::sync::Arc<String>
         }
         impl ClosureGroup___164 {
-            fn fn__7466(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"select p.id from person p \", \\interpolate, condition).toString() == (select p.id from person p where p.last_name = 'Someone') not ({})", self.actual___1684.clone()));
+            fn fn__8551(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, list(\"a\", \"b\", \"c'd\"), \")\").toString() == (v IN ('a', 'b', 'c''d')) not ({})", self.actual___1835.clone()));
             }
         }
         let closure_group = ClosureGroup___164 {
-            actual___1684: actual___1684.clone()
+            actual___1835: actual___1835.clone()
         };
-        let fn__7466 = {
+        let fn__8551 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7466())
+            std::sync::Arc::new(move | | closure_group.fn__8551())
         };
-        test___147.assert(t___7477, fn__7466.clone());
-        let mut t___7479: SqlBuilder = SqlBuilder::new();
-        t___7479.append_safe("select p.id from person p ");
-        t___7479.append_part(SqlPart::new(condition__1317.to_source()));
-        let actual___1687: std::sync::Arc<String> = t___7479.accumulated().to_string();
-        let mut t___7486: bool = Some(actual___1687.as_str()) == Some("select p.id from person p where p.last_name = 'Someone'");
+        test___154.assert(t___8559, fn__8551.clone());
+        let mut t___8561: SqlBuilder = SqlBuilder::new();
+        t___8561.append_safe("v IN (");
+        t___8561.append_int32_list(temper_core::ToListed::to_listed([1, 2, 3]));
+        t___8561.append_safe(")");
+        let actual___1838: std::sync::Arc<String> = t___8561.accumulated().to_string();
+        let mut t___8568: bool = Some(actual___1838.as_str()) == Some("v IN (1, 2, 3)");
         #[derive(Clone)]
         struct ClosureGroup___165 {
-            actual___1687: std::sync::Arc<String>
+            actual___1838: std::sync::Arc<String>
         }
         impl ClosureGroup___165 {
-            fn fn__7465(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"select p.id from person p \", \\interpolate, condition.toSource()).toString() == (select p.id from person p where p.last_name = 'Someone') not ({})", self.actual___1687.clone()));
+            fn fn__8550(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, list(1, 2, 3), \")\").toString() == (v IN (1, 2, 3)) not ({})", self.actual___1838.clone()));
             }
         }
         let closure_group = ClosureGroup___165 {
-            actual___1687: actual___1687.clone()
+            actual___1838: actual___1838.clone()
         };
-        let fn__7465 = {
+        let fn__8550 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7465())
+            std::sync::Arc::new(move | | closure_group.fn__8550())
         };
-        test___147.assert(t___7486, fn__7465.clone());
-        let parts__1318: temper_core::List<SqlPart> = std::sync::Arc::new(vec![SqlPart::new(SqlString::new("a'b")), SqlPart::new(SqlInt32::new(3))]);
-        let mut t___7490: SqlBuilder = SqlBuilder::new();
-        t___7490.append_safe("select ");
-        t___7490.append_part_list(parts__1318.clone());
-        let actual___1690: std::sync::Arc<String> = t___7490.accumulated().to_string();
-        let mut t___7496: bool = Some(actual___1690.as_str()) == Some("select 'a''b', 3");
+        test___154.assert(t___8568, fn__8550.clone());
+        let mut t___8570: SqlBuilder = SqlBuilder::new();
+        t___8570.append_safe("v IN (");
+        t___8570.append_int64_list(temper_core::ToListed::to_listed([1, 2]));
+        t___8570.append_safe(")");
+        let actual___1841: std::sync::Arc<String> = t___8570.accumulated().to_string();
+        let mut t___8577: bool = Some(actual___1841.as_str()) == Some("v IN (1, 2)");
         #[derive(Clone)]
         struct ClosureGroup___166 {
-            actual___1690: std::sync::Arc<String>
+            actual___1841: std::sync::Arc<String>
         }
         impl ClosureGroup___166 {
-            fn fn__7464(& self) -> std::sync::Arc<String> {
-                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"select \", \\interpolate, parts).toString() == (select 'a''b', 3) not ({})", self.actual___1690.clone()));
+            fn fn__8549(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, list(1, 2), \")\").toString() == (v IN (1, 2)) not ({})", self.actual___1841.clone()));
             }
         }
         let closure_group = ClosureGroup___166 {
-            actual___1690: actual___1690.clone()
+            actual___1841: actual___1841.clone()
         };
-        let fn__7464 = {
+        let fn__8549 = {
             let closure_group = closure_group.clone();
-            std::sync::Arc::new(move | | closure_group.fn__7464())
+            std::sync::Arc::new(move | | closure_group.fn__8549())
         };
-        test___147.assert(t___7496, fn__7464.clone());
-        test___147.soft_fail_to_hard()
+        test___154.assert(t___8577, fn__8549.clone());
+        let mut t___8579: SqlBuilder = SqlBuilder::new();
+        t___8579.append_safe("v IN (");
+        t___8579.append_float64_list(temper_core::ToListed::to_listed([1.0f64, 2.0f64]));
+        t___8579.append_safe(")");
+        let actual___1844: std::sync::Arc<String> = t___8579.accumulated().to_string();
+        let mut t___8586: bool = Some(actual___1844.as_str()) == Some("v IN (1.0, 2.0)");
+        #[derive(Clone)]
+        struct ClosureGroup___167 {
+            actual___1844: std::sync::Arc<String>
+        }
+        impl ClosureGroup___167 {
+            fn fn__8548(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, list(1.0, 2.0), \")\").toString() == (v IN (1.0, 2.0)) not ({})", self.actual___1844.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___167 {
+            actual___1844: actual___1844.clone()
+        };
+        let fn__8548 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8548())
+        };
+        test___154.assert(t___8586, fn__8548.clone());
+        let mut t___8588: SqlBuilder = SqlBuilder::new();
+        t___8588.append_safe("v IN (");
+        t___8588.append_boolean_list(temper_core::ToListed::to_listed([true, false]));
+        t___8588.append_safe(")");
+        let actual___1847: std::sync::Arc<String> = t___8588.accumulated().to_string();
+        let mut t___8595: bool = Some(actual___1847.as_str()) == Some("v IN (TRUE, FALSE)");
+        #[derive(Clone)]
+        struct ClosureGroup___168 {
+            actual___1847: std::sync::Arc<String>
+        }
+        impl ClosureGroup___168 {
+            fn fn__8547(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, list(true, false), \")\").toString() == (v IN (TRUE, FALSE)) not ({})", self.actual___1847.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___168 {
+            actual___1847: actual___1847.clone()
+        };
+        let fn__8547 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8547())
+        };
+        test___154.assert(t___8595, fn__8547.clone());
+        'ok___11018: {
+            'orelse___1943: {
+                t___4132 = match temper_std::temporal::Date::new(2024, 1, 1) {
+                    Ok(x) => x,
+                    _ => break 'orelse___1943
+                };
+                t___4133 = t___4132.clone();
+                break 'ok___11018;
+            }
+            t___4133 = panic!();
+        }
+        'ok___11019: {
+            'orelse___1944: {
+                t___4134 = match temper_std::temporal::Date::new(2024, 12, 25) {
+                    Ok(x) => x,
+                    _ => break 'orelse___1944
+                };
+                t___4135 = t___4134.clone();
+                break 'ok___11019;
+            }
+            t___4135 = panic!();
+        }
+        let dates__1438: temper_core::List<temper_std::temporal::Date> = std::sync::Arc::new(vec![t___4133.clone(), t___4135.clone()]);
+        let mut t___8597: SqlBuilder = SqlBuilder::new();
+        t___8597.append_safe("v IN (");
+        t___8597.append_date_list(temper_core::ToListed::to_listed(dates__1438.clone()));
+        t___8597.append_safe(")");
+        let actual___1850: std::sync::Arc<String> = t___8597.accumulated().to_string();
+        let mut t___8604: bool = Some(actual___1850.as_str()) == Some("v IN ('2024-01-01', '2024-12-25')");
+        #[derive(Clone)]
+        struct ClosureGroup___169 {
+            actual___1850: std::sync::Arc<String>
+        }
+        impl ClosureGroup___169 {
+            fn fn__8546(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v IN (\", \\interpolate, dates, \")\").toString() == (v IN ('2024-01-01', '2024-12-25')) not ({})", self.actual___1850.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___169 {
+            actual___1850: actual___1850.clone()
+        };
+        let fn__8546 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8546())
+        };
+        test___154.assert(t___8604, fn__8546.clone());
+        test___154.soft_fail_to_hard()
+    }
+    #[test]
+    fn sqlFloat64_naNRendersAsNull__1853() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___155 = temper_std::testing::Test::new();
+        let nan__1440: f64;
+        nan__1440 = temper_core::float64::div(0.0f64, 0.0f64) ? ;
+        let mut t___8538: SqlBuilder = SqlBuilder::new();
+        t___8538.append_safe("v = ");
+        t___8538.append_float64(nan__1440);
+        let actual___1854: std::sync::Arc<String> = t___8538.accumulated().to_string();
+        let mut t___8544: bool = Some(actual___1854.as_str()) == Some("v = NULL");
+        #[derive(Clone)]
+        struct ClosureGroup___170 {
+            actual___1854: std::sync::Arc<String>
+        }
+        impl ClosureGroup___170 {
+            fn fn__8537(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, nan).toString() == (v = NULL) not ({})", self.actual___1854.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___170 {
+            actual___1854: actual___1854.clone()
+        };
+        let fn__8537 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8537())
+        };
+        test___155.assert(t___8544, fn__8537.clone());
+        test___155.soft_fail_to_hard()
+    }
+    #[test]
+    fn sqlFloat64_infinityRendersAsNull__1857() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___156 = temper_std::testing::Test::new();
+        let inf__1442: f64;
+        inf__1442 = temper_core::float64::div(1.0f64, 0.0f64) ? ;
+        let mut t___8529: SqlBuilder = SqlBuilder::new();
+        t___8529.append_safe("v = ");
+        t___8529.append_float64(inf__1442);
+        let actual___1858: std::sync::Arc<String> = t___8529.accumulated().to_string();
+        let mut t___8535: bool = Some(actual___1858.as_str()) == Some("v = NULL");
+        #[derive(Clone)]
+        struct ClosureGroup___171 {
+            actual___1858: std::sync::Arc<String>
+        }
+        impl ClosureGroup___171 {
+            fn fn__8528(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, inf).toString() == (v = NULL) not ({})", self.actual___1858.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___171 {
+            actual___1858: actual___1858.clone()
+        };
+        let fn__8528 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8528())
+        };
+        test___156.assert(t___8535, fn__8528.clone());
+        test___156.soft_fail_to_hard()
+    }
+    #[test]
+    fn sqlFloat64_negativeInfinityRendersAsNull__1861() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___157 = temper_std::testing::Test::new();
+        let ninf__1444: f64;
+        ninf__1444 = temper_core::float64::div(-1.0f64, 0.0f64) ? ;
+        let mut t___8520: SqlBuilder = SqlBuilder::new();
+        t___8520.append_safe("v = ");
+        t___8520.append_float64(ninf__1444);
+        let actual___1862: std::sync::Arc<String> = t___8520.accumulated().to_string();
+        let mut t___8526: bool = Some(actual___1862.as_str()) == Some("v = NULL");
+        #[derive(Clone)]
+        struct ClosureGroup___172 {
+            actual___1862: std::sync::Arc<String>
+        }
+        impl ClosureGroup___172 {
+            fn fn__8519(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, ninf).toString() == (v = NULL) not ({})", self.actual___1862.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___172 {
+            actual___1862: actual___1862.clone()
+        };
+        let fn__8519 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8519())
+        };
+        test___157.assert(t___8526, fn__8519.clone());
+        test___157.soft_fail_to_hard()
+    }
+    #[test]
+    fn sqlFloat64_normalValuesStillWork__1865() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___158 = temper_std::testing::Test::new();
+        let mut t___8495: SqlBuilder = SqlBuilder::new();
+        t___8495.append_safe("v = ");
+        t___8495.append_float64(3.14f64);
+        let actual___1866: std::sync::Arc<String> = t___8495.accumulated().to_string();
+        let mut t___8501: bool = Some(actual___1866.as_str()) == Some("v = 3.14");
+        #[derive(Clone)]
+        struct ClosureGroup___173 {
+            actual___1866: std::sync::Arc<String>
+        }
+        impl ClosureGroup___173 {
+            fn fn__8494(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, 3.14).toString() == (v = 3.14) not ({})", self.actual___1866.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___173 {
+            actual___1866: actual___1866.clone()
+        };
+        let fn__8494 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8494())
+        };
+        test___158.assert(t___8501, fn__8494.clone());
+        let mut t___8503: SqlBuilder = SqlBuilder::new();
+        t___8503.append_safe("v = ");
+        t___8503.append_float64(0.0f64);
+        let actual___1869: std::sync::Arc<String> = t___8503.accumulated().to_string();
+        let mut t___8509: bool = Some(actual___1869.as_str()) == Some("v = 0.0");
+        #[derive(Clone)]
+        struct ClosureGroup___174 {
+            actual___1869: std::sync::Arc<String>
+        }
+        impl ClosureGroup___174 {
+            fn fn__8493(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, 0.0).toString() == (v = 0.0) not ({})", self.actual___1869.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___174 {
+            actual___1869: actual___1869.clone()
+        };
+        let fn__8493 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8493())
+        };
+        test___158.assert(t___8509, fn__8493.clone());
+        let mut t___8511: SqlBuilder = SqlBuilder::new();
+        t___8511.append_safe("v = ");
+        t___8511.append_float64(-42.5f64);
+        let actual___1872: std::sync::Arc<String> = t___8511.accumulated().to_string();
+        let mut t___8517: bool = Some(actual___1872.as_str()) == Some("v = -42.5");
+        #[derive(Clone)]
+        struct ClosureGroup___175 {
+            actual___1872: std::sync::Arc<String>
+        }
+        impl ClosureGroup___175 {
+            fn fn__8492(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, -42.5).toString() == (v = -42.5) not ({})", self.actual___1872.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___175 {
+            actual___1872: actual___1872.clone()
+        };
+        let fn__8492 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8492())
+        };
+        test___158.assert(t___8517, fn__8492.clone());
+        test___158.soft_fail_to_hard()
+    }
+    #[test]
+    fn sqlDateRendersWithQuotes__1875() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___159 = temper_std::testing::Test::new();
+        let mut t___4028: temper_std::temporal::Date;
+        let d__1447: temper_std::temporal::Date;
+        'ok___11020: {
+            'orelse___1945: {
+                t___4028 = match temper_std::temporal::Date::new(2024, 6, 15) {
+                    Ok(x) => x,
+                    _ => break 'orelse___1945
+                };
+                d__1447 = t___4028.clone();
+                break 'ok___11020;
+            }
+            d__1447 = panic!();
+        }
+        let mut t___8484: SqlBuilder = SqlBuilder::new();
+        t___8484.append_safe("v = ");
+        t___8484.append_date(d__1447.clone());
+        let actual___1876: std::sync::Arc<String> = t___8484.accumulated().to_string();
+        let mut t___8490: bool = Some(actual___1876.as_str()) == Some("v = '2024-06-15'");
+        #[derive(Clone)]
+        struct ClosureGroup___176 {
+            actual___1876: std::sync::Arc<String>
+        }
+        impl ClosureGroup___176 {
+            fn fn__8483(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"v = \", \\interpolate, d).toString() == (v = '2024-06-15') not ({})", self.actual___1876.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___176 {
+            actual___1876: actual___1876.clone()
+        };
+        let fn__8483 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8483())
+        };
+        test___159.assert(t___8490, fn__8483.clone());
+        test___159.soft_fail_to_hard()
+    }
+    #[test]
+    fn nesting__1879() -> temper_core::Result<()> {
+        crate::init(None);
+        temper_std::init(None);
+        let test___160 = temper_std::testing::Test::new();
+        let name__1449: std::sync::Arc<String> = std::sync::Arc::new("Someone".to_string());
+        let mut t___8452: SqlBuilder = SqlBuilder::new();
+        t___8452.append_safe("where p.last_name = ");
+        t___8452.append_string("Someone");
+        let condition__1450: SqlFragment = t___8452.accumulated();
+        let mut t___8456: SqlBuilder = SqlBuilder::new();
+        t___8456.append_safe("select p.id from person p ");
+        t___8456.append_fragment(condition__1450.clone());
+        let actual___1881: std::sync::Arc<String> = t___8456.accumulated().to_string();
+        let mut t___8462: bool = Some(actual___1881.as_str()) == Some("select p.id from person p where p.last_name = 'Someone'");
+        #[derive(Clone)]
+        struct ClosureGroup___177 {
+            actual___1881: std::sync::Arc<String>
+        }
+        impl ClosureGroup___177 {
+            fn fn__8451(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"select p.id from person p \", \\interpolate, condition).toString() == (select p.id from person p where p.last_name = 'Someone') not ({})", self.actual___1881.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___177 {
+            actual___1881: actual___1881.clone()
+        };
+        let fn__8451 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8451())
+        };
+        test___160.assert(t___8462, fn__8451.clone());
+        let mut t___8464: SqlBuilder = SqlBuilder::new();
+        t___8464.append_safe("select p.id from person p ");
+        t___8464.append_part(SqlPart::new(condition__1450.to_source()));
+        let actual___1884: std::sync::Arc<String> = t___8464.accumulated().to_string();
+        let mut t___8471: bool = Some(actual___1884.as_str()) == Some("select p.id from person p where p.last_name = 'Someone'");
+        #[derive(Clone)]
+        struct ClosureGroup___178 {
+            actual___1884: std::sync::Arc<String>
+        }
+        impl ClosureGroup___178 {
+            fn fn__8450(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"select p.id from person p \", \\interpolate, condition.toSource()).toString() == (select p.id from person p where p.last_name = 'Someone') not ({})", self.actual___1884.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___178 {
+            actual___1884: actual___1884.clone()
+        };
+        let fn__8450 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8450())
+        };
+        test___160.assert(t___8471, fn__8450.clone());
+        let parts__1451: temper_core::List<SqlPart> = std::sync::Arc::new(vec![SqlPart::new(SqlString::new("a'b")), SqlPart::new(SqlInt32::new(3))]);
+        let mut t___8475: SqlBuilder = SqlBuilder::new();
+        t___8475.append_safe("select ");
+        t___8475.append_part_list(parts__1451.clone());
+        let actual___1887: std::sync::Arc<String> = t___8475.accumulated().to_string();
+        let mut t___8481: bool = Some(actual___1887.as_str()) == Some("select 'a''b', 3");
+        #[derive(Clone)]
+        struct ClosureGroup___179 {
+            actual___1887: std::sync::Arc<String>
+        }
+        impl ClosureGroup___179 {
+            fn fn__8449(& self) -> std::sync::Arc<String> {
+                return std::sync::Arc::new(format!("expected stringExpr(`-work//src/`.sql, true, \"select \", \\interpolate, parts).toString() == (select 'a''b', 3) not ({})", self.actual___1887.clone()));
+            }
+        }
+        let closure_group = ClosureGroup___179 {
+            actual___1887: actual___1887.clone()
+        };
+        let fn__8449 = {
+            let closure_group = closure_group.clone();
+            std::sync::Arc::new(move | | closure_group.fn__8449())
+        };
+        test___160.assert(t___8481, fn__8449.clone());
+        test___160.soft_fail_to_hard()
     }
     use super::*;
 }
