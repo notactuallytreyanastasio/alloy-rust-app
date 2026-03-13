@@ -104,3 +104,41 @@ Schema creation uses hardcoded `CREATE TABLE` statements.
 ## Verdict
 
 **No SQL injection vulnerabilities found.** The ORM covers all user-input-to-SQL paths. This is the only app that uses the ORM for toggle-completed (rather than raw SQL), giving it the highest ORM coverage. The `i64` → `i32` truncation is a correctness concern, not an injection vector.
+
+---
+
+## Evolution: Temper-Level Remediation
+
+**Date:** 2026-03-12
+**Commit:** [`1df8c7a`](https://github.com/notactuallytreyanastasio/generic_orm/commit/1df8c7a)
+
+The security analysis above identified 3 ORM-level concerns (ORM-1, ORM-2, ORM-3) shared across all 6 app implementations. Because the ORM is written once in Temper and compiled to all backends, fixing these issues at the Temper source level automatically resolves them in every language — including this Rust app.
+
+### What Changed
+
+**ORM-1 (MEDIUM → RESOLVED): Column name type safety in INSERT/UPDATE SQL**
+
+The `to_insert_sql()` and `to_update_sql()` methods previously passed `pair.key` (a raw `String`) to `append_safe()`. While safe by construction (keys originated from `cast()` via `SafeIdentifier::sql_value()`), the type system didn't enforce this. A future refactor could have silently introduced an unvalidated code path.
+
+The fix routes column names through the looked-up `FieldDef.name.sql_value()` — a `SafeIdentifier` — so the column name in the generated SQL always comes from a validated identifier, not a raw map key.
+
+**ORM-2 (LOW → RESOLVED): SqlDate quote escaping**
+
+`SqlDate::format_to()` previously wrapped `value.to_string()` in quotes without escaping. The fix adds character-by-character quote escaping identical to `SqlString::format_to()`, ensuring defense-in-depth against any future Date format that might contain single quotes.
+
+**ORM-3 (LOW → RESOLVED): SqlFloat64 NaN/Infinity handling**
+
+`SqlFloat64::format_to()` previously called `value.to_string()` directly, which could produce `NaN`, `inf`, or `-inf` — none valid SQL literals. The fix checks for these values and renders `NULL` instead, which is the safest SQL representation for non-representable floating-point values.
+
+### Why This Matters
+
+This is the core value proposition of a cross-compiled ORM: **one fix in Temper source propagates to all 6 backends simultaneously.** The same commit that fixed the Rust compiled output also fixed JavaScript, Python, Java, Lua, and C#. No per-language patches needed. No risk of inconsistent fixes across implementations.
+
+### Updated Status
+
+| Finding | Original | Current | Resolution |
+|---------|----------|---------|------------|
+| ORM-1 | MEDIUM | RESOLVED | Column names routed through `SafeIdentifier` |
+| ORM-2 | LOW | RESOLVED | `SqlDate::format_to()` now escapes quotes |
+| ORM-3 | LOW | RESOLVED | `SqlFloat64::format_to()` renders NaN/Infinity as `NULL` |
+| ORM-4 | INFO | ACKNOWLEDGED | Design limitation — escaping-based, not parameterized |
