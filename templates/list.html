@@ -5,7 +5,7 @@
 {% block content %}
 <div class="win95-window">
   <div class="win95-titlebar">
-    <span class="title-text">{{ list.name }}</span>
+    <span class="title-text">{{ list.name }}{% if let Some(desc) = &list.description %} - {{ desc }}{% endif %}</span>
     <div class="win95-titlebar-buttons">
       <button class="win95-titlebar-btn">_</button>
       <button class="win95-titlebar-btn">&#9633;</button>
@@ -15,13 +15,30 @@
 
   <div class="win95-toolbar">
     <a href="/" class="back-link">&laquo; All Lists</a>
-    <form action="/lists/{{ list.id }}/todos" method="post" style="display:flex; gap:4px; flex:1; align-items:center;">
-      <input type="text" name="title" class="win95-input" placeholder="Add a new todo..." required>
+    <form action="/lists/{{ list.id }}/todos" method="post" style="display:flex; gap:4px; flex:1; align-items:center; flex-wrap:wrap;">
+      <input type="text" name="title" class="win95-input" placeholder="Add a new todo..." required style="flex:2; min-width:100px;">
+      <select name="priority" class="win95-input" style="flex:0; min-width:60px; width:auto;">
+        <option value="3">P3</option>
+        <option value="1">P1</option>
+        <option value="2">P2</option>
+        <option value="4">P4</option>
+        <option value="5">P5</option>
+      </select>
+      <input type="date" name="due_date" class="win95-input" style="flex:0; min-width:100px; width:auto;">
       <button type="submit" class="win95-btn primary">Add</button>
     </form>
   </div>
 
   <div class="win95-body">
+    <div style="display:flex; gap:4px; margin-bottom:8px; flex-wrap:wrap;">
+      <form action="/lists/{{ list.id }}/update-desc" method="post">
+        <button type="submit" class="win95-btn" style="font-size:12px; min-width:auto; padding:2px 6px;">Update Desc (ORM update+or_where)</button>
+      </form>
+      <form action="/lists/{{ list.id }}/delete-completed" method="post">
+        <button type="submit" class="win95-btn danger" style="font-size:12px; min-width:auto; padding:2px 6px;">Clear Completed (delete_from+limit)</button>
+      </form>
+    </div>
+
     <div class="win95-sunken" style="min-height: 200px; max-height: 400px;">
       {% if todos.is_empty() %}
       <div class="empty-state">
@@ -35,7 +52,11 @@
               {% if todo.completed %}checked{% endif %}
               onchange="this.form.submit()">
           </form>
+          <span class="priority-badge priority-{{ todo.priority }}">{{ todo.priority }}</span>
           <span class="todo-text">{{ todo.title }}</span>
+          {% if let Some(dd) = &todo.due_date %}
+          <span style="font-size:12px; color:#666;">{{ dd }}</span>
+          {% endif %}
           <div class="todo-actions">
             <form action="/todos/{{ todo.id }}/edit" method="post" class="edit-form"
               style="display:none;" id="edit-{{ todo.id }}">
@@ -60,6 +81,11 @@
         {% endfor %}
       {% endif %}
     </div>
+
+    <details style="margin-top:8px;">
+      <summary style="cursor:pointer; font-size:13px;">ORM SQL Generated (where, order_by, order_by_nulls, select)</summary>
+      <div class="sql-display">{{ sql_used }}</div>
+    </details>
   </div>
 
   <div class="win95-statusbar">

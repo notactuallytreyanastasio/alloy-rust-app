@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Todo App - Error{% endblock %}
+
+{% block content %}
+<div class="win95-window">
+  <div class="win95-titlebar">
+    <span class="title-text">Error</span>
+    <div class="win95-titlebar-buttons">
+      <button class="win95-titlebar-btn">X</button>
+    </div>
+  </div>
+
+  <div class="win95-body">
+    <div style="display:flex; gap:12px; align-items:center; padding:16px;">
+      <span style="font-size:32px;">&#9888;</span>
+      <div>
+        <p style="font-weight:bold; margin-bottom:8px;">Something went wrong</p>
+        <p style="font-size:14px;">{{ message }}</p>
+      </div>
+    </div>
+    <div class="form-actions">
+      <a href="/" class="win95-btn primary" style="text-decoration:none;">OK</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

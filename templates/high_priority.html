@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Todo App - High Priority{% endblock %}
+
+{% block content %}
+<div class="win95-window">
+  <div class="win95-titlebar">
+    <span class="title-text">High Priority - {{ list.name }}</span>
+    <div class="win95-titlebar-buttons">
+      <button class="win95-titlebar-btn">_</button>
+      <button class="win95-titlebar-btn">&#9633;</button>
+      <button class="win95-titlebar-btn">X</button>
+    </div>
+  </div>
+
+  <div class="win95-body">
+    <a href="/lists/{{ list.id }}" class="back-link">&laquo; Back to {{ list.name }}</a>
+
+    <fieldset class="win95-groupbox">
+      <legend>Priority 4-5 with Due Dates (where_between, where_not_null, limit, offset)</legend>
+      <div class="win95-sunken" style="min-height:150px;">
+        {% if todos.is_empty() %}
+        <div class="empty-state">No high-priority todos with due dates in this list.</div>
+        {% else %}
+          {% for todo in &todos %}
+          <div class="todo-item{% if todo.completed %} completed{% endif %}">
+            <span class="priority-badge priority-{{ todo.priority }}">P{{ todo.priority }}</span>
+            <span class="todo-text">{{ todo.title }}</span>
+            {% if let Some(dd) = &todo.due_date %}
+            <span style="font-size:12px; color:#666;">Due: {{ dd }}</span>
+            {% endif %}
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </fieldset>
+
+    <details style="margin-top:8px;">
+      <summary style="cursor:pointer; font-size:13px;">ORM SQL Generated</summary>
+      <div class="sql-display">{{ sql_used }}</div>
+    </details>
+  </div>
+
+  <div class="win95-statusbar">
+    <div class="status-section">{{ todos.len() }} high-priority todo{{ todos.len()|pluralize }}</div>
+    <div class="status-section">where_between + where_not_null</div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Todo App - Lock Modes{% endblock %}
+
+{% block content %}
+<div class="win95-window">
+  <div class="win95-titlebar">
+    <span class="title-text">Lock Mode Demonstration</span>
+    <div class="win95-titlebar-buttons">
+      <button class="win95-titlebar-btn">_</button>
+      <button class="win95-titlebar-btn">&#9633;</button>
+      <button class="win95-titlebar-btn">X</button>
+    </div>
+  </div>
+
+  <div class="win95-body">
+    <a href="/" class="back-link">&laquo; Home</a>
+
+    <fieldset class="win95-groupbox">
+      <legend>FOR UPDATE (ForUpdate) - Exclusive row lock for writes</legend>
+      <div class="sql-display">{{ for_update_sql }}</div>
+    </fieldset>
+
+    <fieldset class="win95-groupbox">
+      <legend>FOR SHARE (ForShare) - Shared row lock for reads</legend>
+      <div class="sql-display">{{ for_share_sql }}</div>
+    </fieldset>
+
+    <p style="font-size:13px; padding:8px; color:#666;">
+      Note: SQLite does not support FOR UPDATE/FOR SHARE, but the ORM correctly generates the SQL
+      for databases that do (PostgreSQL, MySQL). The generated SQL is shown above.
+    </p>
+  </div>
+
+  <div class="win95-statusbar">
+    <div class="status-section">Lock modes: ForUpdate, ForShare</div>
+    <div class="status-section">ORM SQL Generation</div>
+  </div>
+</div>
+{% endblock %}

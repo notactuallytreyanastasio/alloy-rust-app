@@ -14,8 +14,9 @@
   </div>
 
   <div class="win95-toolbar">
-    <form action="/lists" method="post" style="display:flex; gap:4px; width:100%; align-items:center;">
-      <input type="text" name="name" class="win95-input" placeholder="New list name..." required>
+    <form action="/lists" method="post" style="display:flex; gap:4px; width:100%; align-items:center; flex-wrap:wrap;">
+      <input type="text" name="name" class="win95-input" placeholder="New list name..." required style="flex:1; min-width:120px;">
+      <input type="text" name="description" class="win95-input" placeholder="Description (optional)" style="flex:1; min-width:120px;">
       <button type="submit" class="win95-btn primary">New List</button>
     </form>
   </div>
@@ -33,20 +34,28 @@
             <strong>{{ list.name }}</strong>
             <span class="list-meta">&mdash; {{ list.todo_count }} item{{ list.todo_count|pluralize }}</span>
           </a>
-          <div class="todo-actions">
+          <div class="todo-actions" style="display:flex; gap:4px;">
+            <a href="/lists/{{ list.id }}/page/1" class="win95-btn" style="text-decoration:none; font-size:13px; min-width:auto; padding:2px 8px;">Pages</a>
+            <a href="/lists/{{ list.id }}/high-priority" class="win95-btn" style="text-decoration:none; font-size:13px; min-width:auto; padding:2px 8px;">Hi-Pri</a>
+            <a href="/lists/{{ list.id }}/has-completed" class="win95-btn" style="text-decoration:none; font-size:13px; min-width:auto; padding:2px 8px;">Subs</a>
             <form action="/lists/{{ list.id }}/delete" method="post" onsubmit="return confirm('Delete this list and all its todos?');">
-              <button type="submit" class="win95-btn danger">Delete</button>
+              <button type="submit" class="win95-btn danger" style="min-width:auto; padding:2px 8px;">Del</button>
             </form>
           </div>
         </div>
         {% endfor %}
       {% endif %}
     </div>
+
+    <details style="margin-top:8px;">
+      <summary style="cursor:pointer; font-size:13px;">ORM SQL Generated (left_join, group_by, select_expr, count_all, col, order_by)</summary>
+      <div class="sql-display">{{ sql_used }}</div>
+    </details>
   </div>
 
   <div class="win95-statusbar">
     <div class="status-section">{{ lists.len() }} list{{ lists.len()|pluralize }}</div>
-    <div class="status-section">Rust/Axum + SQLite</div>
+    <div class="status-section">Alloy ORM + Rust/Axum</div>
   </div>
 </div>
 {% endblock %}

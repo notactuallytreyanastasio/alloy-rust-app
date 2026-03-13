@@ -62,22 +62,121 @@
     .back-link:hover {
       text-decoration: underline;
     }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 4px 0;
+    }
+    .nav-links a {
+      color: var(--win95-text);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 2px 6px;
+      border: 1px solid var(--win95-btn-shadow);
+      background: var(--win95-btn-face);
+    }
+    .nav-links a:hover {
+      background: var(--win95-selection);
+      color: var(--win95-selection-text);
+    }
+    .sql-display {
+      background: #000;
+      color: #0f0;
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      padding: 8px;
+      margin: 8px 0;
+      border: 2px inset var(--win95-btn-shadow);
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .priority-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      font-size: 12px;
+      border: 1px solid var(--win95-btn-shadow);
+      min-width: 20px;
+      text-align: center;
+    }
+    .priority-1 { background: #ddd; }
+    .priority-2 { background: #bbddff; }
+    .priority-3 { background: #ffffbb; }
+    .priority-4 { background: #ffddbb; }
+    .priority-5 { background: #ffbbbb; }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 8px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-row:hover {
+      background: var(--win95-selection);
+      color: var(--win95-selection-text);
+    }
+    .stat-label { font-weight: bold; }
+    .tag-badge {
+      display: inline-block;
+      padding: 1px 4px;
+      font-size: 11px;
+      background: var(--win95-selection);
+      color: var(--win95-selection-text);
+      margin-left: 4px;
+    }
+    .page-nav {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      padding: 8px;
+    }
+    .page-nav a, .page-nav span {
+      padding: 2px 8px;
+      border: 1px solid var(--win95-btn-shadow);
+      text-decoration: none;
+      color: var(--win95-text);
+      background: var(--win95-btn-face);
+      font-size: 13px;
+    }
+    .page-nav span.current {
+      background: var(--win95-selection);
+      color: var(--win95-selection-text);
+    }
+    .desktop {
+      flex-direction: column;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
   <!-- Mac System 6 Menu Bar -->
   <div class="mac-menubar">
     <span class="apple-logo">&#63743;</span>
-    <span class="menu-item app-name">Todo App</span>
-    <span class="menu-item">File</span>
-    <span class="menu-item">Edit</span>
-    <span class="menu-item">View</span>
-    <span class="menu-item">Special</span>
+    <span class="menu-item app-name"><a href="/" style="color:inherit;text-decoration:none;">Todo App</a></span>
+    <span class="menu-item"><a href="/search" style="color:inherit;text-decoration:none;">Search</a></span>
+    <span class="menu-item"><a href="/stats" style="color:inherit;text-decoration:none;">Stats</a></span>
+    <span class="menu-item"><a href="/overdue" style="color:inherit;text-decoration:none;">Overdue</a></span>
+    <span class="menu-item"><a href="/reports/combined" style="color:inherit;text-decoration:none;">Reports</a></span>
   </div>
 
   <!-- Desktop area -->
   <div class="desktop">
     {% block content %}{% endblock %}
+    <div class="nav-links" style="margin-top:8px; padding:0 10px;">
+      <a href="/">Lists</a>
+      <a href="/search">Search</a>
+      <a href="/stats">Stats</a>
+      <a href="/overdue">Overdue</a>
+      <a href="/reports/combined">Combined Reports</a>
+      <a href="/joins">Join Types</a>
+      <a href="/locks">Lock Modes</a>
+      <a href="/changeset-demo">Changeset Demo</a>
+      <a href="/timestamps">Timestamps</a>
+      <a href="/safe-ids">SqlBuilder Demo</a>
+      <a href="/order-nulls">Null Ordering</a>
+    </div>
   </div>
 </body>
 </html>

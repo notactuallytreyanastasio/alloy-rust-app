@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Todo App - Combined Reports{% endblock %}
+
+{% block content %}
+<div class="win95-window">
+  <div class="win95-titlebar">
+    <span class="title-text">Combined Reports (Set Operations)</span>
+    <div class="win95-titlebar-buttons">
+      <button class="win95-titlebar-btn">_</button>
+      <button class="win95-titlebar-btn">&#9633;</button>
+      <button class="win95-titlebar-btn">X</button>
+    </div>
+  </div>
+
+  <div class="win95-body">
+    <a href="/" class="back-link">&laquo; Home</a>
+
+    <fieldset class="win95-groupbox">
+      <legend>UNION: High Priority OR Has Due Date (union_sql)</legend>
+      <div class="win95-sunken">
+        {% if union_rows.is_empty() %}
+        <div class="empty-state">No results.</div>
+        {% else %}
+          {% for row in &union_rows %}
+          <div class="stat-row">
+            <span>{{ row.title }}</span>
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </fieldset>
+
+    <fieldset class="win95-groupbox">
+      <legend>INTERSECT: High Priority AND Has Due Date (intersect_sql)</legend>
+      <div class="win95-sunken">
+        {% if intersect_rows.is_empty() %}
+        <div class="empty-state">No results.</div>
+        {% else %}
+          {% for row in &intersect_rows %}
+          <div class="stat-row">
+            <span>{{ row.title }}</span>
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </fieldset>
+
+    <fieldset class="win95-groupbox">
+      <legend>EXCEPT: High Priority but NO Due Date (except_sql)</legend>
+      <div class="win95-sunken">
+        {% if except_rows.is_empty() %}
+        <div class="empty-state">No results.</div>
+        {% else %}
+          {% for row in &except_rows %}
+          <div class="stat-row">
+            <span>{{ row.title }}</span>
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </fieldset>
+
+    <details style="margin-top:8px;">
+      <summary style="cursor:pointer; font-size:13px;">ORM SQL Generated (union_sql, union_all_sql, intersect_sql, except_sql)</summary>
+      <div class="sql-display">{% for q in &sql_queries %}{{ q }}
+{% endfor %}</div>
+    </details>
+  </div>
+
+  <div class="win95-statusbar">
+    <div class="status-section">{{ union_rows.len() }} union / {{ intersect_rows.len() }} intersect / {{ except_rows.len() }} except</div>
+    <div class="status-section">Set Operations</div>
+  </div>
+</div>
+{% endblock %}

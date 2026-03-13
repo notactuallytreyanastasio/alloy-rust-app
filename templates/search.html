@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Todo App - Search{% endblock %}
+
+{% block content %}
+<div class="win95-window">
+  <div class="win95-titlebar">
+    <span class="title-text">Search Todos</span>
+    <div class="win95-titlebar-buttons">
+      <button class="win95-titlebar-btn">_</button>
+      <button class="win95-titlebar-btn">&#9633;</button>
+      <button class="win95-titlebar-btn">X</button>
+    </div>
+  </div>
+
+  <div class="win95-toolbar">
+    <a href="/" class="back-link">&laquo; Home</a>
+    <form action="/search" method="get" style="display:flex; gap:4px; flex:1; align-items:center;">
+      <input type="text" name="q" class="win95-input" placeholder="Search todos and lists..." value="{{ query }}">
+      <button type="submit" class="win95-btn primary">Search</button>
+    </form>
+  </div>
+
+  <div class="win95-body">
+    <div class="win95-sunken" style="min-height: 200px; max-height: 400px;">
+      {% if results.is_empty() %}
+      <div class="empty-state">
+        {% if query.is_empty() %}
+          Enter a search term above.
+        {% else %}
+          No results found for "{{ query }}".
+        {% endif %}
+      </div>
+      {% else %}
+        {% for result in &results %}
+        <div class="list-card">
+          <span><strong>{{ result.title }}</strong> <span class="list-meta">&mdash; in {{ result.list_name }}</span></span>
+        </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <details style="margin-top:8px;">
+      <summary style="cursor:pointer; font-size:13px;">ORM SQL Generated (where_like, or_where, safe_to_sql)</summary>
+      <div class="sql-display">{{ sql_used }}</div>
+    </details>
+  </div>
+
+  <div class="win95-statusbar">
+    <div class="status-section">{{ results.len() }} result{{ results.len()|pluralize }}</div>
+    <div class="status-section">where_like + or_where + safe_to_sql</div>
+  </div>
+</div>
+{% endblock %}
